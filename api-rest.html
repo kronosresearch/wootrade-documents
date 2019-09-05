@@ -552,7 +552,7 @@ will response immediately with an order created message.</p>
 <td></td>
 </tr>
 <tr>
-<td>sid</td>
+<td>side</td>
 <td>enum</td>
 <td>Y</td>
 <td><code>SELL</code>/<code>BUY</code></td>
@@ -560,14 +560,20 @@ will response immediately with an order created message.</p>
 </tbody>
 </table>
 <p><strong>Response</strong></p>
-<pre><code class="language-js">{
-  &quot;order_id&quot;: 254558,
-  &quot;symbol&quot;: &quot;SPOT_BTC_USDT&quot;,
-  &quot;timestamp&quot;: 1566182614000
+<pre><code class="language-js">// order create success
+{
+  &quot;success&quot;: true,
+  &quot;order_id&quot;:13
+}
+
+// order create failed
+{
+  &quot;success&quot;: false,
+  &quot;error&quot;: &quot;order_price must be a positive number&quot; // detail message  
 }
 </code></pre>
 <h2>Cancel Order</h2>
-<pre><code>DELETE /v1/order/:oid
+<pre><code>DELETE /v1/order
 </code></pre>
 <p>Cancel order by order id. The order cancelled information will be update from websocket stream.
 note that we immediate response with an order cancel sent message, and will update the cancel event via websocket channel.</p>
@@ -587,6 +593,12 @@ note that we immediate response with an order cancel sent message, and will upda
 <td>number</td>
 <td>Y</td>
 <td>The order_id <code>oid</code> that wish to cancel</td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>Y</td>
+<td></td>
 </tr>
 </tbody>
 </table>
