@@ -510,6 +510,13 @@ Please set <code>Authorization</code> in http header, the format is shown in fol
 </code></pre>
 <p><strong>Symbol:</strong><br>
 Nexus use the format of <code>&lt;TYPE&gt;_&lt;BASE&gt;_&lt;QUOTE&gt;</code> to represent a symbol name, for example: <code>SPOT_BTC_USDT</code> means that it is <code>BTC_USDT</code> pair in <code>SPOT</code> trading market.</p>
+<p><strong>Error Message:</strong><br>
+All API will return following json when api failed, the “error” will contain the detail error message, it may because some data are in wrong format, or other type of error.</p>
+<pre><code class="language-js">{
+  &quot;success&quot;: false,
+  &quot;error&quot;: &quot;order_price must be a positive number&quot; // detail message  
+}
+</code></pre>
 <hr>
 <h2>Send Order</h2>
 <pre><code>POST /v1/order
@@ -560,16 +567,9 @@ will response immediately with an order created message.</p>
 </tbody>
 </table>
 <p><strong>Response</strong></p>
-<pre><code class="language-js">// order create success
-{
+<pre><code class="language-js">{
   &quot;success&quot;: true,
   &quot;order_id&quot;: 13
-}
-
-// order create failed
-{
-  &quot;success&quot;: false,
-  &quot;error&quot;: &quot;order_price must be a positive number&quot; // detail message  
 }
 </code></pre>
 <h2>Cancel Order</h2>
