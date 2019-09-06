@@ -516,6 +516,7 @@ Nexus use the format of <code>&lt;TYPE&gt;_&lt;BASE&gt;_&lt;QUOTE&gt;</code> to 
 <li><code>BOOK</code>: order book update event</li>
 <li><code>TRADE</code>: trade event</li>
 <li><code>ORDER_UPDATE</code>: update of client’s order</li>
+<li><code>TRANSACTION</code>: order executed detail</li>
 </ul>
 <hr>
 <h2>Ping-Pong</h2>
@@ -593,7 +594,7 @@ Nexus use the format of <code>&lt;TYPE&gt;_&lt;BASE&gt;_&lt;QUOTE&gt;</code> to 
 }
 </code></pre>
 <h2>Transaction stream</h2>
-<p>The order exectued transaction details</p>
+<p>The order exectued transaction details. It emit when your order got executed. For example, if your order got hit add become <code>PARTIAL_FILLED</code>, you will recieve two events, one is <code>ORDER_UPDATE</code> and one is <code>TRANSACTION</code>.</p>
 <p><strong>Payload</strong></p>
 <pre><code class="language-js">{
    &quot;event&quot;: &quot;TRANSACTION&quot;,
@@ -605,7 +606,7 @@ Nexus use the format of <code>&lt;TYPE&gt;_&lt;BASE&gt;_&lt;QUOTE&gt;</code> to 
        &quot;executed_price&quot;: 124,
        &quot;executed_quantity&quot;: 0.05,
        &quot;fee&quot;: 0, // fee. use Base (BTC) as unit when BUY, use Quote (USDT) as unit when SELL
-       &quot;side&quot;: &quot;SELL&quot;,
+       &quot;side&quot;: &quot;SELL&quot;
    }
 }
 </code></pre>
