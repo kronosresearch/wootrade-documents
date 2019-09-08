@@ -523,6 +523,7 @@ All API will return following json when api failed, the “error” will contain
 </code></pre>
 <p>Place order maker/taker, the order executed information will be update from websocket stream.
 will response immediately with an order created message.</p>
+<p><code>MARKET</code> type order behavior is: it match until all size executed. If the size is too large (larger than whole book), then the remaining size will be cancelled.</p>
 <p><strong>Parameters</strong></p>
 <table>
 <thead>
