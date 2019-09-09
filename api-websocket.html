@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <title>Kronos Nexus API Documentation</title>
     <style>
       /*! ADAPTED
     Typeplate : Starter Kit
@@ -246,7 +247,7 @@
       .content {
         margin: 50px auto;
         padding: 0 2em;
-        max-width: 100ex;
+        max-width: 110ex;
         line-height: 1.6em;
       }
 
@@ -574,7 +575,6 @@ Nexus use the format of <code>&lt;TYPE&gt;_&lt;BASE&gt;_&lt;QUOTE&gt;</code> to 
 <ul>
 <li>Order been executed (partial filled/full filled)</li>
 <li>Order cancel successed</li>
-<li>Order created</li>
 </ul>
 <p><strong>Payload</strong></p>
 <pre><code class="language-js">{
@@ -594,7 +594,7 @@ Nexus use the format of <code>&lt;TYPE&gt;_&lt;BASE&gt;_&lt;QUOTE&gt;</code> to 
 }
 </code></pre>
 <h2>Transaction stream</h2>
-<p>The order exectued transaction details. It emit when your order got executed. For example, if your order got hit add become <code>PARTIAL_FILLED</code>, you will recieve two events, one is <code>ORDER_UPDATE</code> and one is <code>TRANSACTION</code>.</p>
+<p>The order exectued transaction details. It will emit when your order got executed. For example, if your order got hit and become <code>PARTIAL_FILLED</code>, you will recieve two events, one is <code>ORDER_UPDATE</code> and one is <code>TRANSACTION</code>.</p>
 <p><strong>Payload</strong></p>
 <pre><code class="language-js">{
    &quot;event&quot;: &quot;TRANSACTION&quot;,
