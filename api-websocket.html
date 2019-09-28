@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Kronos Nexus API Documentation</title>
+    <title>Kronos Wootrade API Documentation</title>
     <style>
       /*! ADAPTED
     Typeplate : Starter Kit
@@ -492,12 +492,13 @@
 <li><a class="" href="index.html">index</a></li>
 <li><a class="" href="api-rest.html">api rest</a></li>
 <li><a class="active" href="api-websocket.html">api websocket</a></li>
+<li><a class="" href="strategy.html">strategy</a></li>
 </ul>
       </nav>
       <article id="main" class="content">
         <div id="toc"></div>
-        <h1>Nexus Websocket API</h1>
-<p>Nexus Websocket API General Information:</p>
+        <h1>Wootrade Websocket API</h1>
+<p>Wootrade Websocket API General Information:</p>
 <p><strong>Base endpoints:</strong></p>
 <ul>
 <li><code>wss://staging.nexus.kronostoken.com/ws/:client_key/:symbol</code> <strong>(Staging)</strong></li>
@@ -508,7 +509,7 @@ For example, your websocket endpoint may looks like:</p>
 <pre><code>wss://staging.nexus.kronostoken.com/ws/508590cc-e3cd-4390-ba9b-739830f41242/SPOT_BTC_USDT
 </code></pre>
 <p><strong>Symbol:</strong><br>
-Nexus use the format of <code>&lt;TYPE&gt;_&lt;BASE&gt;_&lt;QUOTE&gt;</code> to represent a symbol name, for example: <code>SPOT_BTC_USDT</code> means that it is <code>BTC_USDT</code> pair in <code>SPOT</code> trading market.</p>
+Wootrade use the format of <code>&lt;TYPE&gt;_&lt;BASE&gt;_&lt;QUOTE&gt;</code> to represent a symbol name, for example: <code>SPOT_BTC_USDT</code> means that it is <code>BTC_USDT</code> pair in <code>SPOT</code> trading market.</p>
 <p><strong>Event Type:</strong></p>
 <p>All the websocket message use same channel, the message is always a JSON string, and would have a attribute called <code>event</code> to identify the type of the message.</p>
 <p>The enumurate of event type are:</p>

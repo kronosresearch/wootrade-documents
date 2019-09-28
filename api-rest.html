@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Kronos Nexus API Documentation</title>
+    <title>Kronos Wootrade API Documentation</title>
     <style>
       /*! ADAPTED
     Typeplate : Starter Kit
@@ -492,12 +492,13 @@
 <li><a class="" href="index.html">index</a></li>
 <li><a class="active" href="api-rest.html">api rest</a></li>
 <li><a class="" href="api-websocket.html">api websocket</a></li>
+<li><a class="" href="strategy.html">strategy</a></li>
 </ul>
       </nav>
       <article id="main" class="content">
         <div id="toc"></div>
-        <h1>Nexus REST API</h1>
-<p>Nexus Rest API General Information:</p>
+        <h1>Wootrade REST API</h1>
+<p>Wootrade REST API General Information:</p>
 <p><strong>Base endpoints:</strong></p>
 <ul>
 <li><code>https://staging.nexus.kronostoken.com/</code> <strong>(Staging)</strong></li>
@@ -510,7 +511,7 @@ Please set <code>Authorization</code> in http header, the format is shown in fol
 &quot;Authorization&quot;: &quot;Bearer eyJhbGciOiJSUzI1Ni.......&quot;
 </code></pre>
 <p><strong>Symbol:</strong><br>
-Nexus use the format of <code>&lt;TYPE&gt;_&lt;BASE&gt;_&lt;QUOTE&gt;</code> to represent a symbol name, for example: <code>SPOT_BTC_USDT</code> means that it is <code>BTC_USDT</code> pair in <code>SPOT</code> trading market.</p>
+Wootrade use the format of <code>&lt;TYPE&gt;_&lt;BASE&gt;_&lt;QUOTE&gt;</code> to represent a symbol name, for example: <code>SPOT_BTC_USDT</code> means that it is <code>BTC_USDT</code> pair in <code>SPOT</code> trading market.</p>
 <p><strong>Error Message:</strong><br>
 All API will return following json when api failed, the “error” will contain the detail error message, it may because some data are in wrong format, or other type of error.</p>
 <pre><code class="language-js">{
@@ -864,7 +865,7 @@ note that we immediate response with an order cancel sent message, and will upda
 <h2>Get Current Balances</h2>
 <pre><code>GET /v1/client/balance
 </code></pre>
-<p>Balance summary of client. Note that the number in balance could be negative, it means how much client owed to Nexus.</p>
+<p>Balance summary of client. Note that the number in balance could be negative, it means how much client owed to Wootrade.</p>
 <p><strong>Parameters</strong></p>
 <p>None</p>
 <p><strong>Response</strong></p>
