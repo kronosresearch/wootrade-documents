@@ -661,7 +661,8 @@ note that we immediate response with an order cancel sent message, and will upda
         &quot;external_order_id&quot;: &quot;GARBAGE&quot;,
         &quot;executed_price&quot;: 10892.84,
         &quot;executed_quantity&quot;: 0.002,
-        &quot;fee&quot;: 0, // fee. use Base (BTC) as unit when BUY, use Quote (USDT) as unit when SELL
+        &quot;fee&quot;: 0,
+        &quot;fee_asset&quot;: &quot;BTC&quot;, // fee. use Base (BTC) as unit when BUY, use Quote (USDT) as unit when SELL
         &quot;side&quot;: &quot;BUY&quot;,
         &quot;timestamp&quot;: &quot;2019-08-20T01:24:50.250Z&quot;,
         &quot;created_time&quot;: &quot;2019-08-20T01:24:50.258Z&quot;,
@@ -852,7 +853,9 @@ note that we immediate response with an order cancel sent message, and will upda
             &quot;order_id&quot;: 211,
             &quot;executed_price&quot;: 10892.84,
             &quot;executed_quantity&quot;: 0.002,
-            &quot;fee&quot;: 0, // fee. use Base (BTC) as unit when BUY, use Quote (USDT) as unit when SELL
+            &quot;side&quot;: &quot;SELL&quot;,
+            &quot;fee&quot;: 0,
+            &quot;fee_asset&quot;: &quot;USDT&quot;, // use Base (BTC) as unit when BUY, use Quote (USDT) as unit when SELL
             &quot;executed_timestamp&quot;: &quot;1566264290.250000&quot;
         },
         // ....skip (total 25 items in one page)
