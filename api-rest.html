@@ -674,6 +674,10 @@ note that we immediate response with an order cancel sent message, and will upda
 <pre><code>GET /v1/orders
 </code></pre>
 <p>Get orders by customize conditions.</p>
+<ul>
+<li><code>INCOMPLETE</code> = <code>NEW</code> + <code>PARTIAL_FILLED</code></li>
+<li><code>COMPLETED</code> = <code>CANCELLED</code> + <code>FILLED</code></li>
+</ul>
 <p><strong>Parameters</strong></p>
 <table>
 <thead>
@@ -695,7 +699,7 @@ note that we immediate response with an order cancel sent message, and will upda
 <td>status</td>
 <td>enum</td>
 <td>N</td>
-<td><code>NEW</code>/<code>CANCELLED</code>/<code>PARTIAL_FILLED</code>/<code>FILLED</code></td>
+<td><code>NEW</code>/<code>CANCELLED</code>/<code>PARTIAL_FILLED</code>/<code>FILLED</code>/<code>INCOMPLETE</code>/<code>COMPLETED</code></td>
 </tr>
 <tr>
 <td>start_t</td>
