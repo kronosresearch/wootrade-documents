@@ -519,6 +519,62 @@ All API will return following json when api failed, the “error” will contain
 }
 </code></pre>
 <hr>
+<h2>Exchange Infomation</h2>
+<pre><code>GET /v1/public/info/:symbol
+</code></pre>
+<p>Get send order requirement by symbol, there have some rules need to fullfill in order to successfully send order, which is defined as following:</p>
+<p>Price filter</p>
+<ul>
+<li><code>price</code> &gt;= <code>quote_min</code></li>
+<li><code>price</code> &lt;= <code>quote_max</code></li>
+<li><code>(price - quote_min) % quote_tick</code> should equal to zero</li>
+</ul>
+<p>Size filter</p>
+<ul>
+<li><code>quantity</code> &gt;= <code>base_min</code></li>
+<li><code>quantity</code> &lt;= <code>base_max</code></li>
+<li><code>(quantity - base_min) % base_tick</code> should equal to zero</li>
+</ul>
+<p>Min Notional filter</p>
+<ul>
+<li><code>price * quantity</code> should grerater than <code>min_notional</code></li>
+</ul>
+<p><strong>Parameters</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>Y</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Response</strong></p>
+<pre><code class="language-js">{
+    &quot;success&quot;: true,
+    &quot;info&quot;: {
+        &quot;symbol&quot;: &quot;SPOT_BTC_USDT&quot;,
+        &quot;quote_min&quot;: 100,
+        &quot;quote_max&quot;: 100000,
+        &quot;quote_tick&quot;: 0.01,
+        &quot;base_min&quot;: 0.0001,
+        &quot;base_max&quot;: 10,
+        &quot;base_tick&quot;: 0.0001,
+        &quot;min_notional&quot;: 0.02
+        &quot;created_time&quot;: &quot;2019-10-23T09:48:57.000Z&quot;,
+        &quot;updated_time&quot;: &quot;2019-10-23T09:48:57.000Z&quot;
+    }
+}
+</code></pre>
 <h2>Send Order</h2>
 <pre><code>POST /v1/order
 </code></pre>
