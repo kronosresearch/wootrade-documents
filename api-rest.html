@@ -518,6 +518,8 @@ All API will return following json when api failed, the “error” will contain
   &quot;error&quot;: &quot;order_price must be a positive number&quot; // detail message  
 }
 </code></pre>
+<p><strong>Rate Limit:</strong><br>
+Rate limit is counted using api key, and if your application reached the rate limit of certain endpoint, the server will return an error result with http code <code>403</code>. You may need wait until next time horizon.</p>
 <hr>
 <h2>Exchange Infomation</h2>
 <pre><code>GET /v1/public/info/:symbol
@@ -576,6 +578,7 @@ All API will return following json when api failed, the “error” will contain
 }
 </code></pre>
 <h2>Send Order</h2>
+<p><strong>Limit: 20 requests per 1 second</strong></p>
 <pre><code>POST /v1/order
 </code></pre>
 <p>Place order maker/taker, the order executed information will be update from websocket stream.
@@ -634,6 +637,7 @@ will response immediately with an order created message.</p>
 }
 </code></pre>
 <h2>Cancel Order</h2>
+<p><strong>Limit: 20 requests per 1 second</strong></p>
 <pre><code>DELETE /v1/order
 </code></pre>
 <p>Cancel order by order id. The order cancelled information will be update from websocket stream.
@@ -670,6 +674,7 @@ note that we immediate response with an order cancel sent message, and will upda
 }
 </code></pre>
 <h2>Get Order</h2>
+<p><strong>Limit: 20 requests per 1 second</strong></p>
 <pre><code>GET /v1/order/:oid
 </code></pre>
 <p>Get specific order detail by <code>order_id</code>.</p>
@@ -727,6 +732,7 @@ note that we immediate response with an order cancel sent message, and will upda
 }
 </code></pre>
 <h2>Get Orders</h2>
+<p><strong>Limit: 10 requests per 1 second</strong></p>
 <pre><code>GET /v1/orders
 </code></pre>
 <p>Get orders by customize conditions.</p>
@@ -803,6 +809,7 @@ note that we immediate response with an order cancel sent message, and will upda
 }
 </code></pre>
 <h2>Orderbook snapshot</h2>
+<p><strong>Limit: 10 requests per 1 second</strong></p>
 <pre><code>GET /v1/orderbook/:symbol
 </code></pre>
 <p>SNAPSHOT of current orderbook. Price of asks/bids are in descending order.</p>
@@ -859,6 +866,7 @@ note that we immediate response with an order cancel sent message, and will upda
 }
 </code></pre>
 <h2>Get History Trades</h2>
+<p><strong>Limit: 10 requests per 1 second</strong></p>
 <pre><code>GET /v1/client/trades
 </code></pre>
 <p>Return client’s trades history in a range of time.</p>
@@ -923,6 +931,7 @@ note that we immediate response with an order cancel sent message, and will upda
 }
 </code></pre>
 <h2>Get Current Balances</h2>
+<p><strong>Limit: 10 requests per 60 seconds</strong></p>
 <pre><code>GET /v1/client/balance
 </code></pre>
 <p>Balance summary of client. Note that the number in balance could be negative, it means how much client owed to Wootrade.</p>
