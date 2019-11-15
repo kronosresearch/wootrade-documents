@@ -950,6 +950,23 @@ note that we immediate response with an order cancel sent message, and will upda
     ]
 }
 </code></pre>
+<h2>Get Current Holding</h2>
+<p><strong>Limit: 10 requests per 60 seconds</strong></p>
+<pre><code>GET /v1/client/holding
+</code></pre>
+<p>Holding summary of client. Note that the number in holding could be negative, it means how much client owed to Wootrade.</p>
+<p><strong>Parameters</strong></p>
+<p>None</p>
+<p><strong>Response</strong></p>
+<pre><code class="language-js">{
+    &quot;success&quot;: true,
+    &quot;holding&quot;: {
+        &quot;BTC&quot;: 1.014,
+        &quot;USDT&quot;: -26333.207589999998,
+        &quot;BCHABC&quot;: 2
+    }
+}
+</code></pre>
 
       </article>
       <footer class="content">
