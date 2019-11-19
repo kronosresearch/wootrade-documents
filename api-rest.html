@@ -530,6 +530,8 @@ Rate limit is counted using api key, and if your application reached the rate li
 <li><code>price</code> &gt;= <code>quote_min</code></li>
 <li><code>price</code> &lt;= <code>quote_max</code></li>
 <li><code>(price - quote_min) % quote_tick</code> should equal to zero</li>
+<li><code>bids[0].price * (1 - price_range)</code> &lt;= <code>price</code> &lt;= <code>bids[0].price * (1 + price_range)</code> when BUY</li>
+<li><code>asks[0].price * (1 - price_range)</code> &lt;= <code>price</code> &lt;= <code>asks[0].price * (1 + price_range)</code> when SELL</li>
 </ul>
 <p>Size filter</p>
 <ul>
@@ -571,7 +573,8 @@ Rate limit is counted using api key, and if your application reached the rate li
         &quot;base_min&quot;: 0.0001,
         &quot;base_max&quot;: 10,
         &quot;base_tick&quot;: 0.0001,
-        &quot;min_notional&quot;: 0.02
+        &quot;min_notional&quot;: 0.02,
+        &quot;price_range&quot;: 0.5,
         &quot;created_time&quot;: &quot;2019-10-23T09:48:57.000Z&quot;,
         &quot;updated_time&quot;: &quot;2019-10-23T09:48:57.000Z&quot;
     }
