@@ -543,6 +543,10 @@ Rate limit is counted using api key, and if your application reached the rate li
 <ul>
 <li><code>price * quantity</code> should grerater than <code>min_notional</code></li>
 </ul>
+<p>Risk Exposure filer</p>
+<ul>
+<li>total exposure in USDT term should lower than allowence range, see <a href="#get-account-infomation">account_info</a></li>
+</ul>
 <p><strong>Parameters</strong></p>
 <table>
 <thead>
@@ -967,6 +971,25 @@ note that we immediate response with an order cancel sent message, and will upda
         &quot;BTC&quot;: 1.014,
         &quot;USDT&quot;: -26333.207589999998,
         &quot;BCHABC&quot;: 2
+    }
+}
+</code></pre>
+<h2>Get Account Infomation</h2>
+<p><strong>Limit: 10 requests per 60 seconds</strong></p>
+<pre><code>GET /v1/client/info
+</code></pre>
+<p>Get account information such as account name, collateral, leverage, current exposure … etc.</p>
+<p><strong>Parameters</strong></p>
+<p>None</p>
+<p><strong>Response</strong></p>
+<pre><code class="language-js">{
+    &quot;success&quot;: true,
+    &quot;application&quot;: {
+        &quot;application_id&quot;: &quot;8935820a-6600-4c2c-9bc3-f017d89aa173&quot;,
+        &quot;account&quot;: &quot;CLIENT_ACCOUNT_01&quot;,
+        &quot;collateral&quot;: 100000, // in USDT unit
+        &quot;leverage&quot;: 5,
+        &quot;risk_exposure&quot;: -523 // abs(risk_exposure) cannot greater than (collateral * leverage)
     }
 }
 </code></pre>
