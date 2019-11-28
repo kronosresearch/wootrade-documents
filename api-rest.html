@@ -492,6 +492,7 @@
 <li><a class="" href="index.html">index</a></li>
 <li><a class="active" href="api-rest.html">api rest</a></li>
 <li><a class="" href="api-websocket.html">api websocket</a></li>
+<li><a class="" href="error-codes.html">error codes</a></li>
 </ul>
       </nav>
       <article id="main" class="content">
@@ -512,10 +513,12 @@ Please set <code>Authorization</code> in http header, the format is shown in fol
 <p><strong>Symbol:</strong><br>
 Wootrade use the format of <code>&lt;TYPE&gt;_&lt;BASE&gt;_&lt;QUOTE&gt;</code> to represent a symbol name, for example: <code>SPOT_BTC_USDT</code> means that it is <code>BTC_USDT</code> pair in <code>SPOT</code> trading market.</p>
 <p><strong>Error Message:</strong><br>
-All API will return following json when api failed, the “error” will contain the detail error message, it may because some data are in wrong format, or other type of error.</p>
+All API will return following json when api failed, the “message” will contain the detail error message, it may because some data are in wrong format, or other type of error.<br>
+Specific error codes and messages are defined in <a href="/error-codes.html">Errors Codes</a>.</p>
 <pre><code class="language-js">{
   &quot;success&quot;: false,
-  &quot;error&quot;: &quot;order_price must be a positive number&quot; // detail message  
+  &quot;code&quot;: -1005, // Error code
+  &quot;message&quot;: &quot;order_price must be a positive number&quot; // Detail message  
 }
 </code></pre>
 <p><strong>Rate Limit:</strong><br>

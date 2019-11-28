@@ -489,22 +489,106 @@
       </a>
       <nav id="menu">
         <ul>
-<li><a class="active" href="index.html">index</a></li>
+<li><a class="" href="index.html">index</a></li>
 <li><a class="" href="api-rest.html">api rest</a></li>
 <li><a class="" href="api-websocket.html">api websocket</a></li>
-<li><a class="" href="error-codes.html">error codes</a></li>
+<li><a class="active" href="error-codes.html">error codes</a></li>
 </ul>
       </nav>
       <article id="main" class="content">
         <div id="toc"></div>
-        <h1>Kronos Wootrade API Documentation</h1>
-<p><strong>KRONOS Wootrade. A privately-accessible liquidity venue for the trading of cryptocurrencies.</strong></p>
-<p>Wootrade provides clients an easily accessible deep pool of liquidity sourced from the largest exchanges and from Kronos’ HFT proprietary trading. We utilize advanced crossing and routing methods which provides ease of access and superior trade execution to select exchanges.</p>
-<p>We provide two interfaces to communicate between Wootrade and clients.</p>
-<ul>
-<li><a href="./api-rest.html">RESTful API interface</a>: Provides sending events like create order, cancel order, fetch balance, …etc.</li>
-<li><a href="./api-websocket.html">Websocket interface</a>: Provides real-time orderbook data feed and order update feed.</li>
-</ul>
+        <h1>Error codes for WooTrade</h1>
+<p>Errors consist of three parts: an error code and a message. Codes are universal, but messages can vary. Here is the error JSON payload:</p>
+<pre><code class="language-js">{
+  &quot;success&quot;: false,
+  &quot;code&quot;: -1001, // Error code
+  &quot;message&quot;: &quot;order_price must be a positive number&quot; // Detail message  
+}
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Error Code</th>
+<th>Status Code</th>
+<th>Error Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-1000</code></td>
+<td>500</td>
+<td><code>UNKNOWN</code></td>
+<td>An unknown error occured while processing the request.</td>
+</tr>
+<tr>
+<td><code>-1001</code></td>
+<td>401</td>
+<td><code>INVALID_SIGNATURE</code></td>
+<td>The api key or secret is in wrong format.</td>
+</tr>
+<tr>
+<td><code>-1002</code></td>
+<td>401</td>
+<td><code>UNAUTHORIZED</code></td>
+<td>API key or secret is invalid, it may because key have insufficient permission or the key is expired/revoked.</td>
+</tr>
+<tr>
+<td><code>-1003</code></td>
+<td>403</td>
+<td><code>TOO_MANY_REQUEST</code></td>
+<td>Rate limit exceed.</td>
+</tr>
+<tr>
+<td><code>-1004</code></td>
+<td>400</td>
+<td><code>UNKNOWN_PARAM</code></td>
+<td>An unknown parameter was sent.</td>
+</tr>
+<tr>
+<td><code>-1005</code></td>
+<td>400</td>
+<td><code>INVALID_PARAM</code></td>
+<td>Some parameters are in wrong format for api.</td>
+</tr>
+<tr>
+<td><code>-1006</code></td>
+<td>400</td>
+<td><code>RESOURCE_NOT_FOUND</code></td>
+<td>The data is not found in server. For example, when client try canceliing a CANCELLED order, will raise this error.</td>
+</tr>
+<tr>
+<td><code>-1101</code></td>
+<td>400</td>
+<td><code>RISK_TOO_HIGH</code></td>
+<td>The risk exposure for client is too high, it may cause by collateral not enough, sending too big order or tthe leverage is too low. please refer to <a href="api-rest.html#get-account-infomation">client info</a> to check the current exposure.</td>
+</tr>
+<tr>
+<td><code>-1102</code></td>
+<td>400</td>
+<td><code>MIN_NOATIONAL</code></td>
+<td>The order value (price * size) is too small.</td>
+</tr>
+<tr>
+<td><code>-1103</code></td>
+<td>400</td>
+<td><code>PRICE_FILTER</code></td>
+<td>The order price is not following the tick size rule for the symbol.</td>
+</tr>
+<tr>
+<td><code>-1104</code></td>
+<td>400</td>
+<td><code>SIZE_FILTER</code></td>
+<td>The order quantity is not following the step size rule for the symbol.</td>
+</tr>
+<tr>
+<td><code>-1105</code></td>
+<td>400</td>
+<td><code>PERCENTAGE_FILTER</code></td>
+<td>price is X% too high or X% too low from the mid price.</td>
+</tr>
+</tbody>
+</table>
 
       </article>
       <footer class="content">
