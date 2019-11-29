@@ -582,8 +582,8 @@ Rate limit is counted using api key, and if your application reached the rate li
         &quot;base_tick&quot;: 0.0001,
         &quot;min_notional&quot;: 0.02,
         &quot;price_range&quot;: 0.5,
-        &quot;created_time&quot;: &quot;2019-10-23T09:48:57.000Z&quot;,
-        &quot;updated_time&quot;: &quot;2019-10-23T09:48:57.000Z&quot;
+        &quot;created_time&quot;: &quot;1575014248.99&quot;,
+        &quot;updated_time&quot;: &quot;1575014248.99&quot;,
     }
 }
 </code></pre>
@@ -721,23 +721,20 @@ note that we immediate response with an order cancel sent message, and will upda
     &quot;side&quot;: &quot;BUY&quot;,
     &quot;executed_quantity&quot;: 0.002,
     &quot;average_executed_price&quot;: 10892.84,
-    &quot;created_time&quot;: &quot;2019-08-20T01:24:50.010Z&quot;,
-    &quot;updated_time&quot;: &quot;2019-08-20T01:24:50.264Z&quot;,
+    &quot;created_time&quot;: &quot;1575014248.957&quot;,
+    &quot;updated_time&quot;: &quot;1575014249.135&quot;,
 
     // Detail transactions of this order
     &quot;Transactions&quot;: [{
-        &quot;id&quot;: 2,
+        &quot;id&quot;: 33,
         &quot;symbol&quot;: &quot;SPOT_BTC_USDT&quot;,
-        &quot;order_id&quot;: 211,
-        &quot;external_order_id&quot;: &quot;GARBAGE&quot;,
-        &quot;executed_price&quot;: 10892.84,
-        &quot;executed_quantity&quot;: 0.002,
-        &quot;fee&quot;: 0,
+        &quot;fee&quot;: 0.000652,
         &quot;fee_asset&quot;: &quot;BTC&quot;, // fee. use Base (BTC) as unit when BUY, use Quote (USDT) as unit when SELL
         &quot;side&quot;: &quot;BUY&quot;,
-        &quot;timestamp&quot;: &quot;2019-08-20T01:24:50.250Z&quot;,
-        &quot;created_time&quot;: &quot;2019-08-20T01:24:50.258Z&quot;,
-        &quot;updated_time&quot;: &quot;2019-08-20T01:24:50.258Z&quot;
+        &quot;order_id&quot;: 9,
+        &quot;executed_price&quot;: 10123,
+        &quot;executed_quantity&quot;: 0.326,
+        &quot;executed_timestamp&quot;: &quot;1565880652.095000&quot;
     }]
 }
 </code></pre>
@@ -806,11 +803,11 @@ note that we immediate response with an order cancel sent message, and will upda
             &quot;status&quot;: &quot;CANCELLED&quot;,
             &quot;symbol&quot;: &quot;SPOT_BCHABC_USDT&quot;,
             &quot;order_id&quot;: 8197,
-            &quot;created_time&quot;: &quot;1568702983.572000&quot;,
             &quot;type&quot;: &quot;LIMIT&quot;,
             &quot;price&quot;: 308.51,
             &quot;quantity&quot;: 0.0019,
             &quot;executed&quot;: 0,
+            &quot;created_time&quot;: &quot;1575014255.089&quot;,
             &quot;Transactions&quot;: [],
             &quot;average_executed_price&quot;: null
         },
@@ -955,7 +952,7 @@ note that we immediate response with an order cancel sent message, and will upda
             &quot;symbol&quot;: &quot;SPOT_BTC_USDT&quot;,
             &quot;base&quot;: -0.1,
             &quot;quote&quot;: 1324.9,
-            &quot;updated_time&quot;: &quot;2019-09-08T14:58:29.000Z&quot;
+            &quot;updated_time&quot;: &quot;1575014707.000&quot;
         }
     ]
 }
