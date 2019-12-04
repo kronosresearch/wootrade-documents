@@ -592,31 +592,10 @@ Rate limit is counted using api key, and if your application reached the rate li
 </code></pre>
 <p>Get available symbols that WooTrade supported, and also send order rules for each symbol. The definition of rules can be found at <a href="#exchange-information">Exchange Infomation</a></p>
 <p><strong>Parameters</strong></p>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>page</td>
-<td>int</td>
-<td>N (default=1)</td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<p>None</p>
 <p><strong>Response</strong></p>
 <pre><code class="language-js">{
   &quot;success&quot;: true,
-  &quot;meta&quot;: {
-    &quot;records_per_page&quot;: 25,
-    &quot;current_page&quot;: 0
-  },
   &quot;rows&quot;: [
     {
       &quot;created_time&quot;: &quot;1575441595.65&quot;,
@@ -630,7 +609,8 @@ Rate limit is counted using api key, and if your application reached the rate li
       &quot;base_tick&quot;: 0.0001,
       &quot;min_notional&quot;: 0.02,
       &quot;price_range&quot;: 0.99
-    }
+    },
+    // ...
   ]
 }
 </code></pre>
