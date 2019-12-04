@@ -524,7 +524,7 @@ Specific error codes and messages are defined in <a href="error-codes.html">Erro
 <p><strong>Rate Limit:</strong><br>
 Rate limit is counted using api key, and if your application reached the rate limit of certain endpoint, the server will return an error result with http code <code>403</code>. You may need wait until next time horizon.</p>
 <hr>
-<h2>Exchange Infomation</h2>
+<h2>Exchange Information</h2>
 <pre><code>GET /v1/public/info/:symbol
 </code></pre>
 <p>Get send order requirement by symbol, there have some rules need to fullfill in order to successfully send order, which is defined as following:</p>
@@ -585,6 +585,53 @@ Rate limit is counted using api key, and if your application reached the rate li
         &quot;created_time&quot;: &quot;1575014248.99&quot;,
         &quot;updated_time&quot;: &quot;1575014248.99&quot;,
     }
+}
+</code></pre>
+<h2>Available Symbols</h2>
+<pre><code>GET /v1/public/info
+</code></pre>
+<p>Get available symbols that WooTrade supported, and also send order rules for each symbol. The definition of rules can be found at <a href="#exchange-information">Exchange Infomation</a></p>
+<p><strong>Parameters</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>page</td>
+<td>int</td>
+<td>N (default=1)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Response</strong></p>
+<pre><code class="language-js">{
+  &quot;success&quot;: true,
+  &quot;meta&quot;: {
+    &quot;records_per_page&quot;: 25,
+    &quot;current_page&quot;: 0
+  },
+  &quot;rows&quot;: [
+    {
+      &quot;created_time&quot;: &quot;1575441595.65&quot;,
+      &quot;updated_time&quot;: &quot;1575441595.65&quot;,
+      &quot;symbol&quot;: &quot;SPOT_BTC_USDT&quot;,
+      &quot;quote_min&quot;: 100,
+      &quot;quote_max&quot;: 100000,
+      &quot;quote_tick&quot;: 0.01,
+      &quot;base_min&quot;: 0.0001,
+      &quot;base_max&quot;: 10,
+      &quot;base_tick&quot;: 0.0001,
+      &quot;min_notional&quot;: 0.02,
+      &quot;price_range&quot;: 0.99
+    }
+  ]
 }
 </code></pre>
 <h2>Send Order</h2>
