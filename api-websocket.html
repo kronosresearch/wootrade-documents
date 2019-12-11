@@ -497,7 +497,7 @@
       </nav>
       <article id="main" class="content">
         <div id="toc"></div>
-        <h1>Wootrade Websocket API</h1>
+        <h1 id="wootrade-websocket-api">Wootrade Websocket API <a class="heading-anchor-permalink" href="#wootrade-websocket-api">#</a></h1>
 <p>Wootrade Websocket API General Information:</p>
 <p><strong>Base endpoints:</strong></p>
 <ul>
@@ -521,7 +521,7 @@ Wootrade use the format of <code>&lt;TYPE&gt;_&lt;BASE&gt;_&lt;QUOTE&gt;</code> 
 <li><code>TRANSACTION</code>: order executed detail</li>
 </ul>
 <hr>
-<h2>Ping-Pong</h2>
+<h2 id="ping-pong">Ping-Pong <a class="heading-anchor-permalink" href="#ping-pong">#</a></h2>
 <p>A ping-pong event that can use to check the system health.</p>
 <p><strong>Send</strong></p>
 <pre><code class="language-js">{
@@ -534,7 +534,7 @@ Wootrade use the format of <code>&lt;TYPE&gt;_&lt;BASE&gt;_&lt;QUOTE&gt;</code> 
    &quot;timestamp&quot;: 1564710591905,
 }
 </code></pre>
-<h2>Orderbook Stream</h2>
+<h2 id="orderbook-stream">Orderbook Stream <a class="heading-anchor-permalink" href="#orderbook-stream">#</a></h2>
 <p>Real-time full limitbook snapshot. Price of asks/bids are in descending order</p>
 <p><strong>Payload</strong></p>
 <pre><code class="language-js">{
@@ -557,7 +557,7 @@ Wootrade use the format of <code>&lt;TYPE&gt;_&lt;BASE&gt;_&lt;QUOTE&gt;</code> 
    }
 }
 </code></pre>
-<h2>Trade Stream</h2>
+<h2 id="trade-stream">Trade Stream <a class="heading-anchor-permalink" href="#trade-stream">#</a></h2>
 <p>The trade stream will broadcast all trade events.</p>
 <p><strong>Payload</strong></p>
 <pre><code class="language-js">{
@@ -571,7 +571,7 @@ Wootrade use the format of <code>&lt;TYPE&gt;_&lt;BASE&gt;_&lt;QUOTE&gt;</code> 
     }
 }
 </code></pre>
-<h2>Order Update Stream</h2>
+<h2 id="order-update-stream">Order Update Stream <a class="heading-anchor-permalink" href="#order-update-stream">#</a></h2>
 <p>The order update stream will provides event messages such as:</p>
 <ul>
 <li>Order been executed (partial filled/full filled)</li>
@@ -595,7 +595,7 @@ Wootrade use the format of <code>&lt;TYPE&gt;_&lt;BASE&gt;_&lt;QUOTE&gt;</code> 
    }
 }
 </code></pre>
-<h2>Transaction stream</h2>
+<h2 id="transaction-stream">Transaction stream <a class="heading-anchor-permalink" href="#transaction-stream">#</a></h2>
 <p>The order exectued transaction details. It will emit when your order got executed. For example, if your order got hit and become <code>PARTIAL_FILLED</code>, you will recieve two events, one is <code>ORDER_UPDATE</code> and one is <code>TRANSACTION</code>.</p>
 <p><strong>Payload</strong></p>
 <pre><code class="language-js">{

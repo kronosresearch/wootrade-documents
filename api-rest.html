@@ -497,7 +497,7 @@
       </nav>
       <article id="main" class="content">
         <div id="toc"></div>
-        <h1>Wootrade REST API</h1>
+        <h1 id="wootrade-rest-api">Wootrade REST API <a class="heading-anchor-permalink" href="#wootrade-rest-api">#</a></h1>
 <p>Wootrade REST API General Information:</p>
 <p><strong>Base endpoints:</strong></p>
 <ul>
@@ -524,7 +524,7 @@ Specific error codes and messages are defined in <a href="error-codes.html">Erro
 <p><strong>Rate Limit:</strong><br>
 Rate limit is counted using api key, and if your application reached the rate limit of certain endpoint, the server will return an error result with http code <code>403</code>. You may need wait until next time horizon.</p>
 <hr>
-<h2>Exchange Information</h2>
+<h2 id="exchange-information">Exchange Information <a class="heading-anchor-permalink" href="#exchange-information">#</a></h2>
 <pre><code>GET /v1/public/info/:symbol
 </code></pre>
 <p>Get send order requirement by symbol, there have some rules need to fullfill in order to successfully send order, which is defined as following:</p>
@@ -587,7 +587,7 @@ Rate limit is counted using api key, and if your application reached the rate li
     }
 }
 </code></pre>
-<h2>Available Symbols</h2>
+<h2 id="available-symbols">Available Symbols <a class="heading-anchor-permalink" href="#available-symbols">#</a></h2>
 <pre><code>GET /v1/public/info
 </code></pre>
 <p>Get available symbols that WooTrade supported, and also send order rules for each symbol. The definition of rules can be found at <a href="#exchange-information">Exchange Infomation</a></p>
@@ -614,7 +614,7 @@ Rate limit is counted using api key, and if your application reached the rate li
   ]
 }
 </code></pre>
-<h2>Send Order</h2>
+<h2 id="send-order">Send Order <a class="heading-anchor-permalink" href="#send-order">#</a></h2>
 <p><strong>Limit: 20 requests per 1 second</strong></p>
 <pre><code>POST /v1/order
 </code></pre>
@@ -673,7 +673,7 @@ will response immediately with an order created message.</p>
   &quot;order_quantity&quot;: 0.987654
 }
 </code></pre>
-<h2>Cancel Order</h2>
+<h2 id="cancel-order">Cancel Order <a class="heading-anchor-permalink" href="#cancel-order">#</a></h2>
 <p><strong>Limit: 20 requests per 1 second</strong></p>
 <pre><code>DELETE /v1/order
 </code></pre>
@@ -710,7 +710,7 @@ note that we immediate response with an order cancel sent message, and will upda
   &quot;status&quot;: &quot;CANCEL_SENT&quot;
 }
 </code></pre>
-<h2>Get Order</h2>
+<h2 id="get-order">Get Order <a class="heading-anchor-permalink" href="#get-order">#</a></h2>
 <p><strong>Limit: 20 requests per 1 second</strong></p>
 <pre><code>GET /v1/order/:oid
 </code></pre>
@@ -765,7 +765,7 @@ note that we immediate response with an order cancel sent message, and will upda
     }]
 }
 </code></pre>
-<h2>Get Orders</h2>
+<h2 id="get-orders">Get Orders <a class="heading-anchor-permalink" href="#get-orders">#</a></h2>
 <p><strong>Limit: 10 requests per 1 second</strong></p>
 <pre><code>GET /v1/orders
 </code></pre>
@@ -842,7 +842,7 @@ note that we immediate response with an order cancel sent message, and will upda
     ]
 }
 </code></pre>
-<h2>Orderbook snapshot</h2>
+<h2 id="orderbook-snapshot">Orderbook snapshot <a class="heading-anchor-permalink" href="#orderbook-snapshot">#</a></h2>
 <p><strong>Limit: 10 requests per 1 second</strong></p>
 <pre><code>GET /v1/orderbook/:symbol
 </code></pre>
@@ -899,7 +899,7 @@ note that we immediate response with an order cancel sent message, and will upda
     ]
 }
 </code></pre>
-<h2>Get History Trades</h2>
+<h2 id="get-history-trades">Get History Trades <a class="heading-anchor-permalink" href="#get-history-trades">#</a></h2>
 <p><strong>Limit: 10 requests per 1 second</strong></p>
 <pre><code>GET /v1/client/trades
 </code></pre>
@@ -964,7 +964,7 @@ note that we immediate response with an order cancel sent message, and will upda
     ]
 }
 </code></pre>
-<h2>Get Current Balances</h2>
+<h2 id="get-current-balances">Get Current Balances <a class="heading-anchor-permalink" href="#get-current-balances">#</a></h2>
 <p><strong>Limit: 10 requests per 60 seconds</strong></p>
 <pre><code>GET /v1/client/balance
 </code></pre>
@@ -984,7 +984,7 @@ note that we immediate response with an order cancel sent message, and will upda
     ]
 }
 </code></pre>
-<h2>Get Current Holding</h2>
+<h2 id="get-current-holding">Get Current Holding <a class="heading-anchor-permalink" href="#get-current-holding">#</a></h2>
 <p><strong>Limit: 10 requests per 60 seconds</strong></p>
 <pre><code>GET /v1/client/holding
 </code></pre>
@@ -1001,7 +1001,7 @@ note that we immediate response with an order cancel sent message, and will upda
     }
 }
 </code></pre>
-<h2>Get Account Infomation</h2>
+<h2 id="get-account-infomation">Get Account Infomation <a class="heading-anchor-permalink" href="#get-account-infomation">#</a></h2>
 <p><strong>Limit: 10 requests per 60 seconds</strong></p>
 <pre><code>GET /v1/client/info
 </code></pre>
