@@ -964,26 +964,6 @@ note that we immediate response with an order cancel sent message, and will upda
     ]
 }
 </code></pre>
-<h2 id="get-current-balances">Get Current Balances <a class="heading-anchor-permalink" href="#get-current-balances">#</a></h2>
-<p><strong>Limit: 10 requests per 60 seconds</strong></p>
-<pre><code>GET /v1/client/balance
-</code></pre>
-<p>Balance summary of client. Note that the number in balance could be negative, it means how much client owed to Wootrade.</p>
-<p><strong>Parameters</strong></p>
-<p>None</p>
-<p><strong>Response</strong></p>
-<pre><code class="language-js">{
-    &quot;success&quot;: true,
-    &quot;rows&quot;: [
-        {
-            &quot;symbol&quot;: &quot;SPOT_BTC_USDT&quot;,
-            &quot;base&quot;: -0.1,
-            &quot;quote&quot;: 1324.9,
-            &quot;updated_time&quot;: &quot;1575014707.000&quot;
-        }
-    ]
-}
-</code></pre>
 <h2 id="get-current-holding">Get Current Holding <a class="heading-anchor-permalink" href="#get-current-holding">#</a></h2>
 <p><strong>Limit: 10 requests per 60 seconds</strong></p>
 <pre><code>GET /v1/client/holding
