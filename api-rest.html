@@ -1000,6 +1000,104 @@ note that we immediate response with an order cancel sent message, and will upda
     }
 }
 </code></pre>
+<h2 id="get-settlement-history">Get Settlement History <a class="heading-anchor-permalink" href="#get-settlement-history">#</a></h2>
+<p><strong>Limit: 10 requests per 60 seconds</strong></p>
+<pre><code>GET /v1/settlements
+</code></pre>
+<p>Get settlement history list, includes settlement_id, status … ect,</p>
+<p><strong>Parameters</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>status</td>
+<td>string</td>
+<td>N</td>
+<td><code>NEW</code>/<code>COMPLETED</code></td>
+</tr>
+<tr>
+<td>page</td>
+<td>number</td>
+<td>N (default: 1)</td>
+<td>the page wish to query.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Response</strong></p>
+<pre><code class="language-js">{
+    &quot;success&quot;: true,
+    &quot;meta&quot;: {
+        &quot;records_per_page&quot;: 25,
+        &quot;current_page&quot;: 1
+    },
+    &quot;rows&quot;: [
+        {
+            &quot;created_time&quot;: &quot;1576562579.274&quot;,
+            &quot;settlement_id&quot;: 3,
+            &quot;settlement_token&quot;: &quot;USDT&quot;,
+            &quot;settlement_quantity&quot;: 1000,
+            &quot;status&quot;: &quot;COMPLETED&quot;
+        },
+        {
+            &quot;created_time&quot;: &quot;1576562572.019&quot;,
+            &quot;settlement_id&quot;: 2,
+            &quot;settlement_token&quot;: &quot;BTC&quot;,
+            &quot;settlement_quantity&quot;: -1,
+            &quot;status&quot;: &quot;NEW&quot;
+        },
+        {
+            &quot;created_time&quot;: &quot;1576562572.018&quot;,
+            &quot;settlement_id&quot;: 1,
+            &quot;settlement_token&quot;: &quot;USDT&quot;,
+            &quot;settlement_quantity&quot;: 10000,
+            &quot;status&quot;: &quot;COMPLETED&quot;
+        }
+    ]
+}
+</code></pre>
+<h2 id="submit-settlement-request">Submit Settlement Request <a class="heading-anchor-permalink" href="#submit-settlement-request">#</a></h2>
+<p><strong>Limit: 5 requests per 60 seconds</strong></p>
+<pre><code>POST /v1/settlement
+</code></pre>
+<p>Submit your settlement request.</p>
+<p><strong>Parameters</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>settlement_token</td>
+<td>string</td>
+<td>Y</td>
+<td>token name wish to settle</td>
+</tr>
+<tr>
+<td>settlement_quantity</td>
+<td>number</td>
+<td>Y</td>
+<td>token quantity wish to settle</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Response</strong></p>
+<pre><code class="language-js">{
+  &quot;success&quot;: true,
+  &quot;settlement_id&quot;: 4
+}
+</code></pre>
 
       </article>
       <footer class="content">
