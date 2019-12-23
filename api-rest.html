@@ -1067,6 +1067,11 @@ note that we immediate response with an order cancel sent message, and will upda
 <pre><code>POST /v1/settlement
 </code></pre>
 <p>Submit your settlement request.</p>
+<ul>
+<li>Deposit(holding &lt; 0): <code>settlement_quantity</code> &gt; 0</li>
+<li>Withdrawal(holding &gt; 0): <code>settlement_quantity</code> &lt; 0, <code>Math.abs(settlement_quantity)</code> &lt; holding</li>
+<li>You need to deposit all negative quantity’s token first, then you can submit withdrawal request.</li>
+</ul>
 <p><strong>Parameters</strong></p>
 <table>
 <thead>

@@ -519,7 +519,7 @@
 <td><code>-1000</code></td>
 <td>500</td>
 <td><code>UNKNOWN</code></td>
-<td>An unknown error occured while processing the request.</td>
+<td>An unknown error occurred while processing the request.</td>
 </tr>
 <tr>
 <td><code>-1001</code></td>
@@ -555,7 +555,7 @@
 <td><code>-1006</code></td>
 <td>400</td>
 <td><code>RESOURCE_NOT_FOUND</code></td>
-<td>The data is not found in server. For example, when client try canceliing a CANCELLED order, will raise this error.</td>
+<td>The data is not found in server. For example, when client try canceling a CANCELLED order, will raise this error.</td>
 </tr>
 <tr>
 <td><code>-1007</code></td>
@@ -564,10 +564,22 @@
 <td>The data is already exists or your request is duplicated.</td>
 </tr>
 <tr>
+<td><code>-1008</code></td>
+<td>400</td>
+<td><code>QUANTITY_TOO_HIGH</code></td>
+<td>The quantity of settlement is too high than you can request.</td>
+</tr>
+<tr>
+<td><code>-1009</code></td>
+<td>400</td>
+<td><code>CAN_NOT_WITHDRAWAL</code></td>
+<td>Can not request withdrawal settlement, you need to deposit other arrears first.</td>
+</tr>
+<tr>
 <td><code>-1101</code></td>
 <td>400</td>
 <td><code>RISK_TOO_HIGH</code></td>
-<td>The risk exposure for client is too high, it may cause by collateral not enough, sending too big order or tthe leverage is too low. please refer to <a href="api-rest.html#get-account-infomation">client info</a> to check the current exposure.</td>
+<td>The risk exposure for client is too high, it may cause by collateral not enough, sending too big order or the leverage is too low. please refer to <a href="api-rest.html#get-account-infomation">client info</a> to check the current exposure.</td>
 </tr>
 <tr>
 <td><code>-1102</code></td>
@@ -591,7 +603,7 @@
 <td><code>-1105</code></td>
 <td>400</td>
 <td><code>PERCENTAGE_FILTER</code></td>
-<td>price is X% too high or X% too low from the mid price.</td>
+<td>Price is X% too high or X% too low from the mid price.</td>
 </tr>
 </tbody>
 </table>
