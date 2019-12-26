@@ -737,32 +737,29 @@ note that we immediate response with an order cancel sent message, and will upda
 <p><strong>Response</strong></p>
 <pre><code class="language-js">{
     &quot;success&quot;: true,
-    &quot;order_id&quot;: 211,
-    &quot;application_id&quot;: &quot;87f495d3-e55d-43b6-b927-9c4038c18a32&quot;,
-    &quot;symbol&quot;: &quot;SPOT_BTC_USDT&quot;,
-    &quot;order_tag&quot;: null,
-    &quot;order_price&quot;: 10894.7,
-    &quot;order_quantity&quot;: 0.002,
-    &quot;order_type&quot;: &quot;LIMIT&quot;,
+    &quot;created_time&quot;: &quot;1577349119.33&quot;,
+    &quot;side&quot;: &quot;SELL&quot;,
     &quot;status&quot;: &quot;FILLED&quot;,
-    &quot;side&quot;: &quot;BUY&quot;,
-    &quot;executed_quantity&quot;: 0.002,
-    &quot;average_executed_price&quot;: 10892.84,
-    &quot;created_time&quot;: &quot;1575014248.957&quot;,
-    &quot;updated_time&quot;: &quot;1575014249.135&quot;,
+    &quot;symbol&quot;: &quot;SPOT_BTC_USDT&quot;,
+    &quot;order_id&quot;: 1,
+    &quot;type&quot;: &quot;LIMIT&quot;,
+    &quot;price&quot;: 123,
+    &quot;quantity&quot;: 0.1,
+    &quot;executed&quot;: 0.1,
 
     // Detail transactions of this order
-    &quot;Transactions&quot;: [{
-        &quot;id&quot;: 33,
-        &quot;symbol&quot;: &quot;SPOT_BTC_USDT&quot;,
-        &quot;fee&quot;: 0.000652,
-        &quot;fee_asset&quot;: &quot;BTC&quot;, // fee. use Base (BTC) as unit when BUY, use Quote (USDT) as unit when SELL
-        &quot;side&quot;: &quot;BUY&quot;,
-        &quot;order_id&quot;: 9,
-        &quot;executed_price&quot;: 10123,
-        &quot;executed_quantity&quot;: 0.326,
-        &quot;executed_timestamp&quot;: &quot;1565880652.095000&quot;
-    }]
+    &quot;Transactions&quot;: [
+        {
+            &quot;id&quot;: 2,
+            &quot;symbol&quot;: &quot;SPOT_BTC_USDT&quot;,
+            &quot;fee&quot;: 0.0001,
+            &quot;fee_asset&quot;: &quot;BTC&quot;, // fee. use Base (BTC) as unit when BUY, use Quote (USDT) as unit when SELL
+            &quot;side&quot;: &quot;BUY&quot;,
+            &quot;order_id&quot;: 1,
+            &quot;executed_price&quot;: 123,
+            &quot;executed_quantity&quot;: 0.05,
+            &quot;executed_timestamp&quot;: &quot;1567382401.000000&quot;
+        }]
 }
 </code></pre>
 <h2 id="get-orders">Get Orders <a class="heading-anchor-permalink" href="#get-orders">#</a></h2>
@@ -897,6 +894,44 @@ note that we immediate response with an order cancel sent message, and will upda
             &quot;quantity&quot;: 0.00488286
         }
     ]
+}
+</code></pre>
+<h2 id="get-trade">Get Trade <a class="heading-anchor-permalink" href="#get-trade">#</a></h2>
+<p><strong>Limit: 20 requests per 1 second</strong></p>
+<pre><code>GET /v1/client/trade/:tid
+</code></pre>
+<p>Get specific transaction detail by <code>id</code>.</p>
+<p><strong>Parameters</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>tid</td>
+<td>number</td>
+<td>Y</td>
+<td>The transaction id <code>tid</code> that wish to query</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Response</strong></p>
+<pre><code class="language-js">{
+    &quot;success&quot;: true,
+    &quot;id&quot;: 1,
+    &quot;symbol&quot;: &quot;SPOT_BTC_USDT&quot;,
+    &quot;fee&quot;: 0.0001,
+    &quot;fee_asset&quot;: &quot;BTC&quot;, // fee. use Base (BTC) as unit when BUY, use Quote (USDT) as unit when SELL
+    &quot;side&quot;: &quot;BUY&quot;,
+    &quot;order_id&quot;: 2,
+    &quot;executed_price&quot;: 123,
+    &quot;executed_quantity&quot;: 0.05,
+    &quot;executed_timestamp&quot;: &quot;1567382400.000000&quot;
 }
 </code></pre>
 <h2 id="get-history-trades">Get History Trades <a class="heading-anchor-permalink" href="#get-history-trades">#</a></h2>
