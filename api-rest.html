@@ -1081,6 +1081,7 @@ note that we immediate response with an order cancel sent message, and will upda
             &quot;settlement_id&quot;: 3,
             &quot;settlement_token&quot;: &quot;USDT&quot;,
             &quot;settlement_quantity&quot;: 1000,
+            &quot;comment&quot;: &quot;Please reivew.&quot;
             &quot;status&quot;: &quot;COMPLETED&quot;
         },
         {
@@ -1088,6 +1089,7 @@ note that we immediate response with an order cancel sent message, and will upda
             &quot;settlement_id&quot;: 2,
             &quot;settlement_token&quot;: &quot;BTC&quot;,
             &quot;settlement_quantity&quot;: -1,
+            &quot;comment&quot;: &quot;&quot;,
             &quot;status&quot;: &quot;NEW&quot;
         },
         {
@@ -1095,6 +1097,7 @@ note that we immediate response with an order cancel sent message, and will upda
             &quot;settlement_id&quot;: 1,
             &quot;settlement_token&quot;: &quot;USDT&quot;,
             &quot;settlement_quantity&quot;: 10000,
+            &quot;comment&quot;: &quot;&quot;,
             &quot;status&quot;: &quot;COMPLETED&quot;
         }
     ]
@@ -1132,6 +1135,12 @@ note that we immediate response with an order cancel sent message, and will upda
 <td>number</td>
 <td>Y</td>
 <td>token quantity wish to settle</td>
+</tr>
+<tr>
+<td>comment</td>
+<td>string</td>
+<td>N</td>
+<td>comment as extra information</td>
 </tr>
 </tbody>
 </table>
