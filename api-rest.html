@@ -898,6 +898,35 @@ note that we immediate response with an order cancel sent message, and will upda
     ]
 }
 </code></pre>
+<h2 id="modify-ip-binding">Modify IP Binding <a class="heading-anchor-permalink" href="#modify-ip-binding">#</a></h2>
+<p><strong>Limit: 10 requests per 60 second</strong></p>
+<pre><code>POST /v1/client/ip
+</code></pre>
+<p>Modify client’s IP binding information</p>
+<p><strong>Parameters</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ips</td>
+<td>string</td>
+<td>Y</td>
+<td>IP list you want to modify, only support IPV4 now, comma separated</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Response</strong></p>
+<pre><code class="language-js">{
+    &quot;success&quot;: true
+}
+</code></pre>
 <h2 id="get-trade">Get Trade <a class="heading-anchor-permalink" href="#get-trade">#</a></h2>
 <p><strong>Limit: 20 requests per 1 second</strong></p>
 <pre><code>GET /v1/client/trade/:tid
