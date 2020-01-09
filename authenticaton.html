@@ -559,6 +559,7 @@ Assume following infomation:</p>
 <ul>
 <li><code>api_key</code> is <code>AbmyVJGUpN064ks5ELjLfA==</code></li>
 <li><code>api_secret</code> is <code>QHKRXHPAW1MC9YGZMAT8YDJG2HPR</code></li>
+<li><code>timestamp</code> is <code>1578565539808</code></li>
 </ul>
 <p>First you have to fetch an <code>access_token</code> using endpoint described <a href="#how-to-get-access-token">here</a>, and after you get the <code>access_token</code>, this <code>access_token</code> is valid as long as it didn’t expire. Put it in your request header in every request.</p>
 <p>Then hash you request parameters with <code>api_secret</code>, the hashing logic is that:</p>
@@ -573,18 +574,24 @@ order_price:9000
 order_quantity:0.11
 side:BUY
 </code></pre>
-<p>Normalize request’s <strong>query string</strong> and <strong>body parameters</strong>, then concat them with alphabet order, the result would be like:</p>
-<pre><code>order_price=9000&amp;order_quantity=0.11&amp;order_type=LIMIT&amp;param1=val1&amp;param2=val2&amp;side=BUY&amp;symbol=SPOT_BTC_USDT
+<p>Normalize request content:</p>
+<ol>
+<li>concat <strong>query string</strong> and <strong>body parameters</strong> with alphabet order in <a href="https://en.wikipedia.org/wiki/Query_string">query string format</a>.</li>
+<li>concat <code>timestamp</code> with above result, using <code>|</code> as seperator.</li>
+</ol>
+<p>The result content would looks like:</p>
+<pre><code>order_price=9000&amp;order_quantity=0.11&amp;order_type=LIMIT&amp;param1=val1&amp;param2=val2&amp;side=BUY&amp;symbol=SPOT_BTC_USDT|1578565539808
 </code></pre>
 <p>Then use <code>api_secret</code> to hash it with HMAC <code>SHA256</code> algorithm, you can use <code>openssl</code> to get this:</p>
-<pre><code class="language-sh">$ echo -n &quot;order_price=9000&amp;order_quantity=0.11&amp;order_type=LIMIT&amp;param1=val1&amp;param2=val2&amp;side=BUY&amp;symbol=SPOT_BTC_USDT&quot; | openssl dgst -sha256 -hmac &quot;QHKRXHPAW1MC9YGZMAT8YDJG2HPR&quot;
-(stdin)= 21b28aa41ea059a7d4cd49f630e661ef5fbcdbfc3b35021dd3f6906eef2c7f12
+<pre><code class="language-sh">$ echo -n &quot;order_price=9000&amp;order_quantity=0.11&amp;order_type=LIMIT&amp;param1=val1&amp;param2=val2&amp;side=BUY&amp;symbol=SPOT_BTC_USDT|1578565539808&quot; | openssl dgst -sha256 -hmac &quot;QHKRXHPAW1MC9YGZMAT8YDJG2HPR&quot;
+(stdin)= 9766aac353561a08111db564f9228ab60b92fef0de565f5a092f0bfbf6547e26
 </code></pre>
-<p>Put the <code>21b28aa41ea059a7d4cd49f630e661ef5fbcdbfc3b35021dd3f6906eef2c7f12</code> in request header <code>x-api-signature</code>.</p>
+<p>Put the <code>9766aac353561a08111db564f9228ab60b92fef0de565f5a092f0bfbf6547e26</code> in request header <code>x-api-signature</code>, and put <code>timestamp</code> in <code>x-api-timestamp</code>.</p>
 <p>So the final request would looks like:</p>
 <pre><code>POST /v1/order?param1=val1&amp;param2=val2 HTTP/1.1
 Content-Type: application/x-www-form-urlencoded
 x-api-signature: 21b28aa41ea059a7d4cd49f630e661ef5fbcdbfc3b35021dd3f6906eef2c7f12
+x-api-timestamp: 1578565539808
 Authorization: Bearer eyJhbGciOiJSUzI1Ni.........
 cache-control: no-cache
 
