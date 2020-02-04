@@ -273,6 +273,9 @@
                     <a href="#get-current-holding" class="toc-h2 toc-link" data-title="Get Current Holding">Get Current Holding</a>
                   </li>
                   <li>
+                    <a href="#get-current-holding-v2" class="toc-h2 toc-link" data-title="Get Current Holding v2">Get Current Holding v2</a>
+                  </li>
+                  <li>
                     <a href="#get-account-information" class="toc-h2 toc-link" data-title="Get Account Information">Get Account Information</a>
                   </li>
                   <li>
@@ -1186,6 +1189,39 @@ GET /v1/client/holding
         <span class="s2">"USDT"</span><span class="p">:</span> <span class="o">-</span><span class="mf">26333.207589999998</span><span class="p">,</span>
         <span class="s2">"BCHABC"</span><span class="p">:</span> <span class="mi">2</span>
     <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+<p><strong>Parameters</strong></p>
+
+<p>None</p>
+<h2 id='get-current-holding-v2'>Get Current Holding v2</h2>
+<p><strong>Limit: 10 requests per 60 seconds</strong></p>
+
+<p><code>
+GET /v2/client/holding
+</code></p>
+
+<p>Holding summary of client. Note that the number in holding could be negative, it means how much client owed to Wootrade.</p>
+
+<blockquote>
+<p><strong>Response</strong></p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="p">{</span>
+  <span class="nl">success</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="nx">holding</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="na">updated_time</span><span class="p">:</span> <span class="s1">'1580794149'</span><span class="p">,</span>
+      <span class="na">token</span><span class="p">:</span> <span class="s1">'BTC'</span><span class="p">,</span>
+      <span class="na">holding</span><span class="p">:</span> <span class="o">-</span><span class="mf">28.000752</span><span class="p">,</span>
+      <span class="na">frozen</span><span class="p">:</span> <span class="mi">0</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="na">updated_time</span><span class="p">:</span> <span class="s1">'1580794149'</span><span class="p">,</span>
+      <span class="na">token</span><span class="p">:</span> <span class="s1">'USDT'</span><span class="p">,</span>
+      <span class="na">holding</span><span class="p">:</span> <span class="mf">282485.071904</span><span class="p">,</span>
+      <span class="na">frozen</span><span class="p">:</span> <span class="mi">0</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
 <span class="p">}</span>
 </code></pre>
 <p><strong>Parameters</strong></p>
