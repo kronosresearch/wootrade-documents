@@ -261,9 +261,6 @@
                     <a href="#orderbook-snapshot" class="toc-h2 toc-link" data-title="Orderbook snapshot">Orderbook snapshot</a>
                   </li>
                   <li>
-                    <a href="#modify-ip-binding" class="toc-h2 toc-link" data-title="Modify IP Binding">Modify IP Binding</a>
-                  </li>
-                  <li>
                     <a href="#get-trade" class="toc-h2 toc-link" data-title="Get Trade">Get Trade</a>
                   </li>
                   <li>
@@ -1024,39 +1021,6 @@ GET /v1/orderbook/:symbol
 <td>number</td>
 <td>N (default: 100)</td>
 <td>the levels wish to show on both side.</td>
-</tr>
-</tbody></table>
-<h2 id='modify-ip-binding'>Modify IP Binding</h2>
-<p><strong>Limit: 10 requests per 60 second</strong></p>
-
-<p><code>
-POST /v1/client/ip
-</code></p>
-
-<p>Modify client&#39;s IP binding information</p>
-
-<blockquote>
-<p><strong>Response</strong></p>
-</blockquote>
-<pre class="highlight javascript"><code><span class="p">{</span>
-    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span>
-<span class="p">}</span>
-</code></pre>
-<p><strong>Parameters</strong></p>
-
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>ips</td>
-<td>string</td>
-<td>Y</td>
-<td>IP list you want to modify, only support IPV4 now, comma separated</td>
 </tr>
 </tbody></table>
 <h2 id='get-trade'>Get Trade</h2>
