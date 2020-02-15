@@ -1502,7 +1502,7 @@ GET /v1/asset/collateral
 POST /v1/asset/collateral
 </code></p>
 
-<p>Initiate a token withdrawal request, <code>amount</code> must less than or equal to <code>collateral</code> - <code>risk_exposure</code></p>
+<p>Initiate a collateral withdrawal request, <code>amount</code> must less than or equal to <code>collateral - abs(risk_exposure)/leverage</code>)</p>
 
 <blockquote>
 <p><strong>Response</strong></p>
