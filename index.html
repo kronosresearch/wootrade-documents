@@ -807,8 +807,14 @@ will response immediately with an order created message.</p>
 <tr>
 <td>symbol</td>
 <td>string</td>
-<td>Y</td>
+<td>N</td>
 <td></td>
+</tr>
+<tr>
+<td>order_tag</td>
+<td>string</td>
+<td>N</td>
+<td>An optional tag for this order. (default: <code>default</code>)</td>
 </tr>
 <tr>
 <td>order_type</td>
@@ -958,6 +964,7 @@ GET /v1/orders
             <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"CANCELLED"</span><span class="p">,</span>
             <span class="s2">"symbol"</span><span class="p">:</span> <span class="s2">"SPOT_BCHABC_USDT"</span><span class="p">,</span>
             <span class="s2">"order_id"</span><span class="p">:</span> <span class="mi">8197</span><span class="p">,</span>
+            <span class="s2">"order_tag"</span><span class="p">:</span> <span class="s2">"default"</span><span class="p">,</span>
             <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"LIMIT"</span><span class="p">,</span>
             <span class="s2">"price"</span><span class="p">:</span> <span class="mf">308.51</span><span class="p">,</span>
             <span class="s2">"quantity"</span><span class="p">:</span> <span class="mf">0.0019</span><span class="p">,</span>
@@ -983,8 +990,14 @@ GET /v1/orders
 <tr>
 <td>symbol</td>
 <td>string</td>
-<td>Y</td>
+<td>N</td>
 <td></td>
+</tr>
+<tr>
+<td>order_tag</td>
+<td>string</td>
+<td>N</td>
+<td>An optional tag for this order.</td>
 </tr>
 <tr>
 <td>status</td>
@@ -1137,6 +1150,7 @@ GET /v1/client/trades
             <span class="s2">"id"</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="c1">// transaction id</span>
             <span class="s2">"symbol"</span><span class="p">:</span> <span class="s2">"SPOT_BTC_USDT"</span><span class="p">,</span>
             <span class="s2">"order_id"</span><span class="p">:</span> <span class="mi">211</span><span class="p">,</span>
+            <span class="s2">"order_tag"</span><span class="p">:</span> <span class="s2">"default"</span><span class="p">,</span>
             <span class="s2">"executed_price"</span><span class="p">:</span> <span class="mf">10892.84</span><span class="p">,</span>
             <span class="s2">"executed_quantity"</span><span class="p">:</span> <span class="mf">0.002</span><span class="p">,</span>
             <span class="s2">"side"</span><span class="p">:</span> <span class="s2">"SELL"</span><span class="p">,</span>
@@ -1161,8 +1175,14 @@ GET /v1/client/trades
 <tr>
 <td>symbol</td>
 <td>string</td>
-<td>Y</td>
+<td>N</td>
 <td></td>
+</tr>
+<tr>
+<td>order_tag</td>
+<td>string</td>
+<td>N</td>
+<td>An optional tag for this order.</td>
 </tr>
 <tr>
 <td>start_t</td>
