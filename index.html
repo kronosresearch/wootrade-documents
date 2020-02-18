@@ -1502,14 +1502,14 @@ POST /v1/asset/withdraw
 GET /v1/asset/collateral
 </code></p>
 
-<p>Get your unique collateral deposit address, only support USDT (Omni), after deposit and confirming with blockchain, your collateral will increase.</p>
+<p>Get your unique collateral deposit address, only support USDT (ERC-20), after deposit and confirming with blockchain, your collateral will increase.</p>
 
 <blockquote>
 <p><strong>Response</strong></p>
 </blockquote>
 <pre class="highlight javascript"><code><span class="p">{</span>
     <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="s2">"address"</span><span class="p">:</span> <span class="s2">"19Pmfeww7Uy9iqMQ3i1zytdSnmK3xSEjVu"</span>
+    <span class="s2">"address"</span><span class="p">:</span> <span class="s2">"0x31d64B3230f8baDD91dE1710A65DF536aF8f7cDa"</span>
 <span class="p">}</span>
 </code></pre>
 <p><strong>Parameters</strong></p>
@@ -1546,7 +1546,7 @@ POST /v1/asset/collateral
 <td>address</td>
 <td>string</td>
 <td>Y</td>
-<td>the address you want to withdraw, only support USDT (Omni) address</td>
+<td>the address you want to withdraw, only support USDT (ERC-20) address</td>
 </tr>
 <tr>
 <td>amount</td>
@@ -1627,7 +1627,7 @@ GET /v1/asset/history
 <td>token</td>
 <td>string</td>
 <td>N</td>
-<td>the address you want to withdraw, only support USDT (Omni) address</td>
+<td>token name you want to search (can get it by /public/token)</td>
 </tr>
 <tr>
 <td>type</td>
