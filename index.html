@@ -246,7 +246,7 @@
                     <a href="#market-trades-public" class="toc-h2 toc-link" data-title="Market Trades (Public)">Market Trades (Public)</a>
                   </li>
                   <li>
-                    <a href="#market-trades-public-2" class="toc-h2 toc-link" data-title="Market Trades (Public)">Market Trades (Public)</a>
+                    <a href="#availble-token-public" class="toc-h2 toc-link" data-title="Availble Token (Public)">Availble Token (Public)</a>
                   </li>
                   <li>
                     <a href="#send-order" class="toc-h2 toc-link" data-title="Send Order">Send Order</a>
@@ -724,7 +724,7 @@ GET /v1/public/market_trades
 <td>Numbers of trades want to query.</td>
 </tr>
 </tbody></table>
-<h2 id='market-trades-public-2'>Market Trades (Public)</h2>
+<h2 id='availble-token-public'>Availble Token (Public)</h2>
 <p><code>
 GET /v1/public/token
 </code></p>
@@ -807,7 +807,7 @@ will response immediately with an order created message.</p>
 <tr>
 <td>symbol</td>
 <td>string</td>
-<td>N</td>
+<td>Y</td>
 <td></td>
 </tr>
 <tr>
@@ -1259,7 +1259,21 @@ GET /v2/client/holding
 </code></pre>
 <p><strong>Parameters</strong></p>
 
-<p>None</p>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>all</td>
+<td>enum</td>
+<td>N</td>
+<td><code>true</code>/<code>false</code>. If <code>true</code> then will return all token even if balance is empty.</td>
+</tr>
+</tbody></table>
 <h2 id='get-account-information'>Get Account Information</h2>
 <p><strong>Limit: 10 requests per 60 seconds</strong></p>
 
