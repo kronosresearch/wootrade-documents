@@ -305,6 +305,9 @@
             <a href="#websocket-api" class="toc-h1 toc-link" data-title="Websocket API">Websocket API</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#symbol-ticker-stream-public" class="toc-h2 toc-link" data-title="Symbol Ticker Stream (Public)">Symbol Ticker Stream (Public)</a>
+                  </li>
+                  <li>
                     <a href="#ping-pong" class="toc-h2 toc-link" data-title="Ping-Pong">Ping-Pong</a>
                   </li>
                   <li>
@@ -1243,16 +1246,16 @@ GET /v2/client/holding
   <span class="nl">success</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
   <span class="nx">holding</span><span class="p">:</span> <span class="p">[</span>
     <span class="p">{</span>
-      <span class="na">updated_time</span><span class="p">:</span> <span class="s1">'1580794149'</span><span class="p">,</span>
-      <span class="na">token</span><span class="p">:</span> <span class="s1">'BTC'</span><span class="p">,</span>
-      <span class="na">holding</span><span class="p">:</span> <span class="o">-</span><span class="mf">28.000752</span><span class="p">,</span>
-      <span class="na">frozen</span><span class="p">:</span> <span class="mi">0</span>
+      <span class="s2">"updated_time"</span><span class="p">:</span> <span class="s2">"1580794149"</span><span class="p">,</span>
+      <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"BTC"</span><span class="p">,</span>
+      <span class="s2">"holding"</span><span class="p">:</span> <span class="o">-</span><span class="mf">28.000752</span><span class="p">,</span>
+      <span class="s2">"frozen"</span><span class="p">:</span> <span class="mi">0</span>
     <span class="p">},</span>
     <span class="p">{</span>
-      <span class="na">updated_time</span><span class="p">:</span> <span class="s1">'1580794149'</span><span class="p">,</span>
-      <span class="na">token</span><span class="p">:</span> <span class="s1">'USDT'</span><span class="p">,</span>
-      <span class="na">holding</span><span class="p">:</span> <span class="mf">282485.071904</span><span class="p">,</span>
-      <span class="na">frozen</span><span class="p">:</span> <span class="mi">0</span>
+      <span class="s2">"updated_time"</span><span class="p">:</span> <span class="s2">"1580794149"</span><span class="p">,</span>
+      <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"USDT"</span><span class="p">,</span>
+      <span class="s2">"holding"</span><span class="p">:</span> <span class="mf">282485.071904</span><span class="p">,</span>
+      <span class="s2">"frozen"</span><span class="p">:</span> <span class="mi">0</span>
     <span class="p">}</span>
   <span class="p">]</span>
 <span class="p">}</span>
@@ -1708,7 +1711,26 @@ wss://staging.nexus.kronostoken.com/ws/508590cc-e3cd-4390-ba9b-739830f41242/SPOT
 <li><code>ORDER_UPDATE</code>: update of client&#39;s order</li>
 <li><code>TRANSACTION</code>: order executed detail</li>
 </ul>
-<h2 id='ping-pong'>Ping-Pong</h2>
+<h2 id='symbol-ticker-stream-public'>Symbol Ticker Stream (Public)</h2>
+<p>Stream name: <code>ticker</code></p>
+
+<p>24hr rolling window mini-ticker statistics. These are NOT the statistics of the UTC day, but a 24hr rolling window for the previous 24hrs.</p>
+
+<blockquote>
+<p><strong>Payload</strong></p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"event"</span><span class="p">:</span> <span class="s2">"ticker"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="mi">1564710591905</span><span class="p">,</span>
+    <span class="s2">"data"</span><span class="p">:</span> <span class="p">[{</span>
+        <span class="s2">"symbol"</span><span class="p">:</span> <span class="s2">"SPOT_BTC_USDT"</span><span class="p">,</span>
+        <span class="s2">"o"</span><span class="p">:</span> <span class="mf">9966.01</span><span class="p">,</span>
+        <span class="s2">"c"</span><span class="p">:</span> <span class="mi">9655</span>
+    <span class="p">},</span>
+    <span class="c1">// ... skips</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</code></pre><h2 id='ping-pong'>Ping-Pong</h2>
 <p>A ping-pong event that can use to check the system health.</p>
 
 <blockquote>
