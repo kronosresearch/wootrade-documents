@@ -305,7 +305,10 @@
             <a href="#websocket-api" class="toc-h1 toc-link" data-title="Websocket API">Websocket API</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#symbol-ticker-stream-public" class="toc-h2 toc-link" data-title="Symbol Ticker Stream (Public)">Symbol Ticker Stream (Public)</a>
+                    <a href="#latest-tickers-for-all-symbols-public" class="toc-h2 toc-link" data-title="Latest Tickers for All Symbols (Public)">Latest Tickers for All Symbols (Public)</a>
+                  </li>
+                  <li>
+                    <a href="#best-bid-offer-for-all-symbols-public" class="toc-h2 toc-link" data-title="Best Bid/Offer for All Symbols (Public)">Best Bid/Offer for All Symbols (Public)</a>
                   </li>
                   <li>
                     <a href="#ping-pong" class="toc-h2 toc-link" data-title="Ping-Pong">Ping-Pong</a>
@@ -744,6 +747,7 @@ GET /v1/public/token
             <span class="s2">"created_time"</span><span class="p">:</span> <span class="s2">"1579399877.02"</span><span class="p">,</span>
             <span class="s2">"updated_time"</span><span class="p">:</span> <span class="s2">"1579399877.02"</span><span class="p">,</span>
             <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"BTC"</span><span class="p">,</span>
+            <span class="s2">"balance_token"</span><span class="p">:</span> <span class="s2">"BTC"</span><span class="p">,</span>
             <span class="s2">"fullname"</span><span class="p">:</span> <span class="s2">"Bitcoin"</span><span class="p">,</span>
             <span class="s2">"decimals"</span><span class="p">:</span> <span class="mi">8</span>
         <span class="p">},</span>
@@ -751,6 +755,7 @@ GET /v1/public/token
             <span class="s2">"created_time"</span><span class="p">:</span> <span class="s2">"1579399877.02"</span><span class="p">,</span>
             <span class="s2">"updated_time"</span><span class="p">:</span> <span class="s2">"1579399877.02"</span><span class="p">,</span>
             <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"BTC_USDT"</span><span class="p">,</span>
+            <span class="s2">"balance_token"</span><span class="p">:</span> <span class="s2">"USDT"</span><span class="p">,</span>
             <span class="s2">"fullname"</span><span class="p">:</span> <span class="s2">"Tether"</span><span class="p">,</span>
             <span class="s2">"decimals"</span><span class="p">:</span> <span class="mi">8</span>
         <span class="p">},</span>
@@ -758,6 +763,7 @@ GET /v1/public/token
             <span class="s2">"created_time"</span><span class="p">:</span> <span class="s2">"1579399877.02"</span><span class="p">,</span>
             <span class="s2">"updated_time"</span><span class="p">:</span> <span class="s2">"1579399877.02"</span><span class="p">,</span>
             <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"ETH"</span><span class="p">,</span>
+            <span class="s2">"balance_token"</span><span class="p">:</span> <span class="s2">"ETH"</span><span class="p">,</span>
             <span class="s2">"fullname"</span><span class="p">:</span> <span class="s2">"Ethereum"</span><span class="p">,</span>
             <span class="s2">"decimals"</span><span class="p">:</span> <span class="mi">18</span>
         <span class="p">},</span>
@@ -765,6 +771,7 @@ GET /v1/public/token
             <span class="s2">"created_time"</span><span class="p">:</span> <span class="s2">"1579399877.02"</span><span class="p">,</span>
             <span class="s2">"updated_time"</span><span class="p">:</span> <span class="s2">"1579399877.02"</span><span class="p">,</span>
             <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"ETH_OKB"</span><span class="p">,</span>
+            <span class="s2">"balance_token"</span><span class="p">:</span> <span class="s2">"OKB"</span><span class="p">,</span>
             <span class="s2">"fullname"</span><span class="p">:</span> <span class="s2">"OKB"</span><span class="p">,</span>
             <span class="s2">"decimals"</span><span class="p">:</span> <span class="mi">18</span>
         <span class="p">}</span>
@@ -1068,7 +1075,8 @@ GET /v1/orderbook/:symbol
             <span class="s2">"prices"</span><span class="p">:</span> <span class="mf">10668.9</span><span class="p">,</span>
             <span class="s2">"quantity"</span><span class="p">:</span> <span class="mf">0.00488286</span>
         <span class="p">}</span>
-    <span class="p">]</span>
+    <span class="p">],</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="mi">1564710591905</span>
 <span class="p">}</span>
 </code></pre>
 <p><strong>Parameters</strong></p>
@@ -1711,7 +1719,29 @@ wss://staging.nexus.kronostoken.com/ws/508590cc-e3cd-4390-ba9b-739830f41242/SPOT
 <li><code>ORDER_UPDATE</code>: update of client&#39;s order</li>
 <li><code>TRANSACTION</code>: order executed detail</li>
 </ul>
-<h2 id='symbol-ticker-stream-public'>Symbol Ticker Stream (Public)</h2>
+
+<p><strong>Public Stream:</strong></p>
+
+<p>Public stream is available to subscribe for market data with following endpoints.</p>
+
+<ul>
+<li><code>wss://staging.nexus.kronostoken.com/ws/stream?streams=stream1,stream2, ...</code> <strong>(Staging)</strong></li>
+<li><code>wss://nexus.kronostoken.com/ws/stream?streams=stream1,stream2, ...</code> <strong>(Production)</strong></li>
+</ul>
+
+<p>The enumurate of public stream type are:</p>
+
+<ul>
+<li><code>ticker</code>: tickers for all pairs</li>
+<li><code>bbo</code>: best bid offer</li>
+</ul>
+
+<p>With diffrent public streams, it could be subscribed to multiple streams <code>stream1,stream2, ...</code> and update at the same time. For example:</p>
+
+<ul>
+<li><code>bbo,ticker</code>: with both bbo and tickers data streams</li>
+</ul>
+<h2 id='latest-tickers-for-all-symbols-public'>Latest Tickers for All Symbols (Public)</h2>
 <p>Stream name: <code>ticker</code></p>
 
 <p>24hr rolling window mini-ticker statistics. These are NOT the statistics of the UTC day, but a 24hr rolling window for the previous 24hrs.</p>
@@ -1721,11 +1751,29 @@ wss://staging.nexus.kronostoken.com/ws/508590cc-e3cd-4390-ba9b-739830f41242/SPOT
 </blockquote>
 <pre class="highlight javascript"><code><span class="p">{</span>
     <span class="s2">"event"</span><span class="p">:</span> <span class="s2">"ticker"</span><span class="p">,</span>
-    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="mi">1564710591905</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="mi">1583288300804</span><span class="p">,</span>
     <span class="s2">"data"</span><span class="p">:</span> <span class="p">[{</span>
         <span class="s2">"symbol"</span><span class="p">:</span> <span class="s2">"SPOT_BTC_USDT"</span><span class="p">,</span>
-        <span class="s2">"o"</span><span class="p">:</span> <span class="mf">9966.01</span><span class="p">,</span>
-        <span class="s2">"c"</span><span class="p">:</span> <span class="mi">9655</span>
+        <span class="s2">"o"</span><span class="p">:</span> <span class="mf">8832.4</span><span class="p">,</span> <span class="c1">// open price</span>
+        <span class="s2">"c"</span><span class="p">:</span> <span class="mf">8818.58</span> <span class="c1">// close price</span>
+    <span class="p">},</span>
+    <span class="c1">// ... skips</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</code></pre><h2 id='best-bid-offer-for-all-symbols-public'>Best Bid/Offer for All Symbols (Public)</h2>
+<p>Stream name: <code>bbo</code></p>
+
+<p>BBO (Best Bid/Offer) stream update while any of best bid or ask price/size is changing.</p>
+
+<blockquote>
+<p><strong>Payload</strong></p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="p">{</span>   <span class="s2">"event"</span><span class="p">:</span> <span class="s2">"bbo"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="mi">1583288306802</span><span class="p">,</span>
+    <span class="s2">"data"</span><span class="p">:</span> <span class="p">[{</span>
+        <span class="s2">"symbol"</span><span class="p">:</span> <span class="s2">"SPOT_BTC_USDT"</span><span class="p">,</span>
+        <span class="s2">"a"</span><span class="p">:</span> <span class="mf">8821.9</span><span class="p">,</span> <span class="c1">// best (the lowest) ask price</span>
+        <span class="s2">"b"</span><span class="p">:</span> <span class="mf">8821.88</span> <span class="c1">// best (the highest) bid price</span>
     <span class="p">},</span>
     <span class="c1">// ... skips</span>
     <span class="p">]</span>
