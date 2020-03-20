@@ -291,6 +291,9 @@
                     <a href="#token-withdraw" class="toc-h2 toc-link" data-title="Token Withdraw">Token Withdraw</a>
                   </li>
                   <li>
+                    <a href="#cancel-withdraw-request" class="toc-h2 toc-link" data-title="Cancel Withdraw Request">Cancel Withdraw Request</a>
+                  </li>
+                  <li>
                     <a href="#get-collateral-deposit-address" class="toc-h2 toc-link" data-title="Get Collateral Deposit Address">Get Collateral Deposit Address</a>
                   </li>
                   <li>
@@ -1518,6 +1521,39 @@ POST /v1/asset/withdraw
 <td>number</td>
 <td>Y</td>
 <td>amount you want to withdraw, must less or equal than holding</td>
+</tr>
+</tbody></table>
+<h2 id='cancel-withdraw-request'>Cancel Withdraw Request</h2>
+<p><strong>Limit 5 requests per 60 seconds</strong></p>
+
+<p><code>
+DELETE /v1/asset/withdraw
+</code></p>
+
+<p>Cancel withdraw request when status is <code>NEW</code></p>
+
+<blockquote>
+<p><strong>Response</strong></p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span>
+<span class="p">}</span>
+</code></pre>
+<p><strong>Parameters</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>string</td>
+<td>Y</td>
+<td>the withdraw id you want to cancel</td>
 </tr>
 </tbody></table>
 <h2 id='get-collateral-deposit-address'>Get Collateral Deposit Address</h2>
