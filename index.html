@@ -328,6 +328,9 @@
                   <li>
                     <a href="#transaction-stream" class="toc-h2 toc-link" data-title="Transaction stream">Transaction stream</a>
                   </li>
+                  <li>
+                    <a href="#position-information-stream" class="toc-h2 toc-link" data-title="Position Information Stream">Position Information Stream</a>
+                  </li>
               </ul>
           </li>
       </ul>
@@ -1313,8 +1316,7 @@ GET /v1/client/info
         <span class="s2">"account"</span><span class="p">:</span> <span class="s2">"CLIENT_ACCOUNT_01"</span><span class="p">,</span>
         <span class="s2">"collateral"</span><span class="p">:</span> <span class="mi">100000</span><span class="p">,</span> <span class="c1">// in USDT unit</span>
         <span class="s2">"collateral_frozen"</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span> <span class="c1">// in USDT unit</span>
-        <span class="s2">"leverage"</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
-        <span class="s2">"risk_exposure"</span><span class="p">:</span> <span class="o">-</span><span class="mi">523</span> <span class="c1">// abs (risk_exposure) cannot greater than (collateral * leverage)</span>
+        <span class="s2">"leverage"</span><span class="p">:</span> <span class="mi">5</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre>
@@ -1589,7 +1591,7 @@ GET /v1/asset/collateral
 POST /v1/asset/collateral
 </code></p>
 
-<p>Initiate a collateral withdrawal request, <code>amount</code> must less than or equal to <code>collateral - abs(risk_exposure)/leverage</code>)</p>
+<p>Initiate a collateral withdrawal request, <code>amount</code> must less than or equal to <code>collateral * (1 - risk_rate)</code>)</p>
 
 <blockquote>
 <p><strong>Response</strong></p>
@@ -1760,6 +1762,7 @@ wss://staging.nexus.kronostoken.com/ws/508590cc-e3cd-4390-ba9b-739830f41242/SPOT
 <li><code>TRADE</code>: trade event</li>
 <li><code>ORDER_UPDATE</code>: update of client&#39;s order</li>
 <li><code>TRANSACTION</code>: order executed detail</li>
+<li><code>POSITIONS</code>: position information</li>
 </ul>
 
 <p><strong>Public Stream:</strong></p>
@@ -1924,6 +1927,37 @@ wss://staging.nexus.kronostoken.com/ws/508590cc-e3cd-4390-ba9b-739830f41242/SPOT
        <span class="s2">"fee_asset"</span><span class="p">:</span> <span class="s2">"USDT"</span><span class="p">,</span> <span class="c1">// use Base (BTC) as unit when BUY, use Quote (USDT) as unit when SELL</span>
        <span class="s2">"side"</span><span class="p">:</span> <span class="s2">"SELL"</span>
    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre><h2 id='position-information-stream'>Position Information Stream</h2>
+<p>Periodically push account position information.</p>
+
+<blockquote>
+<p><strong>Payload</strong></p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="p">{</span>
+  <span class="s2">"event"</span><span class="p">:</span> <span class="s2">"POSITIONS"</span><span class="p">,</span>
+  <span class="s2">"timestamp"</span><span class="p">:</span> <span class="mi">1586505681386</span><span class="p">,</span>
+  <span class="s2">"data"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"risk_rate"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"positions"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"BCHABC"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"holding"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"outstanding_holding"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"mark_px"</span><span class="p">:</span> <span class="mi">214</span>
+      <span class="p">},</span>
+      <span class="s2">"BTC"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"holding"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"outstanding_holding"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"mark_px"</span><span class="p">:</span> <span class="mi">7445</span>
+      <span class="p">},</span>
+      <span class="s2">"USDT"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"holding"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"outstanding_holding"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"mark_px"</span><span class="p">:</span> <span class="mi">1</span>
+      <span class="p">},</span>
+      <span class="c1">// ...skip</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
 <span class="p">}</span>
 </code></pre>
       </div>
