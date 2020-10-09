@@ -308,6 +308,12 @@
                   <li>
                     <a href="#get-asset-transfer-history" class="toc-h2 toc-link" data-title="Get Asset Transfer History">Get Asset Transfer History</a>
                   </li>
+                  <li>
+                    <a href="#get-interest-history" class="toc-h2 toc-link" data-title="Get Interest History">Get Interest History</a>
+                  </li>
+                  <li>
+                    <a href="#repay-interest" class="toc-h2 toc-link" data-title="REPAY Interest">REPAY Interest</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -620,13 +626,13 @@ GET /v1/public/info/:symbol
 <p>Min Notional filter</p>
 
 <ul>
-<li><code>price * quantity</code> should grerater than <code>min_notional</code></li>
+<li><code>price * quantity</code> should greater than <code>min_notional</code></li>
 </ul>
 
 <p>Risk Exposure filer</p>
 
 <ul>
-<li>total exposure in USDT term should lower than allowence range, see <a href="#get-account-infomation">account_info</a></li>
+<li>total exposure in USDT term should lower than allowance range, see <a href="#get-account-infomation">account_info</a></li>
 </ul>
 
 <blockquote>
@@ -1034,7 +1040,7 @@ GET /v1/orders
 <td>status</td>
 <td>enum</td>
 <td>N</td>
-<td><code>NEW</code>/<code>CANCELLED</code>/<code>PARTIAL_FILLED</code>/<code>FILLED</code>/<code>INCOMPLETE</code>/<code>COMPLETED</code></td>
+<td><code>NEW</code>/<code>CANCELLED</code>/<code>PARTIAL_FILLED</code>/<code>FILLED</code>/<code>REJECTED</code>/<code>INCOMPLETE</code>/<code>COMPLETED</code></td>
 </tr>
 <tr>
 <td>start_t</td>
@@ -1278,13 +1284,19 @@ GET /v2/client/holding
       <span class="s2">"updated_time"</span><span class="p">:</span> <span class="s2">"1580794149"</span><span class="p">,</span>
       <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"BTC"</span><span class="p">,</span>
       <span class="s2">"holding"</span><span class="p">:</span> <span class="o">-</span><span class="mf">28.000752</span><span class="p">,</span>
-      <span class="s2">"frozen"</span><span class="p">:</span> <span class="mi">0</span>
+      <span class="s2">"frozen"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="s2">"outstanding_holding"</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"pending_quantity"</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">,</span>
+      <span class="s2">"interest"</span><span class="p">:</span> <span class="o">-</span><span class="mf">0.01</span>
     <span class="p">},</span>
     <span class="p">{</span>
       <span class="s2">"updated_time"</span><span class="p">:</span> <span class="s2">"1580794149"</span><span class="p">,</span>
       <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"USDT"</span><span class="p">,</span>
       <span class="s2">"holding"</span><span class="p">:</span> <span class="mf">282485.071904</span><span class="p">,</span>
-      <span class="s2">"frozen"</span><span class="p">:</span> <span class="mi">0</span>
+      <span class="s2">"frozen"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="s2">"outstanding_holding"</span><span class="p">:</span> <span class="o">-</span><span class="mi">2000</span><span class="p">,</span>
+      <span class="s2">"pending_quantity"</span><span class="p">:</span> <span class="mi">10000</span><span class="p">,</span>
+      <span class="s2">"interest"</span><span class="p">:</span> <span class="o">-</span><span class="mi">10</span>
     <span class="p">}</span>
   <span class="p">]</span>
 <span class="p">}</span>
@@ -1328,7 +1340,8 @@ GET /v1/client/info
         <span class="s2">"leverage"</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
         <span class="s2">"otpauth"</span><span class="p">:</span> <span class="kc">false</span>
     <span class="p">},</span>
-    <span class="s2">"risk_rate"</span><span class="p">:</span> <span class="mi">0</span>
+    <span class="s2">"risk_rate"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"margin_rate"</span><span class="p">:</span> <span class="mi">1000</span>
 <span class="p">}</span>
 </code></pre>
 <p><strong>Parameters</strong></p>
@@ -1872,6 +1885,116 @@ GET /v1/asset/transfer_history
 <td>the page wish to query.</td>
 </tr>
 </tbody></table>
+<h2 id='get-interest-history'>Get Interest History</h2>
+<p><strong>Limit 10 requests per 60 seconds</strong></p>
+
+<p><code>
+GET /v1/interest/history
+</code></p>
+
+<p>Get margin interest history.</p>
+
+<blockquote>
+<p><strong>Response</strong></p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"meta"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"records_per_page"</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span>
+        <span class="s2">"current_page"</span><span class="p">:</span> <span class="mi">1</span>
+    <span class="p">},</span>
+    <span class="s2">"rows"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">"created_time"</span><span class="p">:</span> <span class="s2">"1579399877.041"</span><span class="p">,</span>
+            <span class="s2">"updated_time"</span><span class="p">:</span> <span class="s2">"1579399877.041"</span><span class="p">,</span>
+            <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"USDT"</span><span class="p">,</span>
+            <span class="s2">"application_id"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+            <span class="s2">"side"</span><span class="p">:</span> <span class="s2">"LOAN"</span><span class="p">,</span>
+            <span class="s2">"interest"</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</code></pre>
+<p><strong>Parameters</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>token</td>
+<td>string</td>
+<td>N</td>
+<td>interest token which you want to query</td>
+</tr>
+<tr>
+<td>side</td>
+<td>string</td>
+<td>N</td>
+<td><code>LOAN</code>/<code>REPAY</code></td>
+</tr>
+<tr>
+<td>start_t</td>
+<td>timestamp</td>
+<td>N</td>
+<td>start time range that wish to query, noted the time stamp is 13-digits timestamp.</td>
+</tr>
+<tr>
+<td>end_t</td>
+<td>timestamp</td>
+<td>N</td>
+<td>end time range that wish to query, noted the time stamp is 13-digits timestamp.</td>
+</tr>
+<tr>
+<td>page</td>
+<td>number</td>
+<td>N (default: 1)</td>
+<td>the page wish to query.</td>
+</tr>
+</tbody></table>
+<h2 id='repay-interest'>REPAY Interest</h2>
+<p><strong>Limit 10 requests per 60 seconds</strong></p>
+
+<p><code>
+POST /v1/
+</code></p>
+
+<p>REPAY your margin interest.</p>
+
+<blockquote>
+<p><strong>Response</strong></p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+<span class="p">}</span>
+</code></pre>
+<p><strong>Parameters</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>token</td>
+<td>string</td>
+<td>Y</td>
+<td>interest token which you want to repay</td>
+</tr>
+<tr>
+<td>amount</td>
+<td>number</td>
+<td>Y</td>
+<td>repayment amount</td>
+</tr>
+</tbody></table>
 <h1 id='websocket-api'>Websocket API</h1>
 <p><strong>Base endpoints:</strong></p>
 
@@ -2095,10 +2218,13 @@ Please reply a &quot;PONG&quot; event within 30 seconds after receiving the serv
   <span class="s2">"timestamp"</span><span class="p">:</span> <span class="mi">1586505681386</span><span class="p">,</span>
   <span class="s2">"data"</span><span class="p">:</span> <span class="p">{</span>
     <span class="s2">"risk_rate"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"margin_rate"</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span>
     <span class="s2">"positions"</span><span class="p">:</span> <span class="p">{</span>
       <span class="s2">"BCHABC"</span><span class="p">:</span> <span class="p">{</span>
         <span class="s2">"holding"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
         <span class="s2">"outstanding_holding"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"pending_quantity"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"interest"</span><span class="p">:</span> <span class="o">-</span><span class="mf">0.01</span><span class="p">,</span>
         <span class="s2">"mark_px"</span><span class="p">:</span> <span class="mi">214</span><span class="p">,</span>
         <span class="s2">"break_even_price"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
         <span class="s2">"realised_pnl"</span><span class="p">:</span> <span class="mi">100</span>
@@ -2106,6 +2232,8 @@ Please reply a &quot;PONG&quot; event within 30 seconds after receiving the serv
       <span class="s2">"BTC"</span><span class="p">:</span> <span class="p">{</span>
         <span class="s2">"holding"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
         <span class="s2">"outstanding_holding"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"pending_quantity"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"interest"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
         <span class="s2">"mark_px"</span><span class="p">:</span> <span class="mi">7445</span><span class="p">,</span>
         <span class="s2">"break_even_price"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
         <span class="s2">"realised_pnl"</span><span class="p">:</span> <span class="mi">1000</span>
@@ -2113,6 +2241,8 @@ Please reply a &quot;PONG&quot; event within 30 seconds after receiving the serv
       <span class="s2">"USDT"</span><span class="p">:</span> <span class="p">{</span>
         <span class="s2">"holding"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
         <span class="s2">"outstanding_holding"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"pending_quantity"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"interest"</span><span class="p">:</span> <span class="o">-</span><span class="mi">100</span><span class="p">,</span>
         <span class="s2">"mark_px"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
         <span class="s2">"break_even_price"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
         <span class="s2">"realised_pnl"</span><span class="p">:</span> <span class="mi">0</span>
