@@ -376,8 +376,8 @@
 <p><strong>Base endpoints:</strong></p>
 
 <ul>
-<li><code>https://staging.nexus.kronostoken.com/</code> <strong>(Staging)</strong></li>
-<li><code>https://nexus.kronostoken.com/</code> <strong>(Production)</strong></li>
+<li><code>https://api.staging.woo.network/</code> <strong>(Staging)</strong></li>
+<li><code>https://api.woo.network/</code> <strong>(Production)</strong></li>
 </ul>
 
 <p><strong>Authorization:</strong><br>
@@ -1029,6 +1029,12 @@ GET /v1/orders
 <td>string</td>
 <td>N</td>
 <td><code>BUY</code>/<code>SELL</code></td>
+</tr>
+<tr>
+<td>order_type</td>
+<td>string</td>
+<td>N</td>
+<td><code>LIMIT</code>/<code>MARKET</code>/<code>IOC</code>/<code>FOK</code>/<code>POST_ONLY</code>/<code>LIQUIDATE</code></td>
 </tr>
 <tr>
 <td>order_tag</td>
@@ -1999,14 +2005,14 @@ POST /v1/interest/repay
 <p><strong>Base endpoints:</strong></p>
 
 <ul>
-<li><code>wss://staging.nexus.kronostoken.com/ws/:application_id/:symbol</code> <strong>(Staging)</strong></li>
-<li><code>wss://nexus.kronostoken.com/ws/:application_id/:symbol</code> <strong>(Production)</strong></li>
+<li><code>wss://api.staging.woo.network/ws/:application_id/:symbol</code> <strong>(Staging)</strong></li>
+<li><code>wss://api.woo.network/ws/:application_id/:symbol</code> <strong>(Production)</strong></li>
 </ul>
 
 <p>For example, your websocket endpoint may looks like:</p>
 
 <p><code>
-wss://staging.nexus.kronostoken.com/ws/508590cc-e3cd-4390-ba9b-739830f41242/SPOT_BTC_USDT
+wss://api.staging.woo.network/ws/508590cc-e3cd-4390-ba9b-739830f41242/SPOT_BTC_USDT
 </code></p>
 
 <p><strong>Event Type:</strong></p>
@@ -2029,8 +2035,8 @@ wss://staging.nexus.kronostoken.com/ws/508590cc-e3cd-4390-ba9b-739830f41242/SPOT
 <p>Public stream is available to subscribe for market data with following endpoints.</p>
 
 <ul>
-<li><code>wss://staging.nexus.kronostoken.com/ws/stream?streams=stream1,stream2, ...</code> <strong>(Staging)</strong></li>
-<li><code>wss://nexus.kronostoken.com/ws/stream?streams=stream1,stream2, ...</code> <strong>(Production)</strong></li>
+<li><code>wss://api.staging.woo.network/ws/stream?streams=stream1,stream2, ...</code> <strong>(Staging)</strong></li>
+<li><code>wss://api.woo.network/ws/stream?streams=stream1,stream2, ...</code> <strong>(Production)</strong></li>
 </ul>
 
 <p>The enumurate of public stream type are:</p>
