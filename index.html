@@ -255,6 +255,9 @@
                     <a href="#cancel-order" class="toc-h2 toc-link" data-title="Cancel Order">Cancel Order</a>
                   </li>
                   <li>
+                    <a href="#cancel-orders" class="toc-h2 toc-link" data-title="Cancel Orders">Cancel Orders</a>
+                  </li>
+                  <li>
                     <a href="#get-order" class="toc-h2 toc-link" data-title="Get Order">Get Order</a>
                   </li>
                   <li>
@@ -913,6 +916,40 @@ note that we immediate response with an order cancel sent message, and will upda
 <td></td>
 </tr>
 </tbody></table>
+<h2 id='cancel-orders'>Cancel Orders</h2>
+<p><strong>Limit: 20 requests per 1 second</strong></p>
+
+<p><code>
+DELETE /v1/orders
+</code></p>
+
+<p>Cancel orders by symbol.</p>
+
+<blockquote>
+<p><strong>Response</strong></p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="p">{</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"CANCEL_SENT"</span>
+<span class="p">}</span>
+</code></pre>
+<p><strong>Parameters</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>Y</td>
+<td></td>
+</tr>
+</tbody></table>
 <h2 id='get-order'>Get Order</h2>
 <p><strong>Limit: 20 requests per 1 second</strong></p>
 
@@ -948,7 +985,8 @@ GET /v1/order/:oid
             <span class="s2">"order_id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
             <span class="s2">"executed_price"</span><span class="p">:</span> <span class="mi">123</span><span class="p">,</span>
             <span class="s2">"executed_quantity"</span><span class="p">:</span> <span class="mf">0.05</span><span class="p">,</span>
-            <span class="s2">"executed_timestamp"</span><span class="p">:</span> <span class="s2">"1567382401.000000"</span>
+            <span class="s2">"executed_timestamp"</span><span class="p">:</span> <span class="s2">"1567382401.000000"</span><span class="p">,</span>
+            <span class="s2">"is_maker"</span><span class="p">:</span> <span class="mi">1</span>
         <span class="p">}]</span>
 <span class="p">}</span>
 </code></pre>
@@ -1002,7 +1040,7 @@ GET /v1/orders
             <span class="s2">"executed"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
             <span class="s2">"created_time"</span><span class="p">:</span> <span class="s2">"1575014255.089"</span><span class="p">,</span>
             <span class="s2">"Transactions"</span><span class="p">:</span> <span class="p">[],</span>
-            <span class="s2">"average_executed_price"</span><span class="p">:</span> <span class="kc">null</span>
+            <span class="s2">"average_executed_price"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
         <span class="p">},</span>
         <span class="c1">// ....skip (total 25 items in one page)</span>
     <span class="p">]</span>
@@ -1248,7 +1286,7 @@ GET /v1/client/trades
 </tr>
 </tbody></table>
 <h2 id='get-current-holding'>Get Current Holding</h2>
-<p><strong>Limit: 10 requests per 60 seconds</strong></p>
+<p><strong>Limit: 10 requests per 1 seconds</strong></p>
 
 <p><code>
 GET /v1/client/holding
@@ -1272,7 +1310,7 @@ GET /v1/client/holding
 
 <p>None</p>
 <h2 id='get-current-holding-v2'>Get Current Holding v2</h2>
-<p><strong>Limit: 10 requests per 60 seconds</strong></p>
+<p><strong>Limit: 10 requests per 1 seconds</strong></p>
 
 <p><code>
 GET /v2/client/holding
