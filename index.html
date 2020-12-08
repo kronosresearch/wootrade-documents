@@ -297,16 +297,7 @@
                     <a href="#cancel-withdraw-request" class="toc-h2 toc-link" data-title="Cancel Withdraw Request">Cancel Withdraw Request</a>
                   </li>
                   <li>
-                    <a href="#get-collateral-deposit-address" class="toc-h2 toc-link" data-title="Get Collateral Deposit Address">Get Collateral Deposit Address</a>
-                  </li>
-                  <li>
-                    <a href="#collateral-withdraw" class="toc-h2 toc-link" data-title="Collateral Withdraw">Collateral Withdraw</a>
-                  </li>
-                  <li>
                     <a href="#get-asset-history" class="toc-h2 toc-link" data-title="Get Asset History">Get Asset History</a>
-                  </li>
-                  <li>
-                    <a href="#transfer-usdt-between-collateral-and-holding" class="toc-h2 toc-link" data-title="Transfer USDT between Collateral and Holding">Transfer USDT between Collateral and Holding</a>
                   </li>
                   <li>
                     <a href="#get-asset-transfer-history" class="toc-h2 toc-link" data-title="Get Asset Transfer History">Get Asset Transfer History</a>
@@ -574,7 +565,7 @@ The request must have a <code>x-api-signature</code> header that is generate fro
 <td><code>-1101</code></td>
 <td>400</td>
 <td><code>RISK_TOO_HIGH</code></td>
-<td>The risk exposure for client is too high, it may cause by collateral not enough, sending too big order or the leverage is too low. please refer to <a href="#get-account-information">client info</a> to check the current exposure.</td>
+<td>The risk exposure for client is too high, it may cause by sending too big order or the leverage is too low. please refer to <a href="#get-account-information">client info</a> to check the current exposure.</td>
 </tr>
 <tr>
 <td><code>-1102</code></td>
@@ -1330,7 +1321,7 @@ GET /v2/client/holding
       <span class="s2">"holding"</span><span class="p">:</span> <span class="o">-</span><span class="mf">28.000752</span><span class="p">,</span>
       <span class="s2">"frozen"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
       <span class="s2">"outstanding_holding"</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
-      <span class="s2">"pending_quantity"</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">,</span>
+      <span class="s2">"pending_exposure"</span><span class="p">:</span> <span class="mi">12000</span><span class="p">,</span>
       <span class="s2">"interest"</span><span class="p">:</span> <span class="o">-</span><span class="mf">0.01</span>
     <span class="p">},</span>
     <span class="p">{</span>
@@ -1339,7 +1330,7 @@ GET /v2/client/holding
       <span class="s2">"holding"</span><span class="p">:</span> <span class="mf">282485.071904</span><span class="p">,</span>
       <span class="s2">"frozen"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
       <span class="s2">"outstanding_holding"</span><span class="p">:</span> <span class="o">-</span><span class="mi">2000</span><span class="p">,</span>
-      <span class="s2">"pending_quantity"</span><span class="p">:</span> <span class="mi">10000</span><span class="p">,</span>
+      <span class="s2">"pending_exposure"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
       <span class="s2">"interest"</span><span class="p">:</span> <span class="o">-</span><span class="mi">10</span>
     <span class="p">}</span>
   <span class="p">]</span>
@@ -1369,7 +1360,7 @@ GET /v2/client/holding
 GET /v1/client/info
 </code></p>
 
-<p>Get account information such as account name, collateral, leverage, current exposure ... etc.</p>
+<p>Get account information such as account name, leverage, current exposure ... etc.</p>
 
 <blockquote>
 <p><strong>Response</strong></p>
@@ -1379,12 +1370,13 @@ GET /v1/client/info
     <span class="s2">"application"</span><span class="p">:</span> <span class="p">{</span>
         <span class="s2">"application_id"</span><span class="p">:</span> <span class="s2">"8935820a-6600-4c2c-9bc3-f017d89aa173"</span><span class="p">,</span>
         <span class="s2">"account"</span><span class="p">:</span> <span class="s2">"CLIENT_ACCOUNT_01"</span><span class="p">,</span>
-        <span class="s2">"collateral"</span><span class="p">:</span> <span class="mi">100000</span><span class="p">,</span> <span class="c1">// in USDT unit</span>
-        <span class="s2">"collateral_frozen"</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span> <span class="c1">// in USDT unit</span>
         <span class="s2">"leverage"</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+        <span class="s2">"taker_fee_rate"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"maker_fee_rate"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"interest_rate"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"alias"</span><span class="p">:</span> <span class="s2">"CLIENT_ACCOUNT_01"</span><span class="p">,</span>
         <span class="s2">"otpauth"</span><span class="p">:</span> <span class="kc">false</span>
     <span class="p">},</span>
-    <span class="s2">"risk_rate"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="s2">"margin_rate"</span><span class="p">:</span> <span class="mi">1000</span>
 <span class="p">}</span>
 </code></pre>
@@ -1638,72 +1630,6 @@ DELETE /v1/asset/withdraw
 <td>the withdraw id you want to cancel</td>
 </tr>
 </tbody></table>
-<h2 id='get-collateral-deposit-address'>Get Collateral Deposit Address</h2>
-<p><strong>Limit 5 requests per 60 seconds</strong></p>
-
-<p><code>
-GET /v1/asset/collateral
-</code></p>
-
-<p>Get your unique collateral deposit address, only support USDT (ERC-20), after deposit and confirming with blockchain, your collateral will increase.</p>
-
-<blockquote>
-<p><strong>Response</strong></p>
-</blockquote>
-<pre class="highlight javascript"><code><span class="p">{</span>
-    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="s2">"address"</span><span class="p">:</span> <span class="s2">"0x31d64B3230f8baDD91dE1710A65DF536aF8f7cDa"</span>
-<span class="p">}</span>
-</code></pre>
-<p><strong>Parameters</strong></p>
-
-<p>None</p>
-<h2 id='collateral-withdraw'>Collateral Withdraw</h2>
-<p><strong>Limit 5 requests per 60 seconds</strong></p>
-
-<p><code>
-POST /v1/asset/collateral
-</code></p>
-
-<p>Initiate a collateral withdrawal request, <code>amount</code> must less than or equal to <code>collateral * (1 - risk_rate)</code>)</p>
-
-<blockquote>
-<p><strong>Response</strong></p>
-</blockquote>
-<pre class="highlight javascript"><code><span class="p">{</span>
-    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="s2">"withdraw_id"</span><span class="p">:</span> <span class="s2">"20200119145703655"</span>
-<span class="p">}</span>
-</code></pre>
-<p><strong>Parameters</strong></p>
-
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>address</td>
-<td>string</td>
-<td>Y</td>
-<td>the address you want to withdraw, only support USDT (ERC-20) address</td>
-</tr>
-<tr>
-<td>amount</td>
-<td>number</td>
-<td>Y</td>
-<td>amount you want to withdraw, must less or equal than holding</td>
-</tr>
-<tr>
-<td>code</td>
-<td>string</td>
-<td>N</td>
-<td>the otpauth 2FA code if you bound</td>
-</tr>
-</tbody></table>
 <h2 id='get-asset-history'>Get Asset History</h2>
 <p><strong>Limit 10 requests per 60 seconds</strong></p>
 
@@ -1813,51 +1739,6 @@ GET /v1/asset/history
 <td>number</td>
 <td>N (default: 1)</td>
 <td>the page wish to query.</td>
-</tr>
-</tbody></table>
-<h2 id='transfer-usdt-between-collateral-and-holding'>Transfer USDT between Collateral and Holding</h2>
-<p><strong>Limit 5 requests per 60 seconds</strong></p>
-
-<p><code>
-POST /v1/asset/transfer
-</code></p>
-
-<p>Transfer USDT between Collateral and Holding.</p>
-
-<blockquote>
-<p><strong>Response</strong></p>
-</blockquote>
-<pre class="highlight javascript"><code><span class="p">{</span>
-    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-<span class="p">}</span>
-</code></pre>
-<p><strong>Parameters</strong></p>
-
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>from</td>
-<td>string</td>
-<td>Y</td>
-<td><code>BALANCE</code>/<code>COLLATERAL</code></td>
-</tr>
-<tr>
-<td>to</td>
-<td>string</td>
-<td>Y</td>
-<td><code>BALANCE</code>/<code>COLLATERAL</code></td>
-</tr>
-<tr>
-<td>amount</td>
-<td>number</td>
-<td>Y</td>
-<td>The number of USDT you want to transfer</td>
 </tr>
 </tbody></table>
 <h2 id='get-asset-transfer-history'>Get Asset Transfer History</h2>
@@ -2261,13 +2142,16 @@ Please reply a &quot;PONG&quot; event within 30 seconds after receiving the serv
   <span class="s2">"event"</span><span class="p">:</span> <span class="s2">"POSITIONS"</span><span class="p">,</span>
   <span class="s2">"timestamp"</span><span class="p">:</span> <span class="mi">1586505681386</span><span class="p">,</span>
   <span class="s2">"data"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">"risk_rate"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="s2">"margin_rate"</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span>
+    <span class="s2">"leverage"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"taker_fee_rate"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"maker_fee_rate"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"interest_rate"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="s2">"positions"</span><span class="p">:</span> <span class="p">{</span>
       <span class="s2">"BCHABC"</span><span class="p">:</span> <span class="p">{</span>
         <span class="s2">"holding"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
         <span class="s2">"outstanding_holding"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s2">"pending_quantity"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"pending_exposure"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
         <span class="s2">"interest"</span><span class="p">:</span> <span class="o">-</span><span class="mf">0.01</span><span class="p">,</span>
         <span class="s2">"mark_px"</span><span class="p">:</span> <span class="mi">214</span><span class="p">,</span>
         <span class="s2">"break_even_price"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
@@ -2276,7 +2160,7 @@ Please reply a &quot;PONG&quot; event within 30 seconds after receiving the serv
       <span class="s2">"BTC"</span><span class="p">:</span> <span class="p">{</span>
         <span class="s2">"holding"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
         <span class="s2">"outstanding_holding"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s2">"pending_quantity"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"pending_exposure"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
         <span class="s2">"interest"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
         <span class="s2">"mark_px"</span><span class="p">:</span> <span class="mi">7445</span><span class="p">,</span>
         <span class="s2">"break_even_price"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
@@ -2285,7 +2169,7 @@ Please reply a &quot;PONG&quot; event within 30 seconds after receiving the serv
       <span class="s2">"USDT"</span><span class="p">:</span> <span class="p">{</span>
         <span class="s2">"holding"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
         <span class="s2">"outstanding_holding"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s2">"pending_quantity"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"pending_exposure"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
         <span class="s2">"interest"</span><span class="p">:</span> <span class="o">-</span><span class="mi">100</span><span class="p">,</span>
         <span class="s2">"mark_px"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
         <span class="s2">"break_even_price"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
