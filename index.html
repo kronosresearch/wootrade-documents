@@ -613,7 +613,6 @@ GET /v1/public/info/:symbol
 
 <ul>
 <li><code>quantity</code> &gt;= <code>base_min</code></li>
-<li><code>quantity</code> &lt;= <code>base_max</code></li>
 <li><code>(quantity - base_min) % base_tick</code> should equal to zero</li>
 </ul>
 
@@ -640,7 +639,6 @@ GET /v1/public/info/:symbol
         <span class="s2">"quote_max"</span><span class="p">:</span> <span class="mi">100000</span><span class="p">,</span>
         <span class="s2">"quote_tick"</span><span class="p">:</span> <span class="mf">0.01</span><span class="p">,</span>
         <span class="s2">"base_min"</span><span class="p">:</span> <span class="mf">0.0001</span><span class="p">,</span>
-        <span class="s2">"base_max"</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
         <span class="s2">"base_tick"</span><span class="p">:</span> <span class="mf">0.0001</span><span class="p">,</span>
         <span class="s2">"min_notional"</span><span class="p">:</span> <span class="mf">0.02</span><span class="p">,</span>
         <span class="s2">"price_range"</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span>
@@ -687,7 +685,6 @@ GET /v1/public/info
       <span class="s2">"quote_max"</span><span class="p">:</span> <span class="mi">100000</span><span class="p">,</span>
       <span class="s2">"quote_tick"</span><span class="p">:</span> <span class="mf">0.01</span><span class="p">,</span>
       <span class="s2">"base_min"</span><span class="p">:</span> <span class="mf">0.0001</span><span class="p">,</span>
-      <span class="s2">"base_max"</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
       <span class="s2">"base_tick"</span><span class="p">:</span> <span class="mf">0.0001</span><span class="p">,</span>
       <span class="s2">"min_notional"</span><span class="p">:</span> <span class="mf">0.02</span><span class="p">,</span>
       <span class="s2">"price_range"</span><span class="p">:</span> <span class="mf">0.99</span>
@@ -806,7 +803,14 @@ POST /v1/order
 <p>Place order maker/taker, the order executed information will be update from websocket stream.
 will response immediately with an order created message.</p>
 
-<p><code>MARKET</code> type order behavior is: it match until all size executed. If the size is too large (larger than whole book), then the remaining size will be cancelled.</p>
+<p><code>MARKET</code> type order behavior: it matches until all size executed. If the size is too large (larger than whole book), then the remaining quantity will be cancelled.
+<code>IOC</code> type order behavior: it matches as much as possible at the order_price. If not fully executed, then remaining quantity will be cancelled.
+<code>FOK</code> type order behavior: if the order can be fully executed at the order_price then the order gets fully executed otherwise would be cancelled without any execution.</p>
+
+<p><code>visible_quantity</code> behavior: it sets the maximum quantity to be shown on orderbook. By default, it is equal to order_quantity, negative number and number larger than <code>order_quantity</code> is not allowed.
+     If it sets to 0, the order would be hidden from the orderbook.
+     It doesn&#39;t work for <code>MARKET</code>/<code>IOC</code>/<code>FOK</code> orders since orders with these types would be executed and cancelled immediately and not be shown on orderbook.
+     For <code>LIMIT</code>/<code>POST_ONLY</code> order, as long as it&#39;s not complete, <code>visible_quantity</code> is the maximum quantity that shown on orderbook.</p>
 
 <blockquote>
 <p><strong>Response</strong></p>
@@ -858,6 +862,12 @@ will response immediately with an order created message.</p>
 <td>number</td>
 <td>Y</td>
 <td></td>
+</tr>
+<tr>
+<td>visible_quantity</td>
+<td>number</td>
+<td>N</td>
+<td>The order quantity shown on orderbook</td>
 </tr>
 <tr>
 <td>side</td>
@@ -963,6 +973,7 @@ GET /v1/order/:oid
     <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"LIMIT"</span><span class="p">,</span>
     <span class="s2">"price"</span><span class="p">:</span> <span class="mi">123</span><span class="p">,</span>
     <span class="s2">"quantity"</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+    <span class="s2">"visible"</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
     <span class="s2">"executed"</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
 
     <span class="c1">// Detail transactions of this order</span>
@@ -1705,6 +1716,12 @@ GET /v1/asset/history
 <td>token name you want to search (can get it by /public/token)</td>
 </tr>
 <tr>
+<td>balance_token</td>
+<td>string</td>
+<td>N</td>
+<td>balance_token name you want to search (can get it by /public/token)</td>
+</tr>
+<tr>
 <td>type</td>
 <td>string</td>
 <td>N</td>
@@ -2091,6 +2108,8 @@ Please reply a &quot;PONG&quot; event within 30 seconds after receiving the serv
 <ul>
 <li>Order been executed (partial filled/full filled)</li>
 <li>Order cancel successed</li>
+<li>Order been rejecetd</li>
+<li>Liquidation order</li>
 </ul>
 
 <blockquote>
@@ -2113,7 +2132,7 @@ Please reply a &quot;PONG&quot; event within 30 seconds after receiving the serv
    <span class="p">}</span>
 <span class="p">}</span>
 </code></pre><h2 id='transaction-stream'>Transaction stream</h2>
-<p>The order exectued transaction details. It will emit when your order got executed. For example, if your order got hit and become <code>PARTIAL_FILLED</code>, you will recieve two events, one is <code>ORDER_UPDATE</code> and one is <code>TRANSACTION</code>.</p>
+<p>The order exectued transaction details. It will emit when your order got executed or liquidated. For example, if your order got hit and become <code>PARTIAL_FILLED</code>, you will recieve two events, one is <code>ORDER_UPDATE</code> and one is <code>TRANSACTION</code>.</p>
 
 <blockquote>
 <p><strong>Payload</strong></p>
