@@ -794,7 +794,7 @@ GET /v1/public/token
 
 <p>None</p>
 <h2 id='send-order'>Send Order</h2>
-<p><strong>Limit: 20 requests per 1 second</strong></p>
+<p><strong>Limit: 30 requests per 1 second</strong></p>
 
 <p><code>
 POST /v1/order
@@ -918,7 +918,7 @@ note that we immediate response with an order cancel sent message, and will upda
 </tr>
 </tbody></table>
 <h2 id='cancel-orders'>Cancel Orders</h2>
-<p><strong>Limit: 20 requests per 1 second</strong></p>
+<p><strong>Limit: 10 requests per 1 second</strong></p>
 
 <p><code>
 DELETE /v1/orders
@@ -1949,6 +1949,19 @@ POST /v1/interest/repay
 
 <p><code>
 wss://api.staging.woo.network/ws/508590cc-e3cd-4390-ba9b-739830f41242/SPOT_BTC_USDT
+</code></p>
+
+<p>If you are only intersted in your user events <code>ORDER_UPDATE</code>/<code>TRANSACTION</code>/<code>POSITIONS</code>, the stream is available to subscribe with following endpoints.</p>
+
+<ul>
+<li><code>wss://api.staging.woo.network/ws/:application_id</code> <strong>(Staging)</strong></li>
+<li><code>wss://api.woo.network/ws/:application_id</code> <strong>(Production)</strong></li>
+</ul>
+
+<p>For example, your websocket endpoint may looks like:</p>
+
+<p><code>
+wss://api.staging.woo.network/ws/508590cc-e3cd-4390-ba9b-739830f41242
 </code></p>
 
 <p><strong>Event Type:</strong></p>
