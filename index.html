@@ -360,6 +360,7 @@
 <ul>
 <li><a href="#restful-api">RESTful API interface</a>: Provides sending events like create order, cancel order, fetch balance, ...etc.</li>
 <li><a href="#websocket-api">Websocket interface</a>: Provides real-time orderbook data feed and order update feed.</li>
+<li><a href="#websocket-api-v2">Websocket interface V2</a>: Provides real-time orderbook data feed and order update feed.</li>
 </ul>
 
 <p><strong>Pricing</strong></p>
@@ -560,6 +561,18 @@ The request must have a <code>x-api-signature</code> header that is generate fro
 <td>400</td>
 <td><code>CAN_NOT_WITHDRAWAL</code></td>
 <td>Can not request withdrawal settlement, you need to deposit other arrears first.</td>
+</tr>
+<tr>
+<td><code>-1011</code></td>
+<td>400</td>
+<td><code>RPC_NOT_CONNECT</code></td>
+<td>Can not place/cancel orders, it may because internal network error. Please try again in a few seconds.</td>
+</tr>
+<tr>
+<td><code>-1012</code></td>
+<td>400</td>
+<td><code>RPC_REJECT</code></td>
+<td>The place/cancel order request is rejected by internal module, it may because the account is in liquidation or other internal errors. Please try again in a few seconds.</td>
 </tr>
 <tr>
 <td><code>-1101</code></td>
@@ -1676,7 +1689,7 @@ GET /v1/asset/history
             <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"BALANCE"</span><span class="p">,</span>
             <span class="s2">"token_side"</span><span class="p">:</span> <span class="s2">"DEPOSIT"</span><span class="p">,</span>
             <span class="s2">"amount"</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span>
-            <span class="s2">"txid"</span><span class="p">:</span> <span class="s2">"0x8a74c517bc104c8ebad0c3c3f64b1f302ed5f8bca598ae4459c63419038106b6"</span><span class="p">,</span>
+            <span class="s2">"tx_id"</span><span class="p">:</span> <span class="s2">"0x8a74c517bc104c8ebad0c3c3f64b1f302ed5f8bca598ae4459c63419038106b6"</span><span class="p">,</span>
             <span class="s2">"fee_token"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
             <span class="s2">"fee_amount"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
             <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"CONFIRMING"</span>
@@ -1694,7 +1707,7 @@ GET /v1/asset/history
             <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"BALANCE"</span><span class="p">,</span>
             <span class="s2">"token_side"</span><span class="p">:</span> <span class="s2">"DEPOSIT"</span><span class="p">,</span>
             <span class="s2">"amount"</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
-            <span class="s2">"txid"</span><span class="p">:</span> <span class="s2">"0x7f74c517bc104c8ebad0c3c3f64b1f302ed5f8bca598ae4459c63419038106c5"</span><span class="p">,</span>
+            <span class="s2">"tx_id"</span><span class="p">:</span> <span class="s2">"0x7f74c517bc104c8ebad0c3c3f64b1f302ed5f8bca598ae4459c63419038106c5"</span><span class="p">,</span>
             <span class="s2">"fee_token"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
             <span class="s2">"fee_amount"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
             <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"COMPLETED"</span>
@@ -1969,7 +1982,7 @@ wss://api.staging.woo.network/ws/508590cc-e3cd-4390-ba9b-739830f41242
 
 <p><strong>Event Type:</strong></p>
 
-<p>All the websocket message use same channel, the message is always a JSON string, and would have a attribute called <code>event</code> to identify the type of the message.</p>
+<p>All the websocket message use same channel, the message is always a JSON string, and would have an attribute called <code>event</code> to identify the type of the message.</p>
 
 <p>The enumurate of event type are:</p>
 
