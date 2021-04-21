@@ -352,34 +352,34 @@
                     <a href="#request-orderbook" class="toc-h2 toc-link" data-title="request orderbook">request orderbook</a>
                   </li>
                   <li>
-                    <a href="#subscribe-unsubscribe-orderbook" class="toc-h2 toc-link" data-title="Subscribe/UnSubscribe orderbook">Subscribe/UnSubscribe orderbook</a>
+                    <a href="#orderbook" class="toc-h2 toc-link" data-title="orderbook">orderbook</a>
                   </li>
                   <li>
-                    <a href="#subscribe-unsubscribe-orderbookupdate" class="toc-h2 toc-link" data-title="Subscribe/UnSubscribe orderbookupdate">Subscribe/UnSubscribe orderbookupdate</a>
+                    <a href="#orderbookupdate" class="toc-h2 toc-link" data-title="orderbookupdate">orderbookupdate</a>
                   </li>
                   <li>
-                    <a href="#subscribe-unsubscribe-trade" class="toc-h2 toc-link" data-title="Subscribe/UnSubscribe trade">Subscribe/UnSubscribe trade</a>
+                    <a href="#trade" class="toc-h2 toc-link" data-title="trade">trade</a>
                   </li>
                   <li>
-                    <a href="#subscribe-unsubscribe-24h-ticker" class="toc-h2 toc-link" data-title="Subscribe/UnSubscribe 24h ticker">Subscribe/UnSubscribe 24h ticker</a>
+                    <a href="#24h-ticker" class="toc-h2 toc-link" data-title="24h ticker">24h ticker</a>
                   </li>
                   <li>
-                    <a href="#subscribe-unsubscribe-24h-tickers" class="toc-h2 toc-link" data-title="Subscribe/UnSubscribe 24h tickers">Subscribe/UnSubscribe 24h tickers</a>
+                    <a href="#24h-tickers" class="toc-h2 toc-link" data-title="24h tickers">24h tickers</a>
                   </li>
                   <li>
-                    <a href="#subscribe-unsubscribe-bbo" class="toc-h2 toc-link" data-title="Subscribe/UnSubscribe bbo">Subscribe/UnSubscribe bbo</a>
+                    <a href="#bbo" class="toc-h2 toc-link" data-title="bbo">bbo</a>
                   </li>
                   <li>
-                    <a href="#subscribe-unsubscribe-bbos" class="toc-h2 toc-link" data-title="Subscribe/UnSubscribe bbos">Subscribe/UnSubscribe bbos</a>
+                    <a href="#bbos" class="toc-h2 toc-link" data-title="bbos">bbos</a>
                   </li>
                   <li>
-                    <a href="#subscribe-unsubscribe-k-line" class="toc-h2 toc-link" data-title="Subscribe/UnSubscribe k-line">Subscribe/UnSubscribe k-line</a>
+                    <a href="#k-line" class="toc-h2 toc-link" data-title="k-line">k-line</a>
                   </li>
                   <li>
-                    <a href="#subscribe-unsubscribe-positioninfo" class="toc-h2 toc-link" data-title="Subscribe/UnSubscribe positioninfo">Subscribe/UnSubscribe positioninfo</a>
+                    <a href="#positioninfo" class="toc-h2 toc-link" data-title="positioninfo">positioninfo</a>
                   </li>
                   <li>
-                    <a href="#subscribe-unsubscribe-executionreport" class="toc-h2 toc-link" data-title="Subscribe/UnSubscribe executionreport">Subscribe/UnSubscribe executionreport</a>
+                    <a href="#executionreport" class="toc-h2 toc-link" data-title="executionreport">executionreport</a>
                   </li>
                   <li>
                     <a href="#error-response" class="toc-h2 toc-link" data-title="error response">error response</a>
@@ -2280,6 +2280,16 @@ Please reply a &quot;PONG&quot; event within 30 seconds after receiving the serv
 <li><code>wss://wss.staging.woo.network/ws/stream/{application_id}</code> <strong>(Staging)</strong></li>
 <li><code>wss://wss.woo.network/ws/stream/{application_id}</code> <strong>(Production)</strong></li>
 <li><code>{application_id}</code> user can find application_id from console</li>
+<li><code>user can subscribe/unSubscribe orderbook|orderbook100|aggbook10|aggbook100|aggbook1000|tick|tickers|kline|bbo|trade|kline_1m|kline_5m|kline_15m|kline_30m|kline_1h|kline_1d|kline_1w|kline_1M</code></li>
+</ul>
+
+<p><strong>Private User Data Stream Base endpoints:</strong></p>
+
+<ul>
+<li><code>wss://wss.staging.woo.network/v2/ws/private/stream/{application_id}</code> <strong>(Staging)</strong></li>
+<li><code>wss://wss.woo.network/v2/ws/private/stream/{application_id}</code> <strong>(Production)</strong></li>
+<li><code>{application_id}</code> user can find application_id from console</li>
+<li><code>user can subscribe/unSubscribe positioninfo executionreport.</code></li>
 </ul>
 <h2 id='ping-pong'>PING/PONG</h2>
 <ul>
@@ -2391,7 +2401,7 @@ Please reply a &quot;PONG&quot; event within 30 seconds after receiving the serv
         ]
     }
 }
-</code></pre><h2 id='subscribe-unsubscribe-orderbook'>Subscribe/UnSubscribe orderbook</h2>
+</code></pre><h2 id='orderbook'>orderbook</h2>
 <ul>
 <li><code>{symbol}@orderbook</code> depth 1000 push every 1s</li>
 <li><code>{symbol}@orderbook100</code> depth 100 push every 1s</li>
@@ -2478,7 +2488,7 @@ Please reply a &quot;PONG&quot; event within 30 seconds after receiving the serv
         ]
     }
 }
-</code></pre><h2 id='subscribe-unsubscribe-orderbookupdate'>Subscribe/UnSubscribe orderbookupdate</h2>
+</code></pre><h2 id='orderbookupdate'>orderbookupdate</h2>
 <ul>
 <li><code>{symbol}@orderbookupdate</code> updated orderbook push every 200ms</li>
 </ul>
@@ -2557,7 +2567,7 @@ Please reply a &quot;PONG&quot; event within 30 seconds after receiving the serv
         ]
     }
 }
-</code></pre><h2 id='subscribe-unsubscribe-trade'>Subscribe/UnSubscribe trade</h2>
+</code></pre><h2 id='trade'>trade</h2>
 <ul>
 <li>Push interval: real-time push</li>
 </ul>
@@ -2616,7 +2626,7 @@ Please reply a &quot;PONG&quot; event within 30 seconds after receiving the serv
         "side":"BUY"
     }
 }
-</code></pre><h2 id='subscribe-unsubscribe-24h-ticker'>Subscribe/UnSubscribe 24h ticker</h2>
+</code></pre><h2 id='24h-ticker'>24h ticker</h2>
 <ul>
 <li>Push interval: 1s</li>
 </ul>
@@ -2679,7 +2689,7 @@ Please reply a &quot;PONG&quot; event within 30 seconds after receiving the serv
         "count": 15442
     }
 }
-</code></pre><h2 id='subscribe-unsubscribe-24h-tickers'>Subscribe/UnSubscribe 24h tickers</h2>
+</code></pre><h2 id='24h-tickers'>24h tickers</h2>
 <ul>
 <li>Push interval: 1s</li>
 </ul>
@@ -2755,7 +2765,7 @@ Please reply a &quot;PONG&quot; event within 30 seconds after receiving the serv
        ...
     ]
 }
-</code></pre><h2 id='subscribe-unsubscribe-bbo'>Subscribe/UnSubscribe bbo</h2>
+</code></pre><h2 id='bbo'>bbo</h2>
 <ul>
 <li>Push interval: 1s</li>
 </ul>
@@ -2815,7 +2825,7 @@ Please reply a &quot;PONG&quot; event within 30 seconds after receiving the serv
         "bidSize": 25246.14
     }
 }
-</code></pre><h2 id='subscribe-unsubscribe-bbos'>Subscribe/UnSubscribe bbos</h2>
+</code></pre><h2 id='bbos'>bbos</h2>
 <ul>
 <li>Push interval: 1s</li>
 </ul>
@@ -2885,7 +2895,7 @@ Please reply a &quot;PONG&quot; event within 30 seconds after receiving the serv
        ...
     ]
 }
-</code></pre><h2 id='subscribe-unsubscribe-k-line'>Subscribe/UnSubscribe k-line</h2>
+</code></pre><h2 id='k-line'>k-line</h2>
 <ul>
 <li><code>{time}</code>为 <code>1m</code>/<code>5m</code>/<code>15m</code>/<code>30m</code>/<code>1h</code>/<code>1d</code>/<code>1w</code>/<code>1M</code></li>
 <li>Push interval: 1s</li>
@@ -2951,15 +2961,7 @@ Please reply a &quot;PONG&quot; event within 30 seconds after receiving the serv
         "endTime":1618822440000
     }
 }
-</code></pre>
-<p><strong>private user data stream Base endpoints:</strong></p>
-
-<ul>
-<li><code>wss://wss.staging.woo.network/v2/ws/private/stream/{application_id}</code> <strong>(Staging)</strong></li>
-<li><code>wss://wss.woo.network/v2/ws/private/stream/{application_id}</code> <strong>(Production)</strong></li>
-<li><code>{application_id}</code> user can find application_id from console</li>
-</ul>
-<h2 id='subscribe-unsubscribe-positioninfo'>Subscribe/UnSubscribe positioninfo</h2>
+</code></pre><h2 id='positioninfo'>positioninfo</h2>
 <ul>
 <li>Push interval: real-time push</li>
 </ul>
@@ -3053,7 +3055,7 @@ Please reply a &quot;PONG&quot; event within 30 seconds after receiving the serv
         }
     }
 }
-</code></pre><h2 id='subscribe-unsubscribe-executionreport'>Subscribe/UnSubscribe executionreport</h2>
+</code></pre><h2 id='executionreport'>executionreport</h2>
 <ul>
 <li>Push interval: real-time push</li>
 </ul>
