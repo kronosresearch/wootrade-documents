@@ -382,6 +382,9 @@
                     <a href="#auth-api-key-see-authentication" class="toc-h2 toc-link" data-title="auth (api key see Authentication)">auth (api key see Authentication)</a>
                   </li>
                   <li>
+                    <a href="#positioninfo" class="toc-h2 toc-link" data-title="positioninfo">positioninfo</a>
+                  </li>
+                  <li>
                     <a href="#executionreport" class="toc-h2 toc-link" data-title="executionreport">executionreport</a>
                   </li>
                   <li>
@@ -3084,27 +3087,46 @@ Please reply a &quot;PONG&quot; event within 30 seconds after receiving the serv
     "success":true,
     "ts":1621910107315
 }
-</code></pre><pre class="highlight plaintext"><code>
+</code></pre><h2 id='positioninfo'>positioninfo</h2>
+<ul>
+<li>Push interval: real-time push</li>
+</ul>
 
-##  positioninfo
-- Push interval: real-time push
+<p><strong>Parameters</strong></p>
 
-**Parameters**
-
-| Name   | Type   | Required | Description                              |
-| ------ | ------ | -------- | ---------------------------------------- |
-| id     | string | Y        | id generate by client  |
-| event  | string | Y        | `subscribe`/`unsubscribe`                |
-| topic  | string | Y        | `positioninfo`                         |
-
-</code></pre>
-<p>{
-    &quot;id&quot;: &quot;clientID3&quot;,
-    &quot;topic&quot;: &quot;positioninfo&quot;,
-    &quot;event&quot;: &quot;subscribe&quot;
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>string</td>
+<td>Y</td>
+<td>id generate by client</td>
+</tr>
+<tr>
+<td>event</td>
+<td>string</td>
+<td>Y</td>
+<td><code>subscribe</code>/<code>unsubscribe</code></td>
+</tr>
+<tr>
+<td>topic</td>
+<td>string</td>
+<td>Y</td>
+<td><code>positioninfo</code></td>
+</tr>
+</tbody></table>
+<pre class="highlight plaintext"><code>{
+    "id": "clientID3",
+    "topic": "positioninfo",
+    "event": "subscribe"
 }
-```</p>
-
+</code></pre>
 <p><strong>Response</strong></p>
 <pre class="highlight plaintext"><code>{
     "id": "clientID3",
