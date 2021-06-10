@@ -285,12 +285,6 @@
                     <a href="#get-account-information" class="toc-h2 toc-link" data-title="Get Account Information">Get Account Information</a>
                   </li>
                   <li>
-                    <a href="#get-settlement-history" class="toc-h2 toc-link" data-title="Get Settlement History">Get Settlement History</a>
-                  </li>
-                  <li>
-                    <a href="#submit-settlement-request" class="toc-h2 toc-link" data-title="Submit Settlement Request">Submit Settlement Request</a>
-                  </li>
-                  <li>
                     <a href="#get-token-deposit-address" class="toc-h2 toc-link" data-title="Get Token Deposit Address">Get Token Deposit Address</a>
                   </li>
                   <li>
@@ -379,7 +373,7 @@
                     <a href="#k-line" class="toc-h2 toc-link" data-title="k-line">k-line</a>
                   </li>
                   <li>
-                    <a href="#auth-api-key-see-authentication" class="toc-h2 toc-link" data-title="auth (api key see Authentication)">auth (api key see Authentication)</a>
+                    <a href="#auth" class="toc-h2 toc-link" data-title="auth">auth</a>
                   </li>
                   <li>
                     <a href="#positioninfo" class="toc-h2 toc-link" data-title="positioninfo">positioninfo</a>
@@ -668,8 +662,8 @@ GET /v1/public/info/:symbol
 <li><code>price</code> &gt;= <code>quote_min</code></li>
 <li><code>price</code> &lt;= <code>quote_max</code></li>
 <li><code>(price - quote_min) % quote_tick</code> should equal to zero</li>
-<li><code>bids[0].price * (1 - price_range)</code> &lt;= <code>price</code> &lt;= <code>bids[0].price * (1 + price_range)</code> when BUY</li>
-<li><code>asks[0].price * (1 - price_range)</code> &lt;= <code>price</code> &lt;= <code>asks[0].price * (1 + price_range)</code> when SELL</li>
+<li><code>price</code> &lt;= <code>asks[0].price * (1 + price_range)</code> when BUY</li>
+<li><code>price</code> &gt;= <code>bids[0].price * (1 - price_range)</code> when SELL</li>
 </ul>
 
 <p>Size filter</p>
@@ -866,14 +860,22 @@ POST /v1/order
 <p>Place order maker/taker, the order executed information will be update from websocket stream.
 will response immediately with an order created message.</p>
 
-<p><code>MARKET</code> type order behavior: it matches until all size executed. If the size is too large (larger than whole book), then the remaining quantity will be cancelled.
-<code>IOC</code> type order behavior: it matches as much as possible at the order_price. If not fully executed, then remaining quantity will be cancelled.
-<code>FOK</code> type order behavior: if the order can be fully executed at the order_price then the order gets fully executed otherwise would be cancelled without any execution.</p>
+<p><code>MARKET</code> type order behavior: it matches until all size executed. If the size is too large (larger than whole book) or the matching price exceeds the price limit (refer to <code>price_range</code>), then the remaining quantity will be cancelled.</p>
+
+<p><code>IOC</code> type order behavior: it matches as much as possible at the order_price. If not fully executed, then remaining quantity will be cancelled.</p>
+
+<p><code>FOK</code> type order behavior: if the order can be fully executed at the order_price then the order gets fully executed otherwise would be cancelled without any execution.</p>
+
+<p><code>ASK</code> type order behavior: the order price is guranteed to be the best ask price of the orderbook if it gets accepted.</p>
+
+<p><code>BID</code> type order behavior: the order price is guranteed to be the best bid price of the orderbook if it gets accepted.</p>
 
 <p><code>visible_quantity</code> behavior: it sets the maximum quantity to be shown on orderbook. By default, it is equal to order_quantity, negative number and number larger than <code>order_quantity</code> is not allowed.
      If it sets to 0, the order would be hidden from the orderbook.
      It doesn&#39;t work for <code>MARKET</code>/<code>IOC</code>/<code>FOK</code> orders since orders with these types would be executed and cancelled immediately and not be shown on orderbook.
      For <code>LIMIT</code>/<code>POST_ONLY</code> order, as long as it&#39;s not complete, <code>visible_quantity</code> is the maximum quantity that shown on orderbook.</p>
+
+<p><code>order_amount</code> behavior: for <code>MAREKET</code>/<code>BID</code>/<code>ASK</code> order, order can be placed by <code>order_amount</code> instead of <code>order_quantity</code>. It&#39;s the size of the order in terms of the quote currency instead of the base currency. The order would be rejected if  both <code>order_amount</code> and <code>order_quantity</code> are provided. The precision of the number should be within 8 digits.</p>
 
 <p><code>client_order_id</code> behavior: customized order_id, a unique id among open orders. Orders with the same <code>client_order_id</code> can be accepted only when the previous one if completed, otherwise the order will be rejected.</p>
 
@@ -886,6 +888,7 @@ will response immediately with an order created message.</p>
   <span class="s2">"order_type"</span><span class="p">:</span> <span class="s2">"LIMIT"</span><span class="p">,</span>
   <span class="s2">"order_price"</span><span class="p">:</span> <span class="mf">100.12</span><span class="p">,</span>
   <span class="s2">"order_quantity"</span><span class="p">:</span> <span class="mf">0.987654</span><span class="p">,</span>
+  <span class="s2">"order_amount"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
 <span class="p">}</span>
 </code></pre>
 <p><strong>Parameters</strong></p>
@@ -931,8 +934,14 @@ will response immediately with an order created message.</p>
 <tr>
 <td>order_quantity</td>
 <td>number</td>
-<td>Y</td>
-<td></td>
+<td>N</td>
+<td>For <code>MARKET</code>/<code>ASK</code>/<code>BID</code> order, if <code>order_amount</code> is given, it is not required.</td>
+</tr>
+<tr>
+<td>order_amount</td>
+<td>number</td>
+<td>N</td>
+<td>For <code>MARKET</code>/<code>ASK</code>/<code>BID</code> order, the amount in quote currency</td>
 </tr>
 <tr>
 <td>visible_quantity</td>
@@ -1046,6 +1055,7 @@ GET /v1/order/:oid
     <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"LIMIT"</span><span class="p">,</span>
     <span class="s2">"price"</span><span class="p">:</span> <span class="mi">123</span><span class="p">,</span>
     <span class="s2">"quantity"</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+    <span class="s2">"amount"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
     <span class="s2">"visible"</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
     <span class="s2">"executed"</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
 
@@ -1113,7 +1123,7 @@ GET /v1/orders
             <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"LIMIT"</span><span class="p">,</span>
             <span class="s2">"price"</span><span class="p">:</span> <span class="mf">308.51</span><span class="p">,</span>
             <span class="s2">"quantity"</span><span class="p">:</span> <span class="mf">0.0019</span><span class="p">,</span>
-            <span class="s2">"amount"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"amount"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
             <span class="s2">"executed"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
             <span class="s2">"created_time"</span><span class="p">:</span> <span class="s2">"1575014255.089"</span><span class="p">,</span>
             <span class="s2">"updated_time"</span><span class="p">:</span> <span class="s2">"1575014255.910"</span><span class="p">,</span>
@@ -1389,6 +1399,7 @@ GET /v1/client/order/:client_order_id
     <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"LIMIT"</span><span class="p">,</span>
     <span class="s2">"price"</span><span class="p">:</span> <span class="mi">123</span><span class="p">,</span>
     <span class="s2">"quantity"</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+    <span class="s2">"amount"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
     <span class="s2">"visible"</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
     <span class="s2">"executed"</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
 
@@ -1532,127 +1543,6 @@ GET /v1/client/info
 <p><strong>Parameters</strong></p>
 
 <p>None</p>
-<h2 id='get-settlement-history'>Get Settlement History</h2>
-<p><strong>Limit: 10 requests per 60 seconds</strong></p>
-
-<p><code>
-GET /v1/settlements
-</code></p>
-
-<p>Get settlement history list, includes settlement_id, status ... etc,</p>
-
-<blockquote>
-<p><strong>Response</strong></p>
-</blockquote>
-<pre class="highlight javascript"><code><span class="p">{</span>
-    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="s2">"meta"</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">"records_per_page"</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span>
-        <span class="s2">"current_page"</span><span class="p">:</span> <span class="mi">1</span>
-    <span class="p">},</span>
-    <span class="s2">"rows"</span><span class="p">:</span> <span class="p">[</span>
-        <span class="p">{</span>
-            <span class="s2">"created_time"</span><span class="p">:</span> <span class="s2">"1576562579.274"</span><span class="p">,</span>
-            <span class="s2">"settlement_id"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
-            <span class="s2">"settlement_token"</span><span class="p">:</span> <span class="s2">"USDT"</span><span class="p">,</span>
-            <span class="s2">"settlement_quantity"</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span>
-            <span class="s2">"comment"</span><span class="p">:</span> <span class="s2">"Please reivew."</span>
-            <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"COMPLETED"</span>
-        <span class="p">},</span>
-        <span class="p">{</span>
-            <span class="s2">"created_time"</span><span class="p">:</span> <span class="s2">"1576562572.019"</span><span class="p">,</span>
-            <span class="s2">"settlement_id"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-            <span class="s2">"settlement_token"</span><span class="p">:</span> <span class="s2">"BTC"</span><span class="p">,</span>
-            <span class="s2">"settlement_quantity"</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
-            <span class="s2">"comment"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
-            <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"NEW"</span>
-        <span class="p">},</span>
-        <span class="p">{</span>
-            <span class="s2">"created_time"</span><span class="p">:</span> <span class="s2">"1576562572.018"</span><span class="p">,</span>
-            <span class="s2">"settlement_id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-            <span class="s2">"settlement_token"</span><span class="p">:</span> <span class="s2">"USDT"</span><span class="p">,</span>
-            <span class="s2">"settlement_quantity"</span><span class="p">:</span> <span class="mi">10000</span><span class="p">,</span>
-            <span class="s2">"comment"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
-            <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"COMPLETED"</span>
-        <span class="p">}</span>
-    <span class="p">]</span>
-<span class="p">}</span>
-</code></pre>
-<p><strong>Parameters</strong></p>
-
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>status</td>
-<td>string</td>
-<td>N</td>
-<td><code>NEW</code>/<code>COMPLETED</code>/<code>CANCELED</code></td>
-</tr>
-<tr>
-<td>page</td>
-<td>number</td>
-<td>N (default: 1)</td>
-<td>the page wish to query.</td>
-</tr>
-</tbody></table>
-<h2 id='submit-settlement-request'>Submit Settlement Request</h2>
-<p><strong>Limit: 5 requests per 60 seconds</strong></p>
-
-<p><code>
-POST /v1/settlement
-</code></p>
-
-<p>Submit your settlement request.</p>
-
-<ul>
-<li>Deposit (holding &lt; 0): <code>settlement_quantity</code> &gt; 0</li>
-<li>Withdrawal (holding &gt; 0): <code>settlement_quantity</code> &lt; 0, <code>Math.abs(settlement_quantity)</code> &lt; holding</li>
-<li>You need to deposit all negative quantity&#39;s token first, then you can submit withdrawal request.</li>
-</ul>
-
-<blockquote>
-<p><strong>Response</strong></p>
-</blockquote>
-<pre class="highlight javascript"><code><span class="p">{</span>
-  <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-  <span class="s2">"settlement_id"</span><span class="p">:</span> <span class="mi">4</span>
-<span class="p">}</span>
-</code></pre>
-<p><strong>Parameters</strong></p>
-
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>settlement_token</td>
-<td>string</td>
-<td>Y</td>
-<td>token name wish to settle</td>
-</tr>
-<tr>
-<td>settlement_quantity</td>
-<td>number</td>
-<td>Y</td>
-<td>token quantity wish to settle</td>
-</tr>
-<tr>
-<td>comment</td>
-<td>string</td>
-<td>N</td>
-<td>comment as extra information</td>
-</tr>
-</tbody></table>
 <h2 id='get-token-deposit-address'>Get Token Deposit Address</h2>
 <p><strong>Limit 5 requests per 60 seconds</strong></p>
 
@@ -2358,7 +2248,7 @@ Please reply a &quot;PONG&quot; event within 30 seconds after receiving the serv
 <li><code>wss://wss.staging.woo.network/ws/stream/{application_id}</code> <strong>(Staging)</strong></li>
 <li><code>wss://wss.woo.network/ws/stream/{application_id}</code> <strong>(Production)</strong></li>
 <li><code>{application_id}</code> user can find application_id from console</li>
-<li>user can subscribe/unSubscribe <code>orderbook|orderbook100|aggbook10|aggbook100|aggbook1000|ticker|tickers|bbo|trade|kline_1m|kline_5m|kline_15m|kline_30m|kline_1h|kline_1d|kline_1w|kline_1M</code></li>
+<li>user can subscribe/unsubscribe <code>orderbook</code>|<code>orderbook100</code>|<code>aggbook10</code>|<code>aggbook100</code>|<code>aggbook1000</code>|<code>ticker</code>|<code>tickers</code>|<code>bbo</code>|<code>trade</code>|<code>kline_1m</code>|<code>kline_5m</code>|<code>kline_15m</code>|<code>kline_30m</code>|<code>kline_1h</code>|<code>kline_1d</code>|<code>kline_1w</code>|<code>kline_1M</code></li>
 </ul>
 
 <p><strong>Private User Data Stream Base endpoints:</strong></p>
@@ -2367,8 +2257,8 @@ Please reply a &quot;PONG&quot; event within 30 seconds after receiving the serv
 <li><code>wss://wss.staging.woo.network/v2/ws/private/stream/{application_id}</code> <strong>(Staging)</strong></li>
 <li><code>wss://wss.woo.network/v2/ws/private/stream/{application_id}</code> <strong>(Production)</strong></li>
 <li><code>{application_id}</code> user can find application_id from console</li>
-<li>user need auth after connected</li>
-<li>user can subscribe/unSubscribe <code>positioninfo|executionreport</code>.</li>
+<li>user need to be authenticated before subscribing any topic, would be disconnected if fail the authentication. See refer to <a href="#authentication">Authenticaton</a> for more information. </li>
+<li>user can subscribe/unsubscribe <code>positioninfo</code>|<code>executionreport</code></li>
 </ul>
 <h2 id='ping-pong'>PING/PONG</h2>
 <ul>
@@ -2976,7 +2866,7 @@ Please reply a &quot;PONG&quot; event within 30 seconds after receiving the serv
 }
 </code></pre><h2 id='k-line'>k-line</h2>
 <ul>
-<li><code>{time}</code>  <code>1m</code>/<code>5m</code>/<code>15m</code>/<code>30m</code>/<code>1h</code>/<code>1d</code>/<code>1w</code>/<code>1M</code></li>
+<li><code>{time}</code>: <code>1m</code>/<code>5m</code>/<code>15m</code>/<code>30m</code>/<code>1h</code>/<code>1d</code>/<code>1w</code>/<code>1M</code></li>
 <li>Push interval: 1s</li>
 </ul>
 
@@ -3040,7 +2930,11 @@ Please reply a &quot;PONG&quot; event within 30 seconds after receiving the serv
         "endTime":1618822440000
     }
 }
-</code></pre><h2 id='auth-api-key-see-authentication'>auth (api key see Authentication)</h2>
+</code></pre><h2 id='auth'>auth</h2>
+<ul>
+<li>refer to <a href="#authentication">Authenticaton</a> for more details about how to sign the request with <code>api_key</code> and <code>api_secret</code>.</li>
+</ul>
+
 <p><strong>Parameters</strong></p>
 
 <table><thead>
@@ -3082,14 +2976,14 @@ Please reply a &quot;PONG&quot; event within 30 seconds after receiving the serv
 </code></pre>
 <p><strong>Response</strong></p>
 <pre class="highlight plaintext"><code>{
-    "id":"auth",
+    "id":"123r",
     "event":"auth",
     "success":true,
     "ts":1621910107315
 }
 </code></pre><h2 id='positioninfo'>positioninfo</h2>
 <ul>
-<li>Push interval: real-time push</li>
+<li>Push interval: 1s</li>
 </ul>
 
 <p><strong>Parameters</strong></p>
