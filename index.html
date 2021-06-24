@@ -255,10 +255,16 @@
                     <a href="#cancel-order" class="toc-h2 toc-link" data-title="Cancel Order">Cancel Order</a>
                   </li>
                   <li>
+                    <a href="#cancel-order-by-client_order_id" class="toc-h2 toc-link" data-title="Cancel Order by client_order_id">Cancel Order by client_order_id</a>
+                  </li>
+                  <li>
                     <a href="#cancel-orders" class="toc-h2 toc-link" data-title="Cancel Orders">Cancel Orders</a>
                   </li>
                   <li>
                     <a href="#get-order" class="toc-h2 toc-link" data-title="Get Order">Get Order</a>
+                  </li>
+                  <li>
+                    <a href="#get-order-by-client_order_id" class="toc-h2 toc-link" data-title="Get Order by client_order_id">Get Order by client_order_id</a>
                   </li>
                   <li>
                     <a href="#get-orders" class="toc-h2 toc-link" data-title="Get Orders">Get Orders</a>
@@ -270,10 +276,10 @@
                     <a href="#get-trade" class="toc-h2 toc-link" data-title="Get Trade">Get Trade</a>
                   </li>
                   <li>
-                    <a href="#get-history-trades" class="toc-h2 toc-link" data-title="Get History Trades">Get History Trades</a>
+                    <a href="#get-trades" class="toc-h2 toc-link" data-title="Get Trades">Get Trades</a>
                   </li>
                   <li>
-                    <a href="#get-order-by-client_order_id" class="toc-h2 toc-link" data-title="Get Order by client_order_id">Get Order by client_order_id</a>
+                    <a href="#get-history-trades" class="toc-h2 toc-link" data-title="Get History Trades">Get History Trades</a>
                   </li>
                   <li>
                     <a href="#get-current-holding" class="toc-h2 toc-link" data-title="Get Current Holding">Get Current Holding</a>
@@ -383,6 +389,14 @@
                   </li>
                   <li>
                     <a href="#error-response" class="toc-h2 toc-link" data-title="error response">error response</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#release-note" class="toc-h1 toc-link" data-title="Release Note">Release Note</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#2021-06-25" class="toc-h2 toc-link" data-title="2021-06-25">2021-06-25</a>
                   </li>
               </ul>
           </li>
@@ -957,7 +971,7 @@ will response immediately with an order created message.</p>
 </tr>
 </tbody></table>
 <h2 id='cancel-order'>Cancel Order</h2>
-<p><strong>Limit: 20 requests per 1 second</strong></p>
+<p><strong>Limit: 20 requests per 1 second</strong> shared with <a href="#cancel-order-by-client_order_id">cancel_order_by_client_order_id</a></p>
 
 <p><code>
 DELETE /v1/order
@@ -989,6 +1003,49 @@ note that we immediate response with an order cancel sent message, and will upda
 <td>number</td>
 <td>Y</td>
 <td>The <code>order_id</code> that wish to cancel</td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>Y</td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id='cancel-order-by-client_order_id'>Cancel Order by client_order_id</h2>
+<p><strong>Limit: 20 requests per 1 second</strong> shared with <a href="#cancel-order">cancel_order</a></p>
+
+<p><code>
+DELETE /v1/client/order
+</code></p>
+
+<p>Cancel order by client order id. The order cancelled information will be update from websocket stream.
+Note that we immediate response with an order cancel sent message, and will update the cancel event via websocket channel.</p>
+
+<p>Only the latest order with the <code>symbol</code> and <code>client_order_id</code> would be canceled.</p>
+
+<blockquote>
+<p><strong>Response</strong></p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="p">{</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"CANCEL_SENT"</span>
+<span class="p">}</span>
+</code></pre>
+<p><strong>Parameters</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>client_order_id</td>
+<td>number</td>
+<td>Y</td>
+<td>The <code>client_order_id</code> that wish to cancel</td>
 </tr>
 <tr>
 <td>symbol</td>
@@ -1090,6 +1147,67 @@ GET /v1/order/:oid
 <td>number</td>
 <td>Y</td>
 <td>The order_id <code>oid</code> that wish to query</td>
+</tr>
+</tbody></table>
+<h2 id='get-order-by-client_order_id'>Get Order by client_order_id</h2>
+<p><strong>Limit: 20 requests per 1 seconds</strong></p>
+
+<p><code>
+GET /v1/client/order/:client_order_id
+</code></p>
+
+<p>Get specific order detail by <code>client_order_id</code>. If there are more than one orders with the same <code>client_order_id</code>, return the latest one.</p>
+
+<blockquote>
+<p><strong>Response</strong></p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"created_time"</span><span class="p">:</span> <span class="s2">"1577349119.33"</span><span class="p">,</span>
+    <span class="s2">"side"</span><span class="p">:</span> <span class="s2">"SELL"</span><span class="p">,</span>
+    <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"FILLED"</span><span class="p">,</span>
+    <span class="s2">"symbol"</span><span class="p">:</span> <span class="s2">"SPOT_BTC_USDT"</span><span class="p">,</span>
+    <span class="s2">"client_order_id"</span><span class="p">:</span> <span class="mi">123</span><span class="p">,</span>
+    <span class="s2">"order_id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"order_tag"</span><span class="p">:</span> <span class="s2">"default"</span><span class="p">,</span>
+    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"LIMIT"</span><span class="p">,</span>
+    <span class="s2">"price"</span><span class="p">:</span> <span class="mi">123</span><span class="p">,</span>
+    <span class="s2">"quantity"</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+    <span class="s2">"amount"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="s2">"visible"</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+    <span class="s2">"executed"</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+
+    <span class="c1">// Detail transactions of this order</span>
+    <span class="s2">"Transactions"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="s2">"symbol"</span><span class="p">:</span> <span class="s2">"SPOT_BTC_USDT"</span><span class="p">,</span>
+            <span class="s2">"fee"</span><span class="p">:</span> <span class="mf">0.0001</span><span class="p">,</span>
+            <span class="s2">"fee_asset"</span><span class="p">:</span> <span class="s2">"BTC"</span><span class="p">,</span> <span class="c1">// fee. use Base (BTC) as unit when BUY, use Quote (USDT) as unit when SELL</span>
+            <span class="s2">"side"</span><span class="p">:</span> <span class="s2">"BUY"</span><span class="p">,</span>
+            <span class="s2">"order_id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s2">"executed_price"</span><span class="p">:</span> <span class="mi">123</span><span class="p">,</span>
+            <span class="s2">"executed_quantity"</span><span class="p">:</span> <span class="mf">0.05</span><span class="p">,</span>
+            <span class="s2">"executed_timestamp"</span><span class="p">:</span> <span class="s2">"1567382401.000000"</span><span class="p">,</span>
+            <span class="s2">"is_maker"</span><span class="p">:</span> <span class="mi">1</span>
+        <span class="p">}]</span>
+<span class="p">}</span>
+</code></pre>
+<p><strong>Parameters</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>client_order_id</td>
+<td>number</td>
+<td>Y</td>
+<td>customized order_id when placing order</td>
 </tr>
 </tbody></table>
 <h2 id='get-orders'>Get Orders</h2>
@@ -1298,6 +1416,54 @@ GET /v1/client/trade/:tid
 <td>The transaction id <code>tid</code> that wish to query</td>
 </tr>
 </tbody></table>
+<h2 id='get-trades'>Get Trades</h2>
+<p><strong>Limit: 20 requests per 1 second</strong></p>
+
+<p><code>
+GET /v1/order/:oid/trades
+</code></p>
+
+<p>Get trades by <code>order_id</code></p>
+
+<blockquote>
+<p><strong>Response</strong></p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"rows"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="c1">// transaction id</span>
+            <span class="s2">"symbol"</span><span class="p">:</span> <span class="s2">"SPOT_BTC_USDT"</span><span class="p">,</span>
+            <span class="s2">"order_id"</span><span class="p">:</span> <span class="mi">211</span><span class="p">,</span>
+            <span class="s2">"order_tag"</span><span class="p">:</span> <span class="s2">"default"</span><span class="p">,</span>
+            <span class="s2">"executed_price"</span><span class="p">:</span> <span class="mf">10892.84</span><span class="p">,</span>
+            <span class="s2">"executed_quantity"</span><span class="p">:</span> <span class="mf">0.002</span><span class="p">,</span>
+            <span class="s2">"is_maker"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="s2">"side"</span><span class="p">:</span> <span class="s2">"SELL"</span><span class="p">,</span>
+            <span class="s2">"fee"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"fee_asset"</span><span class="p">:</span> <span class="s2">"USDT"</span><span class="p">,</span> <span class="c1">// use Base (BTC) as unit when BUY, use Quote (USDT) as unit when SELL</span>
+            <span class="s2">"executed_timestamp"</span><span class="p">:</span> <span class="s2">"1566264290.250000"</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</code></pre>
+<p><strong>Parameters</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>oid</td>
+<td>number</td>
+<td>Y</td>
+<td>The order id <code>oid</code> that wish to query</td>
+</tr>
+</tbody></table>
 <h2 id='get-history-trades'>Get History Trades</h2>
 <p><strong>Limit: 10 requests per 1 second</strong></p>
 
@@ -1373,67 +1539,6 @@ GET /v1/client/trades
 <td>number</td>
 <td>N (default: 1)</td>
 <td>the page wish to query.</td>
-</tr>
-</tbody></table>
-<h2 id='get-order-by-client_order_id'>Get Order by client_order_id</h2>
-<p><strong>Limit: 20 requests per 1 seconds</strong></p>
-
-<p><code>
-GET /v1/client/order/:client_order_id
-</code></p>
-
-<p>Get specific order detail by <code>client_order_id</code>. If there are more than one orders with the same <code>client_order_id</code>, return the latest one.</p>
-
-<blockquote>
-<p><strong>Response</strong></p>
-</blockquote>
-<pre class="highlight javascript"><code><span class="p">{</span>
-    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="s2">"created_time"</span><span class="p">:</span> <span class="s2">"1577349119.33"</span><span class="p">,</span>
-    <span class="s2">"side"</span><span class="p">:</span> <span class="s2">"SELL"</span><span class="p">,</span>
-    <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"FILLED"</span><span class="p">,</span>
-    <span class="s2">"symbol"</span><span class="p">:</span> <span class="s2">"SPOT_BTC_USDT"</span><span class="p">,</span>
-    <span class="s2">"client_order_id"</span><span class="p">:</span> <span class="mi">123</span><span class="p">,</span>
-    <span class="s2">"order_id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"order_tag"</span><span class="p">:</span> <span class="s2">"default"</span><span class="p">,</span>
-    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"LIMIT"</span><span class="p">,</span>
-    <span class="s2">"price"</span><span class="p">:</span> <span class="mi">123</span><span class="p">,</span>
-    <span class="s2">"quantity"</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
-    <span class="s2">"amount"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-    <span class="s2">"visible"</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
-    <span class="s2">"executed"</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
-
-    <span class="c1">// Detail transactions of this order</span>
-    <span class="s2">"Transactions"</span><span class="p">:</span> <span class="p">[</span>
-        <span class="p">{</span>
-            <span class="s2">"id"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-            <span class="s2">"symbol"</span><span class="p">:</span> <span class="s2">"SPOT_BTC_USDT"</span><span class="p">,</span>
-            <span class="s2">"fee"</span><span class="p">:</span> <span class="mf">0.0001</span><span class="p">,</span>
-            <span class="s2">"fee_asset"</span><span class="p">:</span> <span class="s2">"BTC"</span><span class="p">,</span> <span class="c1">// fee. use Base (BTC) as unit when BUY, use Quote (USDT) as unit when SELL</span>
-            <span class="s2">"side"</span><span class="p">:</span> <span class="s2">"BUY"</span><span class="p">,</span>
-            <span class="s2">"order_id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-            <span class="s2">"executed_price"</span><span class="p">:</span> <span class="mi">123</span><span class="p">,</span>
-            <span class="s2">"executed_quantity"</span><span class="p">:</span> <span class="mf">0.05</span><span class="p">,</span>
-            <span class="s2">"executed_timestamp"</span><span class="p">:</span> <span class="s2">"1567382401.000000"</span><span class="p">,</span>
-            <span class="s2">"is_maker"</span><span class="p">:</span> <span class="mi">1</span>
-        <span class="p">}]</span>
-<span class="p">}</span>
-</code></pre>
-<p><strong>Parameters</strong></p>
-
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>client_order_id</td>
-<td>number</td>
-<td>Y</td>
-<td>customized order_id when placing order</td>
 </tr>
 </tbody></table>
 <h2 id='get-current-holding'>Get Current Holding</h2>
@@ -3157,7 +3262,21 @@ Please reply a &quot;PONG&quot; event within 30 seconds after receiving the serv
     "ts": 1614141150601,
     "errorMsg": "invalid symbol SPOT_WOO_USDC"
 }
-</code></pre>
+</code></pre><h1 id='release-note'>Release Note</h1>
+<p>All the API changes would be listed here.</p>
+<h2 id='2021-06-25'>2021-06-25</h2>
+<ul>
+<li>Add API <a href="#cancel-order-by-client_order_id">Cancel_Order_by_client_order_id</a></li>
+</ul>
+
+<p>User could cancel order by the user-specified <code>client_order_id</code>.</p>
+
+<ul>
+<li>Add API <a href="#get-trades">Get_Trades</a></li>
+</ul>
+
+<p>User could get all the trades by <code>order_id</code>.</p>
+
       </div>
       <div class="dark-box">
       </div>
