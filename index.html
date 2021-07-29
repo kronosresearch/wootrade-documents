@@ -683,7 +683,7 @@ GET /v1/public/info/:symbol
 <p>Size filter</p>
 
 <ul>
-<li><code>quantity</code> &gt;= <code>base_min</code></li>
+<li><code>base_min</code> &lt;= <code>quantity</code> &lt;= <code>base_max</code></li>
 <li><code>(quantity - base_min) % base_tick</code> should equal to zero</li>
 </ul>
 
@@ -710,6 +710,7 @@ GET /v1/public/info/:symbol
         <span class="s2">"quote_max"</span><span class="p">:</span> <span class="mi">100000</span><span class="p">,</span>
         <span class="s2">"quote_tick"</span><span class="p">:</span> <span class="mf">0.01</span><span class="p">,</span>
         <span class="s2">"base_min"</span><span class="p">:</span> <span class="mf">0.0001</span><span class="p">,</span>
+        <span class="s2">"base_max"</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
         <span class="s2">"base_tick"</span><span class="p">:</span> <span class="mf">0.0001</span><span class="p">,</span>
         <span class="s2">"min_notional"</span><span class="p">:</span> <span class="mf">0.02</span><span class="p">,</span>
         <span class="s2">"price_range"</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span>
@@ -756,6 +757,7 @@ GET /v1/public/info
       <span class="s2">"quote_max"</span><span class="p">:</span> <span class="mi">100000</span><span class="p">,</span>
       <span class="s2">"quote_tick"</span><span class="p">:</span> <span class="mf">0.01</span><span class="p">,</span>
       <span class="s2">"base_min"</span><span class="p">:</span> <span class="mf">0.0001</span><span class="p">,</span>
+      <span class="s2">"base_max"</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
       <span class="s2">"base_tick"</span><span class="p">:</span> <span class="mf">0.0001</span><span class="p">,</span>
       <span class="s2">"min_notional"</span><span class="p">:</span> <span class="mf">0.02</span><span class="p">,</span>
       <span class="s2">"price_range"</span><span class="p">:</span> <span class="mf">0.99</span>
