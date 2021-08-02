@@ -396,6 +396,9 @@
             <a href="#release-note" class="toc-h1 toc-link" data-title="Release Note">Release Note</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#2021-08-06" class="toc-h2 toc-link" data-title="2021-08-06">2021-08-06</a>
+                  </li>
+                  <li>
                     <a href="#2021-06-25" class="toc-h2 toc-link" data-title="2021-06-25">2021-06-25</a>
                   </li>
               </ul>
@@ -466,19 +469,23 @@ Assume following infomation:</p>
 <tr>
 <th>Key</th>
 <th>Value</th>
+<th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td><code>api_key</code></td>
 <td><code>AbmyVJGUpN064ks5ELjLfA==</code></td>
+<td>create from WOO X console</td>
 </tr>
 <tr>
 <td><code>api_secret</code></td>
 <td><code>QHKRXHPAW1MC9YGZMAT8YDJG2HPR</code></td>
+<td>create from WOO X console</td>
 </tr>
 <tr>
 <td><code>timestamp</code></td>
 <td><code>1578565539808</code></td>
+<td>Unix epoch time in milliseconds</td>
 </tr>
 </tbody></table>
 
@@ -714,8 +721,8 @@ GET /v1/public/info/:symbol
         <span class="s2">"base_tick"</span><span class="p">:</span> <span class="mf">0.0001</span><span class="p">,</span>
         <span class="s2">"min_notional"</span><span class="p">:</span> <span class="mf">0.02</span><span class="p">,</span>
         <span class="s2">"price_range"</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span>
-        <span class="s2">"created_time"</span><span class="p">:</span> <span class="s2">"1575014248.99"</span><span class="p">,</span>
-        <span class="s2">"updated_time"</span><span class="p">:</span> <span class="s2">"1575014248.99"</span><span class="p">,</span>
+        <span class="s2">"created_time"</span><span class="p">:</span> <span class="s2">"1575014248.99"</span><span class="p">,</span> <span class="c1">// Unix epoch time in seconds</span>
+        <span class="s2">"updated_time"</span><span class="p">:</span> <span class="s2">"1575014248.99"</span>  <span class="c1">// Unix epoch time in seconds</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre>
@@ -750,8 +757,8 @@ GET /v1/public/info
   <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
   <span class="s2">"rows"</span><span class="p">:</span> <span class="p">[</span>
     <span class="p">{</span>
-      <span class="s2">"created_time"</span><span class="p">:</span> <span class="s2">"1575441595.65"</span><span class="p">,</span>
-      <span class="s2">"updated_time"</span><span class="p">:</span> <span class="s2">"1575441595.65"</span><span class="p">,</span>
+      <span class="s2">"created_time"</span><span class="p">:</span> <span class="s2">"1575441595.65"</span><span class="p">,</span> <span class="c1">// Unix epoch time in seconds</span>
+      <span class="s2">"updated_time"</span><span class="p">:</span> <span class="s2">"1575441595.65"</span><span class="p">,</span> <span class="c1">// Unix epoch time in seconds</span>
       <span class="s2">"symbol"</span><span class="p">:</span> <span class="s2">"SPOT_BTC_USDT"</span><span class="p">,</span>
       <span class="s2">"quote_min"</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
       <span class="s2">"quote_max"</span><span class="p">:</span> <span class="mi">100000</span><span class="p">,</span>
@@ -787,7 +794,7 @@ GET /v1/public/market_trades
             <span class="s2">"side"</span><span class="p">:</span> <span class="s2">"BUY"</span><span class="p">,</span>
             <span class="s2">"executed_price"</span><span class="p">:</span> <span class="mi">202</span><span class="p">,</span>
             <span class="s2">"executed_quantity"</span><span class="p">:</span> <span class="mf">0.00025</span><span class="p">,</span>
-            <span class="s2">"executed_timestamp"</span><span class="p">:</span> <span class="s2">"1567411795.000000"</span>
+            <span class="s2">"executed_timestamp"</span><span class="p">:</span> <span class="s2">"1567411795.000000"</span> <span class="c1">// Unix epoch time in seconds</span>
         <span class="p">}</span>
     <span class="p">]</span>
 <span class="p">}</span>
@@ -829,8 +836,8 @@ GET /v1/public/token
     <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
     <span class="s2">"rows"</span><span class="p">:</span> <span class="p">[</span>
         <span class="p">{</span>
-            <span class="s2">"created_time"</span><span class="p">:</span> <span class="s2">"1579399877.02"</span><span class="p">,</span>
-            <span class="s2">"updated_time"</span><span class="p">:</span> <span class="s2">"1579399877.02"</span><span class="p">,</span>
+            <span class="s2">"created_time"</span><span class="p">:</span> <span class="s2">"1579399877.02"</span><span class="p">,</span> <span class="c1">// Unix epoch time in seconds</span>
+            <span class="s2">"updated_time"</span><span class="p">:</span> <span class="s2">"1579399877.02"</span><span class="p">,</span> <span class="c1">// Unix epoch time in seconds</span>
             <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"BTC"</span><span class="p">,</span>
             <span class="s2">"balance_token"</span><span class="p">:</span> <span class="s2">"BTC"</span><span class="p">,</span>
             <span class="s2">"fullname"</span><span class="p">:</span> <span class="s2">"Bitcoin"</span><span class="p">,</span>
@@ -1104,7 +1111,7 @@ GET /v1/order/:oid
 </blockquote>
 <pre class="highlight javascript"><code><span class="p">{</span>
     <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="s2">"created_time"</span><span class="p">:</span> <span class="s2">"1577349119.33"</span><span class="p">,</span>
+    <span class="s2">"created_time"</span><span class="p">:</span> <span class="s2">"1577349119.33"</span><span class="p">,</span> <span class="c1">// Unix epoch time in seconds</span>
     <span class="s2">"side"</span><span class="p">:</span> <span class="s2">"SELL"</span><span class="p">,</span>
     <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"FILLED"</span><span class="p">,</span>
     <span class="s2">"symbol"</span><span class="p">:</span> <span class="s2">"SPOT_BTC_USDT"</span><span class="p">,</span>
@@ -1117,21 +1124,8 @@ GET /v1/order/:oid
     <span class="s2">"amount"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
     <span class="s2">"visible"</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
     <span class="s2">"executed"</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
-
-    <span class="c1">// Detail transactions of this order</span>
-    <span class="s2">"Transactions"</span><span class="p">:</span> <span class="p">[</span>
-        <span class="p">{</span>
-            <span class="s2">"id"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-            <span class="s2">"symbol"</span><span class="p">:</span> <span class="s2">"SPOT_BTC_USDT"</span><span class="p">,</span>
-            <span class="s2">"fee"</span><span class="p">:</span> <span class="mf">0.0001</span><span class="p">,</span>
-            <span class="s2">"fee_asset"</span><span class="p">:</span> <span class="s2">"BTC"</span><span class="p">,</span> <span class="c1">// fee. use Base (BTC) as unit when BUY, use Quote (USDT) as unit when SELL</span>
-            <span class="s2">"side"</span><span class="p">:</span> <span class="s2">"BUY"</span><span class="p">,</span>
-            <span class="s2">"order_id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-            <span class="s2">"executed_price"</span><span class="p">:</span> <span class="mi">123</span><span class="p">,</span>
-            <span class="s2">"executed_quantity"</span><span class="p">:</span> <span class="mf">0.05</span><span class="p">,</span>
-            <span class="s2">"executed_timestamp"</span><span class="p">:</span> <span class="s2">"1567382401.000000"</span><span class="p">,</span>
-            <span class="s2">"is_maker"</span><span class="p">:</span> <span class="mi">1</span>
-        <span class="p">}]</span>
+    <span class="s2">"fee"</span><span class="p">:</span> <span class="mf">0.00123</span><span class="p">,</span>
+    <span class="s2">"fee_asset"</span><span class="p">:</span> <span class="s2">"USDT"</span>
 <span class="p">}</span>
 </code></pre>
 <p><strong>Parameters</strong></p>
@@ -1165,7 +1159,7 @@ GET /v1/client/order/:client_order_id
 </blockquote>
 <pre class="highlight javascript"><code><span class="p">{</span>
     <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="s2">"created_time"</span><span class="p">:</span> <span class="s2">"1577349119.33"</span><span class="p">,</span>
+    <span class="s2">"created_time"</span><span class="p">:</span> <span class="s2">"1577349119.33"</span><span class="p">,</span> <span class="c1">// Unix epoch time in seconds</span>
     <span class="s2">"side"</span><span class="p">:</span> <span class="s2">"SELL"</span><span class="p">,</span>
     <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"FILLED"</span><span class="p">,</span>
     <span class="s2">"symbol"</span><span class="p">:</span> <span class="s2">"SPOT_BTC_USDT"</span><span class="p">,</span>
@@ -1178,21 +1172,8 @@ GET /v1/client/order/:client_order_id
     <span class="s2">"amount"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
     <span class="s2">"visible"</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
     <span class="s2">"executed"</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
-
-    <span class="c1">// Detail transactions of this order</span>
-    <span class="s2">"Transactions"</span><span class="p">:</span> <span class="p">[</span>
-        <span class="p">{</span>
-            <span class="s2">"id"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-            <span class="s2">"symbol"</span><span class="p">:</span> <span class="s2">"SPOT_BTC_USDT"</span><span class="p">,</span>
-            <span class="s2">"fee"</span><span class="p">:</span> <span class="mf">0.0001</span><span class="p">,</span>
-            <span class="s2">"fee_asset"</span><span class="p">:</span> <span class="s2">"BTC"</span><span class="p">,</span> <span class="c1">// fee. use Base (BTC) as unit when BUY, use Quote (USDT) as unit when SELL</span>
-            <span class="s2">"side"</span><span class="p">:</span> <span class="s2">"BUY"</span><span class="p">,</span>
-            <span class="s2">"order_id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-            <span class="s2">"executed_price"</span><span class="p">:</span> <span class="mi">123</span><span class="p">,</span>
-            <span class="s2">"executed_quantity"</span><span class="p">:</span> <span class="mf">0.05</span><span class="p">,</span>
-            <span class="s2">"executed_timestamp"</span><span class="p">:</span> <span class="s2">"1567382401.000000"</span><span class="p">,</span>
-            <span class="s2">"is_maker"</span><span class="p">:</span> <span class="mi">1</span>
-        <span class="p">}]</span>
+    <span class="s2">"fee"</span><span class="p">:</span> <span class="mf">0.00123</span><span class="p">,</span>
+    <span class="s2">"fee_asset"</span><span class="p">:</span> <span class="s2">"USDT"</span>
 <span class="p">}</span>
 </code></pre>
 <p><strong>Parameters</strong></p>
@@ -1245,9 +1226,10 @@ GET /v1/orders
             <span class="s2">"quantity"</span><span class="p">:</span> <span class="mf">0.0019</span><span class="p">,</span>
             <span class="s2">"amount"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
             <span class="s2">"executed"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-            <span class="s2">"created_time"</span><span class="p">:</span> <span class="s2">"1575014255.089"</span><span class="p">,</span>
-            <span class="s2">"updated_time"</span><span class="p">:</span> <span class="s2">"1575014255.910"</span><span class="p">,</span>
-            <span class="s2">"Transactions"</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">"fee"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"fee_asset"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+            <span class="s2">"created_time"</span><span class="p">:</span> <span class="s2">"1575014255.089"</span><span class="p">,</span> <span class="c1">// Unix epoch time in seconds</span>
+            <span class="s2">"updated_time"</span><span class="p">:</span> <span class="s2">"1575014255.910"</span><span class="p">,</span> <span class="c1">// Unix epoch time in seconds</span>
             <span class="s2">"average_executed_price"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
         <span class="p">},</span>
         <span class="c1">// ....skip (total 25 items in one page)</span>
@@ -1355,7 +1337,7 @@ GET /v1/orderbook/:symbol
             <span class="s2">"quantity"</span><span class="p">:</span> <span class="mf">0.00488286</span>
         <span class="p">}</span>
     <span class="p">],</span>
-    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="mi">1564710591905</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="mi">1564710591905</span>   <span class="c1">// Unix epoch time in milliseconds</span>
 <span class="p">}</span>
 </code></pre>
 <p><strong>Parameters</strong></p>
@@ -1398,7 +1380,7 @@ GET /v1/client/trade/:tid
     <span class="s2">"executed_price"</span><span class="p">:</span> <span class="mi">123</span><span class="p">,</span>
     <span class="s2">"executed_quantity"</span><span class="p">:</span> <span class="mf">0.05</span><span class="p">,</span>
     <span class="s2">"is_maker"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="s2">"executed_timestamp"</span><span class="p">:</span> <span class="s2">"1567382400.000000"</span>
+    <span class="s2">"executed_timestamp"</span><span class="p">:</span> <span class="s2">"1567382400.000000"</span>  <span class="c1">// Unix epoch time in seconds</span>
 <span class="p">}</span>
 </code></pre>
 <p><strong>Parameters</strong></p>
@@ -1444,7 +1426,7 @@ GET /v1/order/:oid/trades
             <span class="s2">"side"</span><span class="p">:</span> <span class="s2">"SELL"</span><span class="p">,</span>
             <span class="s2">"fee"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
             <span class="s2">"fee_asset"</span><span class="p">:</span> <span class="s2">"USDT"</span><span class="p">,</span> <span class="c1">// use Base (BTC) as unit when BUY, use Quote (USDT) as unit when SELL</span>
-            <span class="s2">"executed_timestamp"</span><span class="p">:</span> <span class="s2">"1566264290.250000"</span>
+            <span class="s2">"executed_timestamp"</span><span class="p">:</span> <span class="s2">"1566264290.250000"</span>  <span class="c1">// Unix epoch time in seconds</span>
         <span class="p">}</span>
     <span class="p">]</span>
 <span class="p">}</span>
@@ -1496,7 +1478,7 @@ GET /v1/client/trades
             <span class="s2">"side"</span><span class="p">:</span> <span class="s2">"SELL"</span><span class="p">,</span>
             <span class="s2">"fee"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
             <span class="s2">"fee_asset"</span><span class="p">:</span> <span class="s2">"USDT"</span><span class="p">,</span> <span class="c1">// use Base (BTC) as unit when BUY, use Quote (USDT) as unit when SELL</span>
-            <span class="s2">"executed_timestamp"</span><span class="p">:</span> <span class="s2">"1566264290.250000"</span>
+            <span class="s2">"executed_timestamp"</span><span class="p">:</span> <span class="s2">"1566264290.250000"</span>  <span class="c1">// Unix epoch time in seconds</span>
         <span class="p">},</span>
         <span class="c1">// ....skip (total 25 items in one page)</span>
     <span class="p">]</span>
@@ -1583,7 +1565,7 @@ GET /v2/client/holding
   <span class="nl">success</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
   <span class="nx">holding</span><span class="p">:</span> <span class="p">[</span>
     <span class="p">{</span>
-      <span class="s2">"updated_time"</span><span class="p">:</span> <span class="s2">"1580794149"</span><span class="p">,</span>
+      <span class="s2">"updated_time"</span><span class="p">:</span> <span class="s2">"1580794149"</span><span class="p">,</span>  <span class="c1">// Unix epoch time in seconds</span>
       <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"BTC"</span><span class="p">,</span>
       <span class="s2">"holding"</span><span class="p">:</span> <span class="o">-</span><span class="mf">28.000752</span><span class="p">,</span>
       <span class="s2">"frozen"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
@@ -1796,8 +1778,8 @@ GET /v1/asset/history
     <span class="p">},</span>
     <span class="s2">"rows"</span><span class="p">:</span> <span class="p">[</span>
         <span class="p">{</span>
-            <span class="s2">"created_time"</span><span class="p">:</span> <span class="s2">"1579399877.041"</span><span class="p">,</span>
-            <span class="s2">"updated_time"</span><span class="p">:</span> <span class="s2">"1579399877.041"</span><span class="p">,</span>
+            <span class="s2">"created_time"</span><span class="p">:</span> <span class="s2">"1579399877.041"</span><span class="p">,</span> <span class="c1">// Unix epoch time in seconds</span>
+            <span class="s2">"updated_time"</span><span class="p">:</span> <span class="s2">"1579399877.041"</span><span class="p">,</span> <span class="c1">// Unix epoch time in seconds</span>
             <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"202029292829292"</span><span class="p">,</span>
             <span class="s2">"external_id"</span><span class="p">:</span> <span class="s2">"202029292829292"</span><span class="p">,</span>
             <span class="s2">"application_id"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
@@ -1913,8 +1895,8 @@ GET /v1/asset/transfer_history
     <span class="p">},</span>
     <span class="s2">"rows"</span><span class="p">:</span> <span class="p">[</span>
         <span class="p">{</span>
-            <span class="s2">"created_time"</span><span class="p">:</span> <span class="s2">"1579399877.041"</span><span class="p">,</span>
-            <span class="s2">"updated_time"</span><span class="p">:</span> <span class="s2">"1579399877.041"</span><span class="p">,</span>
+            <span class="s2">"created_time"</span><span class="p">:</span> <span class="s2">"1579399877.041"</span><span class="p">,</span> <span class="c1">// Unix epoch time in seconds</span>
+            <span class="s2">"updated_time"</span><span class="p">:</span> <span class="s2">"1579399877.041"</span><span class="p">,</span> <span class="c1">// Unix epoch time in seconds</span>
             <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"202029292829293"</span><span class="p">,</span>
             <span class="s2">"application_id"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
             <span class="s2">"from"</span><span class="p">:</span> <span class="s2">"COLLATERAL"</span><span class="p">,</span>
@@ -1982,8 +1964,8 @@ GET /v1/interest/history
     <span class="p">},</span>
     <span class="s2">"rows"</span><span class="p">:</span> <span class="p">[</span>
         <span class="p">{</span>
-            <span class="s2">"created_time"</span><span class="p">:</span> <span class="s2">"1579399877.041"</span><span class="p">,</span>
-            <span class="s2">"updated_time"</span><span class="p">:</span> <span class="s2">"1579399877.041"</span><span class="p">,</span>
+            <span class="s2">"created_time"</span><span class="p">:</span> <span class="s2">"1579399877.041"</span><span class="p">,</span> <span class="c1">// Unix epoch time in seconds</span>
+            <span class="s2">"updated_time"</span><span class="p">:</span> <span class="s2">"1579399877.041"</span><span class="p">,</span> <span class="c1">// Unix epoch time in seconds</span>
             <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"USDT"</span><span class="p">,</span>
             <span class="s2">"application_id"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
             <span class="s2">"side"</span><span class="p">:</span> <span class="s2">"LOAN"</span><span class="p">,</span>
@@ -3266,6 +3248,11 @@ Please reply a &quot;PONG&quot; event within 30 seconds after receiving the serv
 }
 </code></pre><h1 id='release-note'>Release Note</h1>
 <p>All the API changes would be listed here.</p>
+<h2 id='2021-08-06'>2021-08-06</h2>
+<ul>
+<li><p>Remove <code>Transactions</code> from <a href="#get-orders">Get_Order</a>, <a href="#get-order-by-client_order_id">Get_Order_by_client_order_id</a>, <a href="#get-orders">Get_Orders</a>.</p></li>
+<li><p>Add <code>fee</code> and <code>fee_asset</code> in <a href="#get-orders">Get_Order</a>, <a href="#get-order-by-client_order_id">Get_Order_by_client_order_id</a>, <a href="#get-orders">Get_Orders</a>.</p></li>
+</ul>
 <h2 id='2021-06-25'>2021-06-25</h2>
 <ul>
 <li>Add API <a href="#cancel-order-by-client_order_id">Cancel_Order_by_client_order_id</a></li>
