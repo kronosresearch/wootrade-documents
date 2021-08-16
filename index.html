@@ -902,6 +902,8 @@ will response immediately with an order created message.</p>
 
 <p><code>client_order_id</code> behavior: customized order_id, a unique id among open orders. Orders with the same <code>client_order_id</code> can be accepted only when the previous one if completed, otherwise the order will be rejected.</p>
 
+<p>For <code>MAREKET</code>/<code>BID</code>/<code>ASK</code> order, if margin trading is disabled, <code>order_amount</code> is not supported when placing SELL order while <code>order_quantity</code> is not supported when placing BUY order.</p>
+
 <blockquote>
 <p><strong>Response</strong></p>
 </blockquote>
@@ -1258,6 +1260,7 @@ GET /v1/orders
             <span class="s2">"price"</span><span class="p">:</span> <span class="mf">308.51</span><span class="p">,</span>
             <span class="s2">"quantity"</span><span class="p">:</span> <span class="mf">0.0019</span><span class="p">,</span>
             <span class="s2">"amount"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+            <span class="s2">"visible"</span><span class="p">:</span> <span class="mf">0.0019</span><span class="p">,</span>
             <span class="s2">"executed"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
             <span class="s2">"total_fee"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
             <span class="s2">"fee_asset"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
