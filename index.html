@@ -432,8 +432,8 @@
 <p><strong>Base endpoints:</strong></p>
 
 <ul>
-<li><code>https://api.staging.woo.network/</code> <strong>(Staging)</strong></li>
-<li><code>https://api.woo.network/</code> <strong>(Production)</strong></li>
+<li><code>https://api.staging.woo.org/</code> <strong>(Staging)</strong></li>
+<li><code>https://api.woo.org/</code> <strong>(Production)</strong></li>
 </ul>
 
 <p><strong>Authorization:</strong><br>
@@ -2094,27 +2094,27 @@ POST /v1/interest/repay
 <p><strong>Base endpoints:</strong></p>
 
 <ul>
-<li><code>wss://api.staging.woo.network/ws/:application_id/:symbol</code> <strong>(Staging)</strong></li>
-<li><code>wss://api.woo.network/ws/:application_id/:symbol</code> <strong>(Production)</strong></li>
+<li><code>wss://api.staging.woo.org/ws/:application_id/:symbol</code> <strong>(Staging)</strong></li>
+<li><code>wss://api.woo.org/ws/:application_id/:symbol</code> <strong>(Production)</strong></li>
 </ul>
 
 <p>For example, your websocket endpoint may looks like:</p>
 
 <p><code>
-wss://api.staging.woo.network/ws/508590cc-e3cd-4390-ba9b-739830f41242/SPOT_BTC_USDT
+wss://api.staging.woo.org/ws/508590cc-e3cd-4390-ba9b-739830f41242/SPOT_BTC_USDT
 </code></p>
 
 <p>If you are only intersted in your user events <code>ORDER_UPDATE</code>/<code>TRANSACTION</code>/<code>POSITIONS</code>, the stream is available to subscribe with following endpoints.</p>
 
 <ul>
-<li><code>wss://api.staging.woo.network/ws/:application_id</code> <strong>(Staging)</strong></li>
-<li><code>wss://api.woo.network/ws/:application_id</code> <strong>(Production)</strong></li>
+<li><code>wss://api.staging.woo.org/ws/:application_id</code> <strong>(Staging)</strong></li>
+<li><code>wss://api.woo.org/ws/:application_id</code> <strong>(Production)</strong></li>
 </ul>
 
 <p>For example, your websocket endpoint may looks like:</p>
 
 <p><code>
-wss://api.staging.woo.network/ws/508590cc-e3cd-4390-ba9b-739830f41242
+wss://api.staging.woo.org/ws/508590cc-e3cd-4390-ba9b-739830f41242
 </code></p>
 
 <p><strong>Event Type:</strong></p>
@@ -2137,8 +2137,8 @@ wss://api.staging.woo.network/ws/508590cc-e3cd-4390-ba9b-739830f41242
 <p>Public stream is available to subscribe for market data with following endpoints.</p>
 
 <ul>
-<li><code>wss://api.staging.woo.network/ws/stream?streams=stream1,stream2, ...</code> <strong>(Staging)</strong></li>
-<li><code>wss://api.woo.network/ws/stream?streams=stream1,stream2, ...</code> <strong>(Production)</strong></li>
+<li><code>wss://api.staging.woo.org/ws/stream?streams=stream1,stream2, ...</code> <strong>(Staging)</strong></li>
+<li><code>wss://api.woo.org/ws/stream?streams=stream1,stream2, ...</code> <strong>(Production)</strong></li>
 </ul>
 
 <p>The enumurate of public stream type are:</p>
@@ -2370,8 +2370,8 @@ Please reply a &quot;PONG&quot; event within 30 seconds after receiving the serv
 <p><strong>Market Data Base endpoints:</strong></p>
 
 <ul>
-<li><code>wss://wss.staging.woo.network/ws/stream/{application_id}</code> <strong>(Staging)</strong></li>
-<li><code>wss://wss.woo.network/ws/stream/{application_id}</code> <strong>(Production)</strong></li>
+<li><code>wss://wss.staging.woo.org/ws/stream/{application_id}</code> <strong>(Staging)</strong></li>
+<li><code>wss://wss.woo.org/ws/stream/{application_id}</code> <strong>(Production)</strong></li>
 <li><code>{application_id}</code> user can find application_id from console</li>
 <li>user can subscribe/unsubscribe <code>orderbook</code>|<code>orderbook100</code>|<code>aggbook10</code>|<code>aggbook100</code>|<code>aggbook1000</code>|<code>ticker</code>|<code>tickers</code>|<code>bbo</code>|<code>trade</code>|<code>kline_1m</code>|<code>kline_5m</code>|<code>kline_15m</code>|<code>kline_30m</code>|<code>kline_1h</code>|<code>kline_1d</code>|<code>kline_1w</code>|<code>kline_1M</code></li>
 </ul>
@@ -2379,8 +2379,8 @@ Please reply a &quot;PONG&quot; event within 30 seconds after receiving the serv
 <p><strong>Private User Data Stream Base endpoints:</strong></p>
 
 <ul>
-<li><code>wss://wss.staging.woo.network/v2/ws/private/stream/{application_id}</code> <strong>(Staging)</strong></li>
-<li><code>wss://wss.woo.network/v2/ws/private/stream/{application_id}</code> <strong>(Production)</strong></li>
+<li><code>wss://wss.staging.woo.org/v2/ws/private/stream/{application_id}</code> <strong>(Staging)</strong></li>
+<li><code>wss://wss.woo.org/v2/ws/private/stream/{application_id}</code> <strong>(Production)</strong></li>
 <li><code>{application_id}</code> user can find application_id from console</li>
 <li>user need to be authenticated before subscribing any topic, would be disconnected if fail the authentication. See refer to <a href="#authentication">Authenticaton</a> for more information. </li>
 <li>user can subscribe/unsubscribe <code>positioninfo</code>|<code>executionreport</code></li>
