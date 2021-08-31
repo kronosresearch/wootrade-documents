@@ -249,6 +249,9 @@
                     <a href="#available-token-public" class="toc-h2 toc-link" data-title="Available Token (Public)">Available Token (Public)</a>
                   </li>
                   <li>
+                    <a href="#token-config" class="toc-h2 toc-link" data-title="Token Config">Token Config</a>
+                  </li>
+                  <li>
                     <a href="#send-order" class="toc-h2 toc-link" data-title="Send Order">Send Order</a>
                   </li>
                   <li>
@@ -395,6 +398,9 @@
           <li>
             <a href="#release-note" class="toc-h1 toc-link" data-title="Release Note">Release Note</a>
               <ul class="toc-list-h2">
+                  <li>
+                    <a href="#2021-09-03" class="toc-h2 toc-link" data-title="2021-09-03">2021-09-03</a>
+                  </li>
                   <li>
                     <a href="#2021-08-06" class="toc-h2 toc-link" data-title="2021-08-06">2021-08-06</a>
                   </li>
@@ -866,6 +872,45 @@ GET /v1/public/token
             <span class="s2">"balance_token"</span><span class="p">:</span> <span class="s2">"OKB"</span><span class="p">,</span>
             <span class="s2">"fullname"</span><span class="p">:</span> <span class="s2">"OKB"</span><span class="p">,</span>
             <span class="s2">"decimals"</span><span class="p">:</span> <span class="mi">18</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</code></pre>
+<p><strong>Parameters</strong></p>
+
+<p>None</p>
+<h2 id='token-config'>Token Config</h2>
+<p><strong>Limit: 10 requests per 1 second</strong></p>
+
+<p><code>
+GET /v1/client/token
+</code></p>
+
+<p>Get the configuration (collateral ratio, margin ratio factor etc) of the token.</p>
+
+<blockquote>
+<p><strong>Response</strong></p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"row"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"BTC"</span><span class="p">,</span>
+            <span class="s2">"collateral_ratio"</span><span class="p">:</span> <span class="mf">0.85</span><span class="p">,</span>
+            <span class="s2">"margin_factor"</span><span class="p">:</span> <span class="mf">2.3</span><span class="nx">e</span><span class="o">-</span><span class="mi">8</span><span class="p">,</span>
+            <span class="s2">"collateral"</span><span class="p">:</span> <span class="kc">true</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"ETH"</span><span class="p">,</span>
+            <span class="s2">"collateral_ratio"</span><span class="p">:</span> <span class="mf">0.85</span><span class="p">,</span>
+            <span class="s2">"margin_factor"</span><span class="p">:</span> <span class="mf">2.5</span><span class="nx">e</span><span class="o">-</span><span class="mi">8</span><span class="p">,</span>
+            <span class="s2">"collateral"</span><span class="p">:</span> <span class="kc">true</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"ASD"</span><span class="p">,</span>
+            <span class="s2">"collateral_ratio"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s2">"margin_factor"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"collateral"</span><span class="p">:</span> <span class="kc">false</span>
         <span class="p">}</span>
     <span class="p">]</span>
 <span class="p">}</span>
@@ -3284,6 +3329,10 @@ Please reply a &quot;PONG&quot; event within 30 seconds after receiving the serv
 }
 </code></pre><h1 id='release-note'>Release Note</h1>
 <p>All the API changes would be listed here.</p>
+<h2 id='2021-09-03'>2021-09-03</h2>
+<ul>
+<li>Add API <a href="#token-config">Token_Config</a></li>
+</ul>
 <h2 id='2021-08-06'>2021-08-06</h2>
 <ul>
 <li><p>Remove <code>Transactions</code> from <a href="#get-orders">Get_Order</a>.</p></li>
