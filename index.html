@@ -512,8 +512,8 @@ side:BUY
 <p>Steps to normalize request content:</p>
 
 <ol>
-<li>concat <strong>query string</strong> and <strong>body parameters</strong> with alphabet order in <a href="https://en.wikipedia.org/wiki/Query_string">query string format</a>.
-use <strong>query string</strong> as the parameters for GET methods and use <strong>body parameters</strong> for POST/DELETE methods. </li>
+<li>use <strong>query string</strong> as the parameters for <strong>GET</strong> methods and <strong>body parameters</strong> for <strong>POST</strong> and <strong>DELETE</strong> methods.</li>
+<li>concat <strong>query string</strong> and <strong>body parameters</strong> with alphabet order in <a href="https://en.wikipedia.org/wiki/Query_string">query string format</a>.</li>
 <li>concat <code>timestamp</code> with above result, using <code>|</code> as seperator.</li>
 </ol>
 
@@ -555,10 +555,10 @@ The api key/secret can be revoke manaually by clients&#39; request. if the key h
 <p><strong>Request IP checker:</strong><br>
 The api key/secret can be tie to specific ips (default is empty). if the request is not come from allowed ip addresses, the request would be reject.</p>
 
-<p><strong>Request Timestamp checker:</strong>
+<p><strong>Request Timestamp checker:</strong><br>
 The request would be considered expired and get rejected if the timestamp in <code>x-api-timestamp</code> header have 300+ seconds difference from the API server time.</p>
 
-<p><strong>HMAC Parameter Signature:</strong>
+<p><strong>HMAC Parameter Signature:</strong><br>
 The request must have a <code>x-api-signature</code> header that is generate from request parameters and signed with your secret key.</p>
 <h1 id='error-codes'>Error Codes</h1>
 <p>Errors consist of three parts: an error code and a message. Codes are universal, but messages can vary. Here is the error JSON payload:</p>
