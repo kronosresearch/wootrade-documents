@@ -249,6 +249,12 @@
                     <a href="#available-token-public" class="toc-h2 toc-link" data-title="Available Token (Public)">Available Token (Public)</a>
                   </li>
                   <li>
+                    <a href="#margin-interest-rate-public" class="toc-h2 toc-link" data-title="Margin Interest Rate (Public)">Margin Interest Rate (Public)</a>
+                  </li>
+                  <li>
+                    <a href="#margin-interest-rate-of-token-public" class="toc-h2 toc-link" data-title="Margin Interest Rate of Token (Public)">Margin Interest Rate of Token (Public)</a>
+                  </li>
+                  <li>
                     <a href="#token-config" class="toc-h2 toc-link" data-title="Token Config">Token Config</a>
                   </li>
                   <li>
@@ -367,6 +373,9 @@
             <a href="#release-note" class="toc-h1 toc-link" data-title="Release Note">Release Note</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#2021-09-27" class="toc-h2 toc-link" data-title="2021-09-27">2021-09-27</a>
+                  </li>
+                  <li>
                     <a href="#2021-09-03" class="toc-h2 toc-link" data-title="2021-09-03">2021-09-03</a>
                   </li>
                   <li>
@@ -465,7 +474,7 @@ Assume following infomation:</p>
 <p>Hash you request parameters with <code>api_secret</code>, the hashing logic is described as following: </p>
 
 <blockquote>
-<p><strong>If the reqest looks like:</strong></p>
+<p><strong>If the request looks like:</strong></p>
 </blockquote>
 <pre class="highlight sh tab-shell"><code>POST /v1/order
 
@@ -849,6 +858,93 @@ GET /v1/public/token
 <p><strong>Parameters</strong></p>
 
 <p>None</p>
+<h2 id='margin-interest-rate-public'>Margin Interest Rate (Public)</h2>
+<p><code>
+GET /v1/token_interest
+</code></p>
+
+<p>Get the margin interest rate of each token.</p>
+
+<blockquote>
+<p><strong>Response</strong>
+<code>js
+{
+    &quot;success&quot;: true,
+    &quot;rows&quot;: [
+        {
+            &quot;token&quot;: &quot;MATIC&quot;,
+            &quot;current_hourly_base_rate&quot;: &quot;0.0001%&quot;,
+            &quot;est_hourly_base_rate&quot;:&quot;0.0001%&quot;,
+            &quot;current_annual_base_rate&quot;:&quot;0.876%&quot;,
+            &quot;est_annual_base_rate&quot;:&quot;0.876%&quot;,
+            &quot;est_time&quot;:&quot;1632394800.000&quot;          // Unix epoch time in seconds
+        },
+        {
+            &quot;token&quot;: &quot;USDT&quot;,
+            &quot;current_hourly_base_rate&quot;: &quot;0.0008%&quot;,
+            &quot;est_hourly_base_rate&quot;:&quot;0.0008%&quot;,
+            &quot;current_annual_base_rate&quot;:&quot;7.008%&quot;,
+            &quot;est_annual_base_rate&quot;:&quot;7.008%&quot;,
+            &quot;est_time&quot;:&quot;1632394800.000&quot;          // Unix epoch time in seconds
+        },
+        {
+            &quot;token&quot;: &quot;WOO&quot;,
+            &quot;current_hourly_base_rate&quot;: &quot;0.001%&quot;,
+            &quot;est_hourly_base_rate&quot;:&quot;0.001%&quot;,
+            &quot;current_annual_base_rate&quot;:&quot;8.76%&quot;,
+            &quot;est_annual_base_rate&quot;:&quot;8.76%&quot;,
+            &quot;est_time&quot;:&quot;1632394800.000&quot;          // Unix epoch time in seconds
+        },
+        // ...
+    ]
+}
+</code></p>
+</blockquote>
+
+<p><strong>Parameters</strong></p>
+
+<p>None</p>
+<h2 id='margin-interest-rate-of-token-public'>Margin Interest Rate of Token (Public)</h2>
+<p><code>
+GET /v1/token_interest/:token
+</code></p>
+
+<p>Get the margin interest rate of the specific token.</p>
+
+<blockquote>
+<p><strong>Response</strong>
+<code>js
+{
+    &quot;success&quot;: true,
+    &quot;info&quot;: {
+        &quot;token&quot;:&quot;BTC&quot;,
+        &quot;current_hourly_base_rate&quot;:&quot;0.0001%&quot;,
+        &quot;est_hourly_base_rate&quot;:&quot;0.0001%&quot;,
+        &quot;current_annual_base_rate&quot;:&quot;0.876%&quot;,
+        &quot;est_annual_base_rate&quot;:&quot;0.876%&quot;,
+        &quot;est_time&quot;:&quot;1632448800.000&quot;         // Unix epoch time in seconds
+    }
+}
+</code></p>
+</blockquote>
+
+<p><strong>Parameters</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>token</td>
+<td>string</td>
+<td>Y</td>
+<td>should be upper case</td>
+</tr>
+</tbody></table>
 <h2 id='token-config'>Token Config</h2>
 <p><strong>Limit: 10 requests per 1 second</strong></p>
 
@@ -2796,7 +2892,7 @@ POST /v1/interest/repay
 }
 </code></pre><h2 id='auth'>auth</h2>
 <ul>
-<li>refer to <a href="#authentication">Authenticaton</a> for more details about how to sign the request with <code>api_key</code> and <code>api_secret</code>.</li>
+<li>refer to <a href="#authentication">Authenticaton</a> for more details about how to sign the request with <code>api_key</code> and <code>api_secret</code>. <strong>query string</strong> and <strong>body parameters</strong> are both blank.</li>
 </ul>
 
 <p><strong>Parameters</strong></p>
@@ -3023,9 +3119,13 @@ POST /v1/interest/repay
 }
 </code></pre><h1 id='release-note'>Release Note</h1>
 <p>All the API changes would be listed here.</p>
+<h2 id='2021-09-27'>2021-09-27</h2>
+<ul>
+<li>Add API to query the margin interest rates.</li>
+</ul>
 <h2 id='2021-09-03'>2021-09-03</h2>
 <ul>
-<li>Add API <a href="#token-config">Token_Config</a></li>
+<li>Add API <a href="#token-config">Token_Config</a>.</li>
 </ul>
 <h2 id='2021-08-06'>2021-08-06</h2>
 <ul>
