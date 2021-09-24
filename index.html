@@ -249,7 +249,7 @@
                     <a href="#available-token-public" class="toc-h2 toc-link" data-title="Available Token (Public)">Available Token (Public)</a>
                   </li>
                   <li>
-                    <a href="#margin-interest-rate-public" class="toc-h2 toc-link" data-title="Margin Interest Rate (Public)">Margin Interest Rate (Public)</a>
+                    <a href="#margin-interest-rates-public" class="toc-h2 toc-link" data-title="Margin Interest Rates (Public)">Margin Interest Rates (Public)</a>
                   </li>
                   <li>
                     <a href="#margin-interest-rate-of-token-public" class="toc-h2 toc-link" data-title="Margin Interest Rate of Token (Public)">Margin Interest Rate of Token (Public)</a>
@@ -858,7 +858,7 @@ GET /v1/public/token
 <p><strong>Parameters</strong></p>
 
 <p>None</p>
-<h2 id='margin-interest-rate-public'>Margin Interest Rate (Public)</h2>
+<h2 id='margin-interest-rates-public'>Margin Interest Rates (Public)</h2>
 <p><code>
 GET /v1/token_interest
 </code></p>
@@ -866,41 +866,39 @@ GET /v1/token_interest
 <p>Get the margin interest rate of each token.</p>
 
 <blockquote>
-<p><strong>Response</strong>
-<code>js
-{
-    &quot;success&quot;: true,
-    &quot;rows&quot;: [
-        {
-            &quot;token&quot;: &quot;MATIC&quot;,
-            &quot;current_hourly_base_rate&quot;: &quot;0.0001%&quot;,
-            &quot;est_hourly_base_rate&quot;:&quot;0.0001%&quot;,
-            &quot;current_annual_base_rate&quot;:&quot;0.876%&quot;,
-            &quot;est_annual_base_rate&quot;:&quot;0.876%&quot;,
-            &quot;est_time&quot;:&quot;1632394800.000&quot;          // Unix epoch time in seconds
-        },
-        {
-            &quot;token&quot;: &quot;USDT&quot;,
-            &quot;current_hourly_base_rate&quot;: &quot;0.0008%&quot;,
-            &quot;est_hourly_base_rate&quot;:&quot;0.0008%&quot;,
-            &quot;current_annual_base_rate&quot;:&quot;7.008%&quot;,
-            &quot;est_annual_base_rate&quot;:&quot;7.008%&quot;,
-            &quot;est_time&quot;:&quot;1632394800.000&quot;          // Unix epoch time in seconds
-        },
-        {
-            &quot;token&quot;: &quot;WOO&quot;,
-            &quot;current_hourly_base_rate&quot;: &quot;0.001%&quot;,
-            &quot;est_hourly_base_rate&quot;:&quot;0.001%&quot;,
-            &quot;current_annual_base_rate&quot;:&quot;8.76%&quot;,
-            &quot;est_annual_base_rate&quot;:&quot;8.76%&quot;,
-            &quot;est_time&quot;:&quot;1632394800.000&quot;          // Unix epoch time in seconds
-        },
-        // ...
-    ]
-}
-</code></p>
+<p><strong>Response</strong></p>
 </blockquote>
-
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"rows"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"MATIC"</span><span class="p">,</span>
+            <span class="s2">"current_hourly_base_rate"</span><span class="p">:</span> <span class="s2">"0.0001%"</span><span class="p">,</span>
+            <span class="s2">"est_hourly_base_rate"</span><span class="p">:</span><span class="s2">"0.0001%"</span><span class="p">,</span>
+            <span class="s2">"current_annual_base_rate"</span><span class="p">:</span><span class="s2">"0.876%"</span><span class="p">,</span>
+            <span class="s2">"est_annual_base_rate"</span><span class="p">:</span><span class="s2">"0.876%"</span><span class="p">,</span>
+            <span class="s2">"est_time"</span><span class="p">:</span><span class="s2">"1632394800.000"</span>          <span class="c1">// Unix epoch time in seconds</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"USDT"</span><span class="p">,</span>
+            <span class="s2">"current_hourly_base_rate"</span><span class="p">:</span> <span class="s2">"0.0008%"</span><span class="p">,</span>
+            <span class="s2">"est_hourly_base_rate"</span><span class="p">:</span><span class="s2">"0.0008%"</span><span class="p">,</span>
+            <span class="s2">"current_annual_base_rate"</span><span class="p">:</span><span class="s2">"7.008%"</span><span class="p">,</span>
+            <span class="s2">"est_annual_base_rate"</span><span class="p">:</span><span class="s2">"7.008%"</span><span class="p">,</span>
+            <span class="s2">"est_time"</span><span class="p">:</span><span class="s2">"1632394800.000"</span>          <span class="c1">// Unix epoch time in seconds</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"WOO"</span><span class="p">,</span>
+            <span class="s2">"current_hourly_base_rate"</span><span class="p">:</span> <span class="s2">"0.001%"</span><span class="p">,</span>
+            <span class="s2">"est_hourly_base_rate"</span><span class="p">:</span><span class="s2">"0.001%"</span><span class="p">,</span>
+            <span class="s2">"current_annual_base_rate"</span><span class="p">:</span><span class="s2">"8.76%"</span><span class="p">,</span>
+            <span class="s2">"est_annual_base_rate"</span><span class="p">:</span><span class="s2">"8.76%"</span><span class="p">,</span>
+            <span class="s2">"est_time"</span><span class="p">:</span><span class="s2">"1632394800.000"</span>          <span class="c1">// Unix epoch time in seconds</span>
+        <span class="p">},</span>
+        <span class="c1">// ...</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</code></pre>
 <p><strong>Parameters</strong></p>
 
 <p>None</p>
@@ -912,22 +910,20 @@ GET /v1/token_interest/:token
 <p>Get the margin interest rate of the specific token.</p>
 
 <blockquote>
-<p><strong>Response</strong>
-<code>js
-{
-    &quot;success&quot;: true,
-    &quot;info&quot;: {
-        &quot;token&quot;:&quot;BTC&quot;,
-        &quot;current_hourly_base_rate&quot;:&quot;0.0001%&quot;,
-        &quot;est_hourly_base_rate&quot;:&quot;0.0001%&quot;,
-        &quot;current_annual_base_rate&quot;:&quot;0.876%&quot;,
-        &quot;est_annual_base_rate&quot;:&quot;0.876%&quot;,
-        &quot;est_time&quot;:&quot;1632448800.000&quot;         // Unix epoch time in seconds
-    }
-}
-</code></p>
+<p><strong>Response</strong></p>
 </blockquote>
-
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"info"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"token"</span><span class="p">:</span><span class="s2">"BTC"</span><span class="p">,</span>
+        <span class="s2">"current_hourly_base_rate"</span><span class="p">:</span><span class="s2">"0.0001%"</span><span class="p">,</span>
+        <span class="s2">"est_hourly_base_rate"</span><span class="p">:</span><span class="s2">"0.0001%"</span><span class="p">,</span>
+        <span class="s2">"current_annual_base_rate"</span><span class="p">:</span><span class="s2">"0.876%"</span><span class="p">,</span>
+        <span class="s2">"est_annual_base_rate"</span><span class="p">:</span><span class="s2">"0.876%"</span><span class="p">,</span>
+        <span class="s2">"est_time"</span><span class="p">:</span><span class="s2">"1632448800.000"</span>         <span class="c1">// Unix epoch time in seconds</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
 <p><strong>Parameters</strong></p>
 
 <table><thead>
