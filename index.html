@@ -249,6 +249,9 @@
                     <a href="#available-token-public" class="toc-h2 toc-link" data-title="Available Token (Public)">Available Token (Public)</a>
                   </li>
                   <li>
+                    <a href="#token-network-public" class="toc-h2 toc-link" data-title="Token Network (Public)">Token Network (Public)</a>
+                  </li>
+                  <li>
                     <a href="#token-config" class="toc-h2 toc-link" data-title="Token Config">Token Config</a>
                   </li>
                   <li>
@@ -372,6 +375,9 @@
           <li>
             <a href="#release-note" class="toc-h1 toc-link" data-title="Release Note">Release Note</a>
               <ul class="toc-list-h2">
+                  <li>
+                    <a href="#2021-10-22" class="toc-h2 toc-link" data-title="2021-10-22">2021-10-22</a>
+                  </li>
                   <li>
                     <a href="#2021-09-27" class="toc-h2 toc-link" data-title="2021-09-27">2021-09-27</a>
                   </li>
@@ -852,6 +858,62 @@ GET /v1/public/token
             <span class="s2">"fullname"</span><span class="p">:</span> <span class="s2">"OKB"</span><span class="p">,</span>
             <span class="s2">"decimals"</span><span class="p">:</span> <span class="mi">18</span>
         <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</code></pre>
+<p><strong>Parameters</strong></p>
+
+<p>None</p>
+<h2 id='token-network-public'>Token Network (Public)</h2>
+<p><code>
+GET /v1/public/token_network
+</code></p>
+
+<p>Get the available networks for each token as well as the deposit/withdrawal information.</p>
+
+<blockquote>
+<p><strong>Response</strong></p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"rows"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">"protocol"</span><span class="p">:</span> <span class="s2">"BTC"</span><span class="p">,</span>
+            <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"BTC"</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Bitcoin"</span><span class="p">,</span>
+            <span class="s2">"minimum_withdrawal"</span><span class="p">:</span> <span class="mf">0.01</span><span class="p">,</span>
+            <span class="s2">"withdrawal_fee"</span><span class="p">:</span> <span class="mf">0.05</span><span class="p">,</span>
+            <span class="s2">"allow_deposit"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s2">"allow_withdraw"</span><span class="p">:</span> <span class="mi">1</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">"protocol"</span><span class="p">:</span> <span class="s2">"ERC20"</span><span class="p">,</span>
+            <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"ETH"</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Ethereum"</span><span class="p">,</span>
+            <span class="s2">"minimum_withdrawal"</span><span class="p">:</span> <span class="mf">0.03</span><span class="p">,</span>
+            <span class="s2">"withdrawal_fee"</span><span class="p">:</span> <span class="mf">0.06</span><span class="p">,</span>
+            <span class="s2">"allow_deposit"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s2">"allow_withdraw"</span><span class="p">:</span> <span class="mi">1</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">"protocol"</span><span class="p">:</span> <span class="s2">"ERC20"</span><span class="p">,</span>
+            <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"WOO"</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Ethereum"</span><span class="p">,</span>
+            <span class="s2">"minimum_withdrawal"</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
+            <span class="s2">"withdrawal_fee"</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+            <span class="s2">"allow_deposit"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s2">"allow_withdraw"</span><span class="p">:</span> <span class="mi">1</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">"protocol"</span><span class="p">:</span> <span class="s2">"BEP20"</span><span class="p">,</span>
+            <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"WOO"</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Binance Smart Chain"</span><span class="p">,</span>
+            <span class="s2">"minimum_withdrawal"</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
+            <span class="s2">"withdrawal_fee"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+            <span class="s2">"allow_deposit"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s2">"allow_withdraw"</span><span class="p">:</span> <span class="mi">1</span>
+        <span class="p">},</span>
+        <span class="c1">// ...</span>
     <span class="p">]</span>
 <span class="p">}</span>
 </code></pre>
@@ -3119,6 +3181,10 @@ POST /v1/interest/repay
 }
 </code></pre><h1 id='release-note'>Release Note</h1>
 <p>All the API changes would be listed here.</p>
+<h2 id='2021-10-22'>2021-10-22</h2>
+<ul>
+<li>Add Public API Token Network to query the token deposit/withdrawal information on each network.</li>
+</ul>
 <h2 id='2021-09-27'>2021-09-27</h2>
 <ul>
 <li>Add API <a href="#margin-interest-rates">Margin_Interest_Rates</a> and <a href="#margin-interest-rate-of-token">Margin_Interest_Rate_of_Token</a> to query the margin interest rates.</li>
