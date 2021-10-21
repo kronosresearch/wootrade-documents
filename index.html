@@ -662,6 +662,8 @@ The request must have a <code>x-api-signature</code> header that is generate fro
 </tr>
 </tbody></table>
 <h1 id='restful-api'>RESTful API</h1><h2 id='exchange-information'>Exchange Information</h2>
+<p><strong>Limit: 10 requests per 1 second per IP address</strong></p>
+
 <p><code>
 GET /v1/public/info/:symbol
 </code></p>
@@ -735,6 +737,8 @@ GET /v1/public/info/:symbol
 </tr>
 </tbody></table>
 <h2 id='available-symbols-public'>Available Symbols (Public)</h2>
+<p><strong>Limit: 10 requests per 1 second per IP address</strong></p>
+
 <p><code>
 GET /v1/public/info
 </code></p>
@@ -768,6 +772,8 @@ GET /v1/public/info
 
 <p>None</p>
 <h2 id='market-trades-public'>Market Trades (Public)</h2>
+<p><strong>Limit: 10 requests per 1 second per IP address</strong></p>
+
 <p><code>
 GET /v1/public/market_trades
 </code></p>
@@ -814,6 +820,8 @@ GET /v1/public/market_trades
 </tr>
 </tbody></table>
 <h2 id='available-token-public'>Available Token (Public)</h2>
+<p><strong>Limit: 10 requests per 1 second per IP address</strong></p>
+
 <p><code>
 GET /v1/public/token
 </code></p>
@@ -865,6 +873,8 @@ GET /v1/public/token
 
 <p>None</p>
 <h2 id='token-network-public'>Token Network (Public)</h2>
+<p><strong>Limit: 10 requests per 1 second per IP address</strong></p>
+
 <p><code>
 GET /v1/public/token_network
 </code></p>
@@ -3183,7 +3193,8 @@ POST /v1/interest/repay
 <p>All the API changes would be listed here.</p>
 <h2 id='2021-10-22'>2021-10-22</h2>
 <ul>
-<li>Add Public API Token Network to query the token deposit/withdrawal information on each network.</li>
+<li><p>Add Public API Token Network to query the token deposit/withdrawal information on each network.</p></li>
+<li><p>Add rate limit on public APIs.</p></li>
 </ul>
 <h2 id='2021-09-27'>2021-09-27</h2>
 <ul>
