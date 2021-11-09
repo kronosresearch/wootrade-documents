@@ -279,6 +279,9 @@
                     <a href="#orderbook-snapshot" class="toc-h2 toc-link" data-title="Orderbook snapshot">Orderbook snapshot</a>
                   </li>
                   <li>
+                    <a href="#kline" class="toc-h2 toc-link" data-title="Kline">Kline</a>
+                  </li>
+                  <li>
                     <a href="#get-trade" class="toc-h2 toc-link" data-title="Get Trade">Get Trade</a>
                   </li>
                   <li>
@@ -375,6 +378,9 @@
           <li>
             <a href="#release-note" class="toc-h1 toc-link" data-title="Release Note">Release Note</a>
               <ul class="toc-list-h2">
+                  <li>
+                    <a href="#2021-11-12" class="toc-h2 toc-link" data-title="2021-11-12">2021-11-12</a>
+                  </li>
                   <li>
                     <a href="#2021-10-22" class="toc-h2 toc-link" data-title="2021-10-22">2021-10-22</a>
                   </li>
@@ -1487,6 +1493,78 @@ GET /v1/orderbook/:symbol
 <td>number</td>
 <td>N (default: 100)</td>
 <td>the levels wish to show on both side.</td>
+</tr>
+</tbody></table>
+<h2 id='kline'>Kline</h2>
+<p><strong>Limit: 10 requests per 1 second</strong></p>
+
+<p><code>
+GET /v1/kline
+</code></p>
+
+<p>The latest klines of the trading pairs.</p>
+
+<blockquote>
+<p><strong>Response</strong></p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"rows"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">"open"</span><span class="p">:</span> <span class="mf">66166.23</span><span class="p">,</span>
+            <span class="s2">"close"</span><span class="p">:</span> <span class="mf">66124.56</span><span class="p">,</span>
+            <span class="s2">"low"</span><span class="p">:</span> <span class="mf">66038.06</span><span class="p">,</span>
+            <span class="s2">"high"</span><span class="p">:</span> <span class="mf">66176.97</span><span class="p">,</span>
+            <span class="s2">"volume"</span><span class="p">:</span> <span class="mf">23.45528526</span><span class="p">,</span>
+            <span class="s2">"amount"</span><span class="p">:</span> <span class="mf">1550436.21725288</span><span class="p">,</span>
+            <span class="s2">"symbol"</span><span class="p">:</span> <span class="s2">"SPOT_BTC_USDT"</span><span class="p">,</span>
+            <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"1m"</span><span class="p">,</span>
+            <span class="s2">"start_timestamp"</span><span class="p">:</span> <span class="mi">1636388220000</span><span class="p">,</span> <span class="c1">// Unix epoch time in milliseconds</span>
+            <span class="s2">"end_timestamp"</span><span class="p">:</span> <span class="mi">1636388280000</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">"open"</span><span class="p">:</span> <span class="mf">66145.13</span><span class="p">,</span>
+            <span class="s2">"close"</span><span class="p">:</span> <span class="mf">66166.24</span><span class="p">,</span>
+            <span class="s2">"low"</span><span class="p">:</span> <span class="mf">66124.62</span><span class="p">,</span>
+            <span class="s2">"high"</span><span class="p">:</span> <span class="mf">66178.60</span><span class="p">,</span>
+            <span class="s2">"volume"</span><span class="p">:</span> <span class="mf">15.50705000</span><span class="p">,</span>
+            <span class="s2">"amount"</span><span class="p">:</span> <span class="mf">1025863.18892610</span><span class="p">,</span>
+            <span class="s2">"symbol"</span><span class="p">:</span> <span class="s2">"SPOT_BTC_USDT"</span><span class="p">,</span>
+            <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"1m"</span><span class="p">,</span>
+            <span class="s2">"start_timestamp"</span><span class="p">:</span> <span class="mi">1636388160000</span><span class="p">,</span>
+            <span class="s2">"end_timestamp"</span><span class="p">:</span> <span class="mi">1636388220000</span>
+        <span class="p">},</span>
+        <span class="c1">// ...skip</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</code></pre>
+<p><strong>Parameters</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>Y</td>
+<td></td>
+</tr>
+<tr>
+<td>type</td>
+<td>enum</td>
+<td>Y</td>
+<td><code>1m</code>/<code>5m</code>/<code>15m</code>/<code>30m</code>/<code>1h</code>/<code>4h</code>/<code>12h</code>/<code>1d</code>/<code>1w</code>/<code>1mon</code></td>
+</tr>
+<tr>
+<td>limit</td>
+<td>number</td>
+<td>N (default: 100)</td>
+<td>Numbers of klines. Maximum of 1000 klines.</td>
 </tr>
 </tbody></table>
 <h2 id='get-trade'>Get Trade</h2>
@@ -3191,6 +3269,10 @@ POST /v1/interest/repay
 }
 </code></pre><h1 id='release-note'>Release Note</h1>
 <p>All the API changes would be listed here.</p>
+<h2 id='2021-11-12'>2021-11-12</h2>
+<ul>
+<li>Add API <a href="#kline">Kline</a> to provide at most 1000 klines.</li>
+</ul>
 <h2 id='2021-10-22'>2021-10-22</h2>
 <ul>
 <li><p>Add Public API Token Network to query the token deposit/withdrawal information on each network.</p></li>
