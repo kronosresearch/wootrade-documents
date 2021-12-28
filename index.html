@@ -391,6 +391,9 @@
                     <a href="#2021-09-27" class="toc-h2 toc-link" data-title="2021-09-27">2021-09-27</a>
                   </li>
                   <li>
+                    <a href="#2021-09-06" class="toc-h2 toc-link" data-title="2021-09-06">2021-09-06</a>
+                  </li>
+                  <li>
                     <a href="#2021-09-03" class="toc-h2 toc-link" data-title="2021-09-03">2021-09-03</a>
                   </li>
                   <li>
@@ -1089,7 +1092,7 @@ will response immediately with an order created message.</p>
 </tr>
 </tbody></table>
 <h2 id='cancel-order'>Cancel Order</h2>
-<p><strong>Limit: 20 requests per 1 second</strong> shared with <a href="#cancel-order-by-client_order_id">cancel_order_by_client_order_id</a></p>
+<p><strong>Limit: 10 requests per 1 second</strong> shared with <a href="#cancel-order-by-client_order_id">cancel_order_by_client_order_id</a></p>
 
 <p><code>
 DELETE /v1/order
@@ -1130,7 +1133,7 @@ note that we immediate response with an order cancel sent message, and will upda
 </tr>
 </tbody></table>
 <h2 id='cancel-order-by-client_order_id'>Cancel Order by client_order_id</h2>
-<p><strong>Limit: 20 requests per 1 second</strong> shared with <a href="#cancel-order">cancel_order</a></p>
+<p><strong>Limit: 10 requests per 1 second</strong> shared with <a href="#cancel-order">cancel_order</a></p>
 
 <p><code>
 DELETE /v1/client/order
@@ -1207,7 +1210,7 @@ DELETE /v1/orders
 </tr>
 </tbody></table>
 <h2 id='get-order'>Get Order</h2>
-<p><strong>Limit: 20 requests per 1 second</strong></p>
+<p><strong>Limit: 10 requests per 1 second</strong> shared with <a href="#get-order-by-client-order-id">get_order_by_client_order_id</a></p>
 
 <p><code>
 GET /v1/order/:oid
@@ -1271,7 +1274,7 @@ GET /v1/order/:oid
 </tr>
 </tbody></table>
 <h2 id='get-order-by-client_order_id'>Get Order by client_order_id</h2>
-<p><strong>Limit: 20 requests per 1 seconds</strong></p>
+<p><strong>Limit: 10 requests per 1 seconds</strong> shared with <a href="#get-order">get_order</a></p>
 
 <p><code>
 GET /v1/client/order/:client_order_id
@@ -1573,7 +1576,7 @@ GET /v1/kline
 </tr>
 </tbody></table>
 <h2 id='get-trade'>Get Trade</h2>
-<p><strong>Limit: 20 requests per 1 second</strong></p>
+<p><strong>Limit: 10 requests per 1 second</strong></p>
 
 <p><code>
 GET /v1/client/trade/:tid
@@ -1616,7 +1619,7 @@ GET /v1/client/trade/:tid
 </tr>
 </tbody></table>
 <h2 id='get-trades'>Get Trades</h2>
-<p><strong>Limit: 20 requests per 1 second</strong></p>
+<p><strong>Limit: 10 requests per 1 second</strong></p>
 
 <p><code>
 GET /v1/order/:oid/trades
@@ -3291,6 +3294,12 @@ POST /v1/interest/repay
 <h2 id='2021-09-27'>2021-09-27</h2>
 <ul>
 <li>Add API <a href="#margin-interest-rates">Margin_Interest_Rates</a> and <a href="#margin-interest-rate-of-token">Margin_Interest_Rate_of_Token</a> to query the margin interest rates.</li>
+</ul>
+<h2 id='2021-09-06'>2021-09-06</h2>
+<ul>
+<li><p>Adjust rate limit of API <a href="#get-order">Get_Order</a> and <a href="#get-order-by-client_order_id">Get_Order_by_client_order_id</a> to 10 per second in total.</p></li>
+<li><p>Adjust rate limit of API <a href="#cancel-order">Cancel_Order</a> and <a href="#cancel-order-by-client_order_id">Cancel_Order_by_client_order_id</a> to 10 per second in total.</p></li>
+<li><p>Adjust rate limit of API <a href="#get-trade">Get_Trade</a>, <a href="#get-trades">Get_Trades</a> to 10 per second for each.</p></li>
 </ul>
 <h2 id='2021-09-03'>2021-09-03</h2>
 <ul>
