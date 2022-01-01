@@ -1006,11 +1006,11 @@ will response immediately with an order created message.</p>
      It doesn&#39;t work for <code>MARKET</code>/<code>IOC</code>/<code>FOK</code> orders since orders with these types would be executed and cancelled immediately and not be shown on orderbook.
      For <code>LIMIT</code>/<code>POST_ONLY</code> order, as long as it&#39;s not complete, <code>visible_quantity</code> is the maximum quantity that shown on orderbook.</p>
 
-<p><code>order_amount</code> behavior: for <code>MAREKET</code>/<code>BID</code>/<code>ASK</code> order, order can be placed by <code>order_amount</code> instead of <code>order_quantity</code>. It&#39;s the size of the order in terms of the quote currency instead of the base currency. The order would be rejected if  both <code>order_amount</code> and <code>order_quantity</code> are provided. The precision of the number should be within 8 digits.</p>
+<p><code>order_amount</code> behavior: for <code>MARKET</code>/<code>BID</code>/<code>ASK</code> order, order can be placed by <code>order_amount</code> instead of <code>order_quantity</code>. It&#39;s the size of the order in terms of the quote currency instead of the base currency. The order would be rejected if  both <code>order_amount</code> and <code>order_quantity</code> are provided. The precision of the number should be within 8 digits.</p>
 
 <p><code>client_order_id</code> behavior: customized order_id, a unique id among open orders. Orders with the same <code>client_order_id</code> can be accepted only when the previous one if completed, otherwise the order will be rejected.</p>
 
-<p>For <code>MAREKET</code>/<code>BID</code>/<code>ASK</code> order, if margin trading is disabled, <code>order_amount</code> is not supported when placing SELL order while <code>order_quantity</code> is not supported when placing BUY order.</p>
+<p>For <code>MARKET</code>/<code>BID</code>/<code>ASK</code> order, if margin trading is disabled, <code>order_amount</code> is not supported when placing SELL order while <code>order_quantity</code> is not supported when placing BUY order.</p>
 
 <blockquote>
 <p><strong>Response</strong></p>
