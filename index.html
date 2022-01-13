@@ -379,6 +379,9 @@
             <a href="#release-note" class="toc-h1 toc-link" data-title="Release Note">Release Note</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#2022-01-17" class="toc-h2 toc-link" data-title="2022-01-17">2022-01-17</a>
+                  </li>
+                  <li>
                     <a href="#2021-12-24" class="toc-h2 toc-link" data-title="2021-12-24">2021-12-24</a>
                   </li>
                   <li>
@@ -961,19 +964,28 @@ GET /v1/client/token
             <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"BTC"</span><span class="p">,</span>
             <span class="s2">"collateral_ratio"</span><span class="p">:</span> <span class="mf">0.85</span><span class="p">,</span>
             <span class="s2">"margin_factor"</span><span class="p">:</span> <span class="mf">2.3</span><span class="nx">e</span><span class="o">-</span><span class="mi">8</span><span class="p">,</span>
-            <span class="s2">"collateral"</span><span class="p">:</span> <span class="kc">true</span>
+            <span class="s2">"collateral"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>        <span class="c1">// if the token is now used as collateral</span>
+            <span class="s2">"can_collateral"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>    <span class="c1">// if the token can be used as collateral</span>
+            <span class="s2">"can_short"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>         <span class="c1">// if the token supports short selling</span>
+            <span class="s2">"stable"</span><span class="p">:</span> <span class="kc">false</span>            <span class="c1">// if the token is stable coin or not</span>
         <span class="p">},</span>
         <span class="p">{</span>
             <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"ETH"</span><span class="p">,</span>
             <span class="s2">"collateral_ratio"</span><span class="p">:</span> <span class="mf">0.85</span><span class="p">,</span>
             <span class="s2">"margin_factor"</span><span class="p">:</span> <span class="mf">2.5</span><span class="nx">e</span><span class="o">-</span><span class="mi">8</span><span class="p">,</span>
-            <span class="s2">"collateral"</span><span class="p">:</span> <span class="kc">true</span>
+            <span class="s2">"collateral"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+            <span class="s2">"can_collateral"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+            <span class="s2">"can_short"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+            <span class="s2">"stable"</span><span class="p">:</span> <span class="kc">false</span>
         <span class="p">},</span>
         <span class="p">{</span>
             <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"ASD"</span><span class="p">,</span>
             <span class="s2">"collateral_ratio"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
             <span class="s2">"margin_factor"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
             <span class="s2">"collateral"</span><span class="p">:</span> <span class="kc">false</span>
+            <span class="s2">"can_collateral"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="s2">"can_short"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="s2">"stable"</span><span class="p">:</span> <span class="kc">false</span>
         <span class="p">}</span>
     <span class="p">]</span>
 <span class="p">}</span>
@@ -3277,6 +3289,10 @@ POST /v1/interest/repay
 }
 </code></pre><h1 id='release-note'>Release Note</h1>
 <p>All the API changes would be listed here.</p>
+<h2 id='2022-01-17'>2022-01-17</h2>
+<ul>
+<li>Add <code>can_collateral</code>, <code>can_short</code> and <code>stable</code> in <a href="#token-config">Token_Config</a></li>
+</ul>
 <h2 id='2021-12-24'>2021-12-24</h2>
 <ul>
 <li><p>Add API <a href="#kline">Kline</a> to query yearly Kline.</p></li>
