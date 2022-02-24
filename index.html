@@ -326,6 +326,24 @@
                   <li>
                     <a href="#repay-interest" class="toc-h2 toc-link" data-title="Repay Interest">Repay Interest</a>
                   </li>
+                  <li>
+                    <a href="#get-subaccounts" class="toc-h2 toc-link" data-title="Get Subaccounts">Get Subaccounts</a>
+                  </li>
+                  <li>
+                    <a href="#get-assets-of-subaccounts" class="toc-h2 toc-link" data-title="Get Assets of Subaccounts">Get Assets of Subaccounts</a>
+                  </li>
+                  <li>
+                    <a href="#get-asset-detail-of-a-subaccount" class="toc-h2 toc-link" data-title="Get Asset Detail of a Subaccount">Get Asset Detail of a Subaccount</a>
+                  </li>
+                  <li>
+                    <a href="#get-ip-restriction" class="toc-h2 toc-link" data-title="Get IP Restriction">Get IP Restriction</a>
+                  </li>
+                  <li>
+                    <a href="#get-transfer-history" class="toc-h2 toc-link" data-title="Get Transfer History">Get Transfer History</a>
+                  </li>
+                  <li>
+                    <a href="#transfer-assets" class="toc-h2 toc-link" data-title="Transfer Assets">Transfer Assets</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -2371,6 +2389,340 @@ POST /v1/interest/repay
 <td>number</td>
 <td>Y</td>
 <td>repayment amount</td>
+</tr>
+</tbody></table>
+<h2 id='get-subaccounts'>Get Subaccounts</h2>
+<p><strong>Limit: 10 requests per 60 seconds</strong></p>
+
+<p><code>
+GET /v1/sub_account/all
+</code></p>
+
+<p>Get subaccount list.</p>
+
+<blockquote>
+<p><strong>Response</strong></p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"rows"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">"application_id"</span><span class="p">:</span> <span class="s2">"6b43de5c-0955-4887-9862-d84e4689f9fe"</span><span class="p">,</span>
+            <span class="s2">"account"</span><span class="p">:</span> <span class="s2">"2"</span><span class="p">,</span>
+            <span class="s2">"created_time"</span><span class="p">:</span> <span class="s2">"1606897264.994"</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">"application_id"</span><span class="p">:</span> <span class="s2">"5b0df321-3aaf-471f-a386-b922a941d17d"</span><span class="p">,</span>
+            <span class="s2">"account"</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
+            <span class="s2">"created_time"</span><span class="p">:</span> <span class="s2">"1606897264.994"</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">"application_id"</span><span class="p">:</span> <span class="s2">"de25e672-f3e8-4ddc-b264-75d243cb2b9c"</span><span class="p">,</span>
+            <span class="s2">"account"</span><span class="p">:</span> <span class="s2">"test"</span><span class="p">,</span>
+            <span class="s2">"created_time"</span><span class="p">:</span> <span class="s2">"1606897264.994"</span>
+        <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span>
+<span class="p">}</span>
+</code></pre>
+<p><strong>Permission</strong></p>
+
+<p>Main account only.</p>
+
+<p><strong>Parameters</strong></p>
+
+<p>None</p>
+<h2 id='get-assets-of-subaccounts'>Get Assets of Subaccounts</h2>
+<p><strong>Limit: 10 requests per 60 seconds</strong></p>
+
+<p><code>
+GET /v1/sub_account/assets 
+</code></p>
+
+<p>Get assets summary of all subaccounts (including main account).</p>
+
+<blockquote>
+<p><strong>Response</strong></p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"rows"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">"application_id"</span><span class="p">:</span> <span class="s2">"0b297f58-9d3e-4c91-95cd-863329631b79"</span><span class="p">,</span>
+            <span class="s2">"account"</span><span class="p">:</span> <span class="s2">"Main"</span><span class="p">,</span>
+            <span class="s2">"usdt_balance"</span><span class="p">:</span> <span class="mf">0.0</span>
+        <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span>
+<span class="p">}</span>
+</code></pre>
+<p><strong>Permission</strong></p>
+
+<p>Main account only.</p>
+
+<p><strong>Parameters</strong></p>
+
+<p>None</p>
+<h2 id='get-asset-detail-of-a-subaccount'>Get Asset Detail of a Subaccount</h2>
+<p><strong>Limit: 10 requests per 60 seconds</strong></p>
+
+<p><code>
+GET /v1/sub_account/asset_detail
+</code></p>
+
+<p>Get assets detail of a subaccounts.</p>
+
+<blockquote>
+<p><strong>Response</strong></p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"balances"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"BTC"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"holding"</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+            <span class="s2">"frozen"</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+            <span class="s2">"interest"</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+            <span class="s2">"staked"</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+            <span class="s2">"unbonding"</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+            <span class="s2">"vault"</span><span class="p">:</span> <span class="mf">0.0</span>
+        <span class="p">},</span>
+        <span class="s2">"WOO"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"holding"</span><span class="p">:</span> <span class="mf">4172706.29647137</span><span class="p">,</span>
+            <span class="s2">"frozen"</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+            <span class="s2">"interest"</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+            <span class="s2">"staked"</span><span class="p">:</span> <span class="mi">51370692</span><span class="p">,</span>
+            <span class="s2">"unbonding"</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+            <span class="s2">"vault"</span><span class="p">:</span> <span class="mf">0.0</span>
+        <span class="p">},</span>
+        <span class="s2">"BNB"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"holding"</span><span class="p">:</span> <span class="mf">0.00070154</span><span class="p">,</span>
+            <span class="s2">"frozen"</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+            <span class="s2">"interest"</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+            <span class="s2">"staked"</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+            <span class="s2">"unbonding"</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+            <span class="s2">"vault"</span><span class="p">:</span> <span class="mf">0.0</span>
+        <span class="p">},</span>
+        <span class="s2">"ETH"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"holding"</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+            <span class="s2">"frozen"</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+            <span class="s2">"interest"</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+            <span class="s2">"staked"</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+            <span class="s2">"unbonding"</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+            <span class="s2">"vault"</span><span class="p">:</span> <span class="mf">0.0</span>
+        <span class="p">},</span>
+        <span class="s2">"USDT"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"holding"</span><span class="p">:</span> <span class="mf">14066.5839369</span><span class="p">,</span>
+            <span class="s2">"frozen"</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+            <span class="s2">"interest"</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+            <span class="s2">"staked"</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+            <span class="s2">"unbonding"</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+            <span class="s2">"vault"</span><span class="p">:</span> <span class="mf">0.0</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="s2">"account"</span><span class="p">:</span> <span class="s2">"test"</span><span class="p">,</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"application_id"</span><span class="p">:</span> <span class="s2">"e074dd6b-4c03-49be-937f-856472f7a6cb"</span>
+<span class="p">}</span>
+</code></pre>
+<p><strong>Permission</strong></p>
+
+<p>Main or Subaccounts.</p>
+
+<p><strong>Parameters</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>application_id</td>
+<td>string</td>
+<td>Y</td>
+<td>application id for an account, user can find it from WOO X console.</td>
+</tr>
+</tbody></table>
+<h2 id='get-ip-restriction'>Get IP Restriction</h2>
+<p><strong>Limit: 10 requests per 10 seconds</strong></p>
+
+<p><code>
+GET /v1/sub_account/ip_restriction
+</code></p>
+
+<p>Get allowed IP list of a subaccount&#39;s API Key.</p>
+
+<blockquote>
+<p><strong>Response</strong></p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"rows"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">"ip_list"</span><span class="p">:</span> <span class="s2">"60.248.33.61,1.2.3.4,100.100.1.1,100.100.1.2,100.100.1.3,100.100.1.4,210.64.18.77"</span><span class="p">,</span>
+            <span class="s2">"api_key"</span><span class="p">:</span> <span class="s2">"plXHR+GwX0u8UG/GwMjLsQ=="</span><span class="p">,</span>
+            <span class="s2">"update_time"</span><span class="p">:</span> <span class="s2">"1644553230.916"</span><span class="p">,</span>
+            <span class="s2">"restrict"</span><span class="p">:</span> <span class="kc">true</span>
+        <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="s2">"meta"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"total"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">"records_per_page"</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span>
+        <span class="s2">"current_page"</span><span class="p">:</span> <span class="mi">1</span>
+    <span class="p">},</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span>
+<span class="p">}</span>
+</code></pre>
+<p><strong>Permission</strong></p>
+
+<p>Main or Subaccounts.</p>
+
+<p><strong>Parameters</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>application_id</td>
+<td>string</td>
+<td>N</td>
+<td>from WOO X console</td>
+</tr>
+<tr>
+<td>api_key</td>
+<td>string</td>
+<td>N</td>
+<td>created from WOO X console</td>
+</tr>
+</tbody></table>
+<h2 id='get-transfer-history'>Get Transfer History</h2>
+<p><strong>Limit: 20 requests per 60 seconds</strong></p>
+
+<p><code>
+GET /v1/asset/main_sub_transfer_history
+</code></p>
+
+<p>Get transfer history between main account and subaccounts.  </p>
+
+<blockquote>
+<p><strong>Response</strong></p>
+</blockquote>
+<pre class="highlight javascript"><code>
+<span class="p">{</span>
+    <span class="s2">"success"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"data"</span><span class="p">:{</span>
+        <span class="s2">"rows"</span><span class="p">:[</span>
+            <span class="p">{</span>
+                <span class="s2">"id"</span><span class="p">:</span><span class="mi">225</span><span class="p">,</span>
+                <span class="s2">"token"</span><span class="p">:</span><span class="s2">"USDT"</span><span class="p">,</span>
+                <span class="s2">"amount"</span><span class="p">:</span><span class="mi">1000000</span><span class="p">,</span>
+                <span class="s2">"status"</span><span class="p">:</span><span class="s2">"COMPLETED"</span><span class="p">,</span>
+                <span class="s2">"from_application_id"</span><span class="p">:</span><span class="s2">"046b5c5c-5b44-4d27-9593-ddc32c0a08ae"</span><span class="p">,</span>
+                <span class="s2">"to_application_id"</span><span class="p">:</span><span class="s2">"082ae5ae-e26a-4fb1-be5b-03e5b4867663"</span><span class="p">,</span>
+                <span class="s2">"from_user"</span><span class="p">:</span><span class="s2">"Main"</span><span class="p">,</span>
+                <span class="s2">"to_user"</span><span class="p">:</span><span class="s2">"av"</span><span class="p">,</span>
+                <span class="s2">"created_time"</span><span class="p">:</span><span class="s2">"1642660941.534"</span><span class="p">,</span>
+                <span class="s2">"updated_time"</span><span class="p">:</span><span class="s2">"1642660941.950"</span>
+            <span class="p">},</span>
+            <span class="c1">// ....skip (total 25 items in one page)</span>
+        <span class="p">],</span>
+        <span class="s2">"meta"</span><span class="p">:{</span>
+            <span class="s2">"total"</span><span class="p">:</span><span class="mi">7</span><span class="p">,</span>
+            <span class="s2">"records_per_page"</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span>
+            <span class="s2">"current_page"</span><span class="p">:</span><span class="mi">1</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+<p><strong>Permission</strong></p>
+
+<p>Main or Subaccounts.</p>
+
+<p><strong>Parameters</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>start_t</td>
+<td>timestamp</td>
+<td>N</td>
+<td>start time range that wish to query, noted the time stamp is 13-digits timestamp.</td>
+</tr>
+<tr>
+<td>end_t</td>
+<td>timestamp</td>
+<td>N</td>
+<td>end time range that wish to query, noted the time stamp is 13-digits timestamp.</td>
+</tr>
+<tr>
+<td>page</td>
+<td>number</td>
+<td>N (default: 1)</td>
+<td>the page wish to query.</td>
+</tr>
+</tbody></table>
+<h2 id='transfer-assets'>Transfer Assets</h2>
+<p><strong>Limit: 20 requests per 60 seconds</strong>
+<code>
+POST /v1/asset/main_sub_transfer
+</code></p>
+
+<p>Transfer asset between main account and subaccounts.  </p>
+
+<blockquote>
+<p><strong>Response</strong></p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="mi">200</span>
+<span class="p">}</span>
+</code></pre>
+<p><strong>Permission</strong></p>
+
+<p>Main or Subaccounts.</p>
+
+<p><strong>Parameters</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>token</td>
+<td>string</td>
+<td>Y</td>
+<td>token name you want to transfer (can get it by /public/token)</td>
+</tr>
+<tr>
+<td>amount</td>
+<td>number</td>
+<td>Y</td>
+<td>amount you want to transfer</td>
+</tr>
+<tr>
+<td>from_application_id</td>
+<td>string</td>
+<td>Y</td>
+<td>application id you want to transfer from</td>
+</tr>
+<tr>
+<td>to_application_id</td>
+<td>string</td>
+<td>Y</td>
+<td>application id you want to transfer to</td>
 </tr>
 </tbody></table>
 <h1 id='websocket-api-v2'>Websocket API V2</h1>
