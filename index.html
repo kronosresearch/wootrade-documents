@@ -3521,14 +3521,22 @@ POST /v1/asset/main_sub_transfer
     "topic":"positioninfo",
     "ts":1618757307607,
     "data":{
-        "marginRate":1000,
-        "leverage":2,
+        "marginRate":95.87,
+        "marginMode":"MARGIN",
+        "leverage":3,
         "takerFeeRate":5,
         "makerFeeRate":0,
-        "interestRate":0,
-        "withdrawDayBtcValue":0,
+        "interestRate":3,
+        "guiTakerFeeRate":5,
+        "guiMakerFeeRate":0,
+        "liquidationMarginRate":95.87,
+        "futuresLeverage":1,
+        "futuresApiTakerFeeRate":5,
+        "futuresApiMakerFeeRate":0,
+        "futuresGuiTakerFeeRate":5,
+        "futuresGuiMakerFeeRate":0,
         "positions":{
-            "BSV":{
+            "BTC":{
                 "holding":0,
                 "outstandingHolding":0,
                 "pendingExposure":0,
@@ -3543,7 +3551,7 @@ POST /v1/asset/main_sub_transfer
                 "fee24H":0,
                 "frozen":0
             },
-            "BCH":{
+            "ETH":{
                 "holding":0,
                 "outstandingHolding":0,
                 "pendingExposure":0,
