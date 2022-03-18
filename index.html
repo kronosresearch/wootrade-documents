@@ -252,6 +252,21 @@
                     <a href="#token-network-public" class="toc-h2 toc-link" data-title="Token Network (Public)">Token Network (Public)</a>
                   </li>
                   <li>
+                    <a href="#get-predicted-funding-rate-for-all-markets-public" class="toc-h2 toc-link" data-title="Get Predicted Funding Rate for All Markets (Public)">Get Predicted Funding Rate for All Markets (Public)</a>
+                  </li>
+                  <li>
+                    <a href="#get-predicted-funding-rate-for-one-market-public" class="toc-h2 toc-link" data-title="Get Predicted Funding Rate for One Market (Public)">Get Predicted Funding Rate for One Market (Public)</a>
+                  </li>
+                  <li>
+                    <a href="#get-funding-rate-history-for-one-market-public" class="toc-h2 toc-link" data-title="Get Funding Rate History for One Market (Public)">Get Funding Rate History for One Market (Public)</a>
+                  </li>
+                  <li>
+                    <a href="#get-futures-info-for-all-markets-public" class="toc-h2 toc-link" data-title="Get Futures Info for All Markets (Public)">Get Futures Info for All Markets (Public)</a>
+                  </li>
+                  <li>
+                    <a href="#get-futures-for-one-market-public" class="toc-h2 toc-link" data-title="Get Futures for One Market (Public)">Get Futures for One Market (Public)</a>
+                  </li>
+                  <li>
                     <a href="#token-config" class="toc-h2 toc-link" data-title="Token Config">Token Config</a>
                   </li>
                   <li>
@@ -344,6 +359,21 @@
                   <li>
                     <a href="#transfer-assets" class="toc-h2 toc-link" data-title="Transfer Assets">Transfer Assets</a>
                   </li>
+                  <li>
+                    <a href="#update-account-mode" class="toc-h2 toc-link" data-title="Update Account Mode">Update Account Mode</a>
+                  </li>
+                  <li>
+                    <a href="#update-leverage-setting" class="toc-h2 toc-link" data-title="Update Leverage Setting">Update Leverage Setting</a>
+                  </li>
+                  <li>
+                    <a href="#get-funding-fee-history" class="toc-h2 toc-link" data-title="Get Funding Fee History">Get Funding Fee History</a>
+                  </li>
+                  <li>
+                    <a href="#get-all-position-info" class="toc-h2 toc-link" data-title="Get All Position info">Get All Position info</a>
+                  </li>
+                  <li>
+                    <a href="#get-one-position-info" class="toc-h2 toc-link" data-title="Get One Position info">Get One Position info</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -391,11 +421,32 @@
                   <li>
                     <a href="#error-response" class="toc-h2 toc-link" data-title="error response">error response</a>
                   </li>
+                  <li>
+                    <a href="#indexprice" class="toc-h2 toc-link" data-title="indexprice">indexprice</a>
+                  </li>
+                  <li>
+                    <a href="#markprice" class="toc-h2 toc-link" data-title="markprice">markprice</a>
+                  </li>
+                  <li>
+                    <a href="#openinterest" class="toc-h2 toc-link" data-title="openinterest">openinterest</a>
+                  </li>
+                  <li>
+                    <a href="#estfundingrate" class="toc-h2 toc-link" data-title="estfundingrate">estfundingrate</a>
+                  </li>
+                  <li>
+                    <a href="#markprices" class="toc-h2 toc-link" data-title="markprices">markprices</a>
+                  </li>
+                  <li>
+                    <a href="#position-push" class="toc-h2 toc-link" data-title="position push">position push</a>
+                  </li>
               </ul>
           </li>
           <li>
             <a href="#release-note" class="toc-h1 toc-link" data-title="Release Note">Release Note</a>
               <ul class="toc-list-h2">
+                  <li>
+                    <a href="#2022-03-21" class="toc-h2 toc-link" data-title="2022-03-21">2022-03-21</a>
+                  </li>
                   <li>
                     <a href="#2022-02-25" class="toc-h2 toc-link" data-title="2022-02-25">2022-02-25</a>
                   </li>
@@ -966,7 +1017,234 @@ GET /v1/public/token_network
 <p><strong>Parameters</strong></p>
 
 <p>None</p>
-<h2 id='token-config'>Token Config</h2>
+<h2 id='get-predicted-funding-rate-for-all-markets-public'>Get Predicted Funding Rate for All Markets (Public)</h2>
+<p><strong>Limit: 10 requests per 1 second per IP address</strong></p>
+<pre class="highlight plaintext"><code>GET /v1/public/funding_rates
+</code></pre>
+<p>Get predicted funding rate and the latest funding rate for all the markets.</p>
+
+<blockquote>
+<p><strong>Response</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>{
+    "success": true,
+    "rows": [
+        {
+            "symbol": "PERP_BTC_USDT",
+            "est_funding_rate": 0.12345689,
+            "est_funding_rate_timestamp": 1636388220001,
+            "last_funding_rate": 0.12345689,
+            "last_funding_rate_timestamp": 1567411795000, // use rate to end calculating funding fee time
+            "next_funding_time": 1567411995000
+        },
+        {
+            "symbol": "PERP_ETH_USDT",
+            "est_funding_rate": 0.12345689,
+            "est_funding_rate_timestamp": 1636388220001,
+            "last_funding_rate": 0.12345689,
+            "last_funding_rate_timestamp": 1567411795000, // use rate to end calculating funding fee time
+             "next_funding_time": 1567411995000
+        }
+    ],
+    "timestamp": 1564710591905 // Unix epoch time in milliseconds
+}
+</code></pre><h2 id='get-predicted-funding-rate-for-one-market-public'>Get Predicted Funding Rate for One Market (Public)</h2>
+<p><strong>Limit: 10 requests per 1 second per IP address</strong></p>
+<pre class="highlight plaintext"><code>GET /v1/public/funding_rate/:symbol
+</code></pre>
+<p>Get predicted funding rate and the latest funding rate for one market.</p>
+
+<p><strong>Parameters</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Name</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Required</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">symbol</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">Y</td>
+<td style="text-align: left"></td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p><strong>Response</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>{
+    "success": true,
+    "symbol": "PERP_BTC_USDT",
+    "est_funding_rate": 0.12345689,
+    "est_funding_rate_timestamp": 1636388220001,
+    "last_funding_rate": 0.12345689,
+    "last_funding_rate_timestamp": 1567411795000, // use rate to end calculating funding fee time
+    "next_funding_time": 1567411995000
+    "timestamp": 1564710591905 // Unix epoch time in milliseconds
+}
+</code></pre><h2 id='get-funding-rate-history-for-one-market-public'>Get Funding Rate History for One Market (Public)</h2>
+<p><strong>Limit: 10 requests per 1 second per IP address</strong></p>
+<pre class="highlight plaintext"><code>GET /v1/public/funding_rate_history
+</code></pre>
+<p>Get funding rate for one market.</p>
+
+<p><strong>Parameters</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Name</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Required</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">symbol</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">Y</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">start_t</td>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">N</td>
+<td style="text-align: left">start time range that wish to query, noted the time stamp is 13-digits timestamp. If start_t and end_t are not filled, the newest funding rate will be returned.</td>
+</tr>
+<tr>
+<td style="text-align: left">end_t</td>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">N</td>
+<td style="text-align: left">end time range that wish to query, noted the time stamp is 13-digits timestamp. If start_t and end_t are not filled, the newest funding rate will be returned.</td>
+</tr>
+<tr>
+<td style="text-align: left">page</td>
+<td style="text-align: left">number</td>
+<td style="text-align: left">N (default: 1)</td>
+<td style="text-align: left">the page wish to query.</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p><strong>Response</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>{
+    "success": true,
+    "meta": {
+        "total": 670,
+        "records_per_page": 25,
+        "current_page": 1
+    },
+    "rows": [
+        {
+            "symbol": "PERP_BTC_USDT",
+            "funding_rate": 0.12345689,
+            "funding_rate_timestamp": 1567411795000, // use rate to end calculating funding fee time
+            "next_funding_time": 1567411995000
+        },
+        {
+            "symbol": "PERP_BTC_USDT",
+            "funding_rate": 0.12345689,                                                 
+            "funding_rate_timestamp": "1567411795.000", // use rate to end calculating funding fee time
+            "next_funding_time": 1567411995000
+        }
+    ],
+    "timestamp": 1564710591905 // Unix epoch time in milliseconds
+}
+</code></pre><h2 id='get-futures-info-for-all-markets-public'>Get Futures Info for All Markets (Public)</h2>
+<p><strong>Limit: 10 requests per 1 second per IP address</strong></p>
+<pre class="highlight plaintext"><code>GET /v1/public/futures
+</code></pre>
+<p>Get basic futures information for all the markets.</p>
+
+<blockquote>
+<p><strong>Response</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>{
+    "success": true,
+    "rows": [
+        {
+          "symbol": "PERP_BTC_USDT",
+                "index_price": 56727.31344564,
+                "mark_price": 56727.31344564,
+                "est_funding_rate": 0.12345689,
+                "last_funding_rate": 0.12345689,
+                "next_funding_time": 1567411795000,
+                "open_interest": 0.12345689,
+                "24h_open": 0.16112,
+                "24h_close": 0.32206,
+                "24h_high": 0.33000,
+                "24h_low": 0.14251,
+                "24h_volume": 89040821.98,
+                "24h_amount": 22493062.21
+        },
+        {
+            "symbol": "PERP_ETH_USDT",
+                "index_price": 6727.31344564,
+                "mark_price": 6727.31344564,
+                "est_funding_rate": 0.12345689,
+                "last_funding_rate": 0.12345689,
+                "next_funding_time": 1567411795000,
+                "open_interest": 0.12345689,
+                "24h_open": 0.16112,
+                "24h_close": 0.32206,
+                "24h_high": 0.33000,
+                "24h_low": 0.14251,
+                "24h_volume": 89040821.98,
+                "24h_amount": 22493062.21
+        }
+    ],
+    "timestamp": 1564710591905 // Unix epoch time in milliseconds
+}
+</code></pre><h2 id='get-futures-for-one-market-public'>Get Futures for One Market (Public)</h2>
+<p><strong>Limit: 10 requests per 1 second per IP address</strong></p>
+<pre class="highlight plaintext"><code>GET /v1/public/futures/:symbol
+</code></pre>
+<p>Get basic futures information for one market.</p>
+
+<p><strong>Parameters</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Name</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Required</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">symbol</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">Y</td>
+<td style="text-align: left"></td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p><strong>Response</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>{
+    "success": true,
+    "info":{
+        "symbol": "PERP_BTC_USDT",
+        "index_price": 56727.31344564,
+        "mark_price": 56727.31344564,
+        "est_funding_rate": 0.12345689,
+        "last_funding_rate": 0.12345689,
+        "next_funding_time": 1567411795000,
+        "open_interest": 0.12345689,
+        "24h_open": 0.16112,
+       "24h_close": 0.32206,
+       "24h_high": 0.33000,
+       "24h_low": 0.14251,
+       "24h_volume": 89040821.98,
+       "24h_amount": 22493062.21
+    },
+    "timestamp": 1564710591905 // Unix epoch time in milliseconds
+}
+</code></pre><h2 id='token-config'>Token Config</h2>
 <p><strong>Limit: 10 requests per 1 second</strong></p>
 
 <p><code>
@@ -985,6 +1263,7 @@ GET /v1/client/token
             <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"BTC"</span><span class="p">,</span>
             <span class="s2">"collateral_ratio"</span><span class="p">:</span> <span class="mf">0.85</span><span class="p">,</span>
             <span class="s2">"margin_factor"</span><span class="p">:</span> <span class="mf">2.3</span><span class="nx">e</span><span class="o">-</span><span class="mi">8</span><span class="p">,</span>
+            <span class="s2">"futures_margin_factor"</span><span class="p">:</span> <span class="mf">2.3</span><span class="nx">e</span><span class="o">-</span><span class="mi">8</span><span class="p">,</span>
             <span class="s2">"collateral"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>        <span class="c1">// if the token is now used as collateral</span>
             <span class="s2">"can_collateral"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>    <span class="c1">// if the token can be used as collateral</span>
             <span class="s2">"can_short"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>         <span class="c1">// if the token supports short selling</span>
@@ -994,6 +1273,7 @@ GET /v1/client/token
             <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"ETH"</span><span class="p">,</span>
             <span class="s2">"collateral_ratio"</span><span class="p">:</span> <span class="mf">0.85</span><span class="p">,</span>
             <span class="s2">"margin_factor"</span><span class="p">:</span> <span class="mf">2.5</span><span class="nx">e</span><span class="o">-</span><span class="mi">8</span><span class="p">,</span>
+            <span class="s2">"futures_margin_factor"</span><span class="p">:</span> <span class="mf">2.3</span><span class="nx">e</span><span class="o">-</span><span class="mi">8</span><span class="p">,</span>
             <span class="s2">"collateral"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
             <span class="s2">"can_collateral"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
             <span class="s2">"can_short"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
@@ -1003,7 +1283,8 @@ GET /v1/client/token
             <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"ASD"</span><span class="p">,</span>
             <span class="s2">"collateral_ratio"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
             <span class="s2">"margin_factor"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-            <span class="s2">"collateral"</span><span class="p">:</span> <span class="kc">false</span>
+            <span class="s2">"futures_margin_factor"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"collateral"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
             <span class="s2">"can_collateral"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
             <span class="s2">"can_short"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
             <span class="s2">"stable"</span><span class="p">:</span> <span class="kc">false</span>
@@ -1868,15 +2149,20 @@ GET /v1/client/info
 <p><strong>Response</strong></p>
 </blockquote>
 <pre class="highlight javascript"><code><span class="p">{</span>
+
     <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
     <span class="s2">"application"</span><span class="p">:</span> <span class="p">{</span>
         <span class="s2">"application_id"</span><span class="p">:</span> <span class="s2">"8935820a-6600-4c2c-9bc3-f017d89aa173"</span><span class="p">,</span>
         <span class="s2">"account"</span><span class="p">:</span> <span class="s2">"CLIENT_ACCOUNT_01"</span><span class="p">,</span>
+        <span class="s2">"alias"</span><span class="p">:</span> <span class="s2">"CLIENT_ACCOUNT_01"</span><span class="p">,</span>
+        <span class="s2">"account_mode"</span><span class="p">:</span><span class="s2">"FUTURES"</span> <span class="c1">//account mode</span>
         <span class="s2">"leverage"</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
         <span class="s2">"taker_fee_rate"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
         <span class="s2">"maker_fee_rate"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
         <span class="s2">"interest_rate"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s2">"alias"</span><span class="p">:</span> <span class="s2">"CLIENT_ACCOUNT_01"</span><span class="p">,</span>
+        <span class="s2">"futures_leverage"</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+        <span class="s2">"futures_taker_fee_rate"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"futures_maker_fee_rate"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
         <span class="s2">"otpauth"</span><span class="p">:</span> <span class="kc">false</span>
     <span class="p">},</span>
     <span class="s2">"margin_rate"</span><span class="p">:</span> <span class="mi">1000</span>
@@ -2728,7 +3014,180 @@ POST /v1/asset/main_sub_transfer
 <td>application id you want to transfer to</td>
 </tr>
 </tbody></table>
-<h1 id='websocket-api-v2'>Websocket API V2</h1>
+<h2 id='update-account-mode'>Update Account Mode</h2>
+<p><strong>Limit: 5 requests per 60 second per user</strong></p>
+<pre class="highlight plaintext"><code>POST /v1/client/account_mode
+</code></pre>
+<p>Choose account mode: pure spot or margin or futures</p>
+
+<p><strong>Parameters</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Name</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Required</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">account_mode</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">Y</td>
+<td style="text-align: left">PURE_SPOT, MARGIN, FUTURES</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p><strong>Response</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>{
+    "success": true
+}
+</code></pre><h2 id='update-leverage-setting'>Update Leverage Setting</h2>
+<p><strong>Limit: 5 requests per 60 second per user</strong></p>
+<pre class="highlight plaintext"><code>POST /v1/client/leverage
+</code></pre>
+<p>Choose maximum leverage for margin mode or futures mode</p>
+
+<p><strong>Parameters</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Name</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Required</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">leverage</td>
+<td style="text-align: left">int</td>
+<td style="text-align: left">Y</td>
+<td style="text-align: left"></td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p><strong>Response</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>{
+    "success": true
+}
+</code></pre><h2 id='get-funding-fee-history'>Get Funding Fee History</h2>
+<p><strong>Limit: 20 requests per 60 second per user</strong></p>
+<pre class="highlight plaintext"><code>GET /v1/funding_fee/history
+</code></pre>
+<p>Get funding fee history</p>
+
+<p><strong>Parameters</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Name</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Required</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">start_t</td>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">N</td>
+<td style="text-align: left">start time range that wish to query, noted the time stamp is 13-digits timestamp.</td>
+</tr>
+<tr>
+<td style="text-align: left">end_t</td>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">N</td>
+<td style="text-align: left">end time range that wish to query, noted the time stamp is 13-digits timestamp.</td>
+</tr>
+<tr>
+<td style="text-align: left">page</td>
+<td style="text-align: left">number</td>
+<td style="text-align: left">N (default: 1)</td>
+<td style="text-align: left">the page wish to query.</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p><strong>Response</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>{
+    "success": true,
+    "meta": {
+            "total": 670,
+        "records_per_page": 25,
+        "current_page": 1
+    },
+    "rows": [
+        {
+            "id": 10001,
+            "symbol": "PERP_BTC_USDT",
+            "funding_rate": 0.00345,
+            "mark_price": 100,
+            "funding_fee": 0.345,
+            "payment_type": "Receive", // Receive and Pay
+            "status": "COMPLETED",
+            "created_time": "1575014255.089", // Unix epoch time in seconds
+            "updated_time": "1575014255.910" // Unix epoch time in seconds
+        },
+        // ....skip (total 25 items in one page)
+
+}
+</code></pre><h2 id='get-all-position-info'>Get All Position info</h2>
+<p><strong>Limit: 10 requests per 10 second per user</strong></p>
+<pre class="highlight plaintext"><code>GET /v1/positions
+</code></pre>
+<p><strong>Parameters</strong></p>
+
+<blockquote>
+<p><strong>Response</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>{
+    "success": true,
+    "current_margin_ratio": 0.8,
+    "initial_margin_ratio": 0.8,
+    "maintenance_margin_ratio": 0.8,
+    "positions": [
+        {
+            "symbol": "PERP_BTC_USDT",
+            "holding": 1.23,
+            "pending_long_qty": 0.5,
+            "pending_short_qty": 0.23,
+            "settle_price": 50000,
+            "average_open_price": 49000,
+            "pnl_24_h": 20,
+            "fee_24_h": 12,
+            "mark_price": 49550,
+            "timestamp": "1575014255.089"
+        },
+        // ....skip 
+    ]  
+}
+</code></pre><h2 id='get-one-position-info'>Get One Position info</h2>
+<p><strong>Limit: 10 requests per 10 second per user</strong></p>
+<pre class="highlight plaintext"><code>GET /v1/position/:symbol
+</code></pre>
+<p><strong>Parameters</strong></p>
+
+<blockquote>
+<p><strong>Response</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>{
+    "success": true,
+    "symbol": "PERP_BTC_USDT",
+    "holding": 1.23,
+    "pending_long_qty": 0.5,
+    "pending_short_qty": 0.23,
+    "settle_price": 50000,
+    "average_open_price": 49000,
+    "pnl_24_h": 20,
+    "fee_24_h": 0.2,
+    "mark_price": 49550,
+    "timestamp": "1575014255.089"
+}
+</code></pre><h1 id='websocket-api-v2'>Websocket API V2</h1>
 <p><strong>Market Data Base endpoints:</strong></p>
 
 <ul>
@@ -3652,8 +4111,376 @@ POST /v1/asset/main_sub_transfer
     "ts": 1614141150601,
     "errorMsg": "invalid symbol SPOT_WOO_USDC"
 }
+</code></pre><h2 id='indexprice'>indexprice</h2>
+<ul>
+<li>Push interval: 1s</li>
+</ul>
+
+<p><strong>Parameters</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>string</td>
+<td>Y</td>
+<td>id generate by client</td>
+</tr>
+<tr>
+<td>event</td>
+<td>string</td>
+<td>Y</td>
+<td><code>subscribe</code>/<code>unsubscribe</code></td>
+</tr>
+<tr>
+<td>topic</td>
+<td>string</td>
+<td>Y</td>
+<td><code>{symbol}@indexprice</code></td>
+</tr>
+</tbody></table>
+<pre class="highlight plaintext"><code>{
+    "id": "clientID3",
+    "topic": "SPOT_ETH_USDT@indexprice",
+    "event": "subscribe"
+}
+</code></pre>
+<p><strong>Response</strong></p>
+<pre class="highlight plaintext"><code>{
+    "id": "clientID3",
+    "event": "subscribe",
+    "success": true,
+    "ts": 1609924478533
+}
+</code></pre>
+<p><strong>Subscribed Message</strong></p>
+<pre class="highlight plaintext"><code>{
+    "topic":"SPOT_ETH_USDT@indexprice",
+    "ts":1618820361552,
+    "data":{
+        "symbol":"SPOT_ETH_USDT",
+        "price":3987.1
+    }
+}
+</code></pre><h2 id='markprice'>markprice</h2>
+<ul>
+<li>Push interval: 1s</li>
+</ul>
+
+<p><strong>Parameters</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>string</td>
+<td>Y</td>
+<td>id generate by client</td>
+</tr>
+<tr>
+<td>event</td>
+<td>string</td>
+<td>Y</td>
+<td><code>subscribe</code>/<code>unsubscribe</code></td>
+</tr>
+<tr>
+<td>topic</td>
+<td>string</td>
+<td>Y</td>
+<td><code>{symbol}@markprice</code></td>
+</tr>
+</tbody></table>
+<pre class="highlight plaintext"><code>{
+    "id": "clientID3",
+    "topic": "PERP_ETH_USDT@markprice",
+    "event": "subscribe"
+}
+</code></pre>
+<p><strong>Response</strong></p>
+<pre class="highlight plaintext"><code>{
+    "id": "clientID3",
+    "event": "subscribe",
+    "success": true,
+    "ts": 1609924478533
+}
+</code></pre>
+<p><strong>Subscribed Message</strong></p>
+<pre class="highlight plaintext"><code>{
+    "topic":"PERP_ETH_USDT@markprice",
+    "ts":1618820361552,
+    "data":{
+        "symbol":"PERP_ETH_USDT",
+        "price":3987.2
+    }
+}
+</code></pre><h2 id='openinterest'>openinterest</h2>
+<ul>
+<li>Push interval: 1s</li>
+</ul>
+
+<p><strong>Parameters</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>string</td>
+<td>Y</td>
+<td>id generate by client</td>
+</tr>
+<tr>
+<td>event</td>
+<td>string</td>
+<td>Y</td>
+<td><code>subscribe</code>/<code>unsubscribe</code></td>
+</tr>
+<tr>
+<td>topic</td>
+<td>string</td>
+<td>Y</td>
+<td><code>{symbol}@openinterest</code></td>
+</tr>
+</tbody></table>
+<pre class="highlight plaintext"><code>{
+    "id": "clientID3",
+    "topic": "PERP_BTC_USDT@openinterest",
+    "event": "subscribe"
+}
+</code></pre>
+<p><strong>Response</strong></p>
+<pre class="highlight plaintext"><code>{
+    "id": "clientID3",
+    "event": "subscribe",
+    "success": true,
+    "ts": 1609924478533
+}
+</code></pre>
+<p><strong>Subscribed Message</strong></p>
+<pre class="highlight plaintext"><code>{
+    "topic":"PERP_BTC_USDT@openinterest",
+    "ts":1618820361552,
+    "data":{
+        "symbol":"PERP_BTC_USDT",
+        "openInterest":1.27988
+    }
+}
+</code></pre><h2 id='estfundingrate'>estfundingrate</h2>
+<ul>
+<li>Push interval: 1s</li>
+</ul>
+
+<p><strong>Parameters</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>string</td>
+<td>Y</td>
+<td>id generate by client</td>
+</tr>
+<tr>
+<td>event</td>
+<td>string</td>
+<td>Y</td>
+<td><code>subscribe</code>/<code>unsubscribe</code></td>
+</tr>
+<tr>
+<td>topic</td>
+<td>string</td>
+<td>Y</td>
+<td><code>{symbol}@estfundingrate</code></td>
+</tr>
+</tbody></table>
+<pre class="highlight plaintext"><code>{
+    "id": "clientID3",
+    "topic": "PERP_BTC_USDT@estfundingrate",
+    "event": "subscribe"
+}
+</code></pre>
+<p><strong>Response</strong></p>
+<pre class="highlight plaintext"><code>{
+    "id": "clientID3",
+    "event": "subscribe",
+    "success": true,
+    "ts": 1609924478533
+}
+</code></pre>
+<p><strong>Subscribed Message</strong></p>
+<pre class="highlight plaintext"><code>{
+    "topic":"PERP_BTC_USDT@estfundingrate",
+    "ts":1618820361552,
+    "data":{
+        "symbol":"PERP_BTC_USDT",
+        "fundingRate":1.27988,
+        "fundingTs":1618820361552
+    }
+}
+</code></pre><h2 id='markprices'>markprices</h2>
+<ul>
+<li>Push interval: 1s</li>
+</ul>
+
+<p><strong>Parameters</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>string</td>
+<td>Y</td>
+<td>id generate by client</td>
+</tr>
+<tr>
+<td>event</td>
+<td>string</td>
+<td>Y</td>
+<td><code>subscribe</code>/<code>unsubscribe</code></td>
+</tr>
+<tr>
+<td>topic</td>
+<td>string</td>
+<td>Y</td>
+<td><code>markprices</code></td>
+</tr>
+</tbody></table>
+<pre class="highlight plaintext"><code>{
+    "id": "clientID5",
+    "topic": "markprices",
+    "event": "subscribe"
+}
+</code></pre>
+<p><strong>Response</strong></p>
+<pre class="highlight plaintext"><code>{
+    "id": "clientID5",
+    "event": "subscribe",
+    "success": true,
+    "ts": 1609924478533
+}
+</code></pre>
+<p><strong>Subscribed Message</strong></p>
+<pre class="highlight plaintext"><code>{
+    "topic":"markprices",
+    "ts":1618822376000,
+    "data":[
+        {
+           "symbol":"PERP_BTC_USDT",
+            "price":51234.13
+        },
+        {
+            "symbol":"PERP_ETH_USDT",
+              "price":3894.34
+        },
+       ...
+    ]
+}
+</code></pre><h2 id='position-push'>position push</h2>
+<ul>
+<li>Push interval: push on update</li>
+</ul>
+
+<p>Parameters</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>string</td>
+<td>Y</td>
+<td>id generate by client</td>
+</tr>
+<tr>
+<td>event</td>
+<td>string</td>
+<td>Y</td>
+<td>subscribe<code>/</code>unsubscribe</td>
+</tr>
+<tr>
+<td>topic</td>
+<td>string</td>
+<td>Y</td>
+<td>position</td>
+</tr>
+</tbody></table>
+<pre class="highlight plaintext"><code>{
+    "id": "clientID5",
+    "topic": "position",
+    "event": "subscribe"
+}
+</code></pre>
+<p>Response</p>
+<pre class="highlight plaintext"><code>{
+    "id": "clientID5",
+    "event": "subscribe",
+    "success": true,
+    "ts": 1609924478533
+}
+</code></pre>
+<p>Subscribed Message</p>
+<pre class="highlight plaintext"><code>{
+    "topic":"position",
+    "ts":1641439456774,
+    "data":[
+
+            {
+                "symbol":"PERP_BTC_USDT",
+                "holding":1.23,
+                "pendingLongQty":1.2,
+                "pendingShortQty":0.3,
+                "pnl24H":20,
+                "fee24H":12,
+                "avgOpenPrice":49000,
+                "settlePrice":50000,
+                "markPrice": 49500,
+            }
+        ]
+}
 </code></pre><h1 id='release-note'>Release Note</h1>
 <p>All the API changes would be listed here.</p>
+<h2 id='2022-03-21'>2022-03-21</h2>
+<ul>
+<li>Add public API for <a href="#get-predicted-funding-rate-for-all-markets-public">Funding Rate</a> and <a href="#get-futures-info-for-all-markets-public">Futures Info</a>.</li>
+<li>Add private API for <a href="#update-account-mode">Change Account mode</a>, <a href="#update-leverage-setting">Change Leverage</a>.</li>
+<li>Add private API for <a href="#get-funding-fee-history">Funding Fee</a>, <a href="#get-all-position-info">Position Info</a>.</li>
+<li>Add <code>account_mode</code>, <code>futures_leverage</code>, <code>futures_taker_fee_rate</code>, <code>futures_maker_fee_rate</code> in <a href="#get-account-information">Account Information</a>.</li>
+<li>Add <code>futures_margin_factor</code> in <a href="#token-config">Token Config</a>, </li>
+</ul>
 <h2 id='2022-02-25'>2022-02-25</h2>
 <ul>
 <li>Add API <a href="#get-subaccounts">SubAccount</a> to manage subaccounts.</li>
