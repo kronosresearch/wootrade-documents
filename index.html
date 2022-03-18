@@ -3064,7 +3064,7 @@ POST /v1/asset/main_sub_transfer
 <td style="text-align: left">leverage</td>
 <td style="text-align: left">int</td>
 <td style="text-align: left">Y</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">for margin mode: 1, 2, 3, 4, 5 ; for futures mode: 1, 2, 3, 4, 5, 10, 15, 20</td>
 </tr>
 </tbody></table>
 
@@ -4480,6 +4480,7 @@ POST /v1/asset/main_sub_transfer
 <li>Add private API for <a href="#get-funding-fee-history">Funding Fee</a>, <a href="#get-all-position-info">Position Info</a>.</li>
 <li>Add <code>account_mode</code>, <code>futures_leverage</code>, <code>futures_taker_fee_rate</code>, <code>futures_maker_fee_rate</code> in <a href="#get-account-information">Account Information</a>.</li>
 <li>Add <code>futures_margin_factor</code> in <a href="#token-config">Token Config</a>, </li>
+<li>Add Websocket Topics <a href="#indexprice">indexprice</a>, <a href="#markprice">markprice</a>, <a href="#openinterest">openinterest</a>, <a href="#estfundingrate">estfundingrate</a>, <a href="#markprices">markprices</a>, <a href="#position-push">position push</a></li>
 </ul>
 <h2 id='2022-02-25'>2022-02-25</h2>
 <ul>
