@@ -327,9 +327,6 @@
                     <a href="#get-asset-history" class="toc-h2 toc-link" data-title="Get Asset History">Get Asset History</a>
                   </li>
                   <li>
-                    <a href="#get-asset-transfer-history" class="toc-h2 toc-link" data-title="Get Asset Transfer History">Get Asset Transfer History</a>
-                  </li>
-                  <li>
                     <a href="#margin-interest-rates" class="toc-h2 toc-link" data-title="Margin Interest Rates">Margin Interest Rates</a>
                   </li>
                   <li>
@@ -830,7 +827,7 @@ GET /v1/public/info/:symbol
 GET /v1/public/info
 </code></p>
 
-<p>Get available symbols that WooTrade supported, and also send order rules for each symbol. The definition of rules can be found at <a href="#exchange-information">Exchange Infomation</a></p>
+<p>Get available symbols that WOO X supported, and also send order rules for each symbol. The definition of rules can be found at <a href="#exchange-information">Exchange Infomation</a></p>
 
 <blockquote>
 <p><strong>Response</strong></p>
@@ -913,7 +910,7 @@ GET /v1/public/market_trades
 GET /v1/public/token
 </code></p>
 
-<p>Get available tokens that WooTrade supported, it need to use when you call get deposit address or withdraw api.</p>
+<p>Get available tokens that WOO X supported, it need to use when you call get deposit address or withdraw api.</p>
 
 <blockquote>
 <p><strong>Response</strong></p>
@@ -2081,7 +2078,7 @@ GET /v1/client/trades
 GET /v1/client/holding
 </code></p>
 
-<p>Holding summary of client. Note that the number in holding could be negative, it means how much client owed to Wootrade.</p>
+<p>Holding summary of client. Note that the number in holding could be negative, it means how much client owed to WOO X.</p>
 
 <blockquote>
 <p><strong>Response</strong></p>
@@ -2105,7 +2102,7 @@ GET /v1/client/holding
 GET /v2/client/holding
 </code></p>
 
-<p>Holding summary of client. Note that the number in holding could be negative, it means how much client owed to Wootrade.</p>
+<p>Holding summary of client. Note that the number in holding could be negative, it means how much client owed to WOO X.</p>
 
 <blockquote>
 <p><strong>Response</strong></p>
@@ -2410,75 +2407,6 @@ GET /v1/asset/history
 <td>N</td>
 <td><code>NEW</code>/<code>CONFIRMING</code>/<code>PROCESSING</code>/<code>COMPLETED</code>/<code>CANCELED</code></td>
 </tr>
-<tr>
-<td>start_t</td>
-<td>timestamp</td>
-<td>N</td>
-<td>start time range that wish to query, noted the time stamp is 13-digits timestamp.</td>
-</tr>
-<tr>
-<td>end_t</td>
-<td>timestamp</td>
-<td>N</td>
-<td>end time range that wish to query, noted the time stamp is 13-digits timestamp.</td>
-</tr>
-<tr>
-<td>page</td>
-<td>number</td>
-<td>N (default: 1)</td>
-<td>the page wish to query.</td>
-</tr>
-</tbody></table>
-<h2 id='get-asset-transfer-history'>Get Asset Transfer History</h2>
-<p><strong>Limit 10 requests per 60 seconds</strong></p>
-
-<p><code>
-GET /v1/asset/transfer_history
-</code></p>
-
-<p>Get asset transfer history.</p>
-
-<blockquote>
-<p><strong>Response</strong></p>
-</blockquote>
-<pre class="highlight javascript"><code><span class="p">{</span>
-    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="s2">"meta"</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">"records_per_page"</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span>
-        <span class="s2">"current_page"</span><span class="p">:</span> <span class="mi">1</span>
-    <span class="p">},</span>
-    <span class="s2">"rows"</span><span class="p">:</span> <span class="p">[</span>
-        <span class="p">{</span>
-            <span class="s2">"created_time"</span><span class="p">:</span> <span class="s2">"1579399877.041"</span><span class="p">,</span> <span class="c1">// Unix epoch time in seconds</span>
-            <span class="s2">"updated_time"</span><span class="p">:</span> <span class="s2">"1579399877.041"</span><span class="p">,</span> <span class="c1">// Unix epoch time in seconds</span>
-            <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"202029292829293"</span><span class="p">,</span>
-            <span class="s2">"application_id"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-            <span class="s2">"from"</span><span class="p">:</span> <span class="s2">"COLLATERAL"</span><span class="p">,</span>
-            <span class="s2">"to"</span><span class="p">:</span> <span class="s2">"BALANCE"</span><span class="p">,</span>
-            <span class="s2">"amount"</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span>
-        <span class="p">},</span>
-        <span class="p">{</span>
-           <span class="s2">"created_time"</span><span class="p">:</span> <span class="s2">"1579399877.041"</span><span class="p">,</span>
-           <span class="s2">"updated_time"</span><span class="p">:</span> <span class="s2">"1579399877.041"</span><span class="p">,</span>
-           <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"202029292829292"</span><span class="p">,</span>
-           <span class="s2">"application_id"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-           <span class="s2">"from"</span><span class="p">:</span> <span class="s2">"BALANCE"</span><span class="p">,</span>
-           <span class="s2">"to"</span><span class="p">:</span> <span class="s2">"COLLATERAL"</span><span class="p">,</span>
-           <span class="s2">"amount"</span><span class="p">:</span> <span class="mi">500</span><span class="p">,</span>
-        <span class="p">}</span>
-    <span class="p">]</span>
-<span class="p">}</span>
-</code></pre>
-<p><strong>Parameters</strong></p>
-
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
 <tr>
 <td>start_t</td>
 <td>timestamp</td>
