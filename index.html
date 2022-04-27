@@ -3190,15 +3190,15 @@ GET /v1/positions
 <td><code>ping</code>/<code>pong</code></td>
 </tr>
 </tbody></table>
-<pre class="highlight plaintext"><code>{
-    "event":"ping"
-}
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"event"</span><span class="p">:</span><span class="s2">"ping"</span>
+<span class="p">}</span>
 </code></pre>
 <p><strong>Response</strong></p>
-<pre class="highlight plaintext"><code>{
-    "event":"pong",
-    "ts":1614667590000
-}
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"event"</span><span class="p">:</span><span class="s2">"pong"</span><span class="p">,</span>
+    <span class="s2">"ts"</span><span class="p">:</span><span class="mi">1614667590000</span>
+<span class="p">}</span>
 </code></pre><h2 id='request-orderbook'>request orderbook</h2>
 <p><strong>Parameters</strong></p>
 
@@ -3235,48 +3235,48 @@ GET /v1/positions
 <td><code>{symbol}</code></td>
 </tr>
 </tbody></table>
-<pre class="highlight plaintext"><code>{
-    "id": "clientID1",
-    "event": "request",
-    "params": {
-        "type": "orderbook",
-        "symbol": "SPOT_BTC_USDT"
-    }
-}
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"clientID1"</span><span class="p">,</span>
+    <span class="s2">"event"</span><span class="p">:</span> <span class="s2">"request"</span><span class="p">,</span>
+    <span class="s2">"params"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"orderbook"</span><span class="p">,</span>
+        <span class="s2">"symbol"</span><span class="p">:</span> <span class="s2">"SPOT_BTC_USDT"</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </code></pre>
 <p><strong>Response</strong></p>
-<pre class="highlight plaintext"><code>{
-    "id":"123r",
-    "event":"request",
-    "success":true,
-    "ts":1618880432419,
-    "data":{
-        "symbol":"SPOT_BTC_USDT",
-        "ts":1618880432380,
-        "asks":[
-            [
-                54700,
-                0.443951
-            ],
-            [
-                54700.02,
-                0.002566
-            ],
-            ...
-        ],
-        "bids":[
-            [
-                54699.99,
-                2.887466
-            ],
-            [
-                54699.76,
-                2.034711
-            ],
-           ...
-        ]
-    }
-}
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"id"</span><span class="p">:</span><span class="s2">"123r"</span><span class="p">,</span>
+    <span class="s2">"event"</span><span class="p">:</span><span class="s2">"request"</span><span class="p">,</span>
+    <span class="s2">"success"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"ts"</span><span class="p">:</span><span class="mi">1618880432419</span><span class="p">,</span>
+    <span class="s2">"data"</span><span class="p">:{</span>
+        <span class="s2">"symbol"</span><span class="p">:</span><span class="s2">"SPOT_BTC_USDT"</span><span class="p">,</span>
+        <span class="s2">"ts"</span><span class="p">:</span><span class="mi">1618880432380</span><span class="p">,</span>
+        <span class="s2">"asks"</span><span class="p">:[</span>
+            <span class="p">[</span>
+                <span class="mi">54700</span><span class="p">,</span>
+                <span class="mf">0.443951</span>
+            <span class="p">],</span>
+            <span class="p">[</span>
+                <span class="mf">54700.02</span><span class="p">,</span>
+                <span class="mf">0.002566</span>
+            <span class="p">],</span>
+            <span class="p">...</span>
+        <span class="p">],</span>
+        <span class="s2">"bids"</span><span class="p">:[</span>
+            <span class="p">[</span>
+                <span class="mf">54699.99</span><span class="p">,</span>
+                <span class="mf">2.887466</span>
+            <span class="p">],</span>
+            <span class="p">[</span>
+                <span class="mf">54699.76</span><span class="p">,</span>
+                <span class="mf">2.034711</span>
+            <span class="p">],</span>
+           <span class="p">...</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </code></pre><h2 id='orderbook'>orderbook</h2>
 <ul>
 <li><code>{symbol}@orderbook</code> depth 1000 push every 1s</li>
@@ -3312,58 +3312,58 @@ GET /v1/positions
 <td><code>{symbol}@orderbook</code>/<code>{symbol}@orderbook100</code></td>
 </tr>
 </tbody></table>
-<pre class="highlight plaintext"><code>{
-    "id": "clientID2",
-    "topic": "SPOT_WOO_USDT@orderbook",
-    "event": "subscribe"
-}
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"clientID2"</span><span class="p">,</span>
+    <span class="s2">"topic"</span><span class="p">:</span> <span class="s2">"SPOT_WOO_USDT@orderbook"</span><span class="p">,</span>
+    <span class="s2">"event"</span><span class="p">:</span> <span class="s2">"subscribe"</span>
+<span class="p">}</span>
 </code></pre>
 <p><strong>Response</strong></p>
-<pre class="highlight plaintext"><code>{
-    "id": "clientID2",
-    "event": "subscribe",
-    "success": true,
-    "ts": 1609924478533
-}
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"clientID2"</span><span class="p">,</span>
+    <span class="s2">"event"</span><span class="p">:</span> <span class="s2">"subscribe"</span><span class="p">,</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"ts"</span><span class="p">:</span> <span class="mi">1609924478533</span>
+<span class="p">}</span>
 </code></pre>
 <p><strong>Subscribed Message</strong></p>
-<pre class="highlight plaintext"><code>{
-    "topic": "SPOT_WOO_USDT@orderbook",
-    "ts": 1614152140945,
-    "data": {
-        "symbol": "SPOT_WOO_USDT",
-        "asks": [
-            [
-                0.31075,
-                2379.63
-            ],
-            [
-                0.31076,
-                4818.76
-            ],
-            [
-                0.31078,
-                8496.1
-            ],
-            ...
-        ],
-        "bids": [
-            [
-                0.30891,
-                2469.98
-            ],
-            [
-                0.3089,
-                482.5
-            ],
-            [
-                0.30877,
-                20
-            ],
-            ...
-        ]
-    }
-}
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"topic"</span><span class="p">:</span> <span class="s2">"SPOT_WOO_USDT@orderbook"</span><span class="p">,</span>
+    <span class="s2">"ts"</span><span class="p">:</span> <span class="mi">1614152140945</span><span class="p">,</span>
+    <span class="s2">"data"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"symbol"</span><span class="p">:</span> <span class="s2">"SPOT_WOO_USDT"</span><span class="p">,</span>
+        <span class="s2">"asks"</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">[</span>
+                <span class="mf">0.31075</span><span class="p">,</span>
+                <span class="mf">2379.63</span>
+            <span class="p">],</span>
+            <span class="p">[</span>
+                <span class="mf">0.31076</span><span class="p">,</span>
+                <span class="mf">4818.76</span>
+            <span class="p">],</span>
+            <span class="p">[</span>
+                <span class="mf">0.31078</span><span class="p">,</span>
+                <span class="mf">8496.1</span>
+            <span class="p">],</span>
+            <span class="p">...</span>
+        <span class="p">],</span>
+        <span class="s2">"bids"</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">[</span>
+                <span class="mf">0.30891</span><span class="p">,</span>
+                <span class="mf">2469.98</span>
+            <span class="p">],</span>
+            <span class="p">[</span>
+                <span class="mf">0.3089</span><span class="p">,</span>
+                <span class="mf">482.5</span>
+            <span class="p">],</span>
+            <span class="p">[</span>
+                <span class="mf">0.30877</span><span class="p">,</span>
+                <span class="mi">20</span>
+            <span class="p">],</span>
+            <span class="p">...</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </code></pre><h2 id='orderbookupdate'>orderbookupdate</h2>
 <ul>
 <li><code>{symbol}@orderbookupdate</code> updated orderbook push every 200ms</li>
@@ -3398,51 +3398,51 @@ GET /v1/positions
 <td><code>{symbol}@orderbookupdate</code></td>
 </tr>
 </tbody></table>
-<pre class="highlight plaintext"><code>{
-    "id": "clientID2",
-    "topic": "SPOT_BTC_USDT@orderbookupdate",
-    "event": "subscribe"
-}
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"clientID2"</span><span class="p">,</span>
+    <span class="s2">"topic"</span><span class="p">:</span> <span class="s2">"SPOT_BTC_USDT@orderbookupdate"</span><span class="p">,</span>
+    <span class="s2">"event"</span><span class="p">:</span> <span class="s2">"subscribe"</span>
+<span class="p">}</span>
 </code></pre>
 <p><strong>Response</strong></p>
-<pre class="highlight plaintext"><code>{
-    "id": "clientID2",
-    "event": "subscribe",
-    "success": true,
-    "ts": 1609924478533
-}
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"clientID2"</span><span class="p">,</span>
+    <span class="s2">"event"</span><span class="p">:</span> <span class="s2">"subscribe"</span><span class="p">,</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"ts"</span><span class="p">:</span> <span class="mi">1609924478533</span>
+<span class="p">}</span>
 </code></pre>
 <p><strong>Subscribed Message</strong></p>
-<pre class="highlight plaintext"><code>{
-    "topic":"SPOT_BTC_USDT@orderbookupdate",
-    "ts":1618826337580,
-    "data":{
-        "symbol":"SPOT_BTC_USDT",
-        "prevTs":1618826337380,
-        "asks":[
-            [
-                56749.15,
-                3.92864
-            ],
-            [
-                56749.8,
-                0
-            ],
-            ...
-        ],
-        "bids":[
-            [
-                56745.2,
-                1.03895025
-            ],
-            [
-                56744.6,
-                1.0807
-            ],
-            ...
-        ]
-    }
-}
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"topic"</span><span class="p">:</span><span class="s2">"SPOT_BTC_USDT@orderbookupdate"</span><span class="p">,</span>
+    <span class="s2">"ts"</span><span class="p">:</span><span class="mi">1618826337580</span><span class="p">,</span>
+    <span class="s2">"data"</span><span class="p">:{</span>
+        <span class="s2">"symbol"</span><span class="p">:</span><span class="s2">"SPOT_BTC_USDT"</span><span class="p">,</span>
+        <span class="s2">"prevTs"</span><span class="p">:</span><span class="mi">1618826337380</span><span class="p">,</span>
+        <span class="s2">"asks"</span><span class="p">:[</span>
+            <span class="p">[</span>
+                <span class="mf">56749.15</span><span class="p">,</span>
+                <span class="mf">3.92864</span>
+            <span class="p">],</span>
+            <span class="p">[</span>
+                <span class="mf">56749.8</span><span class="p">,</span>
+                <span class="mi">0</span>
+            <span class="p">],</span>
+            <span class="p">...</span>
+        <span class="p">],</span>
+        <span class="s2">"bids"</span><span class="p">:[</span>
+            <span class="p">[</span>
+                <span class="mf">56745.2</span><span class="p">,</span>
+                <span class="mf">1.03895025</span>
+            <span class="p">],</span>
+            <span class="p">[</span>
+                <span class="mf">56744.6</span><span class="p">,</span>
+                <span class="mf">1.0807</span>
+            <span class="p">],</span>
+            <span class="p">...</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </code></pre><h2 id='trade'>trade</h2>
 <ul>
 <li>Push interval: real-time push</li>
@@ -3477,31 +3477,31 @@ GET /v1/positions
 <td><code>{symbol}@trade</code></td>
 </tr>
 </tbody></table>
-<pre class="highlight plaintext"><code>{
-    "id": "clientID3",
-    "topic": "SPOT_ADA_USDT@trade",
-    "event": "subscribe"
-}
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"clientID3"</span><span class="p">,</span>
+    <span class="s2">"topic"</span><span class="p">:</span> <span class="s2">"SPOT_ADA_USDT@trade"</span><span class="p">,</span>
+    <span class="s2">"event"</span><span class="p">:</span> <span class="s2">"subscribe"</span>
+<span class="p">}</span>
 </code></pre>
 <p><strong>Response</strong></p>
-<pre class="highlight plaintext"><code>{
-    "id": "clientID3",
-    "event": "subscribe",
-    "success": true,
-    "ts": 1609924478533
-}
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"clientID3"</span><span class="p">,</span>
+    <span class="s2">"event"</span><span class="p">:</span> <span class="s2">"subscribe"</span><span class="p">,</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"ts"</span><span class="p">:</span> <span class="mi">1609924478533</span>
+<span class="p">}</span>
 </code></pre>
 <p><strong>Subscribed Message</strong></p>
-<pre class="highlight plaintext"><code>{
-    "topic":"SPOT_ADA_USDT@trade",
-    "ts":1618820361552,
-    "data":{
-        "symbol":"SPOT_ADA_USDT",
-        "price":1.27988,
-        "size":300,
-        "side":"BUY"
-    }
-}
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"topic"</span><span class="p">:</span><span class="s2">"SPOT_ADA_USDT@trade"</span><span class="p">,</span>
+    <span class="s2">"ts"</span><span class="p">:</span><span class="mi">1618820361552</span><span class="p">,</span>
+    <span class="s2">"data"</span><span class="p">:{</span>
+        <span class="s2">"symbol"</span><span class="p">:</span><span class="s2">"SPOT_ADA_USDT"</span><span class="p">,</span>
+        <span class="s2">"price"</span><span class="p">:</span><span class="mf">1.27988</span><span class="p">,</span>
+        <span class="s2">"size"</span><span class="p">:</span><span class="mi">300</span><span class="p">,</span>
+        <span class="s2">"side"</span><span class="p">:</span><span class="s2">"BUY"</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </code></pre><h2 id='24h-ticker'>24h ticker</h2>
 <ul>
 <li>Push interval: 1s</li>
@@ -3536,35 +3536,35 @@ GET /v1/positions
 <td><code>{symbol}@ticker</code></td>
 </tr>
 </tbody></table>
-<pre class="highlight plaintext"><code>{
-    "id": "clientID4",
-    "topic": "SPOT_WOO_USDT@ticker",
-    "event": "subscribe"
-}
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"clientID4"</span><span class="p">,</span>
+    <span class="s2">"topic"</span><span class="p">:</span> <span class="s2">"SPOT_WOO_USDT@ticker"</span><span class="p">,</span>
+    <span class="s2">"event"</span><span class="p">:</span> <span class="s2">"subscribe"</span>
+<span class="p">}</span>
 </code></pre>
 <p><strong>Response</strong></p>
-<pre class="highlight plaintext"><code>{
-    "id": "clientID4",
-    "event": "subscribe",
-    "success": true,
-    "ts": 1609924478533
-}
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"clientID4"</span><span class="p">,</span>
+    <span class="s2">"event"</span><span class="p">:</span> <span class="s2">"subscribe"</span><span class="p">,</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"ts"</span><span class="p">:</span> <span class="mi">1609924478533</span>
+<span class="p">}</span>
 </code></pre>
 <p><strong>Subscribed Message</strong></p>
-<pre class="highlight plaintext"><code>{
-    "topic": "SPOT_WOO_USDT@ticker",
-    "ts": 1614152270000,
-    "data": {
-        "symbol": "SPOT_WOO_USDT",
-        "open": 0.16112,
-        "close": 0.32206,
-        "high": 0.33000,
-        "low": 0.14251,
-        "volume": 89040821.98,
-        "amount": 22493062.21,
-        "count": 15442
-    }
-}
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"topic"</span><span class="p">:</span> <span class="s2">"SPOT_WOO_USDT@ticker"</span><span class="p">,</span>
+    <span class="s2">"ts"</span><span class="p">:</span> <span class="mi">1614152270000</span><span class="p">,</span>
+    <span class="s2">"data"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"symbol"</span><span class="p">:</span> <span class="s2">"SPOT_WOO_USDT"</span><span class="p">,</span>
+        <span class="s2">"open"</span><span class="p">:</span> <span class="mf">0.16112</span><span class="p">,</span>
+        <span class="s2">"close"</span><span class="p">:</span> <span class="mf">0.32206</span><span class="p">,</span>
+        <span class="s2">"high"</span><span class="p">:</span> <span class="mf">0.33000</span><span class="p">,</span>
+        <span class="s2">"low"</span><span class="p">:</span> <span class="mf">0.14251</span><span class="p">,</span>
+        <span class="s2">"volume"</span><span class="p">:</span> <span class="mf">89040821.98</span><span class="p">,</span>
+        <span class="s2">"amount"</span><span class="p">:</span> <span class="mf">22493062.21</span><span class="p">,</span>
+        <span class="s2">"count"</span><span class="p">:</span> <span class="mi">15442</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </code></pre><h2 id='24h-tickers'>24h tickers</h2>
 <ul>
 <li>Push interval: 1s</li>
@@ -3599,48 +3599,48 @@ GET /v1/positions
 <td><code>tickers</code></td>
 </tr>
 </tbody></table>
-<pre class="highlight plaintext"><code>{
-    "id": "clientID4",
-    "topic": "tickers",
-    "event": "subscribe"
-}
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"clientID4"</span><span class="p">,</span>
+    <span class="s2">"topic"</span><span class="p">:</span> <span class="s2">"tickers"</span><span class="p">,</span>
+    <span class="s2">"event"</span><span class="p">:</span> <span class="s2">"subscribe"</span>
+<span class="p">}</span>
 </code></pre>
 <p><strong>Response</strong></p>
-<pre class="highlight plaintext"><code>{
-    "id": "clientID4",
-    "event": "subscribe",
-    "success": true,
-    "ts": 1609924478533
-}
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"clientID4"</span><span class="p">,</span>
+    <span class="s2">"event"</span><span class="p">:</span> <span class="s2">"subscribe"</span><span class="p">,</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"ts"</span><span class="p">:</span> <span class="mi">1609924478533</span>
+<span class="p">}</span>
 </code></pre>
 <p><strong>Subscribed Message</strong></p>
-<pre class="highlight plaintext"><code>{
-    "topic":"tickers",
-    "ts":1618820615000,
-    "data":[
-        {
-            "symbol":"SPOT_OKB_USDT",
-            "open":16.297,
-            "close":17.183,
-            "high":24.707,
-            "low":11.997,
-            "volume":0,
-            "amount":0,
-            "count":0
-        },
-        {
-            "symbol":"SPOT_XRP_USDT",
-            "open":1.3515,
-            "close":1.43794,
-            "high":1.96674,
-            "low":0.39264,
-            "volume":750127.1,
-            "amount":985440.5122,
-            "count":396
-        },
-       ...
-    ]
-}
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"topic"</span><span class="p">:</span><span class="s2">"tickers"</span><span class="p">,</span>
+    <span class="s2">"ts"</span><span class="p">:</span><span class="mi">1618820615000</span><span class="p">,</span>
+    <span class="s2">"data"</span><span class="p">:[</span>
+        <span class="p">{</span>
+            <span class="s2">"symbol"</span><span class="p">:</span><span class="s2">"SPOT_OKB_USDT"</span><span class="p">,</span>
+            <span class="s2">"open"</span><span class="p">:</span><span class="mf">16.297</span><span class="p">,</span>
+            <span class="s2">"close"</span><span class="p">:</span><span class="mf">17.183</span><span class="p">,</span>
+            <span class="s2">"high"</span><span class="p">:</span><span class="mf">24.707</span><span class="p">,</span>
+            <span class="s2">"low"</span><span class="p">:</span><span class="mf">11.997</span><span class="p">,</span>
+            <span class="s2">"volume"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"amount"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"count"</span><span class="p">:</span><span class="mi">0</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">"symbol"</span><span class="p">:</span><span class="s2">"SPOT_XRP_USDT"</span><span class="p">,</span>
+            <span class="s2">"open"</span><span class="p">:</span><span class="mf">1.3515</span><span class="p">,</span>
+            <span class="s2">"close"</span><span class="p">:</span><span class="mf">1.43794</span><span class="p">,</span>
+            <span class="s2">"high"</span><span class="p">:</span><span class="mf">1.96674</span><span class="p">,</span>
+            <span class="s2">"low"</span><span class="p">:</span><span class="mf">0.39264</span><span class="p">,</span>
+            <span class="s2">"volume"</span><span class="p">:</span><span class="mf">750127.1</span><span class="p">,</span>
+            <span class="s2">"amount"</span><span class="p">:</span><span class="mf">985440.5122</span><span class="p">,</span>
+            <span class="s2">"count"</span><span class="p">:</span><span class="mi">396</span>
+        <span class="p">},</span>
+       <span class="p">...</span>
+    <span class="p">]</span>
+<span class="p">}</span>
 </code></pre><h2 id='bbo'>bbo</h2>
 <ul>
 <li>Push interval: 200ms</li>
@@ -3675,32 +3675,32 @@ GET /v1/positions
 <td><code>{symbol}@bbo</code></td>
 </tr>
 </tbody></table>
-<pre class="highlight plaintext"><code>{
-    "id": "clientID5",
-    "topic": "SPOT_WOO_USDT@bbo",
-    "event": "subscribe"
-}
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"clientID5"</span><span class="p">,</span>
+    <span class="s2">"topic"</span><span class="p">:</span> <span class="s2">"SPOT_WOO_USDT@bbo"</span><span class="p">,</span>
+    <span class="s2">"event"</span><span class="p">:</span> <span class="s2">"subscribe"</span>
+<span class="p">}</span>
 </code></pre>
 <p><strong>Response</strong></p>
-<pre class="highlight plaintext"><code>{
-    "id": "clientID5",
-    "event": "subscribe",
-    "success": true,
-    "ts": 1609924478533
-}
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"clientID5"</span><span class="p">,</span>
+    <span class="s2">"event"</span><span class="p">:</span> <span class="s2">"subscribe"</span><span class="p">,</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"ts"</span><span class="p">:</span> <span class="mi">1609924478533</span>
+<span class="p">}</span>
 </code></pre>
 <p><strong>Subscribed Message</strong></p>
-<pre class="highlight plaintext"><code>{
-    "topic": "SPOT_WOO_USDT@bbo",
-    "ts": 1614152296945,
-    "data": {
-        "symbol": "SPOT_WOO_USDT",
-        "ask": 0.30939,
-        "askSize": 4508.53,
-        "bid": 0.30776,
-        "bidSize": 25246.14
-    }
-}
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"topic"</span><span class="p">:</span> <span class="s2">"SPOT_WOO_USDT@bbo"</span><span class="p">,</span>
+    <span class="s2">"ts"</span><span class="p">:</span> <span class="mi">1614152296945</span><span class="p">,</span>
+    <span class="s2">"data"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"symbol"</span><span class="p">:</span> <span class="s2">"SPOT_WOO_USDT"</span><span class="p">,</span>
+        <span class="s2">"ask"</span><span class="p">:</span> <span class="mf">0.30939</span><span class="p">,</span>
+        <span class="s2">"askSize"</span><span class="p">:</span> <span class="mf">4508.53</span><span class="p">,</span>
+        <span class="s2">"bid"</span><span class="p">:</span> <span class="mf">0.30776</span><span class="p">,</span>
+        <span class="s2">"bidSize"</span><span class="p">:</span> <span class="mf">25246.14</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </code></pre><h2 id='bbos'>bbos</h2>
 <ul>
 <li>Push interval: 1s</li>
@@ -3735,42 +3735,42 @@ GET /v1/positions
 <td><code>bbos</code></td>
 </tr>
 </tbody></table>
-<pre class="highlight plaintext"><code>{
-    "id": "clientID5",
-    "topic": "bbos",
-    "event": "subscribe"
-}
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"clientID5"</span><span class="p">,</span>
+    <span class="s2">"topic"</span><span class="p">:</span> <span class="s2">"bbos"</span><span class="p">,</span>
+    <span class="s2">"event"</span><span class="p">:</span> <span class="s2">"subscribe"</span>
+<span class="p">}</span>
 </code></pre>
 <p><strong>Response</strong></p>
-<pre class="highlight plaintext"><code>{
-    "id": "clientID5",
-    "event": "subscribe",
-    "success": true,
-    "ts": 1609924478533
-}
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"clientID5"</span><span class="p">,</span>
+    <span class="s2">"event"</span><span class="p">:</span> <span class="s2">"subscribe"</span><span class="p">,</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"ts"</span><span class="p">:</span> <span class="mi">1609924478533</span>
+<span class="p">}</span>
 </code></pre>
 <p><strong>Subscribed Message</strong></p>
-<pre class="highlight plaintext"><code>{
-    "topic":"bbos",
-    "ts":1618822376000,
-    "data":[
-        {
-            "symbol":"SPOT_FIL_USDT",
-            "ask":159.0318,
-            "askSize":370.43,
-            "bid":158.9158,
-            "bidSize":16
-        },
-        {
-            "symbol":"SPOT_BTC_USDT",
-            "ask":56987.18,
-            "askSize":3.163881,
-            "bid":56987.17,
-            "bidSize":0.941728
-        },
-       ...
-    ]
-}
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"topic"</span><span class="p">:</span><span class="s2">"bbos"</span><span class="p">,</span>
+    <span class="s2">"ts"</span><span class="p">:</span><span class="mi">1618822376000</span><span class="p">,</span>
+    <span class="s2">"data"</span><span class="p">:[</span>
+        <span class="p">{</span>
+            <span class="s2">"symbol"</span><span class="p">:</span><span class="s2">"SPOT_FIL_USDT"</span><span class="p">,</span>
+            <span class="s2">"ask"</span><span class="p">:</span><span class="mf">159.0318</span><span class="p">,</span>
+            <span class="s2">"askSize"</span><span class="p">:</span><span class="mf">370.43</span><span class="p">,</span>
+            <span class="s2">"bid"</span><span class="p">:</span><span class="mf">158.9158</span><span class="p">,</span>
+            <span class="s2">"bidSize"</span><span class="p">:</span><span class="mi">16</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">"symbol"</span><span class="p">:</span><span class="s2">"SPOT_BTC_USDT"</span><span class="p">,</span>
+            <span class="s2">"ask"</span><span class="p">:</span><span class="mf">56987.18</span><span class="p">,</span>
+            <span class="s2">"askSize"</span><span class="p">:</span><span class="mf">3.163881</span><span class="p">,</span>
+            <span class="s2">"bid"</span><span class="p">:</span><span class="mf">56987.17</span><span class="p">,</span>
+            <span class="s2">"bidSize"</span><span class="p">:</span><span class="mf">0.941728</span>
+        <span class="p">},</span>
+       <span class="p">...</span>
+    <span class="p">]</span>
+<span class="p">}</span>
 </code></pre><h2 id='k-line'>k-line</h2>
 <ul>
 <li><code>{time}</code>: <code>1m</code>/<code>5m</code>/<code>15m</code>/<code>30m</code>/<code>1h</code>/<code>1d</code>/<code>1w</code>/<code>1M</code></li>
@@ -3806,37 +3806,37 @@ GET /v1/positions
 <td><code>{symbol}@kline_{time}</code></td>
 </tr>
 </tbody></table>
-<pre class="highlight plaintext"><code>{
-    "id": "clientID6",
-    "topic": "SPOT_BTC_USDT@kline_1m",
-    "event": "subscribe"
-}
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"clientID6"</span><span class="p">,</span>
+    <span class="s2">"topic"</span><span class="p">:</span> <span class="s2">"SPOT_BTC_USDT@kline_1m"</span><span class="p">,</span>
+    <span class="s2">"event"</span><span class="p">:</span> <span class="s2">"subscribe"</span>
+<span class="p">}</span>
 </code></pre>
 <p><strong>Response</strong></p>
-<pre class="highlight plaintext"><code>{
-    "id": "clientID6",
-    "event": "subscribe",
-    "success": true,
-    "ts": 1609924478533
-}
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"clientID6"</span><span class="p">,</span>
+    <span class="s2">"event"</span><span class="p">:</span> <span class="s2">"subscribe"</span><span class="p">,</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"ts"</span><span class="p">:</span> <span class="mi">1609924478533</span>
+<span class="p">}</span>
 </code></pre>
 <p><strong>Subscribed Message</strong></p>
-<pre class="highlight plaintext"><code>{
-    "topic":"SPOT_BTC_USDT@kline_1m",
-    "ts":1618822432146,
-    "data":{
-        "symbol":"SPOT_BTC_USDT",
-        "type":"1m",
-        "open":56948.97,
-        "close":56891.76,
-        "high":56948.97,
-        "low":56889.06,
-        "volume":44.00947568,
-        "amount":2504584.9,
-        "startTime":1618822380000,
-        "endTime":1618822440000
-    }
-}
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"topic"</span><span class="p">:</span><span class="s2">"SPOT_BTC_USDT@kline_1m"</span><span class="p">,</span>
+    <span class="s2">"ts"</span><span class="p">:</span><span class="mi">1618822432146</span><span class="p">,</span>
+    <span class="s2">"data"</span><span class="p">:{</span>
+        <span class="s2">"symbol"</span><span class="p">:</span><span class="s2">"SPOT_BTC_USDT"</span><span class="p">,</span>
+        <span class="s2">"type"</span><span class="p">:</span><span class="s2">"1m"</span><span class="p">,</span>
+        <span class="s2">"open"</span><span class="p">:</span><span class="mf">56948.97</span><span class="p">,</span>
+        <span class="s2">"close"</span><span class="p">:</span><span class="mf">56891.76</span><span class="p">,</span>
+        <span class="s2">"high"</span><span class="p">:</span><span class="mf">56948.97</span><span class="p">,</span>
+        <span class="s2">"low"</span><span class="p">:</span><span class="mf">56889.06</span><span class="p">,</span>
+        <span class="s2">"volume"</span><span class="p">:</span><span class="mf">44.00947568</span><span class="p">,</span>
+        <span class="s2">"amount"</span><span class="p">:</span><span class="mf">2504584.9</span><span class="p">,</span>
+        <span class="s2">"startTime"</span><span class="p">:</span><span class="mi">1618822380000</span><span class="p">,</span>
+        <span class="s2">"endTime"</span><span class="p">:</span><span class="mi">1618822440000</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </code></pre><h2 id='auth'>auth</h2>
 <ul>
 <li>refer to <a href="#authentication">Authenticaton</a> for more details about how to sign the request with <code>api_key</code> and <code>api_secret</code>. <strong>query string</strong> and <strong>body parameters</strong> are both blank.</li>
@@ -3871,23 +3871,23 @@ GET /v1/positions
 <td>timestamp</td>
 </tr>
 </tbody></table>
-<pre class="highlight plaintext"><code>{
-    "id":"123r",
-    "event":"auth",
-    "params":{
-        "apikey":"CUS69ZJOXwSV38xo...",
-        "sign":"4180da84117fc9753b...",
-        "timestamp":"1621910107900"
-    }
-}
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"id"</span><span class="p">:</span><span class="s2">"123r"</span><span class="p">,</span>
+    <span class="s2">"event"</span><span class="p">:</span><span class="s2">"auth"</span><span class="p">,</span>
+    <span class="s2">"params"</span><span class="p">:{</span>
+        <span class="s2">"apikey"</span><span class="p">:</span><span class="s2">"CUS69ZJOXwSV38xo..."</span><span class="p">,</span>
+        <span class="s2">"sign"</span><span class="p">:</span><span class="s2">"4180da84117fc9753b..."</span><span class="p">,</span>
+        <span class="s2">"timestamp"</span><span class="p">:</span><span class="s2">"1621910107900"</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </code></pre>
 <p><strong>Response</strong></p>
-<pre class="highlight plaintext"><code>{
-    "id":"123r",
-    "event":"auth",
-    "success":true,
-    "ts":1621910107315
-}
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"id"</span><span class="p">:</span><span class="s2">"123r"</span><span class="p">,</span>
+    <span class="s2">"event"</span><span class="p">:</span><span class="s2">"auth"</span><span class="p">,</span>
+    <span class="s2">"success"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"ts"</span><span class="p">:</span><span class="mi">1621910107315</span>
+<span class="p">}</span>
 </code></pre><h2 id='positioninfo'>positioninfo</h2>
 <ul>
 <li>Push interval: 1s</li>
@@ -3922,74 +3922,74 @@ GET /v1/positions
 <td><code>positioninfo</code></td>
 </tr>
 </tbody></table>
-<pre class="highlight plaintext"><code>{
-    "id": "clientID3",
-    "topic": "positioninfo",
-    "event": "subscribe"
-}
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"clientID3"</span><span class="p">,</span>
+    <span class="s2">"topic"</span><span class="p">:</span> <span class="s2">"positioninfo"</span><span class="p">,</span>
+    <span class="s2">"event"</span><span class="p">:</span> <span class="s2">"subscribe"</span>
+<span class="p">}</span>
 </code></pre>
 <p><strong>Response</strong></p>
-<pre class="highlight plaintext"><code>{
-    "id": "clientID3",
-    "event": "subscribe",
-    "success": true,
-    "ts": 1609924478533
-}
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"clientID3"</span><span class="p">,</span>
+    <span class="s2">"event"</span><span class="p">:</span> <span class="s2">"subscribe"</span><span class="p">,</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"ts"</span><span class="p">:</span> <span class="mi">1609924478533</span>
+<span class="p">}</span>
 </code></pre>
 <p><strong>Subscribed Message</strong></p>
-<pre class="highlight plaintext"><code>{
-    "topic":"positioninfo",
-    "ts":1618757307607,
-    "data":{
-        "marginRate":95.87,
-        "marginMode":"MARGIN",
-        "leverage":3,
-        "takerFeeRate":5,
-        "makerFeeRate":0,
-        "interestRate":3,
-        "guiTakerFeeRate":5,
-        "guiMakerFeeRate":0,
-        "liquidationMarginRate":95.87,
-        "futuresLeverage":1,
-        "futuresApiTakerFeeRate":5,
-        "futuresApiMakerFeeRate":0,
-        "futuresGuiTakerFeeRate":5,
-        "futuresGuiMakerFeeRate":0,
-        "positions":{
-            "BTC":{
-                "holding":0,
-                "outstandingHolding":0,
-                "pendingExposure":0,
-                "interest":0,
-                "avgOpenPrice":0,
-                "breakEvenPrice":0,
-                "realisedPnl":0,
-                "settledPnl":0,
-                "markPx":309.8,
-                "liquidPx":0,
-                "pnl24H":0,
-                "fee24H":0,
-                "frozen":0
-            },
-            "ETH":{
-                "holding":0,
-                "outstandingHolding":0,
-                "pendingExposure":0,
-                "interest":0,
-                "avgOpenPrice":0,
-                "breakEvenPrice":0,
-                "realisedPnl":0,
-                "settledPnl":0,
-                "markPx":909.19,
-                "liquidPx":0,
-                "pnl24H":0,
-                "fee24H":0,
-                "frozen":0
-            },
-           ...
-        }
-    }
-}
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"topic"</span><span class="p">:</span><span class="s2">"positioninfo"</span><span class="p">,</span>
+    <span class="s2">"ts"</span><span class="p">:</span><span class="mi">1618757307607</span><span class="p">,</span>
+    <span class="s2">"data"</span><span class="p">:{</span>
+        <span class="s2">"marginRate"</span><span class="p">:</span><span class="mf">95.87</span><span class="p">,</span>
+        <span class="s2">"marginMode"</span><span class="p">:</span><span class="s2">"MARGIN"</span><span class="p">,</span>
+        <span class="s2">"leverage"</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span>
+        <span class="s2">"takerFeeRate"</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span>
+        <span class="s2">"makerFeeRate"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"interestRate"</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span>
+        <span class="s2">"guiTakerFeeRate"</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span>
+        <span class="s2">"guiMakerFeeRate"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"liquidationMarginRate"</span><span class="p">:</span><span class="mf">95.87</span><span class="p">,</span>
+        <span class="s2">"futuresLeverage"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+        <span class="s2">"futuresApiTakerFeeRate"</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span>
+        <span class="s2">"futuresApiMakerFeeRate"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"futuresGuiTakerFeeRate"</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span>
+        <span class="s2">"futuresGuiMakerFeeRate"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"positions"</span><span class="p">:{</span>
+            <span class="s2">"BTC"</span><span class="p">:{</span>
+                <span class="s2">"holding"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"outstandingHolding"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"pendingExposure"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"interest"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"avgOpenPrice"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"breakEvenPrice"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"realisedPnl"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"settledPnl"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"markPx"</span><span class="p">:</span><span class="mf">309.8</span><span class="p">,</span>
+                <span class="s2">"liquidPx"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"pnl24H"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"fee24H"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"frozen"</span><span class="p">:</span><span class="mi">0</span>
+            <span class="p">},</span>
+            <span class="s2">"ETH"</span><span class="p">:{</span>
+                <span class="s2">"holding"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"outstandingHolding"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"pendingExposure"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"interest"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"avgOpenPrice"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"breakEvenPrice"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"realisedPnl"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"settledPnl"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"markPx"</span><span class="p">:</span><span class="mf">909.19</span><span class="p">,</span>
+                <span class="s2">"liquidPx"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"pnl24H"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"fee24H"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"frozen"</span><span class="p">:</span><span class="mi">0</span>
+            <span class="p">},</span>
+           <span class="p">...</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </code></pre><h2 id='executionreport'>executionreport</h2>
 <ul>
 <li>Push interval: real-time push</li>
@@ -4024,54 +4024,54 @@ GET /v1/positions
 <td><code>executionreport</code></td>
 </tr>
 </tbody></table>
-<pre class="highlight plaintext"><code>{
-    "id": "clientID3",
-    "topic": "executionreport",
-    "event": "subscribe"
-}
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"clientID3"</span><span class="p">,</span>
+    <span class="s2">"topic"</span><span class="p">:</span> <span class="s2">"executionreport"</span><span class="p">,</span>
+    <span class="s2">"event"</span><span class="p">:</span> <span class="s2">"subscribe"</span>
+<span class="p">}</span>
 </code></pre>
 <p><strong>Response</strong></p>
-<pre class="highlight plaintext"><code>{
-    "id": "clientID3",
-    "event": "subscribe",
-    "success": true,
-    "ts": 1609924478533
-}
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"clientID3"</span><span class="p">,</span>
+    <span class="s2">"event"</span><span class="p">:</span> <span class="s2">"subscribe"</span><span class="p">,</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"ts"</span><span class="p">:</span> <span class="mi">1609924478533</span>
+<span class="p">}</span>
 </code></pre>
 <p><strong>Subscribed Message</strong></p>
-<pre class="highlight plaintext"><code>{
-    "topic":"executionreport",
-    "ts":1618757714353,
-    "data":{
-        "symbol":"SPOT_XRP_USDT",
-        "clientOrderId":0,
-        "orderId":4506424,
-        "type":"LIMIT",
-        "side":"BUY",
-        "quantity":750127.1,
-        "price":11,
-        "tradeId":1870568,
-        "executedPrice":1.32014,
-        "executedQuantity":6620.6,
-        "fee":1.98618,
-        "feeAsset":"XRP",
-        "totalExecutedQuantity":720891.2,
-        "avgPrice":1.31344,
-        "status":"PARTIAL_FILLED",
-        "reason":"",
-        "orderTag":"default",
-        "totalFee":216.26736,
-        "timestamp":1618757714353,
-        "maker":false
-    }
-}
-</code></pre><h2 id='error-response'>error response</h2><pre class="highlight plaintext"><code>{
-    "id": "clientID7",
-    "event": "subscribe",
-    "success": false,
-    "ts": 1614141150601,
-    "errorMsg": "invalid symbol SPOT_WOO_USDC"
-}
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"topic"</span><span class="p">:</span><span class="s2">"executionreport"</span><span class="p">,</span>
+    <span class="s2">"ts"</span><span class="p">:</span><span class="mi">1618757714353</span><span class="p">,</span>
+    <span class="s2">"data"</span><span class="p">:{</span>
+        <span class="s2">"symbol"</span><span class="p">:</span><span class="s2">"SPOT_XRP_USDT"</span><span class="p">,</span>
+        <span class="s2">"clientOrderId"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"orderId"</span><span class="p">:</span><span class="mi">4506424</span><span class="p">,</span>
+        <span class="s2">"type"</span><span class="p">:</span><span class="s2">"LIMIT"</span><span class="p">,</span>
+        <span class="s2">"side"</span><span class="p">:</span><span class="s2">"BUY"</span><span class="p">,</span>
+        <span class="s2">"quantity"</span><span class="p">:</span><span class="mf">750127.1</span><span class="p">,</span>
+        <span class="s2">"price"</span><span class="p">:</span><span class="mi">11</span><span class="p">,</span>
+        <span class="s2">"tradeId"</span><span class="p">:</span><span class="mi">1870568</span><span class="p">,</span>
+        <span class="s2">"executedPrice"</span><span class="p">:</span><span class="mf">1.32014</span><span class="p">,</span>
+        <span class="s2">"executedQuantity"</span><span class="p">:</span><span class="mf">6620.6</span><span class="p">,</span>
+        <span class="s2">"fee"</span><span class="p">:</span><span class="mf">1.98618</span><span class="p">,</span>
+        <span class="s2">"feeAsset"</span><span class="p">:</span><span class="s2">"XRP"</span><span class="p">,</span>
+        <span class="s2">"totalExecutedQuantity"</span><span class="p">:</span><span class="mf">720891.2</span><span class="p">,</span>
+        <span class="s2">"avgPrice"</span><span class="p">:</span><span class="mf">1.31344</span><span class="p">,</span>
+        <span class="s2">"status"</span><span class="p">:</span><span class="s2">"PARTIAL_FILLED"</span><span class="p">,</span>
+        <span class="s2">"reason"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span>
+        <span class="s2">"orderTag"</span><span class="p">:</span><span class="s2">"default"</span><span class="p">,</span>
+        <span class="s2">"totalFee"</span><span class="p">:</span><span class="mf">216.26736</span><span class="p">,</span>
+        <span class="s2">"timestamp"</span><span class="p">:</span><span class="mi">1618757714353</span><span class="p">,</span>
+        <span class="s2">"maker"</span><span class="p">:</span><span class="kc">false</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre><h2 id='error-response'>error response</h2><pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"clientID7"</span><span class="p">,</span>
+    <span class="s2">"event"</span><span class="p">:</span> <span class="s2">"subscribe"</span><span class="p">,</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="s2">"ts"</span><span class="p">:</span> <span class="mi">1614141150601</span><span class="p">,</span>
+    <span class="s2">"errorMsg"</span><span class="p">:</span> <span class="s2">"invalid symbol SPOT_WOO_USDC"</span>
+<span class="p">}</span>
 </code></pre><h2 id='indexprice'>indexprice</h2>
 <ul>
 <li>Push interval: 1s</li>
@@ -4106,29 +4106,29 @@ GET /v1/positions
 <td><code>{symbol}@indexprice</code></td>
 </tr>
 </tbody></table>
-<pre class="highlight plaintext"><code>{
-    "id": "clientID3",
-    "topic": "SPOT_ETH_USDT@indexprice",
-    "event": "subscribe"
-}
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"clientID3"</span><span class="p">,</span>
+    <span class="s2">"topic"</span><span class="p">:</span> <span class="s2">"SPOT_ETH_USDT@indexprice"</span><span class="p">,</span>
+    <span class="s2">"event"</span><span class="p">:</span> <span class="s2">"subscribe"</span>
+<span class="p">}</span>
 </code></pre>
 <p><strong>Response</strong></p>
-<pre class="highlight plaintext"><code>{
-    "id": "clientID3",
-    "event": "subscribe",
-    "success": true,
-    "ts": 1609924478533
-}
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"clientID3"</span><span class="p">,</span>
+    <span class="s2">"event"</span><span class="p">:</span> <span class="s2">"subscribe"</span><span class="p">,</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"ts"</span><span class="p">:</span> <span class="mi">1609924478533</span>
+<span class="p">}</span>
 </code></pre>
 <p><strong>Subscribed Message</strong></p>
-<pre class="highlight plaintext"><code>{
-    "topic":"SPOT_ETH_USDT@indexprice",
-    "ts":1618820361552,
-    "data":{
-        "symbol":"SPOT_ETH_USDT",
-        "price":3987.1
-    }
-}
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"topic"</span><span class="p">:</span><span class="s2">"SPOT_ETH_USDT@indexprice"</span><span class="p">,</span>
+    <span class="s2">"ts"</span><span class="p">:</span><span class="mi">1618820361552</span><span class="p">,</span>
+    <span class="s2">"data"</span><span class="p">:{</span>
+        <span class="s2">"symbol"</span><span class="p">:</span><span class="s2">"SPOT_ETH_USDT"</span><span class="p">,</span>
+        <span class="s2">"price"</span><span class="p">:</span><span class="mf">3987.1</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </code></pre><h2 id='markprice'>markprice</h2>
 <ul>
 <li>Push interval: 1s</li>
@@ -4163,29 +4163,29 @@ GET /v1/positions
 <td><code>{symbol}@markprice</code></td>
 </tr>
 </tbody></table>
-<pre class="highlight plaintext"><code>{
-    "id": "clientID3",
-    "topic": "PERP_ETH_USDT@markprice",
-    "event": "subscribe"
-}
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"clientID3"</span><span class="p">,</span>
+    <span class="s2">"topic"</span><span class="p">:</span> <span class="s2">"PERP_ETH_USDT@markprice"</span><span class="p">,</span>
+    <span class="s2">"event"</span><span class="p">:</span> <span class="s2">"subscribe"</span>
+<span class="p">}</span>
 </code></pre>
 <p><strong>Response</strong></p>
-<pre class="highlight plaintext"><code>{
-    "id": "clientID3",
-    "event": "subscribe",
-    "success": true,
-    "ts": 1609924478533
-}
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"clientID3"</span><span class="p">,</span>
+    <span class="s2">"event"</span><span class="p">:</span> <span class="s2">"subscribe"</span><span class="p">,</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"ts"</span><span class="p">:</span> <span class="mi">1609924478533</span>
+<span class="p">}</span>
 </code></pre>
 <p><strong>Subscribed Message</strong></p>
-<pre class="highlight plaintext"><code>{
-    "topic":"PERP_ETH_USDT@markprice",
-    "ts":1618820361552,
-    "data":{
-        "symbol":"PERP_ETH_USDT",
-        "price":3987.2
-    }
-}
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"topic"</span><span class="p">:</span><span class="s2">"PERP_ETH_USDT@markprice"</span><span class="p">,</span>
+    <span class="s2">"ts"</span><span class="p">:</span><span class="mi">1618820361552</span><span class="p">,</span>
+    <span class="s2">"data"</span><span class="p">:{</span>
+        <span class="s2">"symbol"</span><span class="p">:</span><span class="s2">"PERP_ETH_USDT"</span><span class="p">,</span>
+        <span class="s2">"price"</span><span class="p">:</span><span class="mf">3987.2</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </code></pre><h2 id='openinterest'>openinterest</h2>
 <ul>
 <li>Push interval: 1s</li>
@@ -4220,29 +4220,29 @@ GET /v1/positions
 <td><code>{symbol}@openinterest</code></td>
 </tr>
 </tbody></table>
-<pre class="highlight plaintext"><code>{
-    "id": "clientID3",
-    "topic": "PERP_BTC_USDT@openinterest",
-    "event": "subscribe"
-}
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"clientID3"</span><span class="p">,</span>
+    <span class="s2">"topic"</span><span class="p">:</span> <span class="s2">"PERP_BTC_USDT@openinterest"</span><span class="p">,</span>
+    <span class="s2">"event"</span><span class="p">:</span> <span class="s2">"subscribe"</span>
+<span class="p">}</span>
 </code></pre>
 <p><strong>Response</strong></p>
-<pre class="highlight plaintext"><code>{
-    "id": "clientID3",
-    "event": "subscribe",
-    "success": true,
-    "ts": 1609924478533
-}
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"clientID3"</span><span class="p">,</span>
+    <span class="s2">"event"</span><span class="p">:</span> <span class="s2">"subscribe"</span><span class="p">,</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"ts"</span><span class="p">:</span> <span class="mi">1609924478533</span>
+<span class="p">}</span>
 </code></pre>
 <p><strong>Subscribed Message</strong></p>
-<pre class="highlight plaintext"><code>{
-    "topic":"PERP_BTC_USDT@openinterest",
-    "ts":1618820361552,
-    "data":{
-        "symbol":"PERP_BTC_USDT",
-        "openInterest":1.27988
-    }
-}
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"topic"</span><span class="p">:</span><span class="s2">"PERP_BTC_USDT@openinterest"</span><span class="p">,</span>
+    <span class="s2">"ts"</span><span class="p">:</span><span class="mi">1618820361552</span><span class="p">,</span>
+    <span class="s2">"data"</span><span class="p">:{</span>
+        <span class="s2">"symbol"</span><span class="p">:</span><span class="s2">"PERP_BTC_USDT"</span><span class="p">,</span>
+        <span class="s2">"openInterest"</span><span class="p">:</span><span class="mf">1.27988</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </code></pre><h2 id='estfundingrate'>estfundingrate</h2>
 <ul>
 <li>Push interval: 1s</li>
@@ -4277,30 +4277,30 @@ GET /v1/positions
 <td><code>{symbol}@estfundingrate</code></td>
 </tr>
 </tbody></table>
-<pre class="highlight plaintext"><code>{
-    "id": "clientID3",
-    "topic": "PERP_BTC_USDT@estfundingrate",
-    "event": "subscribe"
-}
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"clientID3"</span><span class="p">,</span>
+    <span class="s2">"topic"</span><span class="p">:</span> <span class="s2">"PERP_BTC_USDT@estfundingrate"</span><span class="p">,</span>
+    <span class="s2">"event"</span><span class="p">:</span> <span class="s2">"subscribe"</span>
+<span class="p">}</span>
 </code></pre>
 <p><strong>Response</strong></p>
-<pre class="highlight plaintext"><code>{
-    "id": "clientID3",
-    "event": "subscribe",
-    "success": true,
-    "ts": 1609924478533
-}
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"clientID3"</span><span class="p">,</span>
+    <span class="s2">"event"</span><span class="p">:</span> <span class="s2">"subscribe"</span><span class="p">,</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"ts"</span><span class="p">:</span> <span class="mi">1609924478533</span>
+<span class="p">}</span>
 </code></pre>
 <p><strong>Subscribed Message</strong></p>
-<pre class="highlight plaintext"><code>{
-    "topic":"PERP_BTC_USDT@estfundingrate",
-    "ts":1618820361552,
-    "data":{
-        "symbol":"PERP_BTC_USDT",
-        "fundingRate":1.27988,
-        "fundingTs":1618820361552
-    }
-}
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"topic"</span><span class="p">:</span><span class="s2">"PERP_BTC_USDT@estfundingrate"</span><span class="p">,</span>
+    <span class="s2">"ts"</span><span class="p">:</span><span class="mi">1618820361552</span><span class="p">,</span>
+    <span class="s2">"data"</span><span class="p">:{</span>
+        <span class="s2">"symbol"</span><span class="p">:</span><span class="s2">"PERP_BTC_USDT"</span><span class="p">,</span>
+        <span class="s2">"fundingRate"</span><span class="p">:</span><span class="mf">1.27988</span><span class="p">,</span>
+        <span class="s2">"fundingTs"</span><span class="p">:</span><span class="mi">1618820361552</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </code></pre><h2 id='markprices'>markprices</h2>
 <ul>
 <li>Push interval: 1s</li>
@@ -4335,36 +4335,36 @@ GET /v1/positions
 <td><code>markprices</code></td>
 </tr>
 </tbody></table>
-<pre class="highlight plaintext"><code>{
-    "id": "clientID5",
-    "topic": "markprices",
-    "event": "subscribe"
-}
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"clientID5"</span><span class="p">,</span>
+    <span class="s2">"topic"</span><span class="p">:</span> <span class="s2">"markprices"</span><span class="p">,</span>
+    <span class="s2">"event"</span><span class="p">:</span> <span class="s2">"subscribe"</span>
+<span class="p">}</span>
 </code></pre>
 <p><strong>Response</strong></p>
-<pre class="highlight plaintext"><code>{
-    "id": "clientID5",
-    "event": "subscribe",
-    "success": true,
-    "ts": 1609924478533
-}
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"clientID5"</span><span class="p">,</span>
+    <span class="s2">"event"</span><span class="p">:</span> <span class="s2">"subscribe"</span><span class="p">,</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"ts"</span><span class="p">:</span> <span class="mi">1609924478533</span>
+<span class="p">}</span>
 </code></pre>
 <p><strong>Subscribed Message</strong></p>
-<pre class="highlight plaintext"><code>{
-    "topic":"markprices",
-    "ts":1618822376000,
-    "data":[
-        {
-           "symbol":"PERP_BTC_USDT",
-            "price":51234.13
-        },
-        {
-            "symbol":"PERP_ETH_USDT",
-              "price":3894.34
-        },
-       ...
-    ]
-}
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"topic"</span><span class="p">:</span><span class="s2">"markprices"</span><span class="p">,</span>
+    <span class="s2">"ts"</span><span class="p">:</span><span class="mi">1618822376000</span><span class="p">,</span>
+    <span class="s2">"data"</span><span class="p">:[</span>
+        <span class="p">{</span>
+           <span class="s2">"symbol"</span><span class="p">:</span><span class="s2">"PERP_BTC_USDT"</span><span class="p">,</span>
+            <span class="s2">"price"</span><span class="p">:</span><span class="mf">51234.13</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">"symbol"</span><span class="p">:</span><span class="s2">"PERP_ETH_USDT"</span><span class="p">,</span>
+              <span class="s2">"price"</span><span class="p">:</span><span class="mf">3894.34</span>
+        <span class="p">},</span>
+       <span class="p">...</span>
+    <span class="p">]</span>
+<span class="p">}</span>
 </code></pre><h2 id='position-push'>position push</h2>
 <ul>
 <li>Push interval: push on update</li>
@@ -4399,39 +4399,39 @@ GET /v1/positions
 <td>position</td>
 </tr>
 </tbody></table>
-<pre class="highlight plaintext"><code>{
-    "id": "clientID5",
-    "topic": "position",
-    "event": "subscribe"
-}
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"clientID5"</span><span class="p">,</span>
+    <span class="s2">"topic"</span><span class="p">:</span> <span class="s2">"position"</span><span class="p">,</span>
+    <span class="s2">"event"</span><span class="p">:</span> <span class="s2">"subscribe"</span>
+<span class="p">}</span>
 </code></pre>
 <p>Response</p>
-<pre class="highlight plaintext"><code>{
-    "id": "clientID5",
-    "event": "subscribe",
-    "success": true,
-    "ts": 1609924478533
-}
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"clientID5"</span><span class="p">,</span>
+    <span class="s2">"event"</span><span class="p">:</span> <span class="s2">"subscribe"</span><span class="p">,</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"ts"</span><span class="p">:</span> <span class="mi">1609924478533</span>
+<span class="p">}</span>
 </code></pre>
 <p>Subscribed Message</p>
-<pre class="highlight plaintext"><code>{
-    "topic":"position",
-    "ts":1641439456774,
-    "data":[
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"topic"</span><span class="p">:</span><span class="s2">"position"</span><span class="p">,</span>
+    <span class="s2">"ts"</span><span class="p">:</span><span class="mi">1641439456774</span><span class="p">,</span>
+    <span class="s2">"data"</span><span class="p">:[</span>
 
-            {
-                "symbol":"PERP_BTC_USDT",
-                "holding":1.23,
-                "pendingLongQty":1.2,
-                "pendingShortQty":0.3,
-                "pnl24H":20,
-                "fee24H":12,
-                "avgOpenPrice":49000,
-                "settlePrice":50000,
-                "markPrice": 49500,
-            }
-        ]
-}
+            <span class="p">{</span>
+                <span class="s2">"symbol"</span><span class="p">:</span><span class="s2">"PERP_BTC_USDT"</span><span class="p">,</span>
+                <span class="s2">"holding"</span><span class="p">:</span><span class="mf">1.23</span><span class="p">,</span>
+                <span class="s2">"pendingLongQty"</span><span class="p">:</span><span class="mf">1.2</span><span class="p">,</span>
+                <span class="s2">"pendingShortQty"</span><span class="p">:</span><span class="mf">0.3</span><span class="p">,</span>
+                <span class="s2">"pnl24H"</span><span class="p">:</span><span class="mi">20</span><span class="p">,</span>
+                <span class="s2">"fee24H"</span><span class="p">:</span><span class="mi">12</span><span class="p">,</span>
+                <span class="s2">"avgOpenPrice"</span><span class="p">:</span><span class="mi">49000</span><span class="p">,</span>
+                <span class="s2">"settlePrice"</span><span class="p">:</span><span class="mi">50000</span><span class="p">,</span>
+                <span class="s2">"markPrice"</span><span class="p">:</span> <span class="mi">49500</span><span class="p">,</span>
+            <span class="p">}</span>
+        <span class="p">]</span>
+<span class="p">}</span>
 </code></pre><h1 id='release-note'>Release Note</h1>
 <p>All the API changes would be listed here.</p>
 <h2 id='2022-03-21'>2022-03-21</h2>
