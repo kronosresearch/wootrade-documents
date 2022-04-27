@@ -1026,28 +1026,28 @@ GET /v1/public/funding_rates
 <blockquote>
 <p><strong>Response</strong></p>
 </blockquote>
-<pre class="highlight plaintext"><code>{
-    "success": true,
-    "rows": [
-        {
-            "symbol": "PERP_BTC_USDT",
-            "est_funding_rate": 0.12345689,
-            "est_funding_rate_timestamp": 1636388220001,
-            "last_funding_rate": 0.12345689,
-            "last_funding_rate_timestamp": 1567411795000, // use rate to end calculating funding fee time
-            "next_funding_time": 1567411995000
-        },
-        {
-            "symbol": "PERP_ETH_USDT",
-            "est_funding_rate": 0.12345689,
-            "est_funding_rate_timestamp": 1636388220001,
-            "last_funding_rate": 0.12345689,
-            "last_funding_rate_timestamp": 1567411795000, // use rate to end calculating funding fee time
-             "next_funding_time": 1567411995000
-        }
-    ],
-    "timestamp": 1564710591905 // Unix epoch time in milliseconds
-}
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"rows"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">"symbol"</span><span class="p">:</span> <span class="s2">"PERP_BTC_USDT"</span><span class="p">,</span>
+            <span class="s2">"est_funding_rate"</span><span class="p">:</span> <span class="mf">0.12345689</span><span class="p">,</span>
+            <span class="s2">"est_funding_rate_timestamp"</span><span class="p">:</span> <span class="mi">1636388220001</span><span class="p">,</span>
+            <span class="s2">"last_funding_rate"</span><span class="p">:</span> <span class="mf">0.12345689</span><span class="p">,</span>
+            <span class="s2">"last_funding_rate_timestamp"</span><span class="p">:</span> <span class="mi">1567411795000</span><span class="p">,</span> <span class="c1">// use rate to end calculating funding fee time</span>
+            <span class="s2">"next_funding_time"</span><span class="p">:</span> <span class="mi">1567411995000</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">"symbol"</span><span class="p">:</span> <span class="s2">"PERP_ETH_USDT"</span><span class="p">,</span>
+            <span class="s2">"est_funding_rate"</span><span class="p">:</span> <span class="mf">0.12345689</span><span class="p">,</span>
+            <span class="s2">"est_funding_rate_timestamp"</span><span class="p">:</span> <span class="mi">1636388220001</span><span class="p">,</span>
+            <span class="s2">"last_funding_rate"</span><span class="p">:</span> <span class="mf">0.12345689</span><span class="p">,</span>
+            <span class="s2">"last_funding_rate_timestamp"</span><span class="p">:</span> <span class="mi">1567411795000</span><span class="p">,</span> <span class="c1">// use rate to end calculating funding fee time</span>
+             <span class="s2">"next_funding_time"</span><span class="p">:</span> <span class="mi">1567411995000</span>
+        <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="mi">1564710591905</span> <span class="c1">// Unix epoch time in milliseconds</span>
+<span class="p">}</span>
 </code></pre><h2 id='get-predicted-funding-rate-for-one-market-public'>Get Predicted Funding Rate for One Market (Public)</h2>
 <p><strong>Limit: 10 requests per 1 second per IP address</strong></p>
 
@@ -1078,16 +1078,16 @@ GET /v1/public/funding_rate/:symbol
 <blockquote>
 <p><strong>Response</strong></p>
 </blockquote>
-<pre class="highlight plaintext"><code>{
-    "success": true,
-    "symbol": "PERP_BTC_USDT",
-    "est_funding_rate": 0.12345689,
-    "est_funding_rate_timestamp": 1636388220001,
-    "last_funding_rate": 0.12345689,
-    "last_funding_rate_timestamp": 1567411795000, // use rate to end calculating funding fee time
-    "next_funding_time": 1567411995000
-    "timestamp": 1564710591905 // Unix epoch time in milliseconds
-}
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"symbol"</span><span class="p">:</span> <span class="s2">"PERP_BTC_USDT"</span><span class="p">,</span>
+    <span class="s2">"est_funding_rate"</span><span class="p">:</span> <span class="mf">0.12345689</span><span class="p">,</span>
+    <span class="s2">"est_funding_rate_timestamp"</span><span class="p">:</span> <span class="mi">1636388220001</span><span class="p">,</span>
+    <span class="s2">"last_funding_rate"</span><span class="p">:</span> <span class="mf">0.12345689</span><span class="p">,</span>
+    <span class="s2">"last_funding_rate_timestamp"</span><span class="p">:</span> <span class="mi">1567411795000</span><span class="p">,</span> <span class="c1">// use rate to end calculating funding fee time</span>
+    <span class="s2">"next_funding_time"</span><span class="p">:</span> <span class="mi">1567411995000</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="mi">1564710591905</span> <span class="c1">// Unix epoch time in milliseconds</span>
+<span class="p">}</span>
 </code></pre><h2 id='get-funding-rate-history-for-one-market-public'>Get Funding Rate History for One Market (Public)</h2>
 <p><strong>Limit: 10 requests per 1 second per IP address</strong></p>
 
@@ -1136,29 +1136,29 @@ GET /v1/public/funding_rate_history
 <blockquote>
 <p><strong>Response</strong></p>
 </blockquote>
-<pre class="highlight plaintext"><code>{
-    "success": true,
-    "meta": {
-        "total": 670,
-        "records_per_page": 25,
-        "current_page": 1
-    },
-    "rows": [
-        {
-            "symbol": "PERP_BTC_USDT",
-            "funding_rate": 0.12345689,
-            "funding_rate_timestamp": 1567411795000, // use rate to end calculating funding fee time
-            "next_funding_time": 1567411995000
-        },
-        {
-            "symbol": "PERP_BTC_USDT",
-            "funding_rate": 0.12345689,                                                 
-            "funding_rate_timestamp": "1567411795.000", // use rate to end calculating funding fee time
-            "next_funding_time": 1567411995000
-        }
-    ],
-    "timestamp": 1564710591905 // Unix epoch time in milliseconds
-}
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"meta"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"total"</span><span class="p">:</span> <span class="mi">670</span><span class="p">,</span>
+        <span class="s2">"records_per_page"</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span>
+        <span class="s2">"current_page"</span><span class="p">:</span> <span class="mi">1</span>
+    <span class="p">},</span>
+    <span class="s2">"rows"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">"symbol"</span><span class="p">:</span> <span class="s2">"PERP_BTC_USDT"</span><span class="p">,</span>
+            <span class="s2">"funding_rate"</span><span class="p">:</span> <span class="mf">0.12345689</span><span class="p">,</span>
+            <span class="s2">"funding_rate_timestamp"</span><span class="p">:</span> <span class="mi">1567411795000</span><span class="p">,</span> <span class="c1">// use rate to end calculating funding fee time</span>
+            <span class="s2">"next_funding_time"</span><span class="p">:</span> <span class="mi">1567411995000</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">"symbol"</span><span class="p">:</span> <span class="s2">"PERP_BTC_USDT"</span><span class="p">,</span>
+            <span class="s2">"funding_rate"</span><span class="p">:</span> <span class="mf">0.12345689</span><span class="p">,</span>                                                 
+            <span class="s2">"funding_rate_timestamp"</span><span class="p">:</span> <span class="s2">"1567411795.000"</span><span class="p">,</span> <span class="c1">// use rate to end calculating funding fee time</span>
+            <span class="s2">"next_funding_time"</span><span class="p">:</span> <span class="mi">1567411995000</span>
+        <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="mi">1564710591905</span> <span class="c1">// Unix epoch time in milliseconds</span>
+<span class="p">}</span>
 </code></pre><h2 id='get-futures-info-for-all-markets-public'>Get Futures Info for All Markets (Public)</h2>
 <p><strong>Limit: 10 requests per 1 second per IP address</strong></p>
 
@@ -1171,42 +1171,42 @@ GET /v1/public/futures
 <blockquote>
 <p><strong>Response</strong></p>
 </blockquote>
-<pre class="highlight plaintext"><code>{
-    "success": true,
-    "rows": [
-        {
-          "symbol": "PERP_BTC_USDT",
-                "index_price": 56727.31344564,
-                "mark_price": 56727.31344564,
-                "est_funding_rate": 0.12345689,
-                "last_funding_rate": 0.12345689,
-                "next_funding_time": 1567411795000,
-                "open_interest": 0.12345689,
-                "24h_open": 0.16112,
-                "24h_close": 0.32206,
-                "24h_high": 0.33000,
-                "24h_low": 0.14251,
-                "24h_volume": 89040821.98,
-                "24h_amount": 22493062.21
-        },
-        {
-            "symbol": "PERP_ETH_USDT",
-                "index_price": 6727.31344564,
-                "mark_price": 6727.31344564,
-                "est_funding_rate": 0.12345689,
-                "last_funding_rate": 0.12345689,
-                "next_funding_time": 1567411795000,
-                "open_interest": 0.12345689,
-                "24h_open": 0.16112,
-                "24h_close": 0.32206,
-                "24h_high": 0.33000,
-                "24h_low": 0.14251,
-                "24h_volume": 89040821.98,
-                "24h_amount": 22493062.21
-        }
-    ],
-    "timestamp": 1564710591905 // Unix epoch time in milliseconds
-}
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"rows"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+          <span class="s2">"symbol"</span><span class="p">:</span> <span class="s2">"PERP_BTC_USDT"</span><span class="p">,</span>
+                <span class="s2">"index_price"</span><span class="p">:</span> <span class="mf">56727.31344564</span><span class="p">,</span>
+                <span class="s2">"mark_price"</span><span class="p">:</span> <span class="mf">56727.31344564</span><span class="p">,</span>
+                <span class="s2">"est_funding_rate"</span><span class="p">:</span> <span class="mf">0.12345689</span><span class="p">,</span>
+                <span class="s2">"last_funding_rate"</span><span class="p">:</span> <span class="mf">0.12345689</span><span class="p">,</span>
+                <span class="s2">"next_funding_time"</span><span class="p">:</span> <span class="mi">1567411795000</span><span class="p">,</span>
+                <span class="s2">"open_interest"</span><span class="p">:</span> <span class="mf">0.12345689</span><span class="p">,</span>
+                <span class="s2">"24h_open"</span><span class="p">:</span> <span class="mf">0.16112</span><span class="p">,</span>
+                <span class="s2">"24h_close"</span><span class="p">:</span> <span class="mf">0.32206</span><span class="p">,</span>
+                <span class="s2">"24h_high"</span><span class="p">:</span> <span class="mf">0.33000</span><span class="p">,</span>
+                <span class="s2">"24h_low"</span><span class="p">:</span> <span class="mf">0.14251</span><span class="p">,</span>
+                <span class="s2">"24h_volume"</span><span class="p">:</span> <span class="mf">89040821.98</span><span class="p">,</span>
+                <span class="s2">"24h_amount"</span><span class="p">:</span> <span class="mf">22493062.21</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">"symbol"</span><span class="p">:</span> <span class="s2">"PERP_ETH_USDT"</span><span class="p">,</span>
+                <span class="s2">"index_price"</span><span class="p">:</span> <span class="mf">6727.31344564</span><span class="p">,</span>
+                <span class="s2">"mark_price"</span><span class="p">:</span> <span class="mf">6727.31344564</span><span class="p">,</span>
+                <span class="s2">"est_funding_rate"</span><span class="p">:</span> <span class="mf">0.12345689</span><span class="p">,</span>
+                <span class="s2">"last_funding_rate"</span><span class="p">:</span> <span class="mf">0.12345689</span><span class="p">,</span>
+                <span class="s2">"next_funding_time"</span><span class="p">:</span> <span class="mi">1567411795000</span><span class="p">,</span>
+                <span class="s2">"open_interest"</span><span class="p">:</span> <span class="mf">0.12345689</span><span class="p">,</span>
+                <span class="s2">"24h_open"</span><span class="p">:</span> <span class="mf">0.16112</span><span class="p">,</span>
+                <span class="s2">"24h_close"</span><span class="p">:</span> <span class="mf">0.32206</span><span class="p">,</span>
+                <span class="s2">"24h_high"</span><span class="p">:</span> <span class="mf">0.33000</span><span class="p">,</span>
+                <span class="s2">"24h_low"</span><span class="p">:</span> <span class="mf">0.14251</span><span class="p">,</span>
+                <span class="s2">"24h_volume"</span><span class="p">:</span> <span class="mf">89040821.98</span><span class="p">,</span>
+                <span class="s2">"24h_amount"</span><span class="p">:</span> <span class="mf">22493062.21</span>
+        <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="mi">1564710591905</span> <span class="c1">// Unix epoch time in milliseconds</span>
+<span class="p">}</span>
 </code></pre><h2 id='get-futures-for-one-market-public'>Get Futures for One Market (Public)</h2>
 <p><strong>Limit: 10 requests per 1 second per IP address</strong></p>
 
@@ -1237,25 +1237,25 @@ GET /v1/public/futures/:symbol
 <blockquote>
 <p><strong>Response</strong></p>
 </blockquote>
-<pre class="highlight plaintext"><code>{
-    "success": true,
-    "info":{
-        "symbol": "PERP_BTC_USDT",
-        "index_price": 56727.31344564,
-        "mark_price": 56727.31344564,
-        "est_funding_rate": 0.12345689,
-        "last_funding_rate": 0.12345689,
-        "next_funding_time": 1567411795000,
-        "open_interest": 0.12345689,
-        "24h_open": 0.16112,
-       "24h_close": 0.32206,
-       "24h_high": 0.33000,
-       "24h_low": 0.14251,
-       "24h_volume": 89040821.98,
-       "24h_amount": 22493062.21
-    },
-    "timestamp": 1564710591905 // Unix epoch time in milliseconds
-}
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"info"</span><span class="p">:{</span>
+        <span class="s2">"symbol"</span><span class="p">:</span> <span class="s2">"PERP_BTC_USDT"</span><span class="p">,</span>
+        <span class="s2">"index_price"</span><span class="p">:</span> <span class="mf">56727.31344564</span><span class="p">,</span>
+        <span class="s2">"mark_price"</span><span class="p">:</span> <span class="mf">56727.31344564</span><span class="p">,</span>
+        <span class="s2">"est_funding_rate"</span><span class="p">:</span> <span class="mf">0.12345689</span><span class="p">,</span>
+        <span class="s2">"last_funding_rate"</span><span class="p">:</span> <span class="mf">0.12345689</span><span class="p">,</span>
+        <span class="s2">"next_funding_time"</span><span class="p">:</span> <span class="mi">1567411795000</span><span class="p">,</span>
+        <span class="s2">"open_interest"</span><span class="p">:</span> <span class="mf">0.12345689</span><span class="p">,</span>
+        <span class="s2">"24h_open"</span><span class="p">:</span> <span class="mf">0.16112</span><span class="p">,</span>
+       <span class="s2">"24h_close"</span><span class="p">:</span> <span class="mf">0.32206</span><span class="p">,</span>
+       <span class="s2">"24h_high"</span><span class="p">:</span> <span class="mf">0.33000</span><span class="p">,</span>
+       <span class="s2">"24h_low"</span><span class="p">:</span> <span class="mf">0.14251</span><span class="p">,</span>
+       <span class="s2">"24h_volume"</span><span class="p">:</span> <span class="mf">89040821.98</span><span class="p">,</span>
+       <span class="s2">"24h_amount"</span><span class="p">:</span> <span class="mf">22493062.21</span>
+    <span class="p">},</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="mi">1564710591905</span> <span class="c1">// Unix epoch time in milliseconds</span>
+<span class="p">}</span>
 </code></pre><h2 id='token-config'>Token Config</h2>
 <p><strong>Limit: 10 requests per 1 second</strong></p>
 
@@ -2987,9 +2987,9 @@ POST /v1/client/account_mode
 <blockquote>
 <p><strong>Response</strong></p>
 </blockquote>
-<pre class="highlight plaintext"><code>{
-    "success": true
-}
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span>
+<span class="p">}</span>
 </code></pre><h2 id='update-leverage-setting'>Update Leverage Setting</h2>
 <p><strong>Limit: 5 requests per 60 second per user</strong></p>
 
@@ -3020,9 +3020,9 @@ POST /v1/client/leverage
 <blockquote>
 <p><strong>Response</strong></p>
 </blockquote>
-<pre class="highlight plaintext"><code>{
-    "success": true
-}
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span>
+<span class="p">}</span>
 </code></pre><h2 id='get-funding-fee-history'>Get Funding Fee History</h2>
 <p><strong>Limit: 20 requests per 60 second per user</strong></p>
 
@@ -3071,28 +3071,28 @@ GET /v1/funding_fee/history
 <blockquote>
 <p><strong>Response</strong></p>
 </blockquote>
-<pre class="highlight plaintext"><code>{
-    "success": true,
-    "meta": {
-            "total": 670,
-        "records_per_page": 25,
-        "current_page": 1
-    },
-    "rows": [
-        {
-            "id": 10001,
-            "symbol": "PERP_BTC_USDT",
-            "funding_rate": 0.00345,
-            "mark_price": 100,
-            "funding_fee": 0.345,
-            "payment_type": "Receive", // Receive and Pay
-            "status": "COMPLETED",
-            "created_time": "1575014255.089", // Unix epoch time in seconds
-            "updated_time": "1575014255.910" // Unix epoch time in seconds
-        },
-        // ....skip (total 25 items in one page)
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"meta"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"total"</span><span class="p">:</span> <span class="mi">670</span><span class="p">,</span>
+        <span class="s2">"records_per_page"</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span>
+        <span class="s2">"current_page"</span><span class="p">:</span> <span class="mi">1</span>
+    <span class="p">},</span>
+    <span class="s2">"rows"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="mi">10001</span><span class="p">,</span>
+            <span class="s2">"symbol"</span><span class="p">:</span> <span class="s2">"PERP_BTC_USDT"</span><span class="p">,</span>
+            <span class="s2">"funding_rate"</span><span class="p">:</span> <span class="mf">0.00345</span><span class="p">,</span>
+            <span class="s2">"mark_price"</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+            <span class="s2">"funding_fee"</span><span class="p">:</span> <span class="mf">0.345</span><span class="p">,</span>
+            <span class="s2">"payment_type"</span><span class="p">:</span> <span class="s2">"Receive"</span><span class="p">,</span> <span class="c1">// Receive and Pay</span>
+            <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"COMPLETED"</span><span class="p">,</span>
+            <span class="s2">"created_time"</span><span class="p">:</span> <span class="s2">"1575014255.089"</span><span class="p">,</span> <span class="c1">// Unix epoch time in seconds</span>
+            <span class="s2">"updated_time"</span><span class="p">:</span> <span class="s2">"1575014255.910"</span> <span class="c1">// Unix epoch time in seconds</span>
+        <span class="p">},</span>
+        <span class="c1">// ....skip (total 25 items in one page)</span>
 
-}
+<span class="p">}</span>
 </code></pre><h2 id='get-all-position-info'>Get All Position info</h2>
 <p><strong>Limit: 10 requests per 10 second per user</strong></p>
 
@@ -3105,27 +3105,27 @@ GET /v1/positions
 <blockquote>
 <p><strong>Response</strong></p>
 </blockquote>
-<pre class="highlight plaintext"><code>{
-    "success": true,
-    "current_margin_ratio": 0.8,
-    "initial_margin_ratio": 0.8,
-    "maintenance_margin_ratio": 0.8,
-    "positions": [
-        {
-            "symbol": "PERP_BTC_USDT",
-            "holding": 1.23,
-            "pending_long_qty": 0.5,
-            "pending_short_qty": 0.23,
-            "settle_price": 50000,
-            "average_open_price": 49000,
-            "pnl_24_h": 20,
-            "fee_24_h": 12,
-            "mark_price": 49550,
-            "timestamp": "1575014255.089"
-        },
-        // ....skip 
-    ]  
-}
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"current_margin_ratio"</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">,</span>
+    <span class="s2">"initial_margin_ratio"</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">,</span>
+    <span class="s2">"maintenance_margin_ratio"</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">,</span>
+    <span class="s2">"positions"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">"symbol"</span><span class="p">:</span> <span class="s2">"PERP_BTC_USDT"</span><span class="p">,</span>
+            <span class="s2">"holding"</span><span class="p">:</span> <span class="mf">1.23</span><span class="p">,</span>
+            <span class="s2">"pending_long_qty"</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span>
+            <span class="s2">"pending_short_qty"</span><span class="p">:</span> <span class="mf">0.23</span><span class="p">,</span>
+            <span class="s2">"settle_price"</span><span class="p">:</span> <span class="mi">50000</span><span class="p">,</span>
+            <span class="s2">"average_open_price"</span><span class="p">:</span> <span class="mi">49000</span><span class="p">,</span>
+            <span class="s2">"pnl_24_h"</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+            <span class="s2">"fee_24_h"</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+            <span class="s2">"mark_price"</span><span class="p">:</span> <span class="mi">49550</span><span class="p">,</span>
+            <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"1575014255.089"</span>
+        <span class="p">},</span>
+        <span class="c1">// ....skip </span>
+    <span class="p">]</span>  
+<span class="p">}</span>
 </code></pre><h2 id='get-one-position-info'>Get One Position info</h2>
 <p><strong>Limit: 10 requests per 10 second per user</strong></p>
 <pre class="highlight plaintext"><code>GET /v1/position/:symbol
@@ -3135,19 +3135,19 @@ GET /v1/positions
 <blockquote>
 <p><strong>Response</strong></p>
 </blockquote>
-<pre class="highlight plaintext"><code>{
-    "success": true,
-    "symbol": "PERP_BTC_USDT",
-    "holding": 1.23,
-    "pending_long_qty": 0.5,
-    "pending_short_qty": 0.23,
-    "settle_price": 50000,
-    "average_open_price": 49000,
-    "pnl_24_h": 20,
-    "fee_24_h": 0.2,
-    "mark_price": 49550,
-    "timestamp": "1575014255.089"
-}
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"symbol"</span><span class="p">:</span> <span class="s2">"PERP_BTC_USDT"</span><span class="p">,</span>
+    <span class="s2">"holding"</span><span class="p">:</span> <span class="mf">1.23</span><span class="p">,</span>
+    <span class="s2">"pending_long_qty"</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span>
+    <span class="s2">"pending_short_qty"</span><span class="p">:</span> <span class="mf">0.23</span><span class="p">,</span>
+    <span class="s2">"settle_price"</span><span class="p">:</span> <span class="mi">50000</span><span class="p">,</span>
+    <span class="s2">"average_open_price"</span><span class="p">:</span> <span class="mi">49000</span><span class="p">,</span>
+    <span class="s2">"pnl_24_h"</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="s2">"fee_24_h"</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">,</span>
+    <span class="s2">"mark_price"</span><span class="p">:</span> <span class="mi">49550</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"1575014255.089"</span>
+<span class="p">}</span>
 </code></pre><h1 id='websocket-api-v2'>Websocket API V2</h1>
 <p><strong>Market Data Base endpoints:</strong></p>
 
