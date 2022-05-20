@@ -297,6 +297,9 @@
                     <a href="#kline" class="toc-h2 toc-link" data-title="Kline">Kline</a>
                   </li>
                   <li>
+                    <a href="#kline-historical-data" class="toc-h2 toc-link" data-title="Kline - Historical Data">Kline - Historical Data</a>
+                  </li>
+                  <li>
                     <a href="#get-trade" class="toc-h2 toc-link" data-title="Get Trade">Get Trade</a>
                   </li>
                   <li>
@@ -441,6 +444,9 @@
           <li>
             <a href="#release-note" class="toc-h1 toc-link" data-title="Release Note">Release Note</a>
               <ul class="toc-list-h2">
+                  <li>
+                    <a href="#2022-05-23" class="toc-h2 toc-link" data-title="2022-05-23">2022-05-23</a>
+                  </li>
                   <li>
                     <a href="#2022-03-21" class="toc-h2 toc-link" data-title="2022-03-21">2022-03-21</a>
                   </li>
@@ -1902,6 +1908,83 @@ GET /v1/kline
 <td>Numbers of klines. Maximum of 1000 klines.</td>
 </tr>
 </tbody></table>
+<h2 id='kline-historical-data'>Kline - Historical Data</h2>
+<p><strong>Limit: 10 requests per 1 second</strong></p>
+
+<p><code>
+GET https://api-pub.woo.org//v1/hist/kline 
+</code></p>
+
+<p>The historical klines of the trading pairs, the type only support 5m. Note that the endpoint is different with other API.</p>
+
+<blockquote>
+<p><strong>Response</strong></p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"rows"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">"open"</span><span class="p">:</span> <span class="mf">66166.23</span><span class="p">,</span>
+            <span class="s2">"close"</span><span class="p">:</span> <span class="mf">66124.56</span><span class="p">,</span>
+            <span class="s2">"low"</span><span class="p">:</span> <span class="mf">66038.06</span><span class="p">,</span>
+            <span class="s2">"high"</span><span class="p">:</span> <span class="mf">66176.97</span><span class="p">,</span>
+            <span class="s2">"volume"</span><span class="p">:</span> <span class="mf">23.45528526</span><span class="p">,</span>
+            <span class="s2">"amount"</span><span class="p">:</span> <span class="mf">1550436.21725288</span><span class="p">,</span>
+            <span class="s2">"symbol"</span><span class="p">:</span> <span class="s2">"SPOT_BTC_USDT"</span><span class="p">,</span>
+            <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"1m"</span><span class="p">,</span>
+            <span class="s2">"start_timestamp"</span><span class="p">:</span> <span class="mi">1636388220000</span><span class="p">,</span> <span class="c1">// Unix epoch time in milliseconds</span>
+            <span class="s2">"end_timestamp"</span><span class="p">:</span> <span class="mi">1636388280000</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">"open"</span><span class="p">:</span> <span class="mf">66145.13</span><span class="p">,</span>
+            <span class="s2">"close"</span><span class="p">:</span> <span class="mf">66166.24</span><span class="p">,</span>
+            <span class="s2">"low"</span><span class="p">:</span> <span class="mf">66124.62</span><span class="p">,</span>
+            <span class="s2">"high"</span><span class="p">:</span> <span class="mf">66178.60</span><span class="p">,</span>
+            <span class="s2">"volume"</span><span class="p">:</span> <span class="mf">15.50705000</span><span class="p">,</span>
+            <span class="s2">"amount"</span><span class="p">:</span> <span class="mf">1025863.18892610</span><span class="p">,</span>
+            <span class="s2">"symbol"</span><span class="p">:</span> <span class="s2">"SPOT_BTC_USDT"</span><span class="p">,</span>
+            <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"1m"</span><span class="p">,</span>
+            <span class="s2">"start_timestamp"</span><span class="p">:</span> <span class="mi">1636388160000</span><span class="p">,</span>
+            <span class="s2">"end_timestamp"</span><span class="p">:</span> <span class="mi">1636388220000</span>
+        <span class="p">},</span>
+        <span class="c1">// ...skip</span>
+    <span class="p">]</span>
+    <span class="s2">"meta"</span><span class="p">:{</span>
+         <span class="s2">"total"</span><span class="p">:</span><span class="mi">67377</span><span class="p">,</span>
+         <span class="s2">"records_per_page"</span><span class="p">:</span><span class="mi">100</span><span class="p">,</span>
+         <span class="s2">"current_page"</span><span class="p">:</span><span class="mi">1</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+<p><strong>Parameters</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>Y</td>
+<td></td>
+</tr>
+<tr>
+<td>type</td>
+<td>enum</td>
+<td>Y</td>
+<td><code>5m</code>/<code>15m</code>/<code>30m</code>/<code>1h</code>/<code>4h</code>/<code>12h</code>/<code>1d</code>/<code>1w</code>/<code>1mon</code>/<code>1y</code></td>
+</tr>
+<tr>
+<td>start_time</td>
+<td>number</td>
+<td>Y</td>
+<td>start range that wish to query, noted the time stamp is 13-digits timestamp.</td>
+</tr>
+</tbody></table>
 <h2 id='get-trade'>Get Trade</h2>
 <p><strong>Limit: 10 requests per 1 second</strong></p>
 
@@ -3279,7 +3362,7 @@ GET /v1/positions
 <span class="p">}</span>
 </code></pre><h2 id='orderbook'>orderbook</h2>
 <ul>
-<li><code>{symbol}@orderbook</code> depth 1000 push every 1s</li>
+<li><code>{symbol}@orderbook</code> depth 100 push every 1s</li>
 <li><code>{symbol}@orderbook100</code> depth 100 push every 1s</li>
 </ul>
 
@@ -3643,7 +3726,7 @@ GET /v1/positions
 <span class="p">}</span>
 </code></pre><h2 id='bbo'>bbo</h2>
 <ul>
-<li>Push interval: 200ms</li>
+<li>Push interval: 10ms</li>
 </ul>
 
 <p><strong>Parameters</strong></p>
@@ -4434,6 +4517,12 @@ GET /v1/positions
 <span class="p">}</span>
 </code></pre><h1 id='release-note'>Release Note</h1>
 <p>All the API changes would be listed here.</p>
+<h2 id='2022-05-23'>2022-05-23</h2>
+<ul>
+<li>Upgrade websocket subscription topic: <a href="#bbo">bbo</a> push frequency from 200ms to 10ms.</li>
+<li>Deprecate websocket subscription topic: <a href="#orderbook">Orderbook</a> depth 1000, the original {symbol}@orderbook topic will keep alive but push the same data as symbol@orderbook100 (depth 100).</li>
+<li>Add public API for <a href="#kline-historical-data">Historical Kline</a>.</li>
+</ul>
 <h2 id='2022-03-21'>2022-03-21</h2>
 <ul>
 <li>Add public API for <a href="#get-predicted-funding-rate-for-all-markets-public">Funding Rate</a> and <a href="#get-futures-info-for-all-markets-public">Futures Info</a>.</li>
