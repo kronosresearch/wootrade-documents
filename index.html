@@ -445,6 +445,9 @@
             <a href="#release-note" class="toc-h1 toc-link" data-title="Release Note">Release Note</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#2022-06-10" class="toc-h2 toc-link" data-title="2022-06-10">2022-06-10</a>
+                  </li>
+                  <li>
                     <a href="#2022-05-23" class="toc-h2 toc-link" data-title="2022-05-23">2022-05-23</a>
                   </li>
                   <li>
@@ -3193,6 +3196,11 @@ GET /v1/positions
     <span class="s2">"current_margin_ratio"</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">,</span>
     <span class="s2">"initial_margin_ratio"</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">,</span>
     <span class="s2">"maintenance_margin_ratio"</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">,</span>
+    <span class="s2">"total_collateral"</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="s2">"free_collateral"</span><span class="p">:</span> <span class="mi">80</span><span class="p">,</span>
+    <span class="s2">"total_account_value"</span><span class="p">:</span> <span class="mi">150</span><span class="p">,</span>
+    <span class="s2">"total_vault_value"</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="s2">"total_staking_value"</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
     <span class="s2">"positions"</span><span class="p">:</span> <span class="p">[</span>
         <span class="p">{</span>
             <span class="s2">"symbol"</span><span class="p">:</span> <span class="s2">"PERP_BTC_USDT"</span><span class="p">,</span>
@@ -3204,6 +3212,7 @@ GET /v1/positions
             <span class="s2">"pnl_24_h"</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
             <span class="s2">"fee_24_h"</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
             <span class="s2">"mark_price"</span><span class="p">:</span> <span class="mi">49550</span><span class="p">,</span>
+            <span class="s2">"est_liq_price"</span><span class="p">:</span> <span class="mi">40000</span><span class="p">,</span>
             <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"1575014255.089"</span>
         <span class="p">},</span>
         <span class="c1">// ....skip </span>
@@ -3211,7 +3220,7 @@ GET /v1/positions
 <span class="p">}</span>
 </code></pre><h2 id='get-one-position-info'>Get One Position info</h2>
 <p><strong>Limit: 10 requests per 10 second per user</strong></p>
-<pre class="highlight plaintext"><code>GET /v1/position/:symbol
+<pre class="highlight plaintext"><code>GET /v1/positions/:symbol
 </code></pre>
 <p><strong>Parameters</strong></p>
 
@@ -3229,6 +3238,7 @@ GET /v1/positions
     <span class="s2">"pnl_24_h"</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
     <span class="s2">"fee_24_h"</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">,</span>
     <span class="s2">"mark_price"</span><span class="p">:</span> <span class="mi">49550</span><span class="p">,</span>
+    <span class="s2">"est_liq_price"</span><span class="p">:</span> <span class="mi">40000</span><span class="p">,</span>
     <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"1575014255.089"</span>
 <span class="p">}</span>
 </code></pre><h1 id='websocket-api-v2'>Websocket API V2</h1>
@@ -3362,7 +3372,7 @@ GET /v1/positions
 <span class="p">}</span>
 </code></pre><h2 id='orderbook'>orderbook</h2>
 <ul>
-<li><code>{symbol}@orderbook</code> depth 1000 push every 1s</li>
+<li><code>{symbol}@orderbook</code> depth 100 push every 1s</li>
 <li><code>{symbol}@orderbook100</code> depth 100 push every 1s</li>
 </ul>
 
@@ -4517,6 +4527,11 @@ GET /v1/positions
 <span class="p">}</span>
 </code></pre><h1 id='release-note'>Release Note</h1>
 <p>All the API changes would be listed here.</p>
+<h2 id='2022-06-10'>2022-06-10</h2>
+<ul>
+<li>Add <code>total_collateral</code>, <code>free_collateral</code>, <code>total_account_value</code>, <code>total_vault_value</code>, <code>total_staking_value</code> and <code>est_liq_price</code> for each futures positions in <a href="#positions">Position Info</a>.</li>
+<li>Deprecate websocket subscription topic: <a href="#orderbook">Orderbook</a> depth 1000, the original {symbol}@orderbook topic will keep alive but push the same data as symbol@orderbook100 (depth 100).</li>
+</ul>
 <h2 id='2022-05-23'>2022-05-23</h2>
 <ul>
 <li>Upgrade websocket subscription topic: <a href="#bbo">bbo</a> push frequency from 200ms to 10ms.</li>
