@@ -871,7 +871,7 @@ GET /v1/public/info
 GET /v1/public/market_trades
 </code></p>
 
-<p>Get latest market trades.</p>
+<p>Get latest market trades. The response output &quot;source&quot; 0=internal (trade on WOO X), 1=external (trade from aggregrated sources)</p>
 
 <blockquote>
 <p><strong>Response</strong></p>
@@ -882,6 +882,15 @@ GET /v1/public/market_trades
         <span class="p">{</span>
             <span class="s2">"symbol"</span><span class="p">:</span> <span class="s2">"SPOT_ETH_USDT"</span><span class="p">,</span>
             <span class="s2">"side"</span><span class="p">:</span> <span class="s2">"BUY"</span><span class="p">,</span>
+            <span class="s2">"source"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"executed_price"</span><span class="p">:</span> <span class="mi">202</span><span class="p">,</span>
+            <span class="s2">"executed_quantity"</span><span class="p">:</span> <span class="mf">0.00025</span><span class="p">,</span>
+            <span class="s2">"executed_timestamp"</span><span class="p">:</span> <span class="s2">"1567411795.000"</span> <span class="c1">// Unix epoch time in seconds</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">"symbol"</span><span class="p">:</span> <span class="s2">"SPOT_ETH_USDT"</span><span class="p">,</span>
+            <span class="s2">"side"</span><span class="p">:</span> <span class="s2">"BUY"</span><span class="p">,</span>
+            <span class="s2">"source"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
             <span class="s2">"executed_price"</span><span class="p">:</span> <span class="mi">202</span><span class="p">,</span>
             <span class="s2">"executed_quantity"</span><span class="p">:</span> <span class="mf">0.00025</span><span class="p">,</span>
             <span class="s2">"executed_timestamp"</span><span class="p">:</span> <span class="s2">"1567411795.000"</span> <span class="c1">// Unix epoch time in seconds</span>
@@ -2358,7 +2367,7 @@ POST /v1/asset/withdraw
 <tr>
 <td>code</td>
 <td>string</td>
-<td>N</td>
+<td>Y</td>
 <td>the otpauth 2FA code if you bound</td>
 </tr>
 </tbody></table>
@@ -3592,7 +3601,8 @@ GET /v1/positions
         <span class="s2">"symbol"</span><span class="p">:</span><span class="s2">"SPOT_ADA_USDT"</span><span class="p">,</span>
         <span class="s2">"price"</span><span class="p">:</span><span class="mf">1.27988</span><span class="p">,</span>
         <span class="s2">"size"</span><span class="p">:</span><span class="mi">300</span><span class="p">,</span>
-        <span class="s2">"side"</span><span class="p">:</span><span class="s2">"BUY"</span>
+        <span class="s2">"side"</span><span class="p">:</span><span class="s2">"BUY"</span><span class="p">,</span>
+        <span class="s2">"source"</span><span class="p">:</span><span class="mi">0</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre><h2 id='24h-ticker'>24h ticker</h2>
