@@ -445,6 +445,9 @@
             <a href="#release-note" class="toc-h1 toc-link" data-title="Release Note">Release Note</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#2022-07-28" class="toc-h2 toc-link" data-title="2022-07-28">2022-07-28</a>
+                  </li>
+                  <li>
                     <a href="#2022-06-10" class="toc-h2 toc-link" data-title="2022-06-10">2022-06-10</a>
                   </li>
                   <li>
@@ -1367,6 +1370,7 @@ will respond immediately with an order created message.</p>
   <span class="s2">"order_price"</span><span class="p">:</span> <span class="mf">100.12</span><span class="p">,</span>
   <span class="s2">"order_quantity"</span><span class="p">:</span> <span class="mf">0.987654</span><span class="p">,</span>
   <span class="s2">"order_amount"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="s2">"reduce_only"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
   <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"1639980423.855"</span> <span class="c1">// Unix epoch time in seconds</span>
 <span class="p">}</span>
 </code></pre>
@@ -1421,6 +1425,12 @@ will respond immediately with an order created message.</p>
 <td>number</td>
 <td>N</td>
 <td>For <code>MARKET</code>/<code>ASK</code>/<code>BID</code> order, the order size in terms of quote currency</td>
+</tr>
+<tr>
+<td>reduce_only</td>
+<td>boolean</td>
+<td>N</td>
+<td>true or false, default false</td>
 </tr>
 <tr>
 <td>visible_quantity</td>
@@ -1572,6 +1582,7 @@ GET /v1/order/:oid
     <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"FILLED"</span><span class="p">,</span>
     <span class="s2">"symbol"</span><span class="p">:</span> <span class="s2">"SPOT_BTC_USDT"</span><span class="p">,</span>
     <span class="s2">"client_order_id"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"reduce_only"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
     <span class="s2">"order_id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
     <span class="s2">"order_tag"</span><span class="p">:</span> <span class="s2">"default"</span><span class="p">,</span>
     <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"LIMIT"</span><span class="p">,</span>
@@ -1636,6 +1647,7 @@ GET /v1/client/order/:client_order_id
     <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"FILLED"</span><span class="p">,</span>
     <span class="s2">"symbol"</span><span class="p">:</span> <span class="s2">"SPOT_BTC_USDT"</span><span class="p">,</span>
     <span class="s2">"client_order_id"</span><span class="p">:</span> <span class="mi">123</span><span class="p">,</span>
+    <span class="s2">"reduce_only"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
     <span class="s2">"order_id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
     <span class="s2">"order_tag"</span><span class="p">:</span> <span class="s2">"default"</span><span class="p">,</span>
     <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"LIMIT"</span><span class="p">,</span>
@@ -1709,6 +1721,7 @@ GET /v1/orders
             <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"CANCELLED"</span><span class="p">,</span>
             <span class="s2">"symbol"</span><span class="p">:</span> <span class="s2">"SPOT_BCHABC_USDT"</span><span class="p">,</span>
             <span class="s2">"client_order_id"</span><span class="p">:</span> <span class="mi">123</span><span class="p">,</span>
+            <span class="s2">"reduce_only"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
             <span class="s2">"order_id"</span><span class="p">:</span> <span class="mi">8197</span><span class="p">,</span>
             <span class="s2">"order_tag"</span><span class="p">:</span> <span class="s2">"default"</span><span class="p">,</span>
             <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"LIMIT"</span><span class="p">,</span>
@@ -4537,6 +4550,13 @@ GET /v1/positions
 <span class="p">}</span>
 </code></pre><h1 id='release-note'>Release Note</h1>
 <p>All the API changes would be listed here.</p>
+<h2 id='2022-07-28'>2022-07-28</h2>
+<ul>
+<li>Add <code>reduce_only</code> parameter in the request body of API <a href="#send-order">Send_Order</a>.</li>
+<li>Add <code>reduce_only</code> in the response message of API <a href="#get-order">Get_Order</a>, <a href="#get-order-by-client_order_id">Get_Order_by_client_order_id</a> and <a href="#get-orders">Get_Orders</a>.</li>
+<li>Add <code>source</code> in the response message of API <a href="#market-trades-public">Market_Trades(Public)</a>.</li>
+<li>Add <code>source</code> in the push message of Websocket Topic <a href="#trade">trades</a>.</li>
+</ul>
 <h2 id='2022-06-10'>2022-06-10</h2>
 <ul>
 <li>Add <code>total_collateral</code>, <code>free_collateral</code>, <code>total_account_value</code>, <code>total_vault_value</code>, <code>total_staking_value</code> and <code>est_liq_price</code> for each futures positions in <a href="#get-all-position-info">Position Info</a>.</li>
