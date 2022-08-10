@@ -499,19 +499,19 @@
         <h1 id='introduction'>Introduction</h1>
 <p><strong>WOO X. A privately-accessible liquidity venue for the trading of cryptocurrencies.</strong>  </p>
 
-<p>WOO X provides clients with an easily accessible deep pool of liquidity sourced from the largest exchanges and from Kronos’ HFT proprietary trading. We utilize advanced crossing and routing methods which provide ease of access and superior trade execution to select exchanges.  </p>
+<p>WOO X provides clients with an easily accessible deep pool of liquidity sourced from the largest exchanges and from Kronos’ HFT proprietary trading. We utilize advanced crossing and routing methods that provide ease of access and superior trade execution to selected exchanges. </p>
 
-<p>We provide two interfaces to communicate between Wootrade and clients. </p>
+<p>WOO X provides two interfaces to access its services:</p>
 
 <ul>
-<li><a href="#restful-api">RESTful API interface</a>: Provides sending events like create order, cancel order, fetch balance, ...etc.</li>
+<li><a href="#restful-api">RESTful API interface</a>: Provides sending events like create order, cancel orders, fetch balance, etc.</li>
 <li><a href="#websocket-api-v2">Websocket interface V2</a>: Provides real-time orderbook data feed and order update feed.</li>
 </ul>
 
 <p><strong>Pricing</strong></p>
 
-<p>WooTrade charge low transaction fee that is defined as:<br>
-<strong><code>0.01%</code> Taker fee</strong> and <strong><code>0.00%</code> Maker fee</strong> (rebate), for the trial period, <strong><code>0%</code></strong> for both Maker and Taker.</p>
+<p>WOO X charges low to zero transaction fees defined as:<br>
+<strong><code>0.00%</code> Maker fee</strong> and <strong><code>-0.003%</code> Taker rebate</strong>. <a href="https://support.woo.org/hc/en-001/articles/4908701637529">More Info</a> Also, a <strong>30-day free trial period</strong> (for both Maker and Taker) is provided for institutional clients.</p>
 
 <p><strong>Base endpoints:</strong></p>
 
@@ -3242,8 +3242,11 @@ GET /v1/positions
 <span class="p">}</span>
 </code></pre><h2 id='get-one-position-info'>Get One Position info</h2>
 <p><strong>Limit: 10 requests per 10 seconds per user</strong></p>
-<pre class="highlight plaintext"><code>GET /v1/positions/:symbol
-</code></pre>
+
+<p><code>
+GET /v1/position/:symbol
+</code></p>
+
 <p><strong>Parameters</strong></p>
 
 <blockquote>
