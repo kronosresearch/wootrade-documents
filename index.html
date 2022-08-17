@@ -2377,12 +2377,6 @@ POST /v1/asset/withdraw
 <td>Y</td>
 <td>amount you want to withdraw, must less or equal than holding</td>
 </tr>
-<tr>
-<td>code</td>
-<td>string</td>
-<td>Y</td>
-<td>the otpauth 2FA code if you bound</td>
-</tr>
 </tbody></table>
 <h2 id='cancel-withdraw-request'>Cancel Withdraw Request</h2>
 <p><strong>Limit 5 requests per 60 seconds</strong></p>
@@ -3202,7 +3196,7 @@ GET /v1/funding_fee/history
 
 <span class="p">}</span>
 </code></pre><h2 id='get-all-position-info'>Get All Position info</h2>
-<p><strong>Limit: 10 requests per 10 seconds per user</strong></p>
+<p><strong>Limit: 30 requests per 10 seconds per user</strong></p>
 
 <p><code>
 GET /v1/positions
@@ -3241,7 +3235,7 @@ GET /v1/positions
     <span class="p">]</span>  
 <span class="p">}</span>
 </code></pre><h2 id='get-one-position-info'>Get One Position info</h2>
-<p><strong>Limit: 10 requests per 10 seconds per user</strong></p>
+<p><strong>Limit: 30 requests per 10 seconds per user</strong></p>
 
 <p><code>
 GET /v1/position/:symbol
