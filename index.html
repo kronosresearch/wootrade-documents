@@ -445,6 +445,9 @@
             <a href="#release-note" class="toc-h1 toc-link" data-title="Release Note">Release Note</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#2022-08-18" class="toc-h2 toc-link" data-title="2022-08-18">2022-08-18</a>
+                  </li>
+                  <li>
                     <a href="#2022-07-28" class="toc-h2 toc-link" data-title="2022-07-28">2022-07-28</a>
                   </li>
                   <li>
@@ -4547,6 +4550,11 @@ GET /v1/position/:symbol
 <span class="p">}</span>
 </code></pre><h1 id='release-note'>Release Note</h1>
 <p>All the API changes would be listed here.</p>
+<h2 id='2022-08-18'>2022-08-18</h2>
+<ul>
+<li>update <a href="#token-withdraw">Token Withdraw</a> API by remove <code>code</code> parameter, the new version will not require 2FA code for those withdrawal address been verified in the address book.</li>
+<li>Increase rate limit of <a href="#get-all-position-info">Get All Position info</a> and <a href="#get-one-position-info">Get One Position info</a> to 30 requests per second.</li>
+</ul>
 <h2 id='2022-07-28'>2022-07-28</h2>
 <ul>
 <li>Add <code>reduce_only</code> parameter in the request body of API <a href="#send-order">Send_Order</a>.</li>
