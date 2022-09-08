@@ -445,7 +445,7 @@
             <a href="#release-note" class="toc-h1 toc-link" data-title="Release Note">Release Note</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#2022-09-06" class="toc-h2 toc-link" data-title="2022-09-06">2022-09-06</a>
+                    <a href="#2022-09-08" class="toc-h2 toc-link" data-title="2022-09-08">2022-09-08</a>
                   </li>
                   <li>
                     <a href="#2022-08-18" class="toc-h2 toc-link" data-title="2022-08-18">2022-08-18</a>
@@ -503,7 +503,7 @@
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='introduction'>Introduction</h1>
-<p><span style="color:red">This site is deprecated and will be sunset in 2022/10/31, please move to <a href="https://docs.woo.org/">https://docs.woo.org/</a> </span>.</p>
+<!-- <span style="color:red">This site is deprecated and will be sunset in 2022/10/31, please move to <a href="https://docs.woo.org/">https://docs.woo.org/</a> </span>. -->
 
 <p><strong>WOO X. A privately-accessible liquidity venue for the trading of cryptocurrencies.</strong>  </p>
 
@@ -1952,7 +1952,7 @@ GET /v1/kline
 </tr>
 </tbody></table>
 <h2 id='kline-historical-data'>Kline - Historical Data</h2>
-<p><strong>Limit: 1 requests per 1 second per IP</strong></p>
+<p><strong>Limit: 1 request per 1 second per IP</strong></p>
 
 <p><code>
 GET https://api-pub.woo.org/v1/hist/kline 
@@ -2019,7 +2019,7 @@ GET https://api-pub.woo.org/v1/hist/kline
 <td>type</td>
 <td>enum</td>
 <td>Y</td>
-<td><code>1m</code>/<code>5m</code>/<code>15m</code>/<code>30m</code>/<code>1h</code>/<code>4h</code>/<code>12h</code>/<code>1d</code>/<code>1w</code>/<code>1mon</code>/<code>1y</code></td>
+<td><code>1m</code>/<code>5m</code>/<code>15m</code>/<code>30m</code>/<code>1h</code>/<code>4h</code>/<code>12h</code>/<code>1d</code>/<code>1w</code>/<code>1mon</code></td>
 </tr>
 <tr>
 <td>start_time</td>
@@ -4565,7 +4565,7 @@ GET /v1/position/:symbol
 <span class="p">}</span>
 </code></pre><h1 id='release-note'>Release Note</h1>
 <p>All the API changes would be listed here.</p>
-<h2 id='2022-09-06'>2022-09-06</h2>
+<h2 id='2022-09-08'>2022-09-08</h2>
 <ul>
 <li>Add <code>can_collateral</code> in the response message of API <a href="#available-token-public">Available Token (Public)</a>.</li>
 <li>Add <code>realized_pnl</code> in the response message of API <a href="#get-order">Get Order</a>, <a href="#get-order-by-client_order_id">Get Order by client_order_id</a> and <a href="#get-orders">Get Orders</a>. The <code>realized_pnl</code> field in response will only present the settled amount for futures orders.</li>
