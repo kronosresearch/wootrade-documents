@@ -1971,37 +1971,39 @@ GET https://api-pub.woo.org/v1/hist/kline
 </blockquote>
 <pre class="highlight javascript"><code><span class="p">{</span>
     <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="s2">"rows"</span><span class="p">:</span> <span class="p">[</span>
-        <span class="p">{</span>
-            <span class="s2">"open"</span><span class="p">:</span> <span class="mf">66166.23</span><span class="p">,</span>
-            <span class="s2">"close"</span><span class="p">:</span> <span class="mf">66124.56</span><span class="p">,</span>
-            <span class="s2">"low"</span><span class="p">:</span> <span class="mf">66038.06</span><span class="p">,</span>
-            <span class="s2">"high"</span><span class="p">:</span> <span class="mf">66176.97</span><span class="p">,</span>
-            <span class="s2">"volume"</span><span class="p">:</span> <span class="mf">23.45528526</span><span class="p">,</span>
-            <span class="s2">"amount"</span><span class="p">:</span> <span class="mf">1550436.21725288</span><span class="p">,</span>
-            <span class="s2">"symbol"</span><span class="p">:</span> <span class="s2">"SPOT_BTC_USDT"</span><span class="p">,</span>
-            <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"1m"</span><span class="p">,</span>
-            <span class="s2">"start_timestamp"</span><span class="p">:</span> <span class="mi">1636388220000</span><span class="p">,</span> <span class="c1">// Unix epoch time in milliseconds</span>
-            <span class="s2">"end_timestamp"</span><span class="p">:</span> <span class="mi">1636388280000</span>
-        <span class="p">},</span>
-        <span class="p">{</span>
-            <span class="s2">"open"</span><span class="p">:</span> <span class="mf">66145.13</span><span class="p">,</span>
-            <span class="s2">"close"</span><span class="p">:</span> <span class="mf">66166.24</span><span class="p">,</span>
-            <span class="s2">"low"</span><span class="p">:</span> <span class="mf">66124.62</span><span class="p">,</span>
-            <span class="s2">"high"</span><span class="p">:</span> <span class="mf">66178.60</span><span class="p">,</span>
-            <span class="s2">"volume"</span><span class="p">:</span> <span class="mf">15.50705000</span><span class="p">,</span>
-            <span class="s2">"amount"</span><span class="p">:</span> <span class="mf">1025863.18892610</span><span class="p">,</span>
-            <span class="s2">"symbol"</span><span class="p">:</span> <span class="s2">"SPOT_BTC_USDT"</span><span class="p">,</span>
-            <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"1m"</span><span class="p">,</span>
-            <span class="s2">"start_timestamp"</span><span class="p">:</span> <span class="mi">1636388160000</span><span class="p">,</span>
-            <span class="s2">"end_timestamp"</span><span class="p">:</span> <span class="mi">1636388220000</span>
-        <span class="p">},</span>
-        <span class="c1">// ...skip</span>
-    <span class="p">]</span>
-    <span class="s2">"meta"</span><span class="p">:{</span>
-         <span class="s2">"total"</span><span class="p">:</span><span class="mi">67377</span><span class="p">,</span>
-         <span class="s2">"records_per_page"</span><span class="p">:</span><span class="mi">100</span><span class="p">,</span>
-         <span class="s2">"current_page"</span><span class="p">:</span><span class="mi">1</span>
+    <span class="s2">"data"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"rows"</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+                <span class="s2">"open"</span><span class="p">:</span> <span class="mf">66166.23</span><span class="p">,</span>
+                <span class="s2">"close"</span><span class="p">:</span> <span class="mf">66124.56</span><span class="p">,</span>
+                <span class="s2">"low"</span><span class="p">:</span> <span class="mf">66038.06</span><span class="p">,</span>
+                <span class="s2">"high"</span><span class="p">:</span> <span class="mf">66176.97</span><span class="p">,</span>
+                <span class="s2">"volume"</span><span class="p">:</span> <span class="mf">23.45528526</span><span class="p">,</span>
+                <span class="s2">"amount"</span><span class="p">:</span> <span class="mf">1550436.21725288</span><span class="p">,</span>
+                <span class="s2">"symbol"</span><span class="p">:</span> <span class="s2">"SPOT_BTC_USDT"</span><span class="p">,</span>
+                <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"1m"</span><span class="p">,</span>
+                <span class="s2">"start_timestamp"</span><span class="p">:</span> <span class="mi">1636388220000</span><span class="p">,</span> <span class="c1">// Unix epoch time in milliseconds</span>
+                <span class="s2">"end_timestamp"</span><span class="p">:</span> <span class="mi">1636388280000</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s2">"open"</span><span class="p">:</span> <span class="mf">66145.13</span><span class="p">,</span>
+                <span class="s2">"close"</span><span class="p">:</span> <span class="mf">66166.24</span><span class="p">,</span>
+                <span class="s2">"low"</span><span class="p">:</span> <span class="mf">66124.62</span><span class="p">,</span>
+                <span class="s2">"high"</span><span class="p">:</span> <span class="mf">66178.60</span><span class="p">,</span>
+                <span class="s2">"volume"</span><span class="p">:</span> <span class="mf">15.50705000</span><span class="p">,</span>
+                <span class="s2">"amount"</span><span class="p">:</span> <span class="mf">1025863.18892610</span><span class="p">,</span>
+                <span class="s2">"symbol"</span><span class="p">:</span> <span class="s2">"SPOT_BTC_USDT"</span><span class="p">,</span>
+                <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"1m"</span><span class="p">,</span>
+                <span class="s2">"start_timestamp"</span><span class="p">:</span> <span class="mi">1636388160000</span><span class="p">,</span>
+                <span class="s2">"end_timestamp"</span><span class="p">:</span> <span class="mi">1636388220000</span>
+            <span class="p">},</span>
+            <span class="c1">// ...skip</span>
+        <span class="p">]</span>
+        <span class="s2">"meta"</span><span class="p">:{</span>
+            <span class="s2">"total"</span><span class="p">:</span><span class="mi">67377</span><span class="p">,</span>
+            <span class="s2">"records_per_page"</span><span class="p">:</span><span class="mi">100</span><span class="p">,</span>
+            <span class="s2">"current_page"</span><span class="p">:</span><span class="mi">1</span>
+        <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre>
