@@ -1720,7 +1720,7 @@ GET /v1/orders
 <p>Get orders by customize conditions.<br>
 - <code>INCOMPLETE</code> = <code>NEW</code> + <code>PARTIAL_FILLED</code><br>
 - <code>COMPLETED</code> = <code>CANCELLED</code> + <code>FILLED</code>
-The <code>realized_pnl</code> field in response will only present the settled amount for futures orders.</p>
+The <code>realized_pnl</code> field in response will only present the settled amount for futures orders. The return value default is null unless the input parameter <code>realized_pnl</code> set to <code>true</code></p>
 
 <blockquote>
 <p><strong>Response</strong></p>
@@ -1791,6 +1791,12 @@ The <code>realized_pnl</code> field in response will only present the settled am
 <td>string</td>
 <td>N</td>
 <td>An optional tag for this order.</td>
+</tr>
+<tr>
+<td>realized_pnl</td>
+<td>boolean</td>
+<td>N</td>
+<td>Decide if return data calculate realized pnl value for the futures order.</td>
 </tr>
 <tr>
 <td>status</td>
@@ -4568,7 +4574,7 @@ GET /v1/position/:symbol
 <h2 id='2022-09-08'>2022-09-08</h2>
 <ul>
 <li>Add <code>can_collateral</code> in the response message of API <a href="#available-token-public">Available Token (Public)</a>.</li>
-<li>Add <code>realized_pnl</code> in the response message of API <a href="#get-order">Get Order</a>, <a href="#get-order-by-client_order_id">Get Order by client_order_id</a> and <a href="#get-orders">Get Orders</a>. The <code>realized_pnl</code> field in response will only present the settled amount for futures orders.</li>
+<li>Add <code>realized_pnl</code> in the response message of API <a href="#get-order">Get Order</a>, <a href="#get-order-by-client_order_id">Get Order by client_order_id</a> and <a href="#get-orders">Get Orders</a>. And add <code>realized_pnl</code> parameter in the request body of API <a href="#get-orders">Get Orders</a>. The <code>realized_pnl</code> field in response will only present the settled amount for futures orders.</li>
 <li>Newly support <code>1m</code> in <code>type</code> parameter in the query string of API for <a href="#kline-historical-data">Historical Kline</a>.</li>
 </ul>
 <h2 id='2022-08-18'>2022-08-18</h2>
