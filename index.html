@@ -282,6 +282,9 @@
                     <a href="#cancel-orders" class="toc-h2 toc-link" data-title="Cancel Orders">Cancel Orders</a>
                   </li>
                   <li>
+                    <a href="#cancel-all-pending-orders" class="toc-h2 toc-link" data-title="Cancel All Pending Orders">Cancel All Pending Orders</a>
+                  </li>
+                  <li>
                     <a href="#get-order" class="toc-h2 toc-link" data-title="Get Order">Get Order</a>
                   </li>
                   <li>
@@ -289,6 +292,30 @@
                   </li>
                   <li>
                     <a href="#get-orders" class="toc-h2 toc-link" data-title="Get Orders">Get Orders</a>
+                  </li>
+                  <li>
+                    <a href="#send-algo-order" class="toc-h2 toc-link" data-title="Send Algo Order">Send Algo Order</a>
+                  </li>
+                  <li>
+                    <a href="#cancel-algo-order" class="toc-h2 toc-link" data-title="Cancel Algo Order">Cancel Algo Order</a>
+                  </li>
+                  <li>
+                    <a href="#cancel-algo-order-by-client_order_id" class="toc-h2 toc-link" data-title="Cancel Algo Order by client_order_id">Cancel Algo Order by client_order_id</a>
+                  </li>
+                  <li>
+                    <a href="#cancel-all-pending-algo-orders" class="toc-h2 toc-link" data-title="Cancel All Pending Algo Orders">Cancel All Pending Algo Orders</a>
+                  </li>
+                  <li>
+                    <a href="#cancel-all-pending-algo-orders-by-symbol" class="toc-h2 toc-link" data-title="Cancel All Pending Algo Orders by Symbol">Cancel All Pending Algo Orders by Symbol</a>
+                  </li>
+                  <li>
+                    <a href="#get-algo-order" class="toc-h2 toc-link" data-title="Get Algo Order">Get Algo Order</a>
+                  </li>
+                  <li>
+                    <a href="#get-algo-order-by-client_order_id" class="toc-h2 toc-link" data-title="Get Algo Order by client_order_id">Get Algo Order by client_order_id</a>
+                  </li>
+                  <li>
+                    <a href="#get-algo-orders" class="toc-h2 toc-link" data-title="Get Algo Orders">Get Algo Orders</a>
                   </li>
                   <li>
                     <a href="#orderbook-snapshot" class="toc-h2 toc-link" data-title="Orderbook snapshot">Orderbook snapshot</a>
@@ -445,6 +472,9 @@
             <a href="#release-note" class="toc-h1 toc-link" data-title="Release Note">Release Note</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#2022-10-24" class="toc-h2 toc-link" data-title="2022-10-24">2022-10-24</a>
+                  </li>
+                  <li>
                     <a href="#2022-09-08" class="toc-h2 toc-link" data-title="2022-09-08">2022-09-08</a>
                   </li>
                   <li>
@@ -503,7 +533,7 @@
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='introduction'>Introduction</h1>
-<!-- <span style="color:red">This site is deprecated and will be sunset in 2022/10/31, please move to <a href="https://docs.woo.org/">https://docs.woo.org/</a> </span>. -->
+<p><span style="color:red">This site is deprecated and will be sunset in 2022/10/31, please move to <a href="https://docs.woo.org/">https://docs.woo.org/</a> </span>.</p>
 
 <p><strong>WOO X. A privately-accessible liquidity venue for the trading of cryptocurrencies.</strong>  </p>
 
@@ -595,7 +625,7 @@ order_price:9000
 order_quantity:0.11
 side:BUY
 </code></pre>
-<p>Steps to normalize request content:</p>
+<p>For <code>v1</code> API, please follow the steps to normalize request content:</p>
 
 <ol>
 <li>use <strong>query string</strong> as the parameters for <strong>GET</strong> methods and <strong>body parameters</strong> for <strong>POST</strong> and <strong>DELETE</strong> methods.</li>
@@ -604,9 +634,26 @@ side:BUY
 </ol>
 
 <blockquote>
-<p><strong>Normalize request content, The result content would look like following</strong></p>
+<p><strong>Normalize request content for V1 API, The result content would look like following</strong></p>
 </blockquote>
 <pre class="highlight plaintext"><code>order_price=9000&amp;order_quantity=0.11&amp;order_type=LIMIT&amp;side=BUY&amp;symbol=SPOT_BTC_USDT|1578565539808
+</code></pre>
+<p>For <code>v3</code> API, please concatenate the <code>timestamp</code>, <code>http request method</code>, <code>request_path</code> and <code>request_body</code> as the normalized content to sign.</p>
+
+<p>var signString = timestamp + method + request_path + request_body;</p>
+
+<blockquote>
+<p><strong>Normalize request content for V1 API, The result content would look like following</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>1578565539808POST/v3/algo/order{
+    "symbol": "PERP_BTC_USDT",
+    "side": "BUY",
+    "reduceOnly": false,
+    "type": "MARKET",
+    "quantity": "1",
+    "algoType": "TRAILING_STOP",
+    "callbackRate": "0.012"
+}
 </code></pre>
 <blockquote>
 <p><strong>Then use <code>api_secret</code> to hash it with HMAC <code>SHA256</code> algorithm, you can use <code>openssl</code> to get this:</strong></p>
@@ -1575,7 +1622,26 @@ DELETE /v1/orders
 <td></td>
 </tr>
 </tbody></table>
-<h2 id='get-order'>Get Order</h2>
+<h2 id='cancel-all-pending-orders'>Cancel All Pending Orders</h2>
+<p><strong>Limit: 10 requests per 1 second</strong></p>
+
+<p><code>
+DELETE /v3/orders/pending
+</code></p>
+
+<p>Cancel all pending ordinary orders.</p>
+
+<blockquote>
+<p><strong>Response</strong></p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="p">{</span>
+  <span class="s2">"code"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="s2">"message"</span><span class="p">:</span> <span class="s2">"string"</span><span class="p">,</span>
+  <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"CANCEL_SENT"</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="s2">"timestamp"</span><span class="p">:</span> <span class="mi">0</span>
+<span class="p">}</span>
+</code></pre><h2 id='get-order'>Get Order</h2>
 <p><strong>Limit: 10 requests per 1 second</strong> shared with <a href="#get-order-by-client-order-id">get_order_by_client_order_id</a></p>
 
 <p><code>
@@ -1821,6 +1887,749 @@ The <code>realized_pnl</code> field in response will only present the settled am
 <td>number</td>
 <td>N (default: 1)</td>
 <td>the page you wish to query.</td>
+</tr>
+</tbody></table>
+<h2 id='send-algo-order'>Send Algo Order</h2>
+<p><strong>Limit: 2 requests per 1 second per symbol</strong></p>
+
+<p><code>
+POST /v3/algo/Order
+</code></p>
+
+<p><em>**Note that for v3 API, please follow the instruction in <a href="#authentication">authentication</a> section for <code>v3</code> API to generate the signature.
+*</em>*Please use <code>string</code> type for value input field to remain data accurancy.</p>
+
+<p>Place algo order maker/taker, the order executed information will be updated from websocket stream.
+will respond immediately with an order created message.</p>
+
+<p>To place <code>Stop Market</code> order, please use &#39;STOP&#39; as <code>algoType</code>, &#39;STOP_MARKET&#39; as <code>orderCombinationType</code> and &#39;MARKET&#39; as <code>type</code>. Please input the trigger price in <code>triggerPrice</code> field.</p>
+
+<p>To place <code>Stop Limit</code> order, please use &#39;STOP&#39; as <code>algoType</code>, &#39;STOP_LIMIT&#39; as <code>orderCombinationType</code> and &#39;LIMIT&#39; as <code>type</code>. Please input the trigger price in <code>triggerPrice</code> field.</p>
+
+<p>To place <code>Trailing Stop</code> order, please use &#39;TRAILING_STOP&#39; as <code>algoType</code> and &#39;MARKET&#39; as <code>type</code>. Note that The <code>orderCombinationType</code> field is non-required in the Trailing Stop order. Please also input your trailing rate setting in <code>callbackRate</code> field.</p>
+
+<p>To place <code>OCO</code> order, the input fields is 2 layer and includes an array of the ojects named <code>childOrder</code>. The second order of OCO order shoud be a STOP_LIMIT or STOP MARKET order object in the array. please use &#39;OCO&#39; as <code>algoType</code> in outter parameters, and &#39;STOP&#39; as <code>algoType</code> in <code>childOrder</code> object. &#39;STOP_LIMIT&#39; or &#39;STOP_MARKET&#39; as orderCombinationType and &#39;LIMIT&#39; or &#39;MARKET&#39; as type.</p>
+
+<p>To place <code>Positional TP/SL</code> order, the input fields is 2 layer and includes an array of the ojects named <code>childOrder</code>. The take-profit or stop-loss order shoud be the objects in the array. For the sub-order in <code>childOrder</code>, please input &#39;CLOSE_POSITION&#39; as <code>type</code>, and &#39;TAKE_PROFIT&#39; or &#39;STOP_LOSS&#39; in <code>algoType</code> field.</p>
+
+<p>To place <code>Braket</code> order, the input fields is 3 layer and includes an array of the ojects named <code>childOrder</code>. Please use &#39;BRACKET&#39; as <code>algoType</code> and &#39;LIMIT&#39; as type in outter layer, and create a <code>Positional TP/SL</code> order in <code>childOrder</code>, please input &#39;CLOSE_POSITION&#39; as <code>type</code>, and &#39;TAKE_PROFIT&#39; or &#39;STOP_LOSS&#39; in <code>algoType</code> field.</p>
+
+<p><code>visible_quantity</code> behavior: it sets the maximum quantity to be shown on orderbook. By default, it is equal to order_quantity, negative number and number larger than <code>order_quantity</code> is not allowed. The visibility of the childOrder will inherit the parent order&#39;s visibility setting. 
+     If it sets to 0, the order would be hidden from the orderbook.
+     It doesn&#39;t work for <code>MARKET</code>/<code>IOC</code>/<code>FOK</code> orders since orders with these types would be executed and cancelled immediately and not be shown on orderbook.
+     For <code>LIMIT</code>/<code>POST_ONLY</code> order, as long as it&#39;s not complete, <code>visible_quantity</code> is the maximum quantity that is shown on the orderbook.</p>
+
+<p><code>order_amount</code> behavior: for <code>MARKET</code> order, order can be placed by <code>order_amount</code> instead of <code>order_quantity</code>. It&#39;s the size of the order in terms of the quote currency instead of the base currency. The order would be rejected if  both <code>order_amount</code> and <code>order_quantity</code> are provided. The precision of the number should be within 8 digits.</p>
+
+<p><code>client_order_id</code> behavior: customized order_id, a unique id among open orders. Orders with the same <code>client_order_id</code> can be accepted only when the previous one if completed, otherwise the order will be rejected.</p>
+
+<p>For <code>MARKET</code>/<code>BID</code>/<code>ASK</code> order, if margin trading is disabled, <code>order_amount</code> is not supported when placing SELL order while <code>order_quantity</code> is not supported when placing BUY order.</p>
+
+<blockquote>
+<p><strong>Response</strong></p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="p">{</span>
+  <span class="s2">"code"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="s2">"data"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"rows"</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="s2">"algoType"</span><span class="p">:</span> <span class="s2">"string"</span><span class="p">,</span>
+        <span class="s2">"clientOrderId"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"orderId"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"quantity"</span><span class="p">:</span> <span class="mi">0</span>
+      <span class="p">}</span>
+    <span class="p">]</span>
+  <span class="p">},</span>
+  <span class="s2">"message"</span><span class="p">:</span> <span class="s2">"string"</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="s2">"timestamp"</span><span class="p">:</span> <span class="mi">0</span>
+<span class="p">}</span>
+</code></pre>
+<blockquote>
+<p><strong>Request</strong></p>
+</blockquote>
+
+<p>stop market order
+<code>js
+{
+    &quot;symbol&quot;:&quot;PERP_BTC_USDT&quot;,
+    &quot;side&quot;:&quot;BUY&quot;,
+    &quot;orderCombinationType&quot;:&quot;STOP_MARKET&quot;,
+    &quot;algoType&quot;:&quot;STOP&quot;,
+    &quot;triggerPrice&quot;:&quot;1000&quot;,
+    &quot;type&quot;:&quot;MARKET&quot;,
+    &quot;quantity&quot;:&quot;0.01&quot;
+}
+</code></p>
+
+<p>stop market limit
+<code>js
+{
+    &quot;symbol&quot;:&quot;PERP_BTC_USDT&quot;,
+    &quot;side&quot;:&quot;BUY&quot;,
+    &quot;orderCombinationType&quot;:&quot;STOP_LIMIT&quot;,
+    &quot;algoType&quot;:&quot;STOP&quot;,
+    &quot;triggerPrice&quot;:&quot;1000&quot;,
+    &quot;type&quot;:&quot;LIMIT&quot;,
+    &quot;quantity&quot;:&quot;0.01&quot;,
+    &quot;price&quot;:1000
+}
+</code></p>
+
+<p>OCO 
+<code>js
+{
+    &quot;symbol&quot;: &quot;PERP_ETH_USDT&quot;,
+    &quot;side&quot;: &quot;BUY&quot;,
+    &quot;reduceOnly&quot;: false,
+    &quot;type&quot;: &quot;LIMIT&quot;,
+    &quot;quantity&quot;: &quot;1&quot;,
+    &quot;algoType&quot;: &quot;OCO&quot;,
+    &quot;price&quot;: &quot;1000&quot;,
+    &quot;childOrders&quot;: [
+        {
+            &quot;side&quot;: &quot;BUY&quot;,
+            &quot;algoType&quot;: &quot;STOP&quot;,
+            &quot;triggerPrice&quot;: &quot;1600&quot;,
+            &quot;type&quot;: &quot;MARKET&quot;
+        }
+    ]
+}
+</code></p>
+
+<p>Positional TP/SL
+<code>JS
+{
+    &quot;symbol&quot;: &quot;SPOT_BAL_USDT&quot;,
+    &quot;reduceOnly&quot;: false,
+    &quot;algoType&quot;: &quot;POSITIONAL_TP_SL&quot;,
+    &quot;childOrders&quot;: [
+        {
+            &quot;algoType&quot;: &quot;TAKE_PROFIT&quot;,
+            &quot;type&quot;: &quot;CLOSE_POSITION&quot;,
+            &quot;side&quot;: &quot;BUY&quot;,
+            &quot;reduceOnly&quot;: true,
+            &quot;triggerPrice&quot;: &quot;72&quot;
+        },
+        {
+            &quot;algoType&quot;: &quot;STOP_LOSS&quot;,
+            &quot;type&quot;: &quot;CLOSE_POSITION&quot;,
+            &quot;side&quot;: &quot;BUY&quot;,
+            &quot;reduceOnly&quot;: true,
+            &quot;triggerPrice&quot;: &quot;74&quot;
+        }
+    ]
+}
+</code></p>
+
+<p>Bracket
+<code>js
+{
+    &quot;symbol&quot;: &quot;SPOT_BAL_USDT&quot;,
+    &quot;side&quot;: &quot;BUY&quot;,
+    &quot;reduceOnly&quot;: false,
+    &quot;type&quot;: &quot;LIMIT&quot;,
+    &quot;quantity&quot;: &quot;1&quot;,
+    &quot;algoType&quot;: &quot;BRACKET&quot;,
+    &quot;price&quot;: &quot;69&quot;,
+    &quot;childOrders&quot;: [
+        {
+            &quot;symbol&quot;: &quot;SPOT_BAL_USDT&quot;,
+            &quot;reduceOnly&quot;: false,
+            &quot;algoType&quot;: &quot;POSITIONAL_TP_SL&quot;,
+            &quot;childOrders&quot;: [
+                {
+                    &quot;algoType&quot;: &quot;TAKE_PROFIT&quot;,
+                    &quot;type&quot;: &quot;CLOSE_POSITION&quot;,
+                    &quot;side&quot;: &quot;SELL&quot;,
+                    &quot;reduceOnly&quot;: true,
+                    &quot;triggerPrice&quot;: &quot;76&quot;
+                },
+                {
+                    &quot;algoType&quot;: &quot;STOP_LOSS&quot;,
+                    &quot;type&quot;: &quot;CLOSE_POSITION&quot;,
+                    &quot;side&quot;: &quot;SELL&quot;,
+                    &quot;reduceOnly&quot;: true,
+                    &quot;triggerPrice&quot;: &quot;50&quot;
+                }
+            ]
+        }
+    ]
+}
+</code></p>
+
+<p><strong>Parameters</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>algoType</td>
+<td>string</td>
+<td>Y</td>
+<td><code>STOP</code></td>
+</tr>
+<tr>
+<td>callbackRate</td>
+<td>string</td>
+<td>N</td>
+<td>callback rate, only for algoType=TRAILING_STOP, i.e. the value = 0.1 represent to 10%.</td>
+</tr>
+<tr>
+<td>callbackValue</td>
+<td>string</td>
+<td>N</td>
+<td>callback value, only for algoType=TRAILING_STOP, i.e. the value = 100</td>
+</tr>
+<tr>
+<td>childOrder</td>
+<td>array</td>
+<td>N</td>
+<td>Only for algoType=BRACKET</td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>Y</td>
+<td></td>
+</tr>
+<tr>
+<td>clientOderId</td>
+<td>number</td>
+<td>N</td>
+<td>number for scope : from 0 to 9223372036854775807. (default: 0)</td>
+</tr>
+<tr>
+<td>orderTag</td>
+<td>string</td>
+<td>N</td>
+<td>An optional tag for this order. (default: <code>default</code>)</td>
+</tr>
+<tr>
+<td>orderType</td>
+<td>enum</td>
+<td>Y</td>
+<td><code>LIMIT</code>/<code>MARKET</code>/<code>IOC</code>/<code>FOK</code>/<code>POST_ONLY</code>/<code>ASK</code>/<code>BID</code></td>
+</tr>
+<tr>
+<td>orderPrice</td>
+<td>string</td>
+<td>N</td>
+<td>If order_type is <code>MARKET</code>, then is not required, otherwise this parameter is required.</td>
+</tr>
+<tr>
+<td>orderQuantity</td>
+<td>string</td>
+<td>N</td>
+<td>For <code>MARKET</code>/<code>ASK</code>/<code>BID</code> order, if <code>order_amount</code> is given, it is not required.</td>
+</tr>
+<tr>
+<td>orderAmount</td>
+<td>string</td>
+<td>N</td>
+<td>For <code>MARKET</code>/<code>ASK</code>/<code>BID</code> order, the order size in terms of quote currency</td>
+</tr>
+<tr>
+<td>reduceOnly</td>
+<td>boolean</td>
+<td>N</td>
+<td>true or false, default false</td>
+</tr>
+<tr>
+<td>triggerPrice</td>
+<td>string</td>
+<td>N</td>
+<td>trigger price, if algoType=TRAILING_STOP, you need to provide &#39;activatedPrice&#39;</td>
+</tr>
+<tr>
+<td>triggerPriceType</td>
+<td>string</td>
+<td>N</td>
+<td>trigger price, if algoType=TRAILING_STOP, you need to provide &#39;activatedPrice&#39;</td>
+</tr>
+<tr>
+<td>type</td>
+<td>boolean</td>
+<td>N</td>
+<td>true or false, default false</td>
+</tr>
+<tr>
+<td>visible_quantity</td>
+<td>number</td>
+<td>N</td>
+<td>The order quantity shown on orderbook. (default: equal to <code>order_quantity</code>)</td>
+</tr>
+<tr>
+<td>side</td>
+<td>enum</td>
+<td>Y</td>
+<td><code>SELL</code>/<code>BUY</code></td>
+</tr>
+</tbody></table>
+<h2 id='cancel-algo-order'>Cancel Algo Order</h2>
+<p><strong>Limit: 10 requests per 1 second</strong> shared with <a href="#cancel-algo-order-by-client_order_id">cancel_algo_order_by_client_order_id</a></p>
+
+<p><code>
+DELETE /v3/algo/order/:oid
+</code></p>
+
+<p>***Note that for v3 API, please follow the instruction in <a href="#authentication">authentication</a> section for <code>v3</code> API to generate the signature.
+Cancel order by order id. The order cancelled information will be updated from websocket stream.
+note that we give an immediate response with an order cancel sent message, and will update the cancel event via the websocket channel.</p>
+
+<blockquote>
+<p><strong>Response</strong></p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="p">{</span>
+  <span class="s2">"code"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="s2">"message"</span><span class="p">:</span> <span class="s2">"string"</span><span class="p">,</span>
+  <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"CANCEL_SENT"</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="s2">"timestamp"</span><span class="p">:</span> <span class="mi">0</span>
+<span class="p">}</span>
+</code></pre>
+<p><strong>Parameters</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>order_id</td>
+<td>number</td>
+<td>Y</td>
+<td>The <code>order_id</code> that youwish to cancel</td>
+</tr>
+</tbody></table>
+<h2 id='cancel-algo-order-by-client_order_id'>Cancel Algo Order by client_order_id</h2>
+<p><strong>Limit: 10 requests per 1 second</strong> shared with <a href="#cancel-algo-order">cancel_algo_order</a></p>
+
+<p><code>
+DELETE /v3/algo/order
+</code></p>
+
+<p>***Note that for v3 API, please follow the instruction in <a href="#authentication">authentication</a> section for <code>v3</code> API to generate the signature.
+Cancel order by client order id. The order cancelled information will be updated from websocket stream.
+note that we give an immediate response with an order cancel sent message, and will update the cancel event via the websocket channel.</p>
+
+<p>Only the latest order with the <code>symbol</code> and <code>client_order_id</code> would be canceled.</p>
+
+<blockquote>
+<p><strong>Response</strong></p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="p">{</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"CANCEL_SENT"</span>
+<span class="p">}</span>
+</code></pre>
+<p><strong>Parameters</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>client_order_id</td>
+<td>number</td>
+<td>Y</td>
+<td>The <code>client_order_id</code> that you wish tocancel</td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>Y</td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id='cancel-all-pending-algo-orders'>Cancel All Pending Algo Orders</h2>
+<p><strong>Limit: 10 requests per 1 second</strong></p>
+
+<p><code>
+DELETE /v3/algo/orders/pending
+</code></p>
+
+<p>***Note that for v3 API, please follow the instruction in <a href="#authentication">authentication</a> section for <code>v3</code> API to generate the signature.
+Cancel all pending algo orders.</p>
+
+<blockquote>
+<p><strong>Response</strong></p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="p">{</span>
+  <span class="s2">"code"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="s2">"message"</span><span class="p">:</span> <span class="s2">"string"</span><span class="p">,</span>
+  <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"CANCEL_SENT"</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="s2">"timestamp"</span><span class="p">:</span> <span class="mi">0</span>
+<span class="p">}</span>
+</code></pre><h2 id='cancel-all-pending-algo-orders-by-symbol'>Cancel All Pending Algo Orders by Symbol</h2>
+<p><strong>Limit: 10 requests per 1 second</strong></p>
+
+<p><code>
+DELETE /v3/algo/orders/pending/:symbol
+</code></p>
+
+<p>***Note that for v3 API, please follow the instruction in <a href="#authentication">authentication</a> section for <code>v3</code> API to generate the signature.
+Cancel pending algo orders by symbol.</p>
+
+<blockquote>
+<p><strong>Response</strong></p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="p">{</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"CANCEL_ALL_SENT"</span>
+<span class="p">}</span>
+</code></pre>
+<p><strong>Parameters</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>Y</td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id='get-algo-order'>Get Algo Order</h2>
+<p><strong>Limit: 10 requests per 1 second</strong> shared with <a href="#get-algo-order-by-client-order-id">get_algo_order_by_client_order_id</a></p>
+
+<p><code>
+GET /v3/algo/order/:oid
+</code></p>
+
+<p>Get specific order details by Algo order&#39;s <code>order_id</code>.</p>
+
+<blockquote>
+<p><strong>Response</strong></p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="p">{</span>
+  <span class="s2">"code"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="s2">"data"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"activatedPrice"</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="s2">"algoOrderId"</span><span class="p">:</span> <span class="mi">1234567</span><span class="p">,</span>
+    <span class="s2">"algoStatus"</span><span class="p">:</span> <span class="s2">"NEW"</span><span class="p">,</span>
+    <span class="s2">"algoType"</span><span class="p">:</span> <span class="s2">"STOP"</span><span class="p">,</span>
+    <span class="s2">"averageExecutedPrice"</span><span class="p">:</span> <span class="mf">10.1235</span><span class="p">,</span>
+    <span class="s2">"callbackRate"</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+    <span class="s2">"callbackValue"</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="s2">"childOrders"</span><span class="p">:</span> <span class="s2">"100"</span><span class="p">,</span>
+    <span class="s2">"clientOrderId"</span><span class="p">:</span> <span class="mi">1234567</span><span class="p">,</span>
+    <span class="s2">"createdTime"</span><span class="p">:</span> <span class="s2">"10.1235"</span><span class="p">,</span>
+    <span class="s2">"extremePrice"</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="s2">"feeAsset"</span><span class="p">:</span> <span class="s2">"0.1235"</span><span class="p">,</span>
+    <span class="s2">"isActivated"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="s2">"isTriggered"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"orderTag"</span><span class="p">:</span> <span class="s2">"my_tag"</span><span class="p">,</span>
+    <span class="s2">"parentAlgoOrderId"</span><span class="p">:</span> <span class="mi">1234567</span><span class="p">,</span>
+    <span class="s2">"price"</span><span class="p">:</span> <span class="mf">10.1235</span><span class="p">,</span>
+    <span class="s2">"quantity"</span><span class="p">:</span> <span class="mf">10.12345</span><span class="p">,</span>
+    <span class="s2">"realizedPnl"</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="s2">"reduceOnly"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="s2">"rootAlgoOrderId"</span><span class="p">:</span> <span class="mi">1234567</span><span class="p">,</span>
+    <span class="s2">"rootAlgoStatus"</span><span class="p">:</span> <span class="s2">"NEW"</span><span class="p">,</span>
+    <span class="s2">"side"</span><span class="p">:</span> <span class="s2">"BUY"</span><span class="p">,</span>
+    <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"NEW"</span><span class="p">,</span>
+    <span class="s2">"symbol"</span><span class="p">:</span> <span class="s2">"SPOT_WOO_USDT"</span><span class="p">,</span>
+    <span class="s2">"totalExecutedQuantity"</span><span class="p">:</span> <span class="mf">10.1235</span><span class="p">,</span>
+    <span class="s2">"totalFee"</span><span class="p">:</span> <span class="mf">0.1235</span><span class="p">,</span>
+    <span class="s2">"triggerPrice"</span><span class="p">:</span> <span class="mf">10.23456</span><span class="p">,</span>
+    <span class="s2">"triggerPriceType"</span><span class="p">:</span> <span class="s2">"MARKET_PRICE"</span><span class="p">,</span>
+    <span class="s2">"triggerStatus"</span><span class="p">:</span> <span class="s2">"SUCCESS"</span><span class="p">,</span>
+    <span class="s2">"triggerTime"</span><span class="p">:</span> <span class="s2">"10.1235"</span><span class="p">,</span>
+    <span class="s2">"triggerTradePrice"</span><span class="p">:</span> <span class="mf">10.1235</span><span class="p">,</span>
+    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"LIMIT"</span><span class="p">,</span>
+    <span class="s2">"updatedTime"</span><span class="p">:</span> <span class="s2">"10.1235"</span><span class="p">,</span>
+    <span class="s2">"visibleQuantity"</span><span class="p">:</span> <span class="mf">10.1235</span>
+  <span class="p">},</span>
+  <span class="s2">"message"</span><span class="p">:</span> <span class="s2">"string"</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="s2">"timestamp"</span><span class="p">:</span> <span class="mi">0</span>
+<span class="p">}</span>
+</code></pre>
+<p><strong>Parameters</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>oid</td>
+<td>number</td>
+<td>Y</td>
+<td>The Algo order&#39;s order_id <code>oid</code> that you wish to query</td>
+</tr>
+</tbody></table>
+<h2 id='get-algo-order-by-client_order_id'>Get Algo Order by client_order_id</h2>
+<p><strong>Limit: 10 requests per 1 second</strong> shared with <a href="#get-algo-order">get_algo_order</a></p>
+
+<p><code>
+GET /v3/algo/order/:client_order_id
+</code></p>
+
+<p>***Note that for v3 API, please follow the instruction in <a href="#authentication">authentication</a> section for <code>v3</code> API to generate the signature.
+Get specific order details by <code>client_order_id</code>. If there is more than one order with the same <code>client_order_id</code>, return the latest one.</p>
+
+<blockquote>
+<p><strong>Response</strong></p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="p">{</span>
+  <span class="s2">"code"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="s2">"data"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"activatedPrice"</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="s2">"algoOrderId"</span><span class="p">:</span> <span class="mi">1234567</span><span class="p">,</span>
+    <span class="s2">"algoStatus"</span><span class="p">:</span> <span class="s2">"NEW"</span><span class="p">,</span>
+    <span class="s2">"algoType"</span><span class="p">:</span> <span class="s2">"STOP"</span><span class="p">,</span>
+    <span class="s2">"averageExecutedPrice"</span><span class="p">:</span> <span class="mf">10.1235</span><span class="p">,</span>
+    <span class="s2">"callbackRate"</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+    <span class="s2">"callbackValue"</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="s2">"childOrders"</span><span class="p">:</span> <span class="s2">"100"</span><span class="p">,</span>
+    <span class="s2">"clientOrderId"</span><span class="p">:</span> <span class="mi">1234567</span><span class="p">,</span>
+    <span class="s2">"createdTime"</span><span class="p">:</span> <span class="s2">"10.1235"</span><span class="p">,</span>
+    <span class="s2">"extremePrice"</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="s2">"feeAsset"</span><span class="p">:</span> <span class="s2">"0.1235"</span><span class="p">,</span>
+    <span class="s2">"isActivated"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="s2">"isTriggered"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"orderTag"</span><span class="p">:</span> <span class="s2">"my_tag"</span><span class="p">,</span>
+    <span class="s2">"parentAlgoOrderId"</span><span class="p">:</span> <span class="mi">1234567</span><span class="p">,</span>
+    <span class="s2">"price"</span><span class="p">:</span> <span class="mf">10.1235</span><span class="p">,</span>
+    <span class="s2">"quantity"</span><span class="p">:</span> <span class="mf">10.12345</span><span class="p">,</span>
+    <span class="s2">"realizedPnl"</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="s2">"reduceOnly"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="s2">"rootAlgoOrderId"</span><span class="p">:</span> <span class="mi">1234567</span><span class="p">,</span>
+    <span class="s2">"rootAlgoStatus"</span><span class="p">:</span> <span class="s2">"NEW"</span><span class="p">,</span>
+    <span class="s2">"side"</span><span class="p">:</span> <span class="s2">"BUY"</span><span class="p">,</span>
+    <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"NEW"</span><span class="p">,</span>
+    <span class="s2">"symbol"</span><span class="p">:</span> <span class="s2">"SPOT_WOO_USDT"</span><span class="p">,</span>
+    <span class="s2">"totalExecutedQuantity"</span><span class="p">:</span> <span class="mf">10.1235</span><span class="p">,</span>
+    <span class="s2">"totalFee"</span><span class="p">:</span> <span class="mf">0.1235</span><span class="p">,</span>
+    <span class="s2">"triggerPrice"</span><span class="p">:</span> <span class="mf">10.23456</span><span class="p">,</span>
+    <span class="s2">"triggerPriceType"</span><span class="p">:</span> <span class="s2">"MARKET_PRICE"</span><span class="p">,</span>
+    <span class="s2">"triggerStatus"</span><span class="p">:</span> <span class="s2">"SUCCESS"</span><span class="p">,</span>
+    <span class="s2">"triggerTime"</span><span class="p">:</span> <span class="s2">"10.1235"</span><span class="p">,</span>
+    <span class="s2">"triggerTradePrice"</span><span class="p">:</span> <span class="mf">10.1235</span><span class="p">,</span>
+    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"LIMIT"</span><span class="p">,</span>
+    <span class="s2">"updatedTime"</span><span class="p">:</span> <span class="s2">"10.1235"</span><span class="p">,</span>
+    <span class="s2">"visibleQuantity"</span><span class="p">:</span> <span class="mf">10.1235</span>
+  <span class="p">},</span>
+  <span class="s2">"message"</span><span class="p">:</span> <span class="s2">"string"</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="s2">"timestamp"</span><span class="p">:</span> <span class="mi">0</span>
+<span class="p">}</span>
+</code></pre>
+<p><strong>Parameters</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>oid</td>
+<td>number</td>
+<td>Y</td>
+<td>The Algo order&#39;s order_id <code>oid</code> that you wish to query</td>
+</tr>
+</tbody></table>
+<h2 id='get-algo-orders'>Get Algo Orders</h2>
+<p><strong>Limit: 10 requests per 1 second</strong></p>
+
+<p><code>
+GET /v3/algo/orders
+</code></p>
+
+<p>***Note that for v3 API, please follow the instruction in <a href="#authentication">authentication</a> section for <code>v3</code> API to generate the signature.
+Get orders by customize conditions.<br>
+- <code>INCOMPLETE</code> = <code>NEW</code> + <code>PARTIAL_FILLED</code><br>
+- <code>COMPLETED</code> = <code>CANCELLED</code> + <code>FILLED</code>
+The <code>realized_pnl</code> field in response will only present the settled amount for futures orders. The return value default is null unless the input parameter <code>realized_pnl</code> set to <code>true</code></p>
+
+<blockquote>
+<p><strong>Response</strong></p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="p">{</span>
+  <span class="s2">"code"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="s2">"data"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"meta"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"current_page"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="s2">"records_per_page"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="s2">"total"</span><span class="p">:</span> <span class="mi">0</span>
+    <span class="p">},</span>
+    <span class="s2">"rows"</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="s2">"activatedPrice"</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+        <span class="s2">"algoOrderId"</span><span class="p">:</span> <span class="mi">1234567</span><span class="p">,</span>
+        <span class="s2">"algoStatus"</span><span class="p">:</span> <span class="s2">"NEW"</span><span class="p">,</span>
+        <span class="s2">"algoType"</span><span class="p">:</span> <span class="s2">"STOP"</span><span class="p">,</span>
+        <span class="s2">"averageExecutedPrice"</span><span class="p">:</span> <span class="mf">10.1235</span><span class="p">,</span>
+        <span class="s2">"callbackRate"</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+        <span class="s2">"callbackValue"</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+        <span class="s2">"childOrders"</span><span class="p">:</span> <span class="s2">"100"</span><span class="p">,</span>
+        <span class="s2">"clientOrderId"</span><span class="p">:</span> <span class="mi">1234567</span><span class="p">,</span>
+        <span class="s2">"createdTime"</span><span class="p">:</span> <span class="s2">"10.1235"</span><span class="p">,</span>
+        <span class="s2">"extremePrice"</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+        <span class="s2">"feeAsset"</span><span class="p">:</span> <span class="s2">"0.1235"</span><span class="p">,</span>
+        <span class="s2">"isActivated"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="s2">"isTriggered"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="s2">"orderTag"</span><span class="p">:</span> <span class="s2">"my_tag"</span><span class="p">,</span>
+        <span class="s2">"parentAlgoOrderId"</span><span class="p">:</span> <span class="mi">1234567</span><span class="p">,</span>
+        <span class="s2">"price"</span><span class="p">:</span> <span class="mf">10.1235</span><span class="p">,</span>
+        <span class="s2">"quantity"</span><span class="p">:</span> <span class="mf">10.12345</span><span class="p">,</span>
+        <span class="s2">"realizedPnl"</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+        <span class="s2">"reduceOnly"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="s2">"rootAlgoOrderId"</span><span class="p">:</span> <span class="mi">1234567</span><span class="p">,</span>
+        <span class="s2">"rootAlgoStatus"</span><span class="p">:</span> <span class="s2">"NEW"</span><span class="p">,</span>
+        <span class="s2">"side"</span><span class="p">:</span> <span class="s2">"BUY"</span><span class="p">,</span>
+        <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"NEW"</span><span class="p">,</span>
+        <span class="s2">"symbol"</span><span class="p">:</span> <span class="s2">"SPOT_WOO_USDT"</span><span class="p">,</span>
+        <span class="s2">"totalExecutedQuantity"</span><span class="p">:</span> <span class="mf">10.1235</span><span class="p">,</span>
+        <span class="s2">"totalFee"</span><span class="p">:</span> <span class="mf">0.1235</span><span class="p">,</span>
+        <span class="s2">"triggerPrice"</span><span class="p">:</span> <span class="mf">10.23456</span><span class="p">,</span>
+        <span class="s2">"triggerPriceType"</span><span class="p">:</span> <span class="s2">"MARKET_PRICE"</span><span class="p">,</span>
+        <span class="s2">"triggerStatus"</span><span class="p">:</span> <span class="s2">"SUCCESS"</span><span class="p">,</span>
+        <span class="s2">"triggerTime"</span><span class="p">:</span> <span class="s2">"10.1235"</span><span class="p">,</span>
+        <span class="s2">"triggerTradePrice"</span><span class="p">:</span> <span class="mf">10.1235</span><span class="p">,</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"LIMIT"</span><span class="p">,</span>
+        <span class="s2">"updatedTime"</span><span class="p">:</span> <span class="s2">"10.1235"</span><span class="p">,</span>
+        <span class="s2">"visibleQuantity"</span><span class="p">:</span> <span class="mf">10.1235</span>
+      <span class="p">}</span>
+    <span class="p">]</span>
+  <span class="p">},</span>
+  <span class="s2">"message"</span><span class="p">:</span> <span class="s2">"string"</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="s2">"timestamp"</span><span class="p">:</span> <span class="mi">0</span>
+<span class="p">}</span>
+</code></pre>
+<p><strong>Parameters</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>algoType</td>
+<td>string</td>
+<td>Y</td>
+<td><code>STOP</code></td>
+</tr>
+<tr>
+<td>created_time_end</td>
+<td>timestamp</td>
+<td>N</td>
+<td>end time range that you wish to query, noted that the time stamp is a 13-digits timestamp.</td>
+</tr>
+<tr>
+<td>created_time_start</td>
+<td>timestamp</td>
+<td>N</td>
+<td>start time range that you wish to query, noted that the time stamp is a 13-digits timestamp.</td>
+</tr>
+<tr>
+<td>is_triggered</td>
+<td>string</td>
+<td>N</td>
+<td>true or false</td>
+</tr>
+<tr>
+<td>order_tag</td>
+<td>string</td>
+<td>N</td>
+<td>An optional tag for this order.</td>
+</tr>
+<tr>
+<td>page</td>
+<td>number</td>
+<td>N (default: 1)</td>
+<td>the page you wish to query.</td>
+</tr>
+<tr>
+<td>realized_pnl</td>
+<td>boolean</td>
+<td>N</td>
+<td>Decide if return data calculate realized pnl value for the futures order.</td>
+</tr>
+<tr>
+<td>side</td>
+<td>string</td>
+<td>N</td>
+<td><code>BUY</code>/<code>SELL</code></td>
+</tr>
+<tr>
+<td>size</td>
+<td>number</td>
+<td>N</td>
+<td></td>
+</tr>
+<tr>
+<td>status</td>
+<td>enum</td>
+<td>N</td>
+<td><code>NEW</code>/<code>CANCELLED</code>/<code>PARTIAL_FILLED</code>/<code>FILLED</code>/<code>REJECTED</code>/<code>INCOMPLETE</code>/<code>COMPLETED</code></td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>N</td>
+<td></td>
+</tr>
+<tr>
+<td>updated_time_end</td>
+<td>timestamp</td>
+<td>N</td>
+<td>end time range that you wish to query, noted that the time stamp is a 13-digits timestamp.</td>
+</tr>
+<tr>
+<td>updated_time_start</td>
+<td>timestamp</td>
+<td>N</td>
+<td>start time range that you wish to query, noted that the time stamp is a 13-digits timestamp.</td>
+</tr>
+<tr>
+<td>order_type</td>
+<td>string</td>
+<td>N</td>
+<td><code>LIMIT</code>/<code>MARKET</code>/<code>IOC</code>/<code>FOK</code>/<code>POST_ONLY</code>/<code>LIQUIDATE</code></td>
+</tr>
+<tr>
+<td>start_t</td>
+<td>timestamp</td>
+<td>N</td>
+<td>start time range that you wish to query, noted that the time stamp is a 13-digits timestamp.</td>
+</tr>
+<tr>
+<td>end_t</td>
+<td>timestamp</td>
+<td>N</td>
+<td>end time range that you wish to query, noted that the time stamp is a 13-digits timestamp.</td>
 </tr>
 </tbody></table>
 <h2 id='orderbook-snapshot'>Orderbook snapshot</h2>
@@ -3913,7 +4722,7 @@ GET /v1/position/:symbol
 </code></pre><h2 id='k-line'>k-line</h2>
 <ul>
 <li><code>{time}</code>: <code>1m</code>/<code>5m</code>/<code>15m</code>/<code>30m</code>/<code>1h</code>/<code>1d</code>/<code>1w</code>/<code>1M</code></li>
-<li>Push interval: 1s</li>
+<li>Push interval: by the selected k-line type.</li>
 </ul>
 
 <p><strong>Parameters</strong></p>
@@ -4573,6 +5382,14 @@ GET /v1/position/:symbol
 <span class="p">}</span>
 </code></pre><h1 id='release-note'>Release Note</h1>
 <p>All the API changes would be listed here.</p>
+<h2 id='2022-10-24'>2022-10-24</h2>
+<ul>
+<li>Add <a href="#send-algo-order">Send Algo Order</a> to create Algo Order through the API, support algo types include: <code>STOP</code>(stop market &amp; stop limit), <code>OCO</code>, <code>TRAILING_STOP</code>, <code>BRACKET</code> and <code>POSITIONAL_TP_SL</code>.</li>
+<li>Add <a href="#cancel-algo-order">Cancel Algo Order</a>, <a href="#cancel-all-pending-algo-orders">Cancel All Pending Algo Orders</a> and <a href="#cancel-all-pending-algo-orders-by-symbol">Cancel All Pending Algo Orders by Symbol</a> to cancel Algo Orders through the API.</li>
+<li>Add <a href="#get-algo-order">Get Algo Order</a> and <a href="#get-algo-orders">Get Algo Orders</a> to fetch Algo Orders detail through the API.</li>
+<li>Add <a href="#cancel-all-pending-order">Cancel All Pending Order</a> to cancel all pending Ordinary Orders (not include Algo Orders) through the API.</li>
+<li>Update <a href="#authentication">authentication</a> section for <code>v3</code> API to generate the signature with <code>timestamp</code>, <code>request_method</code>, <code>request_path</code> and <code>request_body</code>.</li>
+</ul>
 <h2 id='2022-09-08'>2022-09-08</h2>
 <ul>
 <li>Add <code>can_collateral</code> in the response message of API <a href="#available-token-public">Available Token (Public)</a>.</li>
