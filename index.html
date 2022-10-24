@@ -1912,8 +1912,6 @@ will respond immediately with an order created message.</p>
 
 <p>To place <code>Positional TP/SL</code> order, the input fields is 2 layer and includes an array of the ojects named <code>childOrder</code>. The take-profit or stop-loss order shoud be the objects in the array. For the sub-order in <code>childOrder</code>, please input &#39;CLOSE_POSITION&#39; as <code>type</code>, and &#39;TAKE_PROFIT&#39; or &#39;STOP_LOSS&#39; in <code>algoType</code> field.</p>
 
-<p>To place <code>Braket</code> order, the input fields is 3 layer and includes an array of the ojects named <code>childOrder</code>. Please use &#39;BRACKET&#39; as <code>algoType</code> and &#39;LIMIT&#39; as type in outter layer, and create a <code>Positional TP/SL</code> order in <code>childOrder</code>, please input &#39;CLOSE_POSITION&#39; as <code>type</code>, and &#39;TAKE_PROFIT&#39; or &#39;STOP_LOSS&#39; in <code>algoType</code> field.</p>
-
 <p><code>visible_quantity</code> behavior: it sets the maximum quantity to be shown on orderbook. By default, it is equal to order_quantity, negative number and number larger than <code>order_quantity</code> is not allowed. The visibility of the childOrder will inherit the parent order&#39;s visibility setting. 
      If it sets to 0, the order would be hidden from the orderbook.
      It doesn&#39;t work for <code>MARKET</code>/<code>IOC</code>/<code>FOK</code> orders since orders with these types would be executed and cancelled immediately and not be shown on orderbook.
@@ -2022,42 +2020,6 @@ will respond immediately with an order created message.</p>
 }
 </code></p>
 
-<p>Bracket
-<code>js
-{
-    &quot;symbol&quot;: &quot;SPOT_BAL_USDT&quot;,
-    &quot;side&quot;: &quot;BUY&quot;,
-    &quot;reduceOnly&quot;: false,
-    &quot;type&quot;: &quot;LIMIT&quot;,
-    &quot;quantity&quot;: &quot;1&quot;,
-    &quot;algoType&quot;: &quot;BRACKET&quot;,
-    &quot;price&quot;: &quot;69&quot;,
-    &quot;childOrders&quot;: [
-        {
-            &quot;symbol&quot;: &quot;SPOT_BAL_USDT&quot;,
-            &quot;reduceOnly&quot;: false,
-            &quot;algoType&quot;: &quot;POSITIONAL_TP_SL&quot;,
-            &quot;childOrders&quot;: [
-                {
-                    &quot;algoType&quot;: &quot;TAKE_PROFIT&quot;,
-                    &quot;type&quot;: &quot;CLOSE_POSITION&quot;,
-                    &quot;side&quot;: &quot;SELL&quot;,
-                    &quot;reduceOnly&quot;: true,
-                    &quot;triggerPrice&quot;: &quot;76&quot;
-                },
-                {
-                    &quot;algoType&quot;: &quot;STOP_LOSS&quot;,
-                    &quot;type&quot;: &quot;CLOSE_POSITION&quot;,
-                    &quot;side&quot;: &quot;SELL&quot;,
-                    &quot;reduceOnly&quot;: true,
-                    &quot;triggerPrice&quot;: &quot;50&quot;
-                }
-            ]
-        }
-    ]
-}
-</code></p>
-
 <p><strong>Parameters</strong></p>
 
 <table><thead>
@@ -2090,7 +2052,7 @@ will respond immediately with an order created message.</p>
 <td>childOrder</td>
 <td>array</td>
 <td>N</td>
-<td>Only for algoType=BRACKET</td>
+<td>Only for algoType=POSITIONAL_TP_SL</td>
 </tr>
 <tr>
 <td>symbol</td>
@@ -5377,6 +5339,7 @@ GET /v1/position/:symbol
 <li>Add <a href="#get-algo-order">Get Algo Order</a> and <a href="#get-algo-orders">Get Algo Orders</a> to fetch Algo Orders detail through the API.</li>
 <li>Add <a href="#cancel-all-pending-order">Cancel All Pending Order</a> to cancel all pending Ordinary Orders (not include Algo Orders) through the API.</li>
 <li>Update <a href="#authentication">authentication</a> section for <code>v3</code> API to generate the signature with <code>timestamp</code>, <code>request_method</code>, <code>request_path</code> and <code>request_body</code>.</li>
+<li>Add <a href="#get-system-maintenance-status">Get System Maintenance Status</a> API to fetch system status.</li>
 </ul>
 <h2 id='2022-09-08'>2022-09-08</h2>
 <ul>
