@@ -2031,6 +2031,12 @@ will respond immediately with an order created message.</p>
 </tr>
 </thead><tbody>
 <tr>
+<td>activatedPrice</td>
+<td>string</td>
+<td>N</td>
+<td>activated price for algoType=TRAILING_STOP</td>
+</tr>
+<tr>
 <td>algoType</td>
 <td>string</td>
 <td>Y</td>
@@ -2137,7 +2143,7 @@ will respond immediately with an order created message.</p>
 <p><strong>Limit: 10 requests per 1 second</strong> shared with <a href="#cancel-algo-order-by-client_order_id">cancel_algo_order_by_client_order_id</a></p>
 
 <p><code>
-DELETE /v3/algo/order/:oid
+DELETE /v3/algo/order/:order_id
 </code></p>
 
 <p>***Note that for v3 API, please follow the instruction in <a href="#authentication">authentication</a> section for <code>v3</code> API to generate the signature.
@@ -2568,18 +2574,6 @@ The <code>realized_pnl</code> field in response will only present the settled am
 <td>string</td>
 <td>N</td>
 <td></td>
-</tr>
-<tr>
-<td>updatedTimeEnd</td>
-<td>timestamp</td>
-<td>N</td>
-<td>end time range that you wish to query, noted that the time stamp is a 13-digits timestamp.</td>
-</tr>
-<tr>
-<td>updatedTimeStart</td>
-<td>timestamp</td>
-<td>N</td>
-<td>start time range that you wish to query, noted that the time stamp is a 13-digits timestamp.</td>
 </tr>
 <tr>
 <td>orderType</td>
