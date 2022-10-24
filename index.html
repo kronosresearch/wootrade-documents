@@ -2542,25 +2542,25 @@ The <code>realized_pnl</code> field in response will only present the settled am
 <td><code>STOP</code></td>
 </tr>
 <tr>
-<td>created_time_end</td>
+<td>createdTimeEnd</td>
 <td>timestamp</td>
 <td>N</td>
 <td>end time range that you wish to query, noted that the time stamp is a 13-digits timestamp.</td>
 </tr>
 <tr>
-<td>created_time_start</td>
+<td>createdTimeStart</td>
 <td>timestamp</td>
 <td>N</td>
 <td>start time range that you wish to query, noted that the time stamp is a 13-digits timestamp.</td>
 </tr>
 <tr>
-<td>is_triggered</td>
+<td>isTriggered</td>
 <td>string</td>
 <td>N</td>
 <td>true or false</td>
 </tr>
 <tr>
-<td>order_tag</td>
+<td>orderTag</td>
 <td>string</td>
 <td>N</td>
 <td>An optional tag for this order.</td>
@@ -2569,7 +2569,7 @@ The <code>realized_pnl</code> field in response will only present the settled am
 <td>page</td>
 <td>number</td>
 <td>N (default: 1)</td>
-<td>the page you wish to query.</td>
+<td>pag of query pagination</td>
 </tr>
 <tr>
 <td>realized_pnl</td>
@@ -2587,7 +2587,7 @@ The <code>realized_pnl</code> field in response will only present the settled am
 <td>size</td>
 <td>number</td>
 <td>N</td>
-<td></td>
+<td>size for query pagination</td>
 </tr>
 <tr>
 <td>status</td>
@@ -2602,34 +2602,22 @@ The <code>realized_pnl</code> field in response will only present the settled am
 <td></td>
 </tr>
 <tr>
-<td>updated_time_end</td>
+<td>updatedTimeEnd</td>
 <td>timestamp</td>
 <td>N</td>
 <td>end time range that you wish to query, noted that the time stamp is a 13-digits timestamp.</td>
 </tr>
 <tr>
-<td>updated_time_start</td>
+<td>updatedTimeStart</td>
 <td>timestamp</td>
 <td>N</td>
 <td>start time range that you wish to query, noted that the time stamp is a 13-digits timestamp.</td>
 </tr>
 <tr>
-<td>order_type</td>
+<td>orderType</td>
 <td>string</td>
 <td>N</td>
 <td><code>LIMIT</code>/<code>MARKET</code>/<code>IOC</code>/<code>FOK</code>/<code>POST_ONLY</code>/<code>LIQUIDATE</code></td>
-</tr>
-<tr>
-<td>start_t</td>
-<td>timestamp</td>
-<td>N</td>
-<td>start time range that you wish to query, noted that the time stamp is a 13-digits timestamp.</td>
-</tr>
-<tr>
-<td>end_t</td>
-<td>timestamp</td>
-<td>N</td>
-<td>end time range that you wish to query, noted that the time stamp is a 13-digits timestamp.</td>
 </tr>
 </tbody></table>
 <h2 id='orderbook-snapshot'>Orderbook snapshot</h2>
