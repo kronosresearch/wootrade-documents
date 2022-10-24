@@ -306,7 +306,7 @@
                     <a href="#cancel-all-pending-algo-orders" class="toc-h2 toc-link" data-title="Cancel All Pending Algo Orders">Cancel All Pending Algo Orders</a>
                   </li>
                   <li>
-                    <a href="#cancel-all-pending-algo-orders-by-symbol" class="toc-h2 toc-link" data-title="Cancel All Pending Algo Orders by Symbol">Cancel All Pending Algo Orders by Symbol</a>
+                    <a href="#cancel-pending-merge-orders-by-symbol" class="toc-h2 toc-link" data-title="Cancel Pending Merge Orders by Symbol">Cancel Pending Merge Orders by Symbol</a>
                   </li>
                   <li>
                     <a href="#get-algo-order" class="toc-h2 toc-link" data-title="Get Algo Order">Get Algo Order</a>
@@ -643,7 +643,7 @@ side:BUY
 <p>var signString = timestamp + method + request_path + request_body;</p>
 
 <blockquote>
-<p><strong>Normalize request content for V1 API, The result content would look like following</strong></p>
+<p><strong>Normalize request content for V3 API, The result content would look like following</strong></p>
 </blockquote>
 <pre class="highlight plaintext"><code>1578565539808POST/v3/algo/order{
     "symbol": "PERP_BTC_USDT",
@@ -2236,11 +2236,11 @@ Cancel all pending algo orders.</p>
   <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
   <span class="s2">"timestamp"</span><span class="p">:</span> <span class="mi">0</span>
 <span class="p">}</span>
-</code></pre><h2 id='cancel-all-pending-algo-orders-by-symbol'>Cancel All Pending Algo Orders by Symbol</h2>
+</code></pre><h2 id='cancel-pending-merge-orders-by-symbol'>Cancel Pending Merge Orders by Symbol</h2>
 <p><strong>Limit: 10 requests per 1 second</strong></p>
 
 <p><code>
-DELETE /v3/algo/orders/pending/:symbol
+DELETE /v3/merge/orders/pending/:symbol
 </code></p>
 
 <p>***Note that for v3 API, please follow the instruction in <a href="#authentication">authentication</a> section for <code>v3</code> API to generate the signature.
@@ -2264,6 +2264,12 @@ Cancel pending algo orders by symbol.</p>
 <th>Description</th>
 </tr>
 </thead><tbody>
+<tr>
+<td>side</td>
+<td>string</td>
+<td>N</td>
+<td>BUY or SELL</td>
+</tr>
 <tr>
 <td>symbol</td>
 <td>string</td>
@@ -5335,7 +5341,7 @@ GET /v1/position/:symbol
 <h2 id='2022-10-24'>2022-10-24</h2>
 <ul>
 <li>Add <a href="#send-algo-order">Send Algo Order</a> to create Algo Order through the API, support algo types include: <code>STOP</code>(stop market &amp; stop limit), <code>OCO</code>, <code>TRAILING_STOP</code>, <code>BRACKET</code> and <code>POSITIONAL_TP_SL</code>.</li>
-<li>Add <a href="#cancel-algo-order">Cancel Algo Order</a>, <a href="#cancel-all-pending-algo-orders">Cancel All Pending Algo Orders</a> and <a href="#cancel-all-pending-algo-orders-by-symbol">Cancel All Pending Algo Orders by Symbol</a> to cancel Algo Orders through the API.</li>
+<li>Add <a href="#cancel-algo-order">Cancel Algo Order</a>, <a href="#cancel-all-pending-algo-orders">Cancel All Pending Algo Orders</a> and <a href="#cancel-pending-merge-orders-by-symbol">Cancel Pending Merge Orders by Symbol</a>.</li>
 <li>Add <a href="#get-algo-order">Get Algo Order</a> and <a href="#get-algo-orders">Get Algo Orders</a> to fetch Algo Orders detail through the API.</li>
 <li>Add <a href="#cancel-all-pending-order">Cancel All Pending Order</a> to cancel all pending Ordinary Orders (not include Algo Orders) through the API.</li>
 <li>Update <a href="#authentication">authentication</a> section for <code>v3</code> API to generate the signature with <code>timestamp</code>, <code>request_method</code>, <code>request_path</code> and <code>request_body</code>.</li>
