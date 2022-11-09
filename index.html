@@ -638,7 +638,7 @@ side:BUY
 </blockquote>
 <pre class="highlight plaintext"><code>order_price=9000&amp;order_quantity=0.11&amp;order_type=LIMIT&amp;side=BUY&amp;symbol=SPOT_BTC_USDT|1578565539808
 </code></pre>
-<p>For <code>v3</code> API, please concatenate the <code>timestamp</code>, <code>http request method</code>, <code>request_path</code> and <code>request_body</code> as the normalized content to sign.</p>
+<p>For <code>v3</code> API using request body to pass the parameters, please concatenate the <code>timestamp</code>, <code>http request method</code>, <code>request_path</code> and <code>request_body</code> as the normalized content to sign. Besides, please use <code>application/json</code> as <code>Content-Type</code> in the headers.</p>
 
 <p>var signString = timestamp + method + request_path + request_body;</p>
 
@@ -1450,6 +1450,12 @@ will respond immediately with an order created message.</p>
 <td></td>
 </tr>
 <tr>
+<td>broker_id</td>
+<td>string</td>
+<td>N</td>
+<td>broker id, for broker service provider, please use your application id as broker id</td>
+</tr>
+<tr>
 <td>client_order_id</td>
 <td>number</td>
 <td>N</td>
@@ -2146,7 +2152,7 @@ will respond immediately with an order created message.</p>
 DELETE /v3/algo/order/:order_id
 </code></p>
 
-<p>***Note that for v3 API, please follow the instruction in <a href="#authentication">authentication</a> section for <code>v3</code> API to generate the signature.
+<p>***Note: This v3 API using query string to pass parameter, please follow the instruction in <a href="#authentication">authentication</a> section for <code>v1</code> API to generate the signature.
 Cancel order by order id. The order cancelled information will be updated from websocket stream.
 note that we give an immediate response with an order cancel sent message, and will update the cancel event via the websocket channel.</p>
 
@@ -2229,7 +2235,7 @@ note that we give an immediate response with an order cancel sent message, and w
 DELETE /v3/algo/orders/pending
 </code></p>
 
-<p>***Note that for v3 API, please follow the instruction in <a href="#authentication">authentication</a> section for <code>v3</code> API to generate the signature.
+<p>***Note: This v3 API using query string to pass parameter, please follow the instruction in <a href="#authentication">authentication</a> section for <code>v1</code> API to generate the signature.
 Cancel all pending algo orders.</p>
 
 <blockquote>
@@ -2290,7 +2296,7 @@ Cancel pending algo orders by symbol.</p>
 GET /v3/algo/order/:oid
 </code></p>
 
-<p>Get specific order details by Algo order&#39;s <code>order_id</code>.</p>
+<p>Get specific order details by Algo order&#39;s <code>oid</code>.</p>
 
 <blockquote>
 <p><strong>Response</strong></p>
@@ -2363,8 +2369,7 @@ GET /v3/algo/order/:oid
 GET /v3/algo/order/:client_order_id
 </code></p>
 
-<p>***Note that for v3 API, please follow the instruction in <a href="#authentication">authentication</a> section for <code>v3</code> API to generate the signature.
-Get specific order details by <code>client_order_id</code>. If there is more than one order with the same <code>client_order_id</code>, return the latest one.</p>
+<p>Get specific order details by <code>client_order_id</code>. If there is more than one order with the same <code>client_order_id</code>, return the latest one.</p>
 
 <blockquote>
 <p><strong>Response</strong></p>
@@ -2437,7 +2442,7 @@ Get specific order details by <code>client_order_id</code>. If there is more tha
 GET /v3/algo/orders
 </code></p>
 
-<p>***Note that for v3 API, please follow the instruction in <a href="#authentication">authentication</a> section for <code>v3</code> API to generate the signature.
+<p>***Note: This v3 API using query string to pass parameter, please follow the instruction in <a href="#authentication">authentication</a> section for <code>v1</code> API to generate the signature.
 Get orders by customize conditions.<br>
 - <code>INCOMPLETE</code> = <code>NEW</code> + <code>PARTIAL_FILLED</code><br>
 - <code>COMPLETED</code> = <code>CANCELLED</code> + <code>FILLED</code>
