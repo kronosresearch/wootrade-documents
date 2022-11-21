@@ -246,6 +246,9 @@
                     <a href="#market-trades-public" class="toc-h2 toc-link" data-title="Market Trades (Public)">Market Trades (Public)</a>
                   </li>
                   <li>
+                    <a href="#market-trades-history-public" class="toc-h2 toc-link" data-title="Market Trades History(Public)">Market Trades History(Public)</a>
+                  </li>
+                  <li>
                     <a href="#available-token-public" class="toc-h2 toc-link" data-title="Available Token (Public)">Available Token (Public)</a>
                   </li>
                   <li>
@@ -449,6 +452,9 @@
                     <a href="#error-response" class="toc-h2 toc-link" data-title="error response">error response</a>
                   </li>
                   <li>
+                    <a href="#algoexecutionreportv2" class="toc-h2 toc-link" data-title="algoexecutionreportv2">algoexecutionreportv2</a>
+                  </li>
+                  <li>
                     <a href="#indexprice" class="toc-h2 toc-link" data-title="indexprice">indexprice</a>
                   </li>
                   <li>
@@ -471,6 +477,9 @@
           <li>
             <a href="#release-note" class="toc-h1 toc-link" data-title="Release Note">Release Note</a>
               <ul class="toc-list-h2">
+                  <li>
+                    <a href="#2022-11-21" class="toc-h2 toc-link" data-title="2022-11-21">2022-11-21</a>
+                  </li>
                   <li>
                     <a href="#2022-10-24" class="toc-h2 toc-link" data-title="2022-10-24">2022-10-24</a>
                   </li>
@@ -977,6 +986,83 @@ GET /v1/public/market_trades
 <td>number</td>
 <td>N (default: 10)</td>
 <td>Numbers of trades you want to query.</td>
+</tr>
+</tbody></table>
+<h2 id='market-trades-history-public'>Market Trades History(Public)</h2>
+<p><strong>Limit: 10 requests per 1 second per IP address</strong></p>
+
+<p><code>
+GET https://api-pub.woo.org/v1/hist/trades
+</code></p>
+
+<p>Get historical market trades data. The response output &quot;source&quot; 0=internal (trade on WOO X), 1=external (trade from aggregrated sources)</p>
+
+<blockquote>
+<p><strong>Response</strong></p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"data"</span><span class="p">:{</span>
+        <span class="s2">"rows"</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+                <span class="s2">"symbol"</span><span class="p">:</span> <span class="s2">"SPOT_ETH_USDT"</span><span class="p">,</span>
+                <span class="s2">"side"</span><span class="p">:</span> <span class="s2">"BUY"</span><span class="p">,</span>
+                <span class="s2">"source"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"executed_price"</span><span class="p">:</span> <span class="mi">202</span><span class="p">,</span>
+                <span class="s2">"executed_quantity"</span><span class="p">:</span> <span class="mf">0.00025</span><span class="p">,</span>
+                <span class="s2">"executed_timestamp"</span><span class="p">:</span> <span class="s2">"1567411795.000"</span> <span class="c1">// Unix epoch time in seconds</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s2">"symbol"</span><span class="p">:</span> <span class="s2">"SPOT_ETH_USDT"</span><span class="p">,</span>
+                <span class="s2">"side"</span><span class="p">:</span> <span class="s2">"BUY"</span><span class="p">,</span>
+                <span class="s2">"source"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                <span class="s2">"executed_price"</span><span class="p">:</span> <span class="mi">202</span><span class="p">,</span>
+                <span class="s2">"executed_quantity"</span><span class="p">:</span> <span class="mf">0.00025</span><span class="p">,</span>
+                <span class="s2">"executed_timestamp"</span><span class="p">:</span> <span class="s2">"1567411795.000"</span> <span class="c1">// Unix epoch time in seconds</span>
+            <span class="p">}</span>
+        <span class="p">],</span>
+        <span class="s2">"meta"</span><span class="p">:{</span>
+            <span class="s2">"total"</span><span class="p">:</span><span class="mi">10911159</span><span class="p">,</span>
+            <span class="s2">"records_per_page"</span><span class="p">:</span><span class="mi">100</span><span class="p">,</span>
+            <span class="s2">"current_page"</span><span class="p">:</span><span class="mi">1</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span><span class="mi">1669072422897</span>
+<span class="p">}</span>
+</code></pre>
+<p><strong>Parameters</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>page</td>
+<td>number</td>
+<td>N (default: 1)</td>
+<td></td>
+</tr>
+<tr>
+<td>size</td>
+<td>number</td>
+<td>N (default: 1)</td>
+<td></td>
+</tr>
+<tr>
+<td>start_time</td>
+<td>number</td>
+<td>Y</td>
+<td>start range that you wish to query, noted that the time stamp is a 13-digits timestamp.</td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>Y</td>
+<td></td>
 </tr>
 </tbody></table>
 <h2 id='available-token-public'>Available Token (Public)</h2>
@@ -4975,6 +5061,211 @@ GET /v1/position/:symbol
     <span class="s2">"ts"</span><span class="p">:</span> <span class="mi">1614141150601</span><span class="p">,</span>
     <span class="s2">"errorMsg"</span><span class="p">:</span> <span class="s2">"invalid symbol SPOT_WOO_USDC"</span>
 <span class="p">}</span>
+</code></pre><h2 id='algoexecutionreportv2'>algoexecutionreportv2</h2>
+<ul>
+<li>Push interval: real-time push</li>
+</ul>
+
+<p><strong>Parameters</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>string</td>
+<td>Y</td>
+<td>id generate by client</td>
+</tr>
+<tr>
+<td>event</td>
+<td>string</td>
+<td>Y</td>
+<td><code>subscribe</code>/<code>unsubscribe</code></td>
+</tr>
+<tr>
+<td>topic</td>
+<td>string</td>
+<td>Y</td>
+<td><code>algoexecutionreportv2</code></td>
+</tr>
+</tbody></table>
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"clientID3"</span><span class="p">,</span>
+    <span class="s2">"topic"</span><span class="p">:</span> <span class="s2">"algoexecutionreportv2"</span><span class="p">,</span>
+    <span class="s2">"event"</span><span class="p">:</span> <span class="s2">"subscribe"</span>
+<span class="p">}</span>
+</code></pre>
+<p><strong>Response</strong></p>
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"clientID3"</span><span class="p">,</span>
+    <span class="s2">"event"</span><span class="p">:</span> <span class="s2">"subscribe"</span><span class="p">,</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"ts"</span><span class="p">:</span> <span class="mi">1609924478533</span>
+<span class="p">}</span>
+</code></pre>
+<p><strong>Subscribed Message</strong></p>
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"topic"</span><span class="p">:</span> <span class="s2">"algoexecutionreportv2"</span><span class="p">,</span>
+    <span class="s2">"ts"</span><span class="p">:</span> <span class="mi">1667978011834</span><span class="p">,</span>
+    <span class="s2">"data"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">"symbol"</span><span class="p">:</span> <span class="s2">"SPOT_BAL_USDT"</span><span class="p">,</span>
+            <span class="s2">"rootAlgoOrderId"</span><span class="p">:</span> <span class="mi">345181</span><span class="p">,</span>
+            <span class="s2">"parentAlgoOrderId"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"algoOrderId"</span><span class="p">:</span> <span class="mi">345181</span><span class="p">,</span>
+            <span class="s2">"clientOrderId"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"orderTag"</span><span class="p">:</span> <span class="s2">"default"</span><span class="p">,</span>
+            <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"NEW"</span><span class="p">,</span>
+            <span class="s2">"algoType"</span><span class="p">:</span> <span class="s2">"BRACKET"</span><span class="p">,</span>
+            <span class="s2">"side"</span><span class="p">:</span> <span class="s2">"SELL"</span><span class="p">,</span>
+            <span class="s2">"quantity"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s2">"triggerStatus"</span><span class="p">:</span> <span class="s2">"SUCCESS"</span><span class="p">,</span>
+            <span class="s2">"price"</span><span class="p">:</span> <span class="mi">69</span><span class="p">,</span>
+            <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"LIMIT"</span><span class="p">,</span>
+            <span class="s2">"triggerTradePrice"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"triggerTime"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"tradeId"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"executedPrice"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"executedQuantity"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"fee"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"reason"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+            <span class="s2">"feeAsset"</span><span class="p">:</span> <span class="s2">"USDT"</span><span class="p">,</span>
+            <span class="s2">"totalExecutedQuantity"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"averageExecutedPrice"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"totalFee"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"timestamp"</span><span class="p">:</span> <span class="mi">1667978011834</span><span class="p">,</span>
+            <span class="s2">"visibleQuantity"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s2">"reduceOnly"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="s2">"activatedPrice"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"triggered"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="s2">"activated"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="s2">"maker"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="s2">"isTriggered"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="s2">"isMaker"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="s2">"isActivated"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="s2">"rootAlgoStatus"</span><span class="p">:</span> <span class="s2">"NEW"</span><span class="p">,</span>
+            <span class="s2">"algoStatus"</span><span class="p">:</span> <span class="s2">"NEW"</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">"symbol"</span><span class="p">:</span> <span class="s2">"SPOT_BAL_USDT"</span><span class="p">,</span>
+            <span class="s2">"rootAlgoOrderId"</span><span class="p">:</span> <span class="mi">345181</span><span class="p">,</span>
+            <span class="s2">"parentAlgoOrderId"</span><span class="p">:</span> <span class="mi">345181</span><span class="p">,</span>
+            <span class="s2">"algoOrderId"</span><span class="p">:</span> <span class="mi">345182</span><span class="p">,</span>
+            <span class="s2">"clientOrderId"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"orderTag"</span><span class="p">:</span> <span class="s2">"default"</span><span class="p">,</span>
+            <span class="s2">"algoType"</span><span class="p">:</span> <span class="s2">"POSITIONAL_TP_SL"</span><span class="p">,</span>
+            <span class="s2">"side"</span><span class="p">:</span> <span class="s2">"BUY"</span><span class="p">,</span>
+            <span class="s2">"quantity"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"triggerStatus"</span><span class="p">:</span> <span class="s2">"USELESS"</span><span class="p">,</span>
+            <span class="s2">"price"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"triggerTradePrice"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"triggerTime"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"tradeId"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"executedPrice"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"executedQuantity"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"fee"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"reason"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+            <span class="s2">"feeAsset"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+            <span class="s2">"totalExecutedQuantity"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"averageExecutedPrice"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"totalFee"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"timestamp"</span><span class="p">:</span> <span class="mi">1667978011900</span><span class="p">,</span>
+            <span class="s2">"visibleQuantity"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"reduceOnly"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="s2">"activatedPrice"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"triggered"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="s2">"activated"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="s2">"maker"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="s2">"isTriggered"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="s2">"isMaker"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="s2">"isActivated"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="s2">"rootAlgoStatus"</span><span class="p">:</span> <span class="s2">"NEW"</span><span class="p">,</span>
+            <span class="s2">"algoStatus"</span><span class="p">:</span> <span class="s2">"NEW"</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">"symbol"</span><span class="p">:</span> <span class="s2">"SPOT_BAL_USDT"</span><span class="p">,</span>
+            <span class="s2">"rootAlgoOrderId"</span><span class="p">:</span> <span class="mi">345181</span><span class="p">,</span>
+            <span class="s2">"parentAlgoOrderId"</span><span class="p">:</span> <span class="mi">345182</span><span class="p">,</span>
+            <span class="s2">"algoOrderId"</span><span class="p">:</span> <span class="mi">345183</span><span class="p">,</span>
+            <span class="s2">"clientOrderId"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"orderTag"</span><span class="p">:</span> <span class="s2">"default"</span><span class="p">,</span>
+            <span class="s2">"algoType"</span><span class="p">:</span> <span class="s2">"TAKE_PROFIT"</span><span class="p">,</span>
+            <span class="s2">"side"</span><span class="p">:</span> <span class="s2">"BUY"</span><span class="p">,</span>
+            <span class="s2">"quantity"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"triggerPrice"</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>
+            <span class="s2">"triggerStatus"</span><span class="p">:</span> <span class="s2">"USELESS"</span><span class="p">,</span>
+            <span class="s2">"price"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"CLOSE_POSITION"</span><span class="p">,</span>
+            <span class="s2">"triggerTradePrice"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"triggerTime"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"tradeId"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"executedPrice"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"executedQuantity"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"fee"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"reason"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+            <span class="s2">"feeAsset"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+            <span class="s2">"totalExecutedQuantity"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"averageExecutedPrice"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"totalFee"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"timestamp"</span><span class="p">:</span> <span class="mi">1667978011900</span><span class="p">,</span>
+            <span class="s2">"visibleQuantity"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"reduceOnly"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+            <span class="s2">"activatedPrice"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"triggered"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="s2">"activated"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="s2">"maker"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="s2">"isTriggered"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="s2">"isMaker"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="s2">"isActivated"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="s2">"rootAlgoStatus"</span><span class="p">:</span> <span class="s2">"NEW"</span><span class="p">,</span>
+            <span class="s2">"algoStatus"</span><span class="p">:</span> <span class="s2">"NEW"</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">"symbol"</span><span class="p">:</span> <span class="s2">"SPOT_BAL_USDT"</span><span class="p">,</span>
+            <span class="s2">"rootAlgoOrderId"</span><span class="p">:</span> <span class="mi">345181</span><span class="p">,</span>
+            <span class="s2">"parentAlgoOrderId"</span><span class="p">:</span> <span class="mi">345182</span><span class="p">,</span>
+            <span class="s2">"algoOrderId"</span><span class="p">:</span> <span class="mi">345184</span><span class="p">,</span>
+            <span class="s2">"clientOrderId"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"orderTag"</span><span class="p">:</span> <span class="s2">"default"</span><span class="p">,</span>
+            <span class="s2">"algoType"</span><span class="p">:</span> <span class="s2">"STOP_LOSS"</span><span class="p">,</span>
+            <span class="s2">"side"</span><span class="p">:</span> <span class="s2">"BUY"</span><span class="p">,</span>
+            <span class="s2">"quantity"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"triggerPrice"</span><span class="p">:</span> <span class="mi">75</span><span class="p">,</span>
+            <span class="s2">"triggerStatus"</span><span class="p">:</span> <span class="s2">"USELESS"</span><span class="p">,</span>
+            <span class="s2">"price"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"CLOSE_POSITION"</span><span class="p">,</span>
+            <span class="s2">"triggerTradePrice"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"triggerTime"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"tradeId"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"executedPrice"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"executedQuantity"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"fee"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"reason"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+            <span class="s2">"feeAsset"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+            <span class="s2">"totalExecutedQuantity"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"averageExecutedPrice"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"totalFee"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"timestamp"</span><span class="p">:</span> <span class="mi">1667978011900</span><span class="p">,</span>
+            <span class="s2">"visibleQuantity"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"reduceOnly"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+            <span class="s2">"activatedPrice"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"triggered"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="s2">"activated"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="s2">"maker"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="s2">"isTriggered"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="s2">"isMaker"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="s2">"isActivated"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="s2">"rootAlgoStatus"</span><span class="p">:</span> <span class="s2">"NEW"</span><span class="p">,</span>
+            <span class="s2">"algoStatus"</span><span class="p">:</span> <span class="s2">"NEW"</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
 </code></pre><h2 id='indexprice'>indexprice</h2>
 <ul>
 <li>Push interval: 1s</li>
@@ -5337,6 +5628,10 @@ GET /v1/position/:symbol
 <span class="p">}</span>
 </code></pre><h1 id='release-note'>Release Note</h1>
 <p>All the API changes would be listed here.</p>
+<h2 id='2022-11-21'>2022-11-21</h2>
+<ul>
+<li>Add <a href="#market-trade-history">Market Trade History</a> for fetching trade history data.</li>
+</ul>
 <h2 id='2022-10-24'>2022-10-24</h2>
 <ul>
 <li>Add <a href="#send-algo-order">Send Algo Order</a> to create Algo Order through the API, support algo types include: <code>STOP</code>(stop market &amp; stop limit), <code>OCO</code>, <code>TRAILING_STOP</code>, <code>BRACKET</code> and <code>POSITIONAL_TP_SL</code>.</li>
