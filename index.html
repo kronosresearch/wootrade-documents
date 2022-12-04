@@ -3171,7 +3171,7 @@ GET /v1/client/info
 
 <p>None</p>
 <h2 id='get-token-deposit-address'>Get Token Deposit Address</h2>
-<p><strong>Limit 5 requests per 60 seconds</strong></p>
+<p><strong>Limit 60 requests per 60 seconds</strong></p>
 
 <p><code>
 GET /v1/asset/deposit
@@ -3206,7 +3206,7 @@ GET /v1/asset/deposit
 </tr>
 </tbody></table>
 <h2 id='token-withdraw'>Token Withdraw</h2>
-<p><strong>Limit 5 requests per 60 seconds</strong></p>
+<p><strong>Limit 20 requests per 60 seconds</strong></p>
 
 <p><code>
 POST /v1/asset/withdraw
@@ -5385,7 +5385,7 @@ GET /v1/position/:symbol
 <span class="p">}</span>
 </code></pre><h2 id='openinterest'>openinterest</h2>
 <ul>
-<li>Push interval: 1s</li>
+<li>Push interval: push every 1 second if open interest change and 10 seconds force update even if no change.</li>
 </ul>
 
 <p><strong>Parameters</strong></p>
@@ -5633,7 +5633,8 @@ GET /v1/position/:symbol
 <p>All the API changes would be listed here.</p>
 <h2 id='2022-12-05'>2022-12-05</h2>
 <ul>
-<li>Update push frequency for websocket topics: <a href="#bbo">bbo</a>, <a href="#24-ticker">24 ticker</a> and <a href="#orderbook">orderbook</a>.</li>
+<li>Update push frequency for websocket topics: <a href="#bbo">bbo</a>, <a href="#24-ticker">24 ticker</a>, <a href="#openinterest">Open Interest</a> and <a href="#orderbook">orderbook</a>.</li>
+<li>Update rate limit for <a href="#get-token-deposit-address">Get Token Deposit Address</a> and <a href="#token-withdraw">Token Withdraw</a>.</li>
 </ul>
 <h2 id='2022-11-21'>2022-11-21</h2>
 <ul>
