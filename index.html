@@ -478,6 +478,9 @@
             <a href="#release-note" class="toc-h1 toc-link" data-title="Release Note">Release Note</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#2022-12-05" class="toc-h2 toc-link" data-title="2022-12-05">2022-12-05</a>
+                  </li>
+                  <li>
                     <a href="#2022-11-21" class="toc-h2 toc-link" data-title="2022-11-21">2022-11-21</a>
                   </li>
                   <li>
@@ -542,7 +545,7 @@
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='introduction'>Introduction</h1>
-<!-- <span style="color:red">This site is deprecated and will be sunset in 2022/10/31, please move to <a href="https://docs.woo.org/">https://docs.woo.org/</a> </span>. -->
+<p><span style="color:red">This site is deprecated and will be sunset in 2022/10/31, please move to <a href="https://docs.woo.org/">https://docs.woo.org/</a> </span>.</p>
 
 <p><strong>WOO X. A privately-accessible liquidity venue for the trading of cryptocurrencies.</strong>  </p>
 
@@ -4267,8 +4270,8 @@ GET /v1/position/:symbol
 <span class="p">}</span>
 </code></pre><h2 id='orderbook'>orderbook</h2>
 <ul>
-<li><code>{symbol}@orderbook</code> depth 100 push every 1s</li>
-<li><code>{symbol}@orderbook100</code> depth 100 push every 1s</li>
+<li><code>{symbol}@orderbook</code> depth 100, only push when there are actual change.</li>
+<li><code>{symbol}@orderbook100</code> depth 100, only push when there are actual change.</li>
 </ul>
 
 <p><strong>Parameters</strong></p>
@@ -4493,7 +4496,7 @@ GET /v1/position/:symbol
 <span class="p">}</span>
 </code></pre><h2 id='24h-ticker'>24h ticker</h2>
 <ul>
-<li>Push interval: 1s</li>
+<li>Push interval: only update when there is a change and 1 min force update even if no change.</li>
 </ul>
 
 <p><strong>Parameters</strong></p>
@@ -5628,6 +5631,10 @@ GET /v1/position/:symbol
 <span class="p">}</span>
 </code></pre><h1 id='release-note'>Release Note</h1>
 <p>All the API changes would be listed here.</p>
+<h2 id='2022-12-05'>2022-12-05</h2>
+<ul>
+<li>Update push frequency for websocket topics: <a href="#bbo">bbo</a>, <a href="#24-ticker">24 ticker</a> and <a href="#orderbook">orderbook</a>.</li>
+</ul>
 <h2 id='2022-11-21'>2022-11-21</h2>
 <ul>
 <li>Add <a href="#market-trade-history">Market Trade History</a> for fetching trade history data.</li>
