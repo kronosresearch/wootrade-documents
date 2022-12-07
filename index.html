@@ -297,6 +297,12 @@
                     <a href="#get-orders" class="toc-h2 toc-link" data-title="Get Orders">Get Orders</a>
                   </li>
                   <li>
+                    <a href="#edit-order" class="toc-h2 toc-link" data-title="Edit Order">Edit Order</a>
+                  </li>
+                  <li>
+                    <a href="#edit-order-by-client_order_id" class="toc-h2 toc-link" data-title="Edit Order by client_order_id">Edit Order by client_order_id</a>
+                  </li>
+                  <li>
                     <a href="#send-algo-order" class="toc-h2 toc-link" data-title="Send Algo Order">Send Algo Order</a>
                   </li>
                   <li>
@@ -319,6 +325,12 @@
                   </li>
                   <li>
                     <a href="#get-algo-orders" class="toc-h2 toc-link" data-title="Get Algo Orders">Get Algo Orders</a>
+                  </li>
+                  <li>
+                    <a href="#edit-algo-order" class="toc-h2 toc-link" data-title="Edit Algo Order">Edit Algo Order</a>
+                  </li>
+                  <li>
+                    <a href="#edit-algo-order-by-client_order_id" class="toc-h2 toc-link" data-title="Edit Algo Order by client_order_id">Edit Algo Order by client_order_id</a>
                   </li>
                   <li>
                     <a href="#orderbook-snapshot" class="toc-h2 toc-link" data-title="Orderbook snapshot">Orderbook snapshot</a>
@@ -1984,6 +1996,132 @@ The <code>realized_pnl</code> field in response will only present the settled am
 <td>the page you wish to query.</td>
 </tr>
 </tbody></table>
+<h2 id='edit-order'>Edit Order</h2>
+<p><strong>Limit: 5 requests per 1 second</strong></p>
+
+<p><code>
+PUT /v3/order/:order_id
+</code></p>
+
+<p><em>**Note that for v3 API with json body POST method, please follow the instruction in <a href="#authentication">authentication</a> section for <code>v3</code> API to generate the signature.
+*</em>*Please use <code>string</code> type for value input field to remain data accurancy.</p>
+
+<p>The API allow you to edit the price and the quantity of the selected order. You must input at least one of it in the request body.</p>
+
+<blockquote>
+<p><strong>Response</strong></p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="p">{</span>
+  <span class="s2">"code"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="s2">"data"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"string"</span><span class="p">,</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span>
+  <span class="p">},</span>
+  <span class="s2">"message"</span><span class="p">:</span> <span class="s2">"string"</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="s2">"timestamp"</span><span class="p">:</span> <span class="mi">0</span>
+<span class="p">}</span>
+</code></pre>
+<blockquote>
+<p><strong>Request</strong></p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"price"</span><span class="p">:</span> <span class="s2">"10.5"</span><span class="p">,</span>
+    <span class="s2">"quantity"</span><span class="p">:</span> <span class="s2">"1.4"</span>
+<span class="p">}</span>
+</code></pre>
+<p><strong>Parameters</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>oid</td>
+<td>number</td>
+<td>Y</td>
+<td>The order_id <code>oid</code> that you wish to query</td>
+</tr>
+<tr>
+<td>price</td>
+<td>number</td>
+<td>N</td>
+<td>New price of the order.</td>
+</tr>
+<tr>
+<td>quantity</td>
+<td>number</td>
+<td>N</td>
+<td>New quantity of the order.</td>
+</tr>
+</tbody></table>
+<h2 id='edit-order-by-client_order_id'>Edit Order by client_order_id</h2>
+<p><strong>Limit: 5 requests per 1 second</strong></p>
+
+<p><code>
+PUT /v3/order/client/:client_order_id
+</code></p>
+
+<p><em>**Note that for v3 API with json body POST method, please follow the instruction in <a href="#authentication">authentication</a> section for <code>v3</code> API to generate the signature.
+*</em>*Please use <code>string</code> type for value input field to remain data accurancy.</p>
+
+<p>The API allow you to edit the price and the quantity of the selected order. You must input at least one of it in the request body.</p>
+
+<blockquote>
+<p><strong>Response</strong></p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="p">{</span>
+  <span class="s2">"code"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="s2">"data"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"string"</span><span class="p">,</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span>
+  <span class="p">},</span>
+  <span class="s2">"message"</span><span class="p">:</span> <span class="s2">"string"</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="s2">"timestamp"</span><span class="p">:</span> <span class="mi">0</span>
+<span class="p">}</span>
+</code></pre>
+<blockquote>
+<p><strong>Request</strong></p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"price"</span><span class="p">:</span> <span class="s2">"10.5"</span><span class="p">,</span>
+    <span class="s2">"quantity"</span><span class="p">:</span> <span class="s2">"1.4"</span>
+<span class="p">}</span>
+</code></pre>
+<p><strong>Parameters</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>client_order_id</td>
+<td>number</td>
+<td>Y</td>
+<td>customized order_id when placing order</td>
+</tr>
+<tr>
+<td>price</td>
+<td>number</td>
+<td>N</td>
+<td>New price of the order.</td>
+</tr>
+<tr>
+<td>quantity</td>
+<td>number</td>
+<td>N</td>
+<td>New quantity of the order.</td>
+</tr>
+</tbody></table>
 <h2 id='send-algo-order'>Send Algo Order</h2>
 <p><strong>Limit: 2 requests per 1 second per symbol</strong></p>
 
@@ -2521,7 +2659,7 @@ GET /v3/algo/order/:client_order_id
 <td>oid</td>
 <td>number</td>
 <td>Y</td>
-<td>The Algo order&#39;s order_id <code>oid</code> that you wish to query</td>
+<td>customized order_id when placing order</td>
 </tr>
 </tbody></table>
 <h2 id='get-algo-orders'>Get Algo Orders</h2>
@@ -2674,6 +2812,218 @@ The <code>realized_pnl</code> field in response will only present the settled am
 <td>string</td>
 <td>N</td>
 <td><code>LIMIT</code>/<code>MARKET</code>/<code>IOC</code>/<code>FOK</code>/<code>POST_ONLY</code>/<code>LIQUIDATE</code></td>
+</tr>
+</tbody></table>
+<h2 id='edit-algo-order'>Edit Algo Order</h2>
+<p><strong>Limit: 5 requests per 1 second</strong></p>
+
+<p><code>
+PUT /v3/algo/order/:order_id
+</code></p>
+
+<p><em>**Note that for v3 API with json body POST method, please follow the instruction in <a href="#authentication">authentication</a> section for <code>v3</code> API to generate the signature.
+*</em>*Please use <code>string</code> type for value input field to remain data accurancy.</p>
+
+<p>The API allow you to edit the trigger price and the quantity of the selected algo order. You must input at least one of it in the request body.</p>
+
+<blockquote>
+<p><strong>Response</strong></p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="p">{</span>
+  <span class="s2">"code"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="s2">"data"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"string"</span><span class="p">,</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span>
+  <span class="p">},</span>
+  <span class="s2">"message"</span><span class="p">:</span> <span class="s2">"string"</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="s2">"timestamp"</span><span class="p">:</span> <span class="mi">0</span>
+<span class="p">}</span>
+</code></pre>
+<blockquote>
+<p><strong>Request</strong></p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="p">{</span>
+  <span class="s2">"activatedPrice"</span><span class="p">:</span> <span class="s2">"200"</span><span class="p">,</span>
+  <span class="s2">"callbackRate"</span><span class="p">:</span> <span class="s2">"200"</span><span class="p">,</span>
+  <span class="s2">"callbackValue"</span><span class="p">:</span> <span class="s2">"200"</span><span class="p">,</span>
+  <span class="s2">"childOrders"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">"algoOrderId"</span><span class="p">:</span> <span class="mi">123456</span><span class="p">,</span>
+      <span class="s2">"price"</span><span class="p">:</span> <span class="s2">"1000"</span><span class="p">,</span>
+      <span class="s2">"quantity"</span><span class="p">:</span> <span class="s2">"1000"</span><span class="p">,</span>
+      <span class="s2">"triggerPrice"</span><span class="p">:</span> <span class="s2">"1000"</span>
+    <span class="p">}</span>
+  <span class="p">],</span>
+  <span class="s2">"price"</span><span class="p">:</span> <span class="s2">"1000"</span><span class="p">,</span>
+  <span class="s2">"quantity"</span><span class="p">:</span> <span class="s2">"1000"</span><span class="p">,</span>
+  <span class="s2">"triggerPrice"</span><span class="p">:</span> <span class="s2">"1000"</span>
+<span class="p">}</span>
+
+</code></pre>
+<p><strong>Parameters</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>oid</td>
+<td>number</td>
+<td>Y</td>
+<td>The order_id <code>oid</code> that you wish to query</td>
+</tr>
+<tr>
+<td>activatedPrice</td>
+<td>string</td>
+<td>N</td>
+<td>activated price for algoType=TRAILING_STOP</td>
+</tr>
+<tr>
+<td>callbackRate</td>
+<td>string</td>
+<td>N</td>
+<td>new callback rate, only for algoType=TRAILING_STOP, i.e. the value = 0.1 represent to 10%.</td>
+</tr>
+<tr>
+<td>callbackValue</td>
+<td>string</td>
+<td>N</td>
+<td>new callback value, only for algoType=TRAILING_STOP, i.e. the value = 100</td>
+</tr>
+<tr>
+<td>childOrders</td>
+<td>array</td>
+<td>N</td>
+<td>The array list of the child orders, only for algoType=POSITIONAL_TP_SL or TP_SL</td>
+</tr>
+<tr>
+<td>price</td>
+<td>number</td>
+<td>N</td>
+<td>New price of the algo order.</td>
+</tr>
+<tr>
+<td>quantity</td>
+<td>number</td>
+<td>N</td>
+<td>New quantity of the algo order.</td>
+</tr>
+<tr>
+<td>triggerPrice</td>
+<td>number</td>
+<td>N</td>
+<td>New trigger price of the algo order.</td>
+</tr>
+</tbody></table>
+<h2 id='edit-algo-order-by-client_order_id'>Edit Algo Order by client_order_id</h2>
+<p><strong>Limit: 5 requests per 1 second</strong></p>
+
+<p><code>
+PUT /v3/algo/order/client/:client_order_id
+</code></p>
+
+<p><em>**Note that for v3 API with json body POST method, please follow the instruction in <a href="#authentication">authentication</a> section for <code>v3</code> API to generate the signature.
+*</em>*Please use <code>string</code> type for value input field to remain data accurancy.</p>
+
+<p>The API allow you to edit the price and the quantity of the selected algo order. You must input at least one of it in the request body.</p>
+
+<blockquote>
+<p><strong>Response</strong></p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="p">{</span>
+  <span class="s2">"code"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="s2">"data"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"string"</span><span class="p">,</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span>
+  <span class="p">},</span>
+  <span class="s2">"message"</span><span class="p">:</span> <span class="s2">"string"</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="s2">"timestamp"</span><span class="p">:</span> <span class="mi">0</span>
+<span class="p">}</span>
+</code></pre>
+<blockquote>
+<p><strong>Request</strong></p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="p">{</span>
+  <span class="s2">"activatedPrice"</span><span class="p">:</span> <span class="s2">"200"</span><span class="p">,</span>
+  <span class="s2">"callbackRate"</span><span class="p">:</span> <span class="s2">"200"</span><span class="p">,</span>
+  <span class="s2">"callbackValue"</span><span class="p">:</span> <span class="s2">"200"</span><span class="p">,</span>
+  <span class="s2">"childOrders"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">"algoOrderId"</span><span class="p">:</span> <span class="mi">123456</span><span class="p">,</span>
+      <span class="s2">"price"</span><span class="p">:</span> <span class="s2">"1000"</span><span class="p">,</span>
+      <span class="s2">"quantity"</span><span class="p">:</span> <span class="s2">"1000"</span><span class="p">,</span>
+      <span class="s2">"triggerPrice"</span><span class="p">:</span> <span class="s2">"1000"</span>
+    <span class="p">}</span>
+  <span class="p">],</span>
+  <span class="s2">"price"</span><span class="p">:</span> <span class="s2">"1000"</span><span class="p">,</span>
+  <span class="s2">"quantity"</span><span class="p">:</span> <span class="s2">"1000"</span><span class="p">,</span>
+  <span class="s2">"triggerPrice"</span><span class="p">:</span> <span class="s2">"1000"</span>
+<span class="p">}</span>
+
+</code></pre>
+<p><strong>Parameters</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>oid</td>
+<td>number</td>
+<td>Y</td>
+<td>The order_id <code>oid</code> that you wish to query</td>
+</tr>
+<tr>
+<td>activatedPrice</td>
+<td>string</td>
+<td>N</td>
+<td>activated price for algoType=TRAILING_STOP</td>
+</tr>
+<tr>
+<td>callbackRate</td>
+<td>string</td>
+<td>N</td>
+<td>new callback rate, only for algoType=TRAILING_STOP, i.e. the value = 0.1 represent to 10%.</td>
+</tr>
+<tr>
+<td>callbackValue</td>
+<td>string</td>
+<td>N</td>
+<td>new callback value, only for algoType=TRAILING_STOP, i.e. the value = 100</td>
+</tr>
+<tr>
+<td>childOrders</td>
+<td>array</td>
+<td>N</td>
+<td>The array list of the child orders, only for algoType=POSITIONAL_TP_SL or TP_SL</td>
+</tr>
+<tr>
+<td>price</td>
+<td>number</td>
+<td>N</td>
+<td>New price of the algo order.</td>
+</tr>
+<tr>
+<td>quantity</td>
+<td>number</td>
+<td>N</td>
+<td>New quantity of the algo order.</td>
+</tr>
+<tr>
+<td>triggerPrice</td>
+<td>number</td>
+<td>N</td>
+<td>New trigger price of the algo order.</td>
 </tr>
 </tbody></table>
 <h2 id='orderbook-snapshot'>Orderbook snapshot</h2>
@@ -5633,6 +5983,7 @@ GET /v1/position/:symbol
 <p>All the API changes would be listed here.</p>
 <h2 id='2022-12-05'>2022-12-05</h2>
 <ul>
+<li>Add <a href="#edit-order">Edit Order</a>, <a href="#edit-order-by-client_order_id">Edit order by client_order_id</a>, <a href="#edit-algo-order">Edit Algo Order</a> and <a href="#edit-algo-order-by-client_order_id">Edit Algo order by client_order_id</a>.</li>
 <li>Update push frequency for websocket topics: <a href="#bbo">bbo</a>, <a href="#24-ticker">24 ticker</a>, <a href="#openinterest">Open Interest</a> and <a href="#orderbook">orderbook</a>.</li>
 <li>Update rate limit for <a href="#get-token-deposit-address">Get Token Deposit Address</a> and <a href="#token-withdraw">Token Withdraw</a>.</li>
 </ul>
