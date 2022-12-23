@@ -3514,7 +3514,7 @@ The API is design to replace the legacy API <a href="#get-current-holding">Get C
   <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
   <span class="s2">"holding"</span><span class="p">:</span> <span class="p">[</span>
     <span class="p">{</span>
-      <span class="s2">"updated_time"</span><span class="p">:</span> <span class="s2">"1580794149"</span><span class="p">,</span>
+      <span class="s2">"updatedTime"</span><span class="p">:</span> <span class="s2">"1580794149000"</span><span class="p">,</span>
       <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"BTC"</span><span class="p">,</span>
       <span class="s2">"holding"</span><span class="p">:</span> <span class="o">-</span><span class="mf">28.000752</span><span class="p">,</span>
       <span class="s2">"frozen"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
@@ -3522,9 +3522,9 @@ The API is design to replace the legacy API <a href="#get-current-holding">Get C
       <span class="s2">"unbonding"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
       <span class="s2">"vault"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
       <span class="s2">"interest"</span><span class="p">:</span> <span class="o">-</span><span class="mf">0.01</span><span class="p">,</span>
-      <span class="s2">"pending_long_qty"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-      <span class="s2">"pending_short_qty"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-      <span class="s2">"available_balance"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="s2">"pendingLongQty"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="s2">"pendingShortQty"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="s2">"availableBalance"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="p">},</span>
         <span class="c1">// ....skip </span>
   <span class="p">]</span>
@@ -3604,23 +3604,23 @@ The API is design to replace the legacy API <a href="#get-account-information">G
         <span class="s2">"application_id"</span><span class="p">:</span> <span class="s2">"8935820a-6600-4c2c-9bc3-f017d89aa173"</span><span class="p">,</span>
         <span class="s2">"account"</span><span class="p">:</span> <span class="s2">"CLIENT_ACCOUNT_01"</span><span class="p">,</span>
         <span class="s2">"alias"</span><span class="p">:</span> <span class="s2">"CLIENT_ACCOUNT_01"</span><span class="p">,</span>
-        <span class="s2">"account_mode"</span><span class="p">:</span><span class="s2">"FUTURES"</span> <span class="c1">//account mode</span>
+        <span class="s2">"accountMode"</span><span class="p">:</span><span class="s2">"FUTURES"</span> <span class="c1">//account mode</span>
         <span class="s2">"leverage"</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="c1">// based on account mode</span>
-        <span class="s2">"taker_fee_rate"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s2">"maker_fee_rate"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s2">"interest_rate"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s2">"futures_taker_fee_rate"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s2">"futures_maker_fee_rate"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"takerFeeRate"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"makerFeeRate"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"interestrate"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"futuresTakerFeeRate"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"futuresMakerFeeRate"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
         <span class="s2">"otpauth"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-        <span class="s2">"margin_ratio"</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">,</span>
-        <span class="s2">"open_margin_ratio"</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">,</span>
-        <span class="s2">"initial_margin_ratio"</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">,</span>
-        <span class="s2">"maintenance_margin_ratio"</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">,</span>
-        <span class="s2">"total_collateral"</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
-        <span class="s2">"free_collateral"</span><span class="p">:</span> <span class="mi">80</span><span class="p">,</span>
-        <span class="s2">"total_account_value"</span><span class="p">:</span> <span class="mi">150</span><span class="p">,</span>
-        <span class="s2">"total_vault_value"</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
-        <span class="s2">"total_staking_value"</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+        <span class="s2">"marginRatio"</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">,</span>
+        <span class="s2">"openMarginRatio"</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">,</span>
+        <span class="s2">"initialMarginRatio"</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">,</span>
+        <span class="s2">"maintenanceMarginRatio"</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">,</span>
+        <span class="s2">"totalCollateral"</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+        <span class="s2">"freecollateral"</span><span class="p">:</span> <span class="mi">80</span><span class="p">,</span>
+        <span class="s2">"totalAccountValue"</span><span class="p">:</span> <span class="mi">150</span><span class="p">,</span>
+        <span class="s2">"totalVaultValue"</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+        <span class="s2">"totalStakingValue"</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
     <span class="p">},</span>
 <span class="p">}</span>
 </code></pre>
@@ -4593,15 +4593,15 @@ The API is design to replace the legacy API <a href="#get-positions">Get Positio
         <span class="p">{</span>
             <span class="s2">"symbol"</span><span class="p">:</span> <span class="s2">"PERP_BTC_USDT"</span><span class="p">,</span>
             <span class="s2">"holding"</span><span class="p">:</span> <span class="mf">1.23</span><span class="p">,</span>
-            <span class="s2">"pending_long_qty"</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span>
-            <span class="s2">"pending_short_qty"</span><span class="p">:</span> <span class="mf">0.23</span><span class="p">,</span>
-            <span class="s2">"settle_price"</span><span class="p">:</span> <span class="mi">50000</span><span class="p">,</span>
-            <span class="s2">"average_open_price"</span><span class="p">:</span> <span class="mi">49000</span><span class="p">,</span>
-            <span class="s2">"pnl_24_h"</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
-            <span class="s2">"fee_24_h"</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
-            <span class="s2">"mark_price"</span><span class="p">:</span> <span class="mi">49550</span><span class="p">,</span>
-            <span class="s2">"est_liq_price"</span><span class="p">:</span> <span class="mi">40000</span><span class="p">,</span>
-            <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"1575014255.089"</span>
+            <span class="s2">"pendingLongQty"</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span>
+            <span class="s2">"pendingShortQty"</span><span class="p">:</span> <span class="mf">0.23</span><span class="p">,</span>
+            <span class="s2">"settlePrice"</span><span class="p">:</span> <span class="mi">50000</span><span class="p">,</span>
+            <span class="s2">"averageOpenPrice"</span><span class="p">:</span> <span class="mi">49000</span><span class="p">,</span>
+            <span class="s2">"pnl24H"</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+            <span class="s2">"fee24H"</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+            <span class="s2">"markPrice"</span><span class="p">:</span> <span class="mi">49550</span><span class="p">,</span>
+            <span class="s2">"estLiqPrice"</span><span class="p">:</span> <span class="mi">40000</span><span class="p">,</span>
+            <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"1575014255089"</span>
         <span class="p">},</span>
         <span class="c1">// ....skip </span>
     <span class="p">]</span>  
