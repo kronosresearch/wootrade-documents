@@ -321,9 +321,6 @@
                     <a href="#get-algo-order" class="toc-h2 toc-link" data-title="Get Algo Order">Get Algo Order</a>
                   </li>
                   <li>
-                    <a href="#get-algo-order-by-client_order_id" class="toc-h2 toc-link" data-title="Get Algo Order by client_order_id">Get Algo Order by client_order_id</a>
-                  </li>
-                  <li>
                     <a href="#get-algo-orders" class="toc-h2 toc-link" data-title="Get Algo Orders">Get Algo Orders</a>
                   </li>
                   <li>
@@ -2239,7 +2236,7 @@ will respond immediately with an order created message.</p>
 </code></p>
 
 <p>Positional TP/SL
-<code>JS
+```JS
 {
     &quot;symbol&quot;: &quot;SPOT_BAL_USDT&quot;,
     &quot;reduceOnly&quot;: false,
@@ -2260,8 +2257,43 @@ will respond immediately with an order created message.</p>
             &quot;triggerPrice&quot;: &quot;74&quot;
         }
     ]
+}</p>
+
+<p>// Bracket order</p>
+
+<p>{
+    &quot;symbol&quot;: &quot;SPOT_BAL_USDT&quot;,
+    &quot;side&quot;: &quot;BUY&quot;,
+    &quot;reduceOnly&quot;: false,
+    &quot;type&quot;: &quot;LIMIT&quot;,
+    &quot;quantity&quot;: &quot;1&quot;,
+    &quot;algoType&quot;: &quot;BRACKET&quot;,
+    &quot;price&quot;: &quot;69&quot;,
+    &quot;childOrders&quot;: [
+        {
+            &quot;symbol&quot;: &quot;SPOT_BAL_USDT&quot;,
+            &quot;reduceOnly&quot;: false,
+            &quot;algoType&quot;: &quot;POSITIONAL_TP_SL&quot;,
+            &quot;childOrders&quot;: [
+                {
+                    &quot;algoType&quot;: &quot;TAKE_PROFIT&quot;,
+                    &quot;type&quot;: &quot;CLOSE_POSITION&quot;,
+                    &quot;side&quot;: &quot;SELL&quot;,
+                    &quot;reduceOnly&quot;: true,
+                    &quot;triggerPrice&quot;: &quot;76&quot;
+                },
+                {
+                    &quot;algoType&quot;: &quot;STOP_LOSS&quot;,
+                    &quot;type&quot;: &quot;CLOSE_POSITION&quot;,
+                    &quot;side&quot;: &quot;SELL&quot;,
+                    &quot;reduceOnly&quot;: true,
+                    &quot;triggerPrice&quot;: &quot;50&quot;
+                }
+            ]
+        }
+    ]
 }
-</code></p>
+```</p>
 
 <p><strong>Parameters</strong></p>
 
@@ -2298,7 +2330,7 @@ will respond immediately with an order created message.</p>
 <td>callback value, only for algoType=TRAILING_STOP, i.e. the value = 100</td>
 </tr>
 <tr>
-<td>childOrder</td>
+<td>childOrders</td>
 <td>array</td>
 <td>N</td>
 <td>Only for algoType=POSITIONAL_TP_SL</td>
@@ -2314,6 +2346,12 @@ will respond immediately with an order created message.</p>
 <td>number</td>
 <td>N</td>
 <td>number for scope : from 0 to 9223372036854775807. (default: 0)</td>
+</tr>
+<tr>
+<td>orderCombinationType</td>
+<td>enum</td>
+<td>N</td>
+<td><code>STOP_LIMIT</code>/<code>STOP_MARKET</code></td>
 </tr>
 <tr>
 <td>orderTag</td>
@@ -2370,10 +2408,10 @@ will respond immediately with an order created message.</p>
 <td>true or false, default false</td>
 </tr>
 <tr>
-<td>visible_quantity</td>
+<td>visibleQuantity</td>
 <td>number</td>
 <td>N</td>
-<td>The order quantity shown on orderbook. (default: equal to <code>order_quantity</code>)</td>
+<td>The order quantity shown on orderbook. (default: equal to <code>orderQuantity</code>)</td>
 </tr>
 <tr>
 <td>side</td>
@@ -2597,79 +2635,6 @@ GET /v3/algo/order/:oid
 <td>number</td>
 <td>Y</td>
 <td>The Algo order&#39;s order_id <code>oid</code> that you wish to query</td>
-</tr>
-</tbody></table>
-<h2 id='get-algo-order-by-client_order_id'>Get Algo Order by client_order_id</h2>
-<p><strong>Limit: 10 requests per 1 second</strong> shared with <a href="#get-algo-order">get_algo_order</a></p>
-
-<p><code>
-GET /v3/algo/order/:client_order_id
-</code></p>
-
-<p>Get specific order details by <code>client_order_id</code>. If there is more than one order with the same <code>client_order_id</code>, return the latest one.</p>
-
-<blockquote>
-<p><strong>Response</strong></p>
-</blockquote>
-<pre class="highlight javascript"><code><span class="p">{</span>
-  <span class="s2">"code"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-  <span class="s2">"data"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">"activatedPrice"</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
-    <span class="s2">"algoOrderId"</span><span class="p">:</span> <span class="mi">1234567</span><span class="p">,</span>
-    <span class="s2">"algoStatus"</span><span class="p">:</span> <span class="s2">"NEW"</span><span class="p">,</span>
-    <span class="s2">"algoType"</span><span class="p">:</span> <span class="s2">"STOP"</span><span class="p">,</span>
-    <span class="s2">"averageExecutedPrice"</span><span class="p">:</span> <span class="mf">10.1235</span><span class="p">,</span>
-    <span class="s2">"callbackRate"</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
-    <span class="s2">"callbackValue"</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
-    <span class="s2">"childOrders"</span><span class="p">:</span> <span class="s2">"100"</span><span class="p">,</span>
-    <span class="s2">"clientOrderId"</span><span class="p">:</span> <span class="mi">1234567</span><span class="p">,</span>
-    <span class="s2">"createdTime"</span><span class="p">:</span> <span class="s2">"10.1235"</span><span class="p">,</span>
-    <span class="s2">"extremePrice"</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
-    <span class="s2">"feeAsset"</span><span class="p">:</span> <span class="s2">"0.1235"</span><span class="p">,</span>
-    <span class="s2">"isActivated"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-    <span class="s2">"isTriggered"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="s2">"orderTag"</span><span class="p">:</span> <span class="s2">"my_tag"</span><span class="p">,</span>
-    <span class="s2">"parentAlgoOrderId"</span><span class="p">:</span> <span class="mi">1234567</span><span class="p">,</span>
-    <span class="s2">"price"</span><span class="p">:</span> <span class="mf">10.1235</span><span class="p">,</span>
-    <span class="s2">"quantity"</span><span class="p">:</span> <span class="mf">10.12345</span><span class="p">,</span>
-    <span class="s2">"realizedPnl"</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
-    <span class="s2">"reduceOnly"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-    <span class="s2">"rootAlgoOrderId"</span><span class="p">:</span> <span class="mi">1234567</span><span class="p">,</span>
-    <span class="s2">"rootAlgoStatus"</span><span class="p">:</span> <span class="s2">"NEW"</span><span class="p">,</span>
-    <span class="s2">"side"</span><span class="p">:</span> <span class="s2">"BUY"</span><span class="p">,</span>
-    <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"NEW"</span><span class="p">,</span>
-    <span class="s2">"symbol"</span><span class="p">:</span> <span class="s2">"SPOT_WOO_USDT"</span><span class="p">,</span>
-    <span class="s2">"totalExecutedQuantity"</span><span class="p">:</span> <span class="mf">10.1235</span><span class="p">,</span>
-    <span class="s2">"totalFee"</span><span class="p">:</span> <span class="mf">0.1235</span><span class="p">,</span>
-    <span class="s2">"triggerPrice"</span><span class="p">:</span> <span class="mf">10.23456</span><span class="p">,</span>
-    <span class="s2">"triggerPriceType"</span><span class="p">:</span> <span class="s2">"MARKET_PRICE"</span><span class="p">,</span>
-    <span class="s2">"triggerStatus"</span><span class="p">:</span> <span class="s2">"SUCCESS"</span><span class="p">,</span>
-    <span class="s2">"triggerTime"</span><span class="p">:</span> <span class="s2">"10.1235"</span><span class="p">,</span>
-    <span class="s2">"triggerTradePrice"</span><span class="p">:</span> <span class="mf">10.1235</span><span class="p">,</span>
-    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"LIMIT"</span><span class="p">,</span>
-    <span class="s2">"updatedTime"</span><span class="p">:</span> <span class="s2">"10.1235"</span><span class="p">,</span>
-    <span class="s2">"visibleQuantity"</span><span class="p">:</span> <span class="mf">10.1235</span>
-  <span class="p">},</span>
-  <span class="s2">"message"</span><span class="p">:</span> <span class="s2">"string"</span><span class="p">,</span>
-  <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-  <span class="s2">"timestamp"</span><span class="p">:</span> <span class="mi">0</span>
-<span class="p">}</span>
-</code></pre>
-<p><strong>Parameters</strong></p>
-
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>oid</td>
-<td>number</td>
-<td>Y</td>
-<td>customized order_id when placing order</td>
 </tr>
 </tbody></table>
 <h2 id='get-algo-orders'>Get Algo Orders</h2>
