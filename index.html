@@ -348,6 +348,9 @@
                     <a href="#get-trade-history" class="toc-h2 toc-link" data-title="Get Trade History">Get Trade History</a>
                   </li>
                   <li>
+                    <a href="#get-staking-yield-history" class="toc-h2 toc-link" data-title="Get Staking Yield History">Get Staking Yield History</a>
+                  </li>
+                  <li>
                     <a href="#get-current-holding" class="toc-h2 toc-link" data-title="Get Current Holding">Get Current Holding</a>
                   </li>
                   <li>
@@ -2318,6 +2321,12 @@ will respond immediately with an order created message.</p>
 <td><code>STOP</code></td>
 </tr>
 <tr>
+<td>brokerId</td>
+<td>string</td>
+<td>N</td>
+<td>broker id, for broker service provider, please use your application id as broker id</td>
+</tr>
+<tr>
 <td>callbackRate</td>
 <td>string</td>
 <td>N</td>
@@ -3381,6 +3390,103 @@ GET /v1/client/trades
 <td>number</td>
 <td>N (default: 1)</td>
 <td>the page you wish to query.</td>
+</tr>
+</tbody></table>
+<h2 id='get-staking-yield-history'>Get Staking Yield History</h2>
+<p><strong>Limit: 10 requests per 1 second</strong></p>
+
+<p><code>
+GET /v1/staking/yield_history
+</code></p>
+
+<p>Return client’s staking yield history</p>
+
+<blockquote>
+<p><strong>Response</strong></p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="p">{</span>
+  <span class="s2">"rows"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="mi">53173</span><span class="p">,</span>
+      <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"WOO"</span><span class="p">,</span>
+      <span class="s2">"user_id"</span><span class="p">:</span> <span class="mi">10174</span><span class="p">,</span>
+      <span class="s2">"staking_size"</span><span class="p">:</span> <span class="mf">30100.00000000</span><span class="p">,</span>
+      <span class="s2">"annual_reward"</span><span class="p">:</span> <span class="s2">"0.24294%"</span><span class="p">,</span>
+      <span class="s2">"yield_amount"</span><span class="p">:</span> <span class="mf">0.20034259</span><span class="p">,</span>
+      <span class="s2">"yield_time"</span><span class="p">:</span> <span class="s2">"1673481600.000"</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="mi">53029</span><span class="p">,</span>
+      <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"WOO"</span><span class="p">,</span>
+      <span class="s2">"user_id"</span><span class="p">:</span> <span class="mi">10174</span><span class="p">,</span>
+      <span class="s2">"staking_size"</span><span class="p">:</span> <span class="mf">30100.00000000</span><span class="p">,</span>
+      <span class="s2">"annual_reward"</span><span class="p">:</span> <span class="s2">"0.24294%"</span><span class="p">,</span>
+      <span class="s2">"yield_amount"</span><span class="p">:</span> <span class="mf">0.20034259</span><span class="p">,</span>
+      <span class="s2">"yield_time"</span><span class="p">:</span> <span class="s2">"1673395200.000"</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="mi">52885</span><span class="p">,</span>
+      <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"WOO"</span><span class="p">,</span>
+      <span class="s2">"user_id"</span><span class="p">:</span> <span class="mi">10174</span><span class="p">,</span>
+      <span class="s2">"staking_size"</span><span class="p">:</span> <span class="mf">30100.00000000</span><span class="p">,</span>
+      <span class="s2">"annual_reward"</span><span class="p">:</span> <span class="s2">"0.24294%"</span><span class="p">,</span>
+      <span class="s2">"yield_amount"</span><span class="p">:</span> <span class="mf">0.20034259</span><span class="p">,</span>
+      <span class="s2">"yield_time"</span><span class="p">:</span> <span class="s2">"1673308800.000"</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="mi">52741</span><span class="p">,</span>
+      <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"WOO"</span><span class="p">,</span>
+      <span class="s2">"user_id"</span><span class="p">:</span> <span class="mi">10174</span><span class="p">,</span>
+      <span class="s2">"staking_size"</span><span class="p">:</span> <span class="mf">30100.00000000</span><span class="p">,</span>
+      <span class="s2">"annual_reward"</span><span class="p">:</span> <span class="s2">"0.242572%"</span><span class="p">,</span>
+      <span class="s2">"yield_amount"</span><span class="p">:</span> <span class="mf">0.20003858</span><span class="p">,</span>
+      <span class="s2">"yield_time"</span><span class="p">:</span> <span class="s2">"1673222400.000"</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="mi">52597</span><span class="p">,</span>
+      <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"WOO"</span><span class="p">,</span>
+      <span class="s2">"user_id"</span><span class="p">:</span> <span class="mi">10174</span><span class="p">,</span>
+      <span class="s2">"staking_size"</span><span class="p">:</span> <span class="mf">30100.00000000</span><span class="p">,</span>
+      <span class="s2">"annual_reward"</span><span class="p">:</span> <span class="s2">"0.242572%"</span><span class="p">,</span>
+      <span class="s2">"yield_amount"</span><span class="p">:</span> <span class="mf">0.20003858</span><span class="p">,</span>
+      <span class="s2">"yield_time"</span><span class="p">:</span> <span class="s2">"1673136000.000"</span>
+    <span class="p">}</span>
+  <span class="p">],</span>
+  <span class="s2">"meta"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"total"</span><span class="p">:</span> <span class="mi">582</span><span class="p">,</span>
+    <span class="s2">"records_per_page"</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+    <span class="s2">"current_page"</span><span class="p">:</span> <span class="mi">1</span>
+  <span class="p">},</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span>
+<span class="p">}</span>
+</code></pre>
+<p><strong>Parameters</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>page</td>
+<td>number</td>
+<td>N (default: 1)</td>
+<td>the page you wish to query.</td>
+</tr>
+<tr>
+<td>size</td>
+<td>number</td>
+<td>N (default: 25)</td>
+<td>the page size you wish to query, default = 25, 1000 at max.</td>
+</tr>
+<tr>
+<td>token</td>
+<td>string</td>
+<td>Y</td>
+<td>i.e: WOO</td>
 </tr>
 </tbody></table>
 <h2 id='get-current-holding'>Get Current Holding</h2>
