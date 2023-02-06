@@ -2215,12 +2215,12 @@ will respond immediately with an order created message.</p>
 <span class="p">}</span>
 </code></pre>
 <blockquote>
-<p><strong>Request</strong></p>
+<p><strong>Request</strong>
+```js
+// stop market order</p>
 </blockquote>
 
-<p>stop market order
-<code>js
-{
+<p>{
     &quot;symbol&quot;:&quot;PERP_BTC_USDT&quot;,
     &quot;side&quot;:&quot;BUY&quot;,
     &quot;orderCombinationType&quot;:&quot;STOP_MARKET&quot;,
@@ -2228,12 +2228,11 @@ will respond immediately with an order created message.</p>
     &quot;triggerPrice&quot;:&quot;1000&quot;,
     &quot;type&quot;:&quot;MARKET&quot;,
     &quot;quantity&quot;:&quot;0.01&quot;
-}
-</code></p>
+}</p>
 
-<p>stop market limit
-<code>js
-{
+<p>//stop market limit</p>
+
+<p>{
     &quot;symbol&quot;:&quot;PERP_BTC_USDT&quot;,
     &quot;side&quot;:&quot;BUY&quot;,
     &quot;orderCombinationType&quot;:&quot;STOP_LIMIT&quot;,
@@ -2242,12 +2241,11 @@ will respond immediately with an order created message.</p>
     &quot;type&quot;:&quot;LIMIT&quot;,
     &quot;quantity&quot;:&quot;0.01&quot;,
     &quot;price&quot;:1000
-}
-</code></p>
+}</p>
 
-<p>OCO 
-<code>js
-{
+<p>//OCO </p>
+
+<p>{
     &quot;symbol&quot;: &quot;PERP_ETH_USDT&quot;,
     &quot;side&quot;: &quot;BUY&quot;,
     &quot;reduceOnly&quot;: false,
@@ -2263,12 +2261,11 @@ will respond immediately with an order created message.</p>
             &quot;type&quot;: &quot;MARKET&quot;
         }
     ]
-}
-</code></p>
+}</p>
 
-<p>Positional TP/SL
-```JS
-{
+<p>//Positional TP/SL</p>
+
+<p>{
     &quot;symbol&quot;: &quot;SPOT_BAL_USDT&quot;,
     &quot;reduceOnly&quot;: false,
     &quot;algoType&quot;: &quot;POSITIONAL_TP_SL&quot;,
