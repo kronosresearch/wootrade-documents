@@ -309,9 +309,6 @@
                     <a href="#cancel-algo-order" class="toc-h2 toc-link" data-title="Cancel Algo Order">Cancel Algo Order</a>
                   </li>
                   <li>
-                    <a href="#cancel-algo-order-by-client_order_id" class="toc-h2 toc-link" data-title="Cancel Algo Order by client_order_id">Cancel Algo Order by client_order_id</a>
-                  </li>
-                  <li>
                     <a href="#cancel-all-pending-algo-orders" class="toc-h2 toc-link" data-title="Cancel All Pending Algo Orders">Cancel All Pending Algo Orders</a>
                   </li>
                   <li>
@@ -501,6 +498,9 @@
           <li>
             <a href="#release-note" class="toc-h1 toc-link" data-title="Release Note">Release Note</a>
               <ul class="toc-list-h2">
+                  <li>
+                    <a href="#2023-02-06" class="toc-h2 toc-link" data-title="2023-02-06">2023-02-06</a>
+                  </li>
                   <li>
                     <a href="#2022-12-05" class="toc-h2 toc-link" data-title="2022-12-05">2022-12-05</a>
                   </li>
@@ -1751,12 +1751,17 @@ DELETE /v3/orders/pending
 <blockquote>
 <p><strong>Response</strong></p>
 </blockquote>
-<pre class="highlight javascript"><code><span class="p">{</span>
-  <span class="s2">"code"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-  <span class="s2">"message"</span><span class="p">:</span> <span class="s2">"string"</span><span class="p">,</span>
-  <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"CANCEL_SENT"</span><span class="p">,</span>
-  <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-  <span class="s2">"timestamp"</span><span class="p">:</span> <span class="mi">0</span>
+<pre class="highlight javascript"><code><span class="c1">// success response</span>
+<span class="p">{</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"CANCEL_ALL_SENT"</span>
+<span class="p">}</span>
+
+<span class="c1">// Failed response</span>
+<span class="p">{</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="s2">"code"</span><span class="p">:</span> <span class="o">-</span><span class="mi">1002</span><span class="p">,</span>
+    <span class="s2">"message"</span><span class="p">:</span> <span class="s2">"The request is unauthorized."</span>
 <span class="p">}</span>
 </code></pre><h2 id='get-order'>Get Order</h2>
 <p><strong>Limit: 10 requests per 1 second</strong> shared with <a href="#get-order-by-client-order-id">get_order_by_client_order_id</a></p>
@@ -1902,7 +1907,7 @@ GET /v1/orders
 
 <p>Get orders by customize conditions.<br>
 - <code>INCOMPLETE</code> = <code>NEW</code> + <code>PARTIAL_FILLED</code><br>
-- <code>COMPLETED</code> = <code>CANCELLED</code> + <code>FILLED</code>
+- <code>COMPLETED</code> = <code>CANCELLED</code> + <code>FILLED</code> + <code>REJECTED</code>
 The <code>realized_pnl</code> field in response will only present the settled amount for futures orders. The return value default is null unless the input parameter <code>realized_pnl</code> set to <code>true</code></p>
 
 <blockquote>
@@ -1964,6 +1969,12 @@ The <code>realized_pnl</code> field in response will only present the settled am
 <td><code>BUY</code>/<code>SELL</code></td>
 </tr>
 <tr>
+<td>size</td>
+<td>number</td>
+<td>N</td>
+<td>The page size, default 100, max 500.</td>
+</tr>
+<tr>
 <td>order_type</td>
 <td>string</td>
 <td>N</td>
@@ -2021,15 +2032,21 @@ PUT /v3/order/:order_id
 <blockquote>
 <p><strong>Response</strong></p>
 </blockquote>
-<pre class="highlight javascript"><code><span class="p">{</span>
-  <span class="s2">"code"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-  <span class="s2">"data"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"string"</span><span class="p">,</span>
-    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span>
-  <span class="p">},</span>
-  <span class="s2">"message"</span><span class="p">:</span> <span class="s2">"string"</span><span class="p">,</span>
-  <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-  <span class="s2">"timestamp"</span><span class="p">:</span> <span class="mi">0</span>
+<pre class="highlight javascript"><code><span class="c1">// Success response</span>
+<span class="p">{</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"data"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"EDIT_SENT"</span>
+    <span class="p">},</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="mi">1673842319229</span>
+<span class="p">}</span>
+
+<span class="c1">// Failed response</span>
+<span class="p">{</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="s2">"code"</span><span class="p">:</span> <span class="o">-</span><span class="mi">1103</span><span class="p">,</span>
+    <span class="s2">"message"</span><span class="p">:</span> <span class="s2">"The order does not meet the price filter requirement."</span>
 <span class="p">}</span>
 </code></pre>
 <blockquote>
@@ -2051,20 +2068,20 @@ PUT /v3/order/:order_id
 </tr>
 </thead><tbody>
 <tr>
-<td>oid</td>
+<td>order_id</td>
 <td>number</td>
 <td>Y</td>
-<td>The order_id <code>oid</code> that you wish to query</td>
+<td>The <code>order_id</code> that you wish to query</td>
 </tr>
 <tr>
 <td>price</td>
-<td>number</td>
+<td>string</td>
 <td>N</td>
 <td>New price of the order.</td>
 </tr>
 <tr>
 <td>quantity</td>
-<td>number</td>
+<td>string</td>
 <td>N</td>
 <td>New quantity of the order.</td>
 </tr>
@@ -2084,15 +2101,21 @@ PUT /v3/order/client/:client_order_id
 <blockquote>
 <p><strong>Response</strong></p>
 </blockquote>
-<pre class="highlight javascript"><code><span class="p">{</span>
-  <span class="s2">"code"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-  <span class="s2">"data"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"string"</span><span class="p">,</span>
-    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span>
-  <span class="p">},</span>
-  <span class="s2">"message"</span><span class="p">:</span> <span class="s2">"string"</span><span class="p">,</span>
-  <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-  <span class="s2">"timestamp"</span><span class="p">:</span> <span class="mi">0</span>
+<pre class="highlight javascript"><code><span class="c1">// Success response</span>
+<span class="p">{</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"data"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"EDIT_SENT"</span>
+    <span class="p">},</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="mi">1673842319229</span>
+<span class="p">}</span>
+
+<span class="c1">// Failed response</span>
+<span class="p">{</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="s2">"code"</span><span class="p">:</span> <span class="o">-</span><span class="mi">1103</span><span class="p">,</span>
+    <span class="s2">"message"</span><span class="p">:</span> <span class="s2">"The order does not meet the price filter requirement."</span>
 <span class="p">}</span>
 </code></pre>
 <blockquote>
@@ -2121,13 +2144,13 @@ PUT /v3/order/client/:client_order_id
 </tr>
 <tr>
 <td>price</td>
-<td>number</td>
+<td>string</td>
 <td>N</td>
 <td>New price of the order.</td>
 </tr>
 <tr>
 <td>quantity</td>
-<td>number</td>
+<td>string</td>
 <td>N</td>
 <td>New quantity of the order.</td>
 </tr>
@@ -2145,26 +2168,22 @@ POST /v3/algo/Order
 <p>Place algo order maker/taker, the order executed information will be updated from websocket stream.
 will respond immediately with an order created message.</p>
 
-<p>To place <code>Stop Market</code> order, please use &#39;STOP&#39; as <code>algoType</code>, &#39;STOP_MARKET&#39; as <code>orderCombinationType</code> and &#39;MARKET&#39; as <code>type</code>. Please input the trigger price in <code>triggerPrice</code> field.</p>
+<p>To place <code>Stop Market</code> order, please use &#39;STOP&#39; as <code>algoType</code> and &#39;MARKET&#39; as <code>type</code>. Please input the trigger price in <code>triggerPrice</code> field.</p>
 
-<p>To place <code>Stop Limit</code> order, please use &#39;STOP&#39; as <code>algoType</code>, &#39;STOP_LIMIT&#39; as <code>orderCombinationType</code> and &#39;LIMIT&#39; as <code>type</code>. Please input the trigger price in <code>triggerPrice</code> field.</p>
+<p>To place <code>Stop Limit</code> order, please use &#39;STOP&#39; as <code>algoType</code> and &#39;LIMIT&#39; as <code>type</code>. Please input the trigger price in <code>triggerPrice</code> field.</p>
 
-<p>To place <code>Trailing Stop</code> order, please use &#39;TRAILING_STOP&#39; as <code>algoType</code> and &#39;MARKET&#39; as <code>type</code>. Note that The <code>orderCombinationType</code> field is non-required in the Trailing Stop order. Please also input your trailing rate setting in <code>callbackRate</code> field.</p>
+<p>To place <code>Trailing Stop</code> order, please use &#39;TRAILING_STOP&#39; as <code>algoType</code> and &#39;MARKET&#39; as <code>type</code>. Please also input your trailing rate setting in <code>callbackRate</code> field.</p>
 
-<p>To place <code>OCO</code> order, the input fields is 2 layer and includes an array of the ojects named <code>childOrder</code>. The second order of OCO order shoud be a STOP_LIMIT or STOP MARKET order object in the array. please use &#39;OCO&#39; as <code>algoType</code> in outter parameters, and &#39;STOP&#39; as <code>algoType</code> in <code>childOrder</code> object. &#39;STOP_LIMIT&#39; or &#39;STOP_MARKET&#39; as orderCombinationType and &#39;LIMIT&#39; or &#39;MARKET&#39; as type.</p>
+<p>To place <code>OCO</code> order, the input fields is 2 layer and includes an array of the objects named <code>childOrder</code>. The second order of OCO order should be a STOP_LIMIT or STOP MARKET order object in the array. please use &#39;OCO&#39; as <code>algoType</code> in outter parameters, &#39;STOP&#39; as <code>algoType</code> in <code>childOrder</code> object, and &#39;LIMIT&#39; or &#39;MARKET&#39; as type.</p>
 
-<p>To place <code>Positional TP/SL</code> order, the input fields is 2 layer and includes an array of the ojects named <code>childOrder</code>. The take-profit or stop-loss order shoud be the objects in the array. For the sub-order in <code>childOrder</code>, please input &#39;CLOSE_POSITION&#39; as <code>type</code>, and &#39;TAKE_PROFIT&#39; or &#39;STOP_LOSS&#39; in <code>algoType</code> field.</p>
+<p>To place <code>Positional TP/SL</code> order, the input fields is 2 layer and includes an array of the objects named <code>childOrder</code>. The take-profit or stop-loss order should be the objects in the array. For the sub-order in <code>childOrder</code>, please input &#39;CLOSE_POSITION&#39; as <code>type</code>, and &#39;TAKE_PROFIT&#39; or &#39;STOP_LOSS&#39; in <code>algoType</code> field.</p>
 
 <p><code>visible_quantity</code> behavior: it sets the maximum quantity to be shown on orderbook. By default, it is equal to order_quantity, negative number and number larger than <code>order_quantity</code> is not allowed. The visibility of the childOrder will inherit the parent order&#39;s visibility setting. 
      If it sets to 0, the order would be hidden from the orderbook.
-     It doesn&#39;t work for <code>MARKET</code>/<code>IOC</code>/<code>FOK</code> orders since orders with these types would be executed and cancelled immediately and not be shown on orderbook.
-     For <code>LIMIT</code>/<code>POST_ONLY</code> order, as long as it&#39;s not complete, <code>visible_quantity</code> is the maximum quantity that is shown on the orderbook.</p>
-
-<p><code>order_amount</code> behavior: for <code>MARKET</code> order, order can be placed by <code>order_amount</code> instead of <code>order_quantity</code>. It&#39;s the size of the order in terms of the quote currency instead of the base currency. The order would be rejected if  both <code>order_amount</code> and <code>order_quantity</code> are provided. The precision of the number should be within 8 digits.</p>
+     It doesn&#39;t work for <code>MARKET</code> orders since orders with these types would be executed and cancelled immediately and not be shown on orderbook.
+     For <code>LIMIT</code> order, as long as it&#39;s not complete, <code>visible_quantity</code> is the maximum quantity that is shown on the orderbook.</p>
 
 <p><code>client_order_id</code> behavior: customized order_id, a unique id among open orders. Orders with the same <code>client_order_id</code> can be accepted only when the previous one if completed, otherwise the order will be rejected.</p>
-
-<p>For <code>MARKET</code>/<code>BID</code>/<code>ASK</code> order, if margin trading is disabled, <code>order_amount</code> is not supported when placing SELL order while <code>order_quantity</code> is not supported when placing BUY order.</p>
 
 <blockquote>
 <p><strong>Response</strong></p>
@@ -2300,135 +2319,39 @@ will respond immediately with an order created message.</p>
 
 <p><strong>Parameters</strong></p>
 
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>activatedPrice</td>
-<td>string</td>
-<td>N</td>
-<td>activated price for algoType=TRAILING_STOP</td>
-</tr>
-<tr>
-<td>algoType</td>
-<td>string</td>
-<td>Y</td>
-<td><code>STOP</code></td>
-</tr>
-<tr>
-<td>brokerId</td>
-<td>string</td>
-<td>N</td>
-<td>broker id, for broker service provider, please use your application id as broker id</td>
-</tr>
-<tr>
-<td>callbackRate</td>
-<td>string</td>
-<td>N</td>
-<td>callback rate, only for algoType=TRAILING_STOP, i.e. the value = 0.1 represent to 10%.</td>
-</tr>
-<tr>
-<td>callbackValue</td>
-<td>string</td>
-<td>N</td>
-<td>callback value, only for algoType=TRAILING_STOP, i.e. the value = 100</td>
-</tr>
-<tr>
-<td>childOrders</td>
-<td>array</td>
-<td>N</td>
-<td>Only for algoType=POSITIONAL_TP_SL</td>
-</tr>
-<tr>
-<td>symbol</td>
-<td>string</td>
-<td>Y</td>
-<td></td>
-</tr>
-<tr>
-<td>clientOderId</td>
-<td>number</td>
-<td>N</td>
-<td>number for scope : from 0 to 9223372036854775807. (default: 0)</td>
-</tr>
-<tr>
-<td>orderCombinationType</td>
-<td>enum</td>
-<td>N</td>
-<td><code>STOP_LIMIT</code>/<code>STOP_MARKET</code></td>
-</tr>
-<tr>
-<td>orderTag</td>
-<td>string</td>
-<td>N</td>
-<td>An optional tag for this order. (default: <code>default</code>)</td>
-</tr>
-<tr>
-<td>orderType</td>
-<td>enum</td>
-<td>Y</td>
-<td><code>LIMIT</code>/<code>MARKET</code>/<code>IOC</code>/<code>FOK</code>/<code>POST_ONLY</code>/<code>ASK</code>/<code>BID</code></td>
-</tr>
-<tr>
-<td>orderPrice</td>
-<td>string</td>
-<td>N</td>
-<td>If order_type is <code>MARKET</code>, then is not required, otherwise this parameter is required.</td>
-</tr>
-<tr>
-<td>orderQuantity</td>
-<td>string</td>
-<td>N</td>
-<td>For <code>MARKET</code>/<code>ASK</code>/<code>BID</code> order, if <code>order_amount</code> is given, it is not required.</td>
-</tr>
-<tr>
-<td>orderAmount</td>
-<td>string</td>
-<td>N</td>
-<td>For <code>MARKET</code>/<code>ASK</code>/<code>BID</code> order, the order size in terms of quote currency</td>
-</tr>
-<tr>
-<td>reduceOnly</td>
-<td>boolean</td>
-<td>N</td>
-<td>true or false, default false</td>
-</tr>
-<tr>
-<td>triggerPrice</td>
-<td>string</td>
-<td>N</td>
-<td>trigger price, if algoType=TRAILING_STOP, you need to provide &#39;activatedPrice&#39;</td>
-</tr>
-<tr>
-<td>triggerPriceType</td>
-<td>string</td>
-<td>N</td>
-<td>trigger price, if algoType=TRAILING_STOP, you need to provide &#39;activatedPrice&#39;</td>
-</tr>
-<tr>
-<td>type</td>
-<td>boolean</td>
-<td>N</td>
-<td>true or false, default false</td>
-</tr>
-<tr>
-<td>visibleQuantity</td>
-<td>number</td>
-<td>N</td>
-<td>The order quantity shown on orderbook. (default: equal to <code>orderQuantity</code>)</td>
-</tr>
-<tr>
-<td>side</td>
-<td>enum</td>
-<td>Y</td>
-<td><code>SELL</code>/<code>BUY</code></td>
-</tr>
-</tbody></table>
+<p>Parent 
+| Name             | Type   | Required | Description                                                                            |
+| ---------------- | ------ | -------- | -------------------------------------------------------------------------------------- |
+| activatedPrice   | string | N        | activated price for algoType=TRAILING_STOP                                               |
+| algoType         | string | Y        | <code>STOP</code>|<code>OCO</code>|<code>TRAILING_STOP</code>|<code>BRACKET</code>|<code>POSITIONAL_TP_SL</code>                              |
+| brokerId        | string | N        | broker id, for broker service provider, please use your application id as broker id    |
+| callbackRate     | string | N        | callback rate, only for algoType=TRAILING_STOP, i.e. the value = 0.1 represent to 10%. |
+| callbackValue    | string | N        | callback value, only for algoType=TRAILING_STOP, i.e. the value = 100                  |
+| childOrders       | child  | N        | Child orders for algoType=<code>POSITIONAL_TP_SL</code>|<code>BRACKET</code>                                       |
+| symbol           | string | Y        |                                                                                        |
+| clientOderId     | number | N        | Client order id defined by client
+Duplicated client order id on opening order is not allowed.   |
+| orderTag         | string | N        | An optional tag for this order. (default: <code>default</code>)                                    |
+| price            | string | N        | order price                                                                             |
+| quantity         | string | N        | Order quantity, only optional for algoType=<code>POSITIONAL_TP_SL</code>                           |
+| reduceOnly       | boolean | N       | true or false, default false                                                            |
+| triggerPrice     | string | N       | trigger price, if algoType=TRAILING_STOP, you need to provide &#39;activatedPrice&#39;          |
+| triggerPriceType | string | N       | trigger price, default <code>MARKET_PRICE</code>, enum: <code>MARKET_PRICE</code>|<code>MARK_PRICE</code>                |
+| type             | string   | Y        | <code>LIMIT</code>/<code>MARKET</code>                                                                     |
+| visibleQuantity | number | N        | The order quantity shown on orderbook. (default: equal to <code>orderQuantity</code>)              |
+| side             | enum   | Y        | <code>SELL</code>/<code>BUY</code>                                                                           |</p>
+
+<p>Child
+| Name             | Type   | Required | Description                                                                            |
+| ---------------- | ------ | -------- | -------------------------------------------------------------------------------------- |
+| symbol           | string | Y        |                                                                                        |
+| algoType         | string | Y        | <code>STOP</code>|<code>OCO</code>|<code>TRAILING_STOP</code>|<code>BRACKET</code>|<code>POSITIONAL_TP_SL</code>                              |
+| side             | enum   | Y        | <code>SELL</code>/<code>BUY</code>                                                                           |
+| type             | string   | Y       | <code>LIMIT</code>/<code>MARKET</code>|<code>CLOSE_POSITION</code>                                                    |
+| triggerPrice     | string | N       | trigger price, if algoType=TRAILING_STOP, you need to provide &#39;activatedPrice&#39;          |
+| price            | string | N        | order price                                                                            |
+| reduceOnly       | boolean | N       | true or false, default false                                                           |
+| childOrders       | child  | N        | Child orders for algoType=<code>POSITIONAL_TP_SL</code>|<code>BRACKET</code>                                |</p>
 <h2 id='cancel-algo-order'>Cancel Algo Order</h2>
 <p><strong>Limit: 10 requests per 1 second</strong> shared with <a href="#cancel-algo-order-by-client_order_id">cancel_algo_order_by_client_order_id</a></p>
 
@@ -2436,19 +2359,23 @@ will respond immediately with an order created message.</p>
 DELETE /v3/algo/order/:order_id
 </code></p>
 
-<p>***Note: This v3 API using query string to pass parameter, please follow the instruction in <a href="#authentication">authentication</a> section for <code>v1</code> API to generate the signature.
+<p>***Note: This v3 API using query string to pass parameter, please follow the instruction in <a href="#authentication">authentication</a> section for <code>v3</code> API to generate the signature.
 Cancel order by order id. The order cancelled information will be updated from websocket stream.
 note that we give an immediate response with an order cancel sent message, and will update the cancel event via the websocket channel.</p>
 
 <blockquote>
 <p><strong>Response</strong></p>
 </blockquote>
-<pre class="highlight javascript"><code><span class="p">{</span>
-  <span class="s2">"code"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-  <span class="s2">"message"</span><span class="p">:</span> <span class="s2">"string"</span><span class="p">,</span>
-  <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"CANCEL_SENT"</span><span class="p">,</span>
-  <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-  <span class="s2">"timestamp"</span><span class="p">:</span> <span class="mi">0</span>
+<pre class="highlight javascript"><code><span class="c1">// Success response</span>
+<span class="p">{</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"CANCEL_SENT"</span>
+<span class="p">}</span>
+
+<span class="c1">// Failed response</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="s2">"code"</span><span class="p">:</span> <span class="o">-</span><span class="mi">1006</span><span class="p">,</span>
+    <span class="s2">"message"</span><span class="p">:</span> <span class="s2">"Your order and symbol are not valid or already canceled."</span>
 <span class="p">}</span>
 </code></pre>
 <p><strong>Parameters</strong></p>
@@ -2468,50 +2395,6 @@ note that we give an immediate response with an order cancel sent message, and w
 <td>The <code>order_id</code> that youwish to cancel</td>
 </tr>
 </tbody></table>
-<h2 id='cancel-algo-order-by-client_order_id'>Cancel Algo Order by client_order_id</h2>
-<p><strong>Limit: 10 requests per 1 second</strong> shared with <a href="#cancel-algo-order">cancel_algo_order</a></p>
-
-<p><code>
-DELETE /v3/algo/order
-</code></p>
-
-<p>***Note that for v3 API, please follow the instruction in <a href="#authentication">authentication</a> section for <code>v3</code> API to generate the signature.
-Cancel order by client order id. The order cancelled information will be updated from websocket stream.
-note that we give an immediate response with an order cancel sent message, and will update the cancel event via the websocket channel.</p>
-
-<p>Only the latest order with the <code>symbol</code> and <code>client_order_id</code> would be canceled.</p>
-
-<blockquote>
-<p><strong>Response</strong></p>
-</blockquote>
-<pre class="highlight javascript"><code><span class="p">{</span>
-  <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-  <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"CANCEL_SENT"</span>
-<span class="p">}</span>
-</code></pre>
-<p><strong>Parameters</strong></p>
-
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>client_order_id</td>
-<td>number</td>
-<td>Y</td>
-<td>The <code>client_order_id</code> that you wish tocancel</td>
-</tr>
-<tr>
-<td>symbol</td>
-<td>string</td>
-<td>Y</td>
-<td></td>
-</tr>
-</tbody></table>
 <h2 id='cancel-all-pending-algo-orders'>Cancel All Pending Algo Orders</h2>
 <p><strong>Limit: 10 requests per 1 second</strong></p>
 
@@ -2519,18 +2402,22 @@ note that we give an immediate response with an order cancel sent message, and w
 DELETE /v3/algo/orders/pending
 </code></p>
 
-<p>***Note: This v3 API using query string to pass parameter, please follow the instruction in <a href="#authentication">authentication</a> section for <code>v1</code> API to generate the signature.
+<p>***Note: This v3 API using query string to pass parameter, please follow the instruction in <a href="#authentication">authentication</a> section for <code>v3</code> API to generate the signature.
 Cancel all pending algo orders.</p>
 
 <blockquote>
 <p><strong>Response</strong></p>
 </blockquote>
-<pre class="highlight javascript"><code><span class="p">{</span>
-  <span class="s2">"code"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-  <span class="s2">"message"</span><span class="p">:</span> <span class="s2">"string"</span><span class="p">,</span>
-  <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"CANCEL_SENT"</span><span class="p">,</span>
-  <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-  <span class="s2">"timestamp"</span><span class="p">:</span> <span class="mi">0</span>
+<pre class="highlight javascript"><code><span class="c1">// Success response</span>
+<span class="p">{</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"CANCEL_SENT"</span>
+<span class="p">}</span>
+
+<span class="c1">// Failed response</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="s2">"code"</span><span class="p">:</span> <span class="o">-</span><span class="mi">1006</span><span class="p">,</span>
+    <span class="s2">"message"</span><span class="p">:</span> <span class="s2">"Your order and symbol are not valid or already canceled."</span>
 <span class="p">}</span>
 </code></pre><h2 id='cancel-pending-merge-orders-by-symbol'>Cancel Pending Merge Orders by Symbol</h2>
 <p><strong>Limit: 10 requests per 1 second</strong></p>
@@ -2578,55 +2465,51 @@ Cancel pending algo orders by symbol.</p>
 
 <p><code>
 GET /v3/algo/order/:oid
-</code></p>
+</code>
+***Note: This v3 API using query string to pass parameter, please follow the instruction in <a href="#authentication">authentication</a> section for <code>v3</code> API to generate the signature.</p>
 
 <p>Get specific order details by Algo order&#39;s <code>oid</code>.</p>
 
 <blockquote>
 <p><strong>Response</strong></p>
 </blockquote>
-<pre class="highlight javascript"><code><span class="p">{</span>
-  <span class="s2">"code"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-  <span class="s2">"data"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">"activatedPrice"</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
-    <span class="s2">"algoOrderId"</span><span class="p">:</span> <span class="mi">1234567</span><span class="p">,</span>
-    <span class="s2">"algoStatus"</span><span class="p">:</span> <span class="s2">"NEW"</span><span class="p">,</span>
-    <span class="s2">"algoType"</span><span class="p">:</span> <span class="s2">"STOP"</span><span class="p">,</span>
-    <span class="s2">"averageExecutedPrice"</span><span class="p">:</span> <span class="mf">10.1235</span><span class="p">,</span>
-    <span class="s2">"callbackRate"</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
-    <span class="s2">"callbackValue"</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
-    <span class="s2">"childOrders"</span><span class="p">:</span> <span class="s2">"100"</span><span class="p">,</span>
-    <span class="s2">"clientOrderId"</span><span class="p">:</span> <span class="mi">1234567</span><span class="p">,</span>
-    <span class="s2">"createdTime"</span><span class="p">:</span> <span class="s2">"10.1235"</span><span class="p">,</span>
-    <span class="s2">"extremePrice"</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
-    <span class="s2">"feeAsset"</span><span class="p">:</span> <span class="s2">"0.1235"</span><span class="p">,</span>
-    <span class="s2">"isActivated"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-    <span class="s2">"isTriggered"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="s2">"orderTag"</span><span class="p">:</span> <span class="s2">"my_tag"</span><span class="p">,</span>
-    <span class="s2">"parentAlgoOrderId"</span><span class="p">:</span> <span class="mi">1234567</span><span class="p">,</span>
-    <span class="s2">"price"</span><span class="p">:</span> <span class="mf">10.1235</span><span class="p">,</span>
-    <span class="s2">"quantity"</span><span class="p">:</span> <span class="mf">10.12345</span><span class="p">,</span>
-    <span class="s2">"realizedPnl"</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
-    <span class="s2">"reduceOnly"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-    <span class="s2">"rootAlgoOrderId"</span><span class="p">:</span> <span class="mi">1234567</span><span class="p">,</span>
-    <span class="s2">"rootAlgoStatus"</span><span class="p">:</span> <span class="s2">"NEW"</span><span class="p">,</span>
-    <span class="s2">"side"</span><span class="p">:</span> <span class="s2">"BUY"</span><span class="p">,</span>
-    <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"NEW"</span><span class="p">,</span>
-    <span class="s2">"symbol"</span><span class="p">:</span> <span class="s2">"SPOT_WOO_USDT"</span><span class="p">,</span>
-    <span class="s2">"totalExecutedQuantity"</span><span class="p">:</span> <span class="mf">10.1235</span><span class="p">,</span>
-    <span class="s2">"totalFee"</span><span class="p">:</span> <span class="mf">0.1235</span><span class="p">,</span>
-    <span class="s2">"triggerPrice"</span><span class="p">:</span> <span class="mf">10.23456</span><span class="p">,</span>
-    <span class="s2">"triggerPriceType"</span><span class="p">:</span> <span class="s2">"MARKET_PRICE"</span><span class="p">,</span>
-    <span class="s2">"triggerStatus"</span><span class="p">:</span> <span class="s2">"SUCCESS"</span><span class="p">,</span>
-    <span class="s2">"triggerTime"</span><span class="p">:</span> <span class="s2">"10.1235"</span><span class="p">,</span>
-    <span class="s2">"triggerTradePrice"</span><span class="p">:</span> <span class="mf">10.1235</span><span class="p">,</span>
-    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"LIMIT"</span><span class="p">,</span>
-    <span class="s2">"updatedTime"</span><span class="p">:</span> <span class="s2">"10.1235"</span><span class="p">,</span>
-    <span class="s2">"visibleQuantity"</span><span class="p">:</span> <span class="mf">10.1235</span>
-  <span class="p">},</span>
-  <span class="s2">"message"</span><span class="p">:</span> <span class="s2">"string"</span><span class="p">,</span>
-  <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-  <span class="s2">"timestamp"</span><span class="p">:</span> <span class="mi">0</span>
+<pre class="highlight javascript"><code><span class="c1">// Success response</span>
+<span class="p">{</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"data"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"algoOrderId"</span><span class="p">:</span> <span class="mi">398524</span><span class="p">,</span>
+        <span class="s2">"clientOrderId"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"rootAlgoOrderId"</span><span class="p">:</span> <span class="mi">398524</span><span class="p">,</span>
+        <span class="s2">"parentAlgoOrderId"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"symbol"</span><span class="p">:</span> <span class="s2">"SPOT_ETH_USDT"</span><span class="p">,</span>
+        <span class="s2">"orderTag"</span><span class="p">:</span> <span class="s2">"default"</span><span class="p">,</span>
+        <span class="s2">"algoType"</span><span class="p">:</span> <span class="s2">"TAKE_PROFIT"</span><span class="p">,</span>
+        <span class="s2">"side"</span><span class="p">:</span> <span class="s2">"BUY"</span><span class="p">,</span>
+        <span class="s2">"quantity"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">"isTriggered"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="s2">"triggerPrice"</span><span class="p">:</span> <span class="mi">1100</span><span class="p">,</span>
+        <span class="s2">"triggerStatus"</span><span class="p">:</span> <span class="s2">"USELESS"</span><span class="p">,</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"MARKET"</span><span class="p">,</span>
+        <span class="s2">"rootAlgoStatus"</span><span class="p">:</span> <span class="s2">"CANCELLED"</span><span class="p">,</span>
+        <span class="s2">"algoStatus"</span><span class="p">:</span> <span class="s2">"CANCELLED"</span><span class="p">,</span>
+        <span class="s2">"triggerPriceType"</span><span class="p">:</span> <span class="s2">"MARKET_PRICE"</span><span class="p">,</span>
+        <span class="s2">"triggerTime"</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+        <span class="s2">"totalExecutedQuantity"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"averageExecutedPrice"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"totalFee"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"feeAsset"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+        <span class="s2">"reduceOnly"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="s2">"createdTime"</span><span class="p">:</span> <span class="s2">"1672208227.132"</span><span class="p">,</span>
+        <span class="s2">"updatedTime"</span><span class="p">:</span> <span class="s2">"1672208285.237"</span>
+    <span class="p">},</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="mi">1673859064561</span>
+<span class="p">}</span>
+
+<span class="c1">// Failed response</span>
+<span class="p">{</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="s2">"code"</span><span class="p">:</span> <span class="o">-</span><span class="mi">1006</span><span class="p">,</span>
+    <span class="s2">"message"</span><span class="p">:</span> <span class="s2">"The order can not be found."</span>
 <span class="p">}</span>
 </code></pre>
 <p><strong>Parameters</strong></p>
@@ -2653,11 +2536,11 @@ GET /v3/algo/order/:oid
 GET /v3/algo/orders
 </code></p>
 
-<p>***Note: This v3 API using query string to pass parameter, please follow the instruction in <a href="#authentication">authentication</a> section for <code>v1</code> API to generate the signature.
+<p>***Note: This v3 API using query string to pass parameter, please follow the instruction in <a href="#authentication">authentication</a> section for <code>v3</code> API to generate the signature.
 Get orders by customize conditions.<br>
 - <code>INCOMPLETE</code> = <code>NEW</code> + <code>PARTIAL_FILLED</code><br>
-- <code>COMPLETED</code> = <code>CANCELLED</code> + <code>FILLED</code>
-The <code>realized_pnl</code> field in response will only present the settled amount for futures orders. The return value default is null unless the input parameter <code>realized_pnl</code> set to <code>true</code></p>
+- <code>COMPLETED</code> = <code>CANCELLED</code> + <code>FILLED</code> + <code>REJECTED</code>
+The <code>realizedPnl</code> field in response will only present the settled amount for futures orders. The return value default is null unless the input parameter <code>realizedPnl</code> set to <code>true</code></p>
 
 <blockquote>
 <p><strong>Response</strong></p>
@@ -2762,7 +2645,7 @@ The <code>realized_pnl</code> field in response will only present the settled am
 <td>pag of query pagination</td>
 </tr>
 <tr>
-<td>realized_pnl</td>
+<td>realizedPnl</td>
 <td>boolean</td>
 <td>N</td>
 <td>Decide if return data calculate realized pnl value for the futures order.</td>
@@ -2795,7 +2678,7 @@ The <code>realized_pnl</code> field in response will only present the settled am
 <td>orderType</td>
 <td>string</td>
 <td>N</td>
-<td><code>LIMIT</code>/<code>MARKET</code>/<code>IOC</code>/<code>FOK</code>/<code>POST_ONLY</code>/<code>LIQUIDATE</code></td>
+<td><code>LIMIT</code>/<code>MARKET</code></td>
 </tr>
 </tbody></table>
 <h2 id='edit-algo-order'>Edit Algo Order</h2>
@@ -3520,7 +3403,7 @@ GET /v1/client/holding
 GET /v2/client/holding
 </code></p>
 
-<p><font color=#0000FF>** Note: This API will be deprecated in 2023 Q1, please find the replacement API in </font> <a href="#get-current-holding-get-balance-new">Get Current Holding Get Balance - New</a>
+<p><font color=#0000FF>** Note: This API will be deprecated at the end of 2023 Q1, please find the replacement API in </font> <a href="#get-current-holding-get-balance-new">Get Current Holding Get Balance - New</a>
 Holding summary of client. Note that the number in holding could be negative, it means how much client owed to WOO X.</p>
 
 <blockquote>
@@ -3574,8 +3457,9 @@ Holding summary of client. Note that the number in holding could be negative, it
 GET /v3/balances
 </code></p>
 
-<p><font color=#0000FF>** Note: This API will be released with WOO X New Margin Ratio Program in Jan 2023, currently on available in staging environment </font>
-Holding summary of client. Note that the number in holding could be negative, it means how much client owed to WOO X.
+<!-- <font color=#0000FF>** Note: This API will be released with WOO X New Margin Ratio Program in Jan 2023, currently on available in staging environment </font> -->
+
+<p>Holding summary of client. Note that the number in holding could be negative, it means how much client owed to WOO X.
 The API is design to replace the legacy API <a href="#get-current-holding">Get Current Holding</a> and <a href="#get-current-holding-v2">Get Current Holding v2</a></p>
 
 <blockquote>
@@ -3613,7 +3497,7 @@ The API is design to replace the legacy API <a href="#get-current-holding">Get C
 GET /v1/client/info
 </code></p>
 
-<p><font color=#0000FF>** Note: This API will be deprecated in 2023 Q1, please find the replacement API in </font> <a href="#get-account-information-new">Get Account Information - New</a>
+<p><font color=#0000FF>** Note: This API will be deprecated at the end of 2023 Q1, please find the replacement API in </font> <a href="#get-account-information-new">Get Account Information - New</a>
 Get account information such as account name, leverage, current exposure ... etc.</p>
 
 <blockquote>
@@ -3649,8 +3533,9 @@ Get account information such as account name, leverage, current exposure ... etc
 GET /v3/acccountinfo
 </code></p>
 
-<p><font color=#0000FF>** Note: This API will be released with WOO X New Margin Ratio Program in Jan 2023, currently on available in staging environment. </font>
-Get account information such as account name, leverage, current exposure ... etc.
+<!-- <font color=#0000FF>** Note: This API will be released with WOO X New Margin Ratio Program in Jan 2023, currently on available in staging environment. </font> -->
+
+<p>Get account information such as account name, leverage, current exposure ... etc.
 The API is design to replace the legacy API <a href="#get-account-information">Get Account Information</a></p>
 
 <blockquote>
@@ -4597,7 +4482,7 @@ GET /v1/funding_fee/history
 GET /v1/positions
 </code></p>
 
-<p><font color=#0000FF>** Note: This API will be deprecated in 2023 Q1, please find the replacement API in </font> <a href="#get-positions-new">Get Positions - New</a></p>
+<p><font color=#0000FF>** Note: This API will be deprecated at the end of 2023 Q1, please find the replacement API in </font> <a href="#get-positions-new">Get Positions - New</a></p>
 
 <p><strong>Parameters</strong></p>
 
@@ -4638,8 +4523,9 @@ GET /v1/positions
 GET /v3/positions
 </code></p>
 
-<p><font color=#0000FF>** Note: This API will be released with WOO X New Margin Ratio Program in Jan 2023, currently on available in staging environment </font>
-The API is design to replace the legacy API <a href="#get-positions">Get Positions</a></p>
+<!-- <font color=#0000FF>** Note: This API will be released with WOO X New Margin Ratio Program in Jan 2023, currently on available in staging environment </font> -->
+
+<p>The API is design to replace the legacy API <a href="#get-positions">Get Positions</a></p>
 
 <p><strong>Parameters</strong></p>
 
@@ -5439,7 +5325,7 @@ GET /v1/position/:symbol
 <li>Push interval: 1s</li>
 </ul>
 
-<p><font color=#0000FF>** Note: This topic will be deprecated in 2023 Q1 with WOO X New Margin Ratio Program, please find the replacement topic at </font> <a href="#balance">balance</a></p>
+<p><font color=#0000FF>** Note: This topic will be deprecated at the end of 2023 Q1 with WOO X New Margin Ratio Program, please find the replacement topic at </font> <a href="#balance">balance</a></p>
 
 <p><strong>Parameters</strong></p>
 
@@ -5540,10 +5426,10 @@ GET /v1/position/:symbol
 <span class="p">}</span>
 </code></pre><h2 id='balance'>balance</h2>
 <ul>
-<li>Push interval: 1s</li>
+<li>Push interval: realtime</li>
 </ul>
 
-<p><font color=#0000FF>** Note: This topic will be released in 2023 Q1 with WOO X New Margin Ratio Program, in order to replace existing topic </font> <a href="#positionsinfo">positionsinfo</a></p>
+<!-- <font color=#0000FF>** Note: This topic will be released in 2023 Q1 with WOO X New Margin Ratio Program, in order to replace existing topic </font> [positionsinfo](#positionsinfo) -->
 
 <p><strong>Parameters</strong></p>
 
@@ -5593,37 +5479,39 @@ GET /v1/position/:symbol
     <span class="s2">"topic"</span><span class="p">:</span><span class="s2">"balance"</span><span class="p">,</span>
     <span class="s2">"ts"</span><span class="p">:</span><span class="mi">1618757714353</span><span class="p">,</span>
     <span class="s2">"data"</span><span class="p">:{</span>
-        <span class="s2">"BTC"</span><span class="p">:{</span>
-            <span class="s2">"holding"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
-            <span class="s2">"frozen"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
-            <span class="s2">"interest"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
-            <span class="s2">"pendingShortQty"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
-            <span class="s2">"pendingLongQty"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
-            <span class="s2">"version"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
-            <span class="s2">"staked"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
-            <span class="s2">"unbonding"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
-            <span class="s2">"vault"</span><span class="p">:</span><span class="mf">309.8</span><span class="p">,</span>
-            <span class="s2">"averageOpenPrice"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
-            <span class="s2">"pnl24H"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
-            <span class="s2">"fee24H"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
-            <span class="s2">"markPrice"</span><span class="p">:</span><span class="mi">0</span>
-        <span class="p">},</span>
-        <span class="s2">"ETH"</span><span class="p">:{</span>
-            <span class="s2">"holding"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
-            <span class="s2">"frozen"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
-            <span class="s2">"interest"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
-            <span class="s2">"pendingShortQty"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
-            <span class="s2">"pendingLongQty"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
-            <span class="s2">"version"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
-            <span class="s2">"staked"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
-            <span class="s2">"unbonding"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
-            <span class="s2">"vault"</span><span class="p">:</span><span class="mf">309.8</span><span class="p">,</span>
-            <span class="s2">"averageOpenPrice"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
-            <span class="s2">"pnl24H"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
-            <span class="s2">"fee24H"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
-            <span class="s2">"markPrice"</span><span class="p">:</span><span class="mi">0</span>
-        <span class="p">},</span>
-        <span class="p">...</span>
+        <span class="s2">"balances"</span><span class="p">{</span>
+            <span class="s2">"BTC"</span><span class="p">:{</span>
+                <span class="s2">"holding"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"frozen"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"interest"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"pendingShortQty"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"pendingLongQty"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"version"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"staked"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"unbonding"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"vault"</span><span class="p">:</span><span class="mf">309.8</span><span class="p">,</span>
+                <span class="s2">"averageOpenPrice"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"pnl24H"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"fee24H"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"markPrice"</span><span class="p">:</span><span class="mi">0</span>
+            <span class="p">},</span>
+            <span class="s2">"ETH"</span><span class="p">:{</span>
+                <span class="s2">"holding"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"frozen"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"interest"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"pendingShortQty"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"pendingLongQty"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"version"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"staked"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"unbonding"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"vault"</span><span class="p">:</span><span class="mf">309.8</span><span class="p">,</span>
+                <span class="s2">"averageOpenPrice"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"pnl24H"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"fee24H"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"markPrice"</span><span class="p">:</span><span class="mi">0</span>
+            <span class="p">},</span>
+            <span class="p">...</span>
+        <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre><h2 id='executionreport'>executionreport</h2>
@@ -6275,6 +6163,12 @@ GET /v1/position/:symbol
 <span class="p">}</span>
 </code></pre><h1 id='release-note'>Release Note</h1>
 <p>All the API changes would be listed here.</p>
+<h2 id='2023-02-06'>2023-02-06</h2>
+<p>New REST API:
+- Add <a href="#get-current-holding-get-balance-new">Get Balance</a> API. The API is design to replace the legacy API <a href="#get-current-holding">Get Current Holding</a> and <a href="#get-current-holding-v2">Get Current Holding v2</a>.
+- Add <a href="#get-account-information-new">Get Account Information - New</a>. the API is design to replace the legacy API <a href="#get-account-information">Get Account Information</a>.
+- Add <a href="#get-all-position-info-new">Get All Position Info - New</a>. The API is design to replace the legacy API <a href="#get-positions">Get Positions</a>
+- Add New Websocket topic <a href="#balance">balance</a>. The topic is design to replace existing topic <a href="#positionsinfo">positionsinfo</a>.</p>
 <h2 id='2022-12-05'>2022-12-05</h2>
 <ul>
 <li>Add <a href="#edit-order">Edit Order</a>, <a href="#edit-order-by-client_order_id">Edit order by client_order_id</a>, <a href="#edit-algo-order">Edit Algo Order</a> and <a href="#edit-algo-order-by-client_order_id">Edit Algo order by client_order_id</a>.</li>
