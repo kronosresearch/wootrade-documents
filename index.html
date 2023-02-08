@@ -621,7 +621,7 @@ Specific error codes and messages are defined in <a href="#error-codes">Errors C
 <h1 id='authentication'>Authentication</h1>
 <p>Client needs to ask for an <code>api_key</code> and <code>api_secret</code>, and use these to sign your request.</p>
 <h2 id='example'>Example</h2>
-<p>Here we provide a simple example that shows you how to send a valid request to WooTrade.<br>
+<p>Here we provide a simple example that shows you how to send a valid request to WOO X.<br>
 Assume following infomation:</p>
 
 <table><thead>
@@ -902,6 +902,7 @@ GET /v1/public/info/:symbol
         <span class="s2">"base_tick"</span><span class="p">:</span> <span class="mf">0.0001</span><span class="p">,</span>
         <span class="s2">"min_notional"</span><span class="p">:</span> <span class="mf">0.02</span><span class="p">,</span>
         <span class="s2">"price_range"</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span>
+        <span class="s2">"price_scope"</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
         <span class="s2">"created_time"</span><span class="p">:</span> <span class="s2">"1575014248.99"</span><span class="p">,</span> <span class="c1">// Unix epoch time in seconds</span>
         <span class="s2">"updated_time"</span><span class="p">:</span> <span class="s2">"1575014248.99"</span>  <span class="c1">// Unix epoch time in seconds</span>
     <span class="p">}</span>
@@ -1114,8 +1115,7 @@ GET /v1/public/token
             <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"BTC"</span><span class="p">,</span>
             <span class="s2">"balance_token"</span><span class="p">:</span> <span class="s2">"BTC"</span><span class="p">,</span>
             <span class="s2">"fullname"</span><span class="p">:</span> <span class="s2">"Bitcoin"</span><span class="p">,</span>
-            <span class="s2">"decimals"</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
-            <span class="s2">"can_collateral"</span><span class="p">:</span> <span class="kc">true</span>
+            <span class="s2">"decimals"</span><span class="p">:</span> <span class="mi">8</span>
         <span class="p">},</span>
         <span class="p">{</span>
             <span class="s2">"created_time"</span><span class="p">:</span> <span class="s2">"1579399877.02"</span><span class="p">,</span>
@@ -1123,8 +1123,7 @@ GET /v1/public/token
             <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"BTC_USDT"</span><span class="p">,</span>
             <span class="s2">"balance_token"</span><span class="p">:</span> <span class="s2">"USDT"</span><span class="p">,</span>
             <span class="s2">"fullname"</span><span class="p">:</span> <span class="s2">"Tether"</span><span class="p">,</span>
-            <span class="s2">"decimals"</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
-            <span class="s2">"can_collateral"</span><span class="p">:</span> <span class="kc">true</span>
+            <span class="s2">"decimals"</span><span class="p">:</span> <span class="mi">8</span>
         <span class="p">},</span>
         <span class="p">{</span>
             <span class="s2">"created_time"</span><span class="p">:</span> <span class="s2">"1579399877.02"</span><span class="p">,</span>
@@ -1132,8 +1131,7 @@ GET /v1/public/token
             <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"ETH"</span><span class="p">,</span>
             <span class="s2">"balance_token"</span><span class="p">:</span> <span class="s2">"ETH"</span><span class="p">,</span>
             <span class="s2">"fullname"</span><span class="p">:</span> <span class="s2">"Ethereum"</span><span class="p">,</span>
-            <span class="s2">"decimals"</span><span class="p">:</span> <span class="mi">18</span><span class="p">,</span>
-            <span class="s2">"can_collateral"</span><span class="p">:</span> <span class="kc">true</span>
+            <span class="s2">"decimals"</span><span class="p">:</span> <span class="mi">18</span>
         <span class="p">},</span>
         <span class="p">{</span>
             <span class="s2">"created_time"</span><span class="p">:</span> <span class="s2">"1579399877.02"</span><span class="p">,</span>
@@ -1141,8 +1139,7 @@ GET /v1/public/token
             <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"ETH_OKB"</span><span class="p">,</span>
             <span class="s2">"balance_token"</span><span class="p">:</span> <span class="s2">"OKB"</span><span class="p">,</span>
             <span class="s2">"fullname"</span><span class="p">:</span> <span class="s2">"OKB"</span><span class="p">,</span>
-            <span class="s2">"decimals"</span><span class="p">:</span> <span class="mi">18</span><span class="p">,</span>
-            <span class="s2">"can_collateral"</span><span class="p">:</span> <span class="kc">true</span>
+            <span class="s2">"decimals"</span><span class="p">:</span> <span class="mi">18</span>
         <span class="p">}</span>
     <span class="p">]</span>
 <span class="p">}</span>
@@ -2325,29 +2322,130 @@ will respond immediately with an order created message.</p>
 
 <p><strong>Parameters</strong></p>
 
-<p>Parent 
-| Name             | Type   | Required | Description                                                                            |
-| ---------------- | ------ | -------- | -------------------------------------------------------------------------------------- |
-| activatedPrice   | string | N        | activated price for algoType=TRAILING_STOP                                               |
-| algoType         | string | Y        | <code>STOP</code>|<code>OCO</code>|<code>TRAILING_STOP</code>|<code>BRACKET</code>|<code>POSITIONAL_TP_SL</code>                              |
-| brokerId        | string | N        | broker id, for broker service provider, please use your application id as broker id    |
-| callbackRate     | string | N        | callback rate, only for algoType=TRAILING_STOP, i.e. the value = 0.1 represent to 10%. |
-| callbackValue    | string | N        | callback value, only for algoType=TRAILING_STOP, i.e. the value = 100                  |
-| childOrders       | child  | N        | Child orders for algoType=<code>POSITIONAL_TP_SL</code>|<code>BRACKET</code>                                       |
-| symbol           | string | Y        |                                                                                        |
-| clientOderId     | number | N        | Client order id defined by client
-Duplicated client order id on opening order is not allowed.   |
-| orderTag         | string | N        | An optional tag for this order. (default: <code>default</code>)                                    |
-| price            | string | N        | order price                                                                             |
-| quantity         | string | N        | Order quantity, only optional for algoType=<code>POSITIONAL_TP_SL</code>                           |
-| reduceOnly       | boolean | N       | true or false, default false                                                            |
-| triggerPrice     | string | N       | trigger price, if algoType=TRAILING_STOP, you need to provide &#39;activatedPrice&#39;          |
-| triggerPriceType | string | N       | trigger price, default <code>MARKET_PRICE</code>, enum: <code>MARKET_PRICE</code>|<code>MARK_PRICE</code>                |
-| type             | string   | Y        | <code>LIMIT</code>/<code>MARKET</code>                                                                     |
-| visibleQuantity | number | N        | The order quantity shown on orderbook. (default: equal to <code>orderQuantity</code>)              |
-| side             | enum   | Y        | <code>SELL</code>/<code>BUY</code>                                                                           |</p>
+<ul>
+<li>Parent</li>
+</ul>
 
-<p>Child
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>activatedPrice</td>
+<td>string</td>
+<td>N</td>
+<td>activated price for algoType=TRAILING_STOP</td>
+</tr>
+<tr>
+<td>algoType</td>
+<td>string</td>
+<td>Y</td>
+<td><code>STOP</code></td>
+</tr>
+<tr>
+<td>brokerId</td>
+<td>string</td>
+<td>N</td>
+<td>broker id, for broker service provider, please use your application id as broker id</td>
+</tr>
+<tr>
+<td>callbackRate</td>
+<td>string</td>
+<td>N</td>
+<td>callback rate, only for algoType=TRAILING_STOP, i.e. the value = 0.1 represent to 10%.</td>
+</tr>
+<tr>
+<td>callbackValue</td>
+<td>string</td>
+<td>N</td>
+<td>callback value, only for algoType=TRAILING_STOP, i.e. the value = 100</td>
+</tr>
+<tr>
+<td>childOrders</td>
+<td>child</td>
+<td>N</td>
+<td>Child orders for algoType=<code>POSITIONAL_TP_SL</code></td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>Y</td>
+<td></td>
+</tr>
+<tr>
+<td>clientOderId</td>
+<td>number</td>
+<td>N</td>
+<td>Client order id defined by client</td>
+</tr>
+<tr>
+<td>Duplicated client order id on opening order is not allowed.</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>orderTag</td>
+<td>string</td>
+<td>N</td>
+<td>An optional tag for this order. (default: <code>default</code>)</td>
+</tr>
+<tr>
+<td>price</td>
+<td>string</td>
+<td>N</td>
+<td>order price</td>
+</tr>
+<tr>
+<td>quantity</td>
+<td>string</td>
+<td>N</td>
+<td>Order quantity, only optional for algoType=<code>POSITIONAL_TP_SL</code></td>
+</tr>
+<tr>
+<td>reduceOnly</td>
+<td>boolean</td>
+<td>N</td>
+<td>true or false, default false</td>
+</tr>
+<tr>
+<td>triggerPrice</td>
+<td>string</td>
+<td>N</td>
+<td>trigger price, if algoType=TRAILING_STOP, you need to provide &#39;activatedPrice&#39;</td>
+</tr>
+<tr>
+<td>triggerPriceType</td>
+<td>string</td>
+<td>N</td>
+<td>trigger price, default <code>MARKET_PRICE</code>, enum: <code>MARKET_PRICE</code></td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>Y</td>
+<td><code>LIMIT</code>/<code>MARKET</code></td>
+</tr>
+<tr>
+<td>visibleQuantity</td>
+<td>number</td>
+<td>N</td>
+<td>The order quantity shown on orderbook. (default: equal to <code>orderQuantity</code>)</td>
+</tr>
+<tr>
+<td>side</td>
+<td>enum</td>
+<td>Y</td>
+<td><code>SELL</code>/<code>BUY</code></td>
+</tr>
+</tbody></table>
+
+<ul>
+<li>Child
 | Name             | Type   | Required | Description                                                                            |
 | ---------------- | ------ | -------- | -------------------------------------------------------------------------------------- |
 | symbol           | string | Y        |                                                                                        |
@@ -2357,7 +2455,8 @@ Duplicated client order id on opening order is not allowed.   |
 | triggerPrice     | string | N       | trigger price, if algoType=TRAILING_STOP, you need to provide &#39;activatedPrice&#39;          |
 | price            | string | N        | order price                                                                            |
 | reduceOnly       | boolean | N       | true or false, default false                                                           |
-| childOrders       | child  | N        | Child orders for algoType=<code>POSITIONAL_TP_SL</code>|<code>BRACKET</code>                                |</p>
+| childOrders       | child  | N        | Child orders for algoType=<code>POSITIONAL_TP_SL</code>|<code>BRACKET</code>                                |</li>
+</ul>
 <h2 id='cancel-algo-order'>Cancel Algo Order</h2>
 <p><strong>Limit: 10 requests per 1 second</strong> shared with <a href="#cancel-algo-order-by-client_order_id">cancel_algo_order_by_client_order_id</a></p>
 
@@ -3416,27 +3515,38 @@ Holding summary of client. Note that the number in holding could be negative, it
 <p><strong>Response</strong></p>
 </blockquote>
 <pre class="highlight javascript"><code><span class="p">{</span>
-  <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-  <span class="s2">"holding"</span><span class="p">:</span> <span class="p">[</span>
-    <span class="p">{</span>
-      <span class="s2">"updated_time"</span><span class="p">:</span> <span class="s2">"1580794149"</span><span class="p">,</span>  <span class="c1">// Unix epoch time in seconds</span>
-      <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"BTC"</span><span class="p">,</span>
-      <span class="s2">"holding"</span><span class="p">:</span> <span class="o">-</span><span class="mf">28.000752</span><span class="p">,</span>
-      <span class="s2">"frozen"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-      <span class="s2">"outstanding_holding"</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
-      <span class="s2">"pending_exposure"</span><span class="p">:</span> <span class="mi">12000</span><span class="p">,</span>
-      <span class="s2">"interest"</span><span class="p">:</span> <span class="o">-</span><span class="mf">0.01</span>
-    <span class="p">},</span>
-    <span class="p">{</span>
-      <span class="s2">"updated_time"</span><span class="p">:</span> <span class="s2">"1580794149"</span><span class="p">,</span>
-      <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"USDT"</span><span class="p">,</span>
-      <span class="s2">"holding"</span><span class="p">:</span> <span class="mf">282485.071904</span><span class="p">,</span>
-      <span class="s2">"frozen"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-      <span class="s2">"outstanding_holding"</span><span class="p">:</span> <span class="o">-</span><span class="mi">2000</span><span class="p">,</span>
-      <span class="s2">"pending_exposure"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-      <span class="s2">"interest"</span><span class="p">:</span> <span class="o">-</span><span class="mi">10</span>
-    <span class="p">}</span>
-  <span class="p">]</span>
+    <span class="s2">"holding"</span><span class="p">:[</span>
+        <span class="p">{</span>
+            <span class="s2">"token"</span><span class="p">:</span><span class="s2">"BTC"</span><span class="p">,</span>
+            <span class="s2">"holding"</span><span class="p">:</span><span class="mf">0.00590139</span><span class="p">,</span>
+            <span class="s2">"frozen"</span><span class="p">:</span><span class="mf">0.0</span><span class="p">,</span>
+            <span class="s2">"interest"</span><span class="p">:</span><span class="mf">0.0</span><span class="p">,</span>
+            <span class="s2">"outstanding_holding"</span><span class="p">:</span><span class="o">-</span><span class="mf">0.00080</span><span class="p">,</span>
+            <span class="s2">"pending_exposure"</span><span class="p">:</span><span class="mf">0.0</span><span class="p">,</span>
+            <span class="s2">"opening_cost"</span><span class="p">:</span><span class="o">-</span><span class="mf">126.36839957</span><span class="p">,</span>
+            <span class="s2">"holding_cost"</span><span class="p">:</span><span class="o">-</span><span class="mf">125.69703515</span><span class="p">,</span>
+            <span class="s2">"realised_pnl"</span><span class="p">:</span><span class="mf">73572.86125165</span><span class="p">,</span>
+            <span class="s2">"settled_pnl"</span><span class="p">:</span><span class="mf">73573.5326161</span><span class="p">,</span>
+            <span class="s2">"fee_24_h"</span><span class="p">:</span><span class="mf">0.01432411</span><span class="p">,</span>
+            <span class="s2">"settled_pnl_24_h"</span><span class="p">:</span><span class="mf">0.67528081</span><span class="p">,</span>
+            <span class="s2">"updated_time"</span><span class="p">:</span><span class="s2">"1675220398"</span>
+        <span class="p">},{</span>
+            <span class="s2">"token"</span><span class="p">:</span><span class="s2">"UNI"</span><span class="p">,</span>
+            <span class="s2">"holding"</span><span class="p">:</span><span class="mf">0.00000000</span><span class="p">,</span>
+            <span class="s2">"frozen"</span><span class="p">:</span><span class="mf">0.00000000</span><span class="p">,</span>
+            <span class="s2">"interest"</span><span class="p">:</span><span class="mf">0.00000000</span><span class="p">,</span>
+            <span class="s2">"outstanding_holding"</span><span class="p">:</span><span class="mf">0.00000000</span><span class="p">,</span>
+            <span class="s2">"pending_exposure"</span><span class="p">:</span><span class="mf">0.00000000</span><span class="p">,</span>
+            <span class="s2">"opening_cost"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"holding_cost"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"realised_pnl"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"settled_pnl"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"fee_24_h"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"settled_pnl_24_h"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"updated_time"</span><span class="p">:</span><span class="s2">"1655269545"</span>
+        <span class="p">}</span>   
+    <span class="p">],</span>
+    <span class="s2">"success"</span><span class="p">:</span><span class="kc">true</span>
 <span class="p">}</span>
 </code></pre>
 <p><strong>Parameters</strong></p>
@@ -3520,7 +3630,6 @@ Get account information such as account name, leverage, current exposure ... etc
         <span class="s2">"leverage"</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
         <span class="s2">"taker_fee_rate"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
         <span class="s2">"maker_fee_rate"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s2">"interest_rate"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
         <span class="s2">"futures_leverage"</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
         <span class="s2">"futures_taker_fee_rate"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
         <span class="s2">"futures_maker_fee_rate"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
@@ -3766,6 +3875,8 @@ GET /v1/asset/history
             <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"ETH"</span><span class="p">,</span>
             <span class="s2">"target_address"</span><span class="p">:</span> <span class="s2">"0x31d64B3230f8baDD91dE1710A65DF536aF8f7cDa"</span><span class="p">,</span>
             <span class="s2">"source_address"</span><span class="p">:</span> <span class="s2">"0x70fd25717f769c7f9a46b319f0f9103c0d887af0"</span><span class="p">,</span>
+            <span class="s2">"confirming_threshold"</span><span class="p">:</span><span class="mi">12</span><span class="p">,</span>
+            <span class="s2">"confirmed_number"</span><span class="p">:</span><span class="mi">12</span><span class="p">,</span>
             <span class="s2">"extra"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
             <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"BALANCE"</span><span class="p">,</span>
             <span class="s2">"token_side"</span><span class="p">:</span> <span class="s2">"DEPOSIT"</span><span class="p">,</span>
@@ -3784,6 +3895,8 @@ GET /v1/asset/history
             <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"ETH"</span><span class="p">,</span>
             <span class="s2">"target_address"</span><span class="p">:</span> <span class="s2">"0x31d64B3230f8baDD91dE1710A65DF536aF8f7cDa"</span><span class="p">,</span>
             <span class="s2">"source_address"</span><span class="p">:</span> <span class="s2">"0x70fd25717f769c7f9a46b319f0f9103c0d887af0"</span><span class="p">,</span>
+            <span class="s2">"confirming_threshold"</span><span class="p">:</span><span class="mi">12</span><span class="p">,</span>
+            <span class="s2">"confirmed_number"</span><span class="p">:</span><span class="mi">12</span><span class="p">,</span>
             <span class="s2">"extra"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
             <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"BALANCE"</span><span class="p">,</span>
             <span class="s2">"token_side"</span><span class="p">:</span> <span class="s2">"DEPOSIT"</span><span class="p">,</span>
@@ -5369,7 +5482,7 @@ GET /v1/position/:symbol
 <span class="p">}</span>
 </code></pre><h2 id='positioninfo'>positioninfo</h2>
 <ul>
-<li>Push interval: 1s</li>
+<li>Push interval: realtime (push on update)</li>
 </ul>
 
 <p><font color=#0000FF>** Note: This topic will be deprecated at the end of 2023 Q1 with WOO X New Margin Ratio Program, please find the replacement topic at </font> <a href="#balance">balance</a></p>
@@ -5473,7 +5586,7 @@ GET /v1/position/:symbol
 <span class="p">}</span>
 </code></pre><h2 id='balance'>balance</h2>
 <ul>
-<li>Push interval: realtime</li>
+<li>Push interval: realtime (push on update)</li>
 </ul>
 
 <!-- <font color=#0000FF>** Note: This topic will be released in 2023 Q1 with WOO X New Margin Ratio Program, in order to replace existing topic </font> [positionsinfo](#positionsinfo) -->
