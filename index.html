@@ -1745,6 +1745,18 @@ DELETE /v1/orders
 <td>Y</td>
 <td></td>
 </tr>
+<tr>
+<td>page</td>
+<td>number</td>
+<td>N (default: 1)</td>
+<td>the page you wish to query.</td>
+</tr>
+<tr>
+<td>size</td>
+<td>number</td>
+<td>N (default: 1)</td>
+<td></td>
+</tr>
 </tbody></table>
 <h2 id='cancel-all-pending-orders'>Cancel All Pending Orders</h2>
 <p><strong>Limit: 10 requests per 1 second</strong></p>
@@ -3380,6 +3392,12 @@ GET /v1/client/trades
 <td>N (default: 1)</td>
 <td>the page you wish to query.</td>
 </tr>
+<tr>
+<td>size</td>
+<td>number</td>
+<td>N (default: 1)</td>
+<td></td>
+</tr>
 </tbody></table>
 <h2 id='get-staking-yield-history'>Get Staking Yield History</h2>
 <p><strong>Limit: 10 requests per 1 second</strong></p>
@@ -3968,6 +3986,12 @@ GET /v1/asset/history
 <td>N (default: 1)</td>
 <td>the page you wish to query.</td>
 </tr>
+<tr>
+<td>size</td>
+<td>number</td>
+<td>N (default: 1)</td>
+<td></td>
+</tr>
 </tbody></table>
 <h2 id='margin-interest-rates'>Margin Interest Rates</h2>
 <p><strong>Limit 10 requests per 60 seconds</strong></p>
@@ -4125,6 +4149,12 @@ GET /v1/interest/history
 <td>number</td>
 <td>N (default: 1)</td>
 <td>the page you wish to query.</td>
+</tr>
+<tr>
+<td>size</td>
+<td>number</td>
+<td>N (default: 1)</td>
+<td></td>
 </tr>
 </tbody></table>
 <h2 id='repay-interest'>Repay Interest</h2>
@@ -4444,6 +4474,12 @@ GET /v1/asset/main_sub_transfer_history
 <td>N (default: 1)</td>
 <td>the page you wish to query.</td>
 </tr>
+<tr>
+<td>size</td>
+<td>number</td>
+<td>N (default: 1)</td>
+<td></td>
+</tr>
 </tbody></table>
 <h2 id='transfer-assets'>Transfer Assets</h2>
 <p><strong>Limit: 20 requests per 60 seconds</strong>
@@ -4608,6 +4644,12 @@ GET /v1/funding_fee/history
 <td style="text-align: left">number</td>
 <td style="text-align: left">N (default: 1)</td>
 <td style="text-align: left">the page you wish to query.</td>
+</tr>
+<tr>
+<td style="text-align: left">size</td>
+<td style="text-align: left">number</td>
+<td style="text-align: left">N (default: 1)</td>
+<td style="text-align: left"></td>
 </tr>
 </tbody></table>
 
@@ -5725,29 +5767,32 @@ GET /v1/position/:symbol
 </code></pre>
 <p><strong>Subscribed Message</strong></p>
 <pre class="highlight javascript"><code><span class="p">{</span>
-    <span class="s2">"topic"</span><span class="p">:</span><span class="s2">"executionreport"</span><span class="p">,</span>
-    <span class="s2">"ts"</span><span class="p">:</span><span class="mi">1618757714353</span><span class="p">,</span>
-    <span class="s2">"data"</span><span class="p">:{</span>
-        <span class="s2">"symbol"</span><span class="p">:</span><span class="s2">"SPOT_XRP_USDT"</span><span class="p">,</span>
-        <span class="s2">"clientOrderId"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
-        <span class="s2">"orderId"</span><span class="p">:</span><span class="mi">4506424</span><span class="p">,</span>
-        <span class="s2">"type"</span><span class="p">:</span><span class="s2">"LIMIT"</span><span class="p">,</span>
-        <span class="s2">"side"</span><span class="p">:</span><span class="s2">"BUY"</span><span class="p">,</span>
-        <span class="s2">"quantity"</span><span class="p">:</span><span class="mf">750127.1</span><span class="p">,</span>
-        <span class="s2">"price"</span><span class="p">:</span><span class="mi">11</span><span class="p">,</span>
-        <span class="s2">"tradeId"</span><span class="p">:</span><span class="mi">1870568</span><span class="p">,</span>
-        <span class="s2">"executedPrice"</span><span class="p">:</span><span class="mf">1.32014</span><span class="p">,</span>
-        <span class="s2">"executedQuantity"</span><span class="p">:</span><span class="mf">6620.6</span><span class="p">,</span>
-        <span class="s2">"fee"</span><span class="p">:</span><span class="mf">1.98618</span><span class="p">,</span>
-        <span class="s2">"feeAsset"</span><span class="p">:</span><span class="s2">"XRP"</span><span class="p">,</span>
-        <span class="s2">"totalExecutedQuantity"</span><span class="p">:</span><span class="mf">720891.2</span><span class="p">,</span>
-        <span class="s2">"avgPrice"</span><span class="p">:</span><span class="mf">1.31344</span><span class="p">,</span>
-        <span class="s2">"status"</span><span class="p">:</span><span class="s2">"PARTIAL_FILLED"</span><span class="p">,</span>
-        <span class="s2">"reason"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span>
-        <span class="s2">"orderTag"</span><span class="p">:</span><span class="s2">"default"</span><span class="p">,</span>
-        <span class="s2">"totalFee"</span><span class="p">:</span><span class="mf">216.26736</span><span class="p">,</span>
-        <span class="s2">"timestamp"</span><span class="p">:</span><span class="mi">1618757714353</span><span class="p">,</span>
-        <span class="s2">"maker"</span><span class="p">:</span><span class="kc">false</span>
+    <span class="s2">"topic"</span><span class="p">:</span> <span class="s2">"executionreport"</span><span class="p">,</span>
+    <span class="s2">"ts"</span><span class="p">:</span> <span class="mi">1675406261689</span><span class="p">,</span>
+    <span class="s2">"data"</span><span class="p">:</span>
+    <span class="p">{</span>
+        <span class="s2">"symbol"</span><span class="p">:</span> <span class="s2">"SPOT_BTC_USDT"</span><span class="p">,</span>
+        <span class="s2">"clientOrderId"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"orderId"</span><span class="p">:</span> <span class="mi">54774393</span><span class="p">,</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"MARKET"</span><span class="p">,</span>
+        <span class="s2">"side"</span><span class="p">:</span> <span class="s2">"BUY"</span><span class="p">,</span>
+        <span class="s2">"quantity"</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+        <span class="s2">"price"</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+        <span class="s2">"tradeId"</span><span class="p">:</span> <span class="mi">56201985</span><span class="p">,</span>
+        <span class="s2">"executedPrice"</span><span class="p">:</span> <span class="mf">23534.06</span><span class="p">,</span>
+        <span class="s2">"executedQuantity"</span><span class="p">:</span> <span class="mf">0.00040791</span><span class="p">,</span>
+        <span class="s2">"fee"</span><span class="p">:</span> <span class="mf">2.1</span><span class="nx">E</span><span class="o">-</span><span class="mi">7</span><span class="p">,</span>
+        <span class="s2">"feeAsset"</span><span class="p">:</span> <span class="s2">"BTC"</span><span class="p">,</span>
+        <span class="s2">"totalExecutedQuantity"</span><span class="p">:</span> <span class="mf">0.00040791</span><span class="p">,</span>
+        <span class="s2">"avgPrice"</span><span class="p">:</span> <span class="mf">23534.06</span><span class="p">,</span>
+        <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"FILLED"</span><span class="p">,</span>
+        <span class="s2">"reason"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+        <span class="s2">"orderTag"</span><span class="p">:</span> <span class="s2">"default"</span><span class="p">,</span>
+        <span class="s2">"totalFee"</span><span class="p">:</span> <span class="mf">2.1</span><span class="nx">E</span><span class="o">-</span><span class="mi">7</span><span class="p">,</span>
+        <span class="s2">"visible"</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+        <span class="s2">"timestamp"</span><span class="p">:</span> <span class="mi">1675406261689</span><span class="p">,</span>
+        <span class="s2">"reduceOnly"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="s2">"maker"</span><span class="p">:</span> <span class="kc">false</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre><h2 id='error-response'>error response</h2><pre class="highlight javascript"><code><span class="p">{</span>
