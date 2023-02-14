@@ -2481,17 +2481,65 @@ will respond immediately with an order created message.</p>
 </tr>
 </tbody></table>
 
-<p><strong>Parameters - Child</strong>
-| Name             | Type   | Required | Description                                                                            |
-| ---------------- | ------ | -------- | -------------------------------------------------------------------------------------- |
-| symbol           | string | Y        |                                                                                        |
-| algoType         | string | Y        | <code>STOP</code>|<code>OCO</code>|<code>TRAILING_STOP</code>|<code>BRACKET</code>|<code>POSITIONAL_TP_SL</code>                              |
-| side             | enum   | Y        | <code>SELL</code>/<code>BUY</code>                                                                           |
-| type             | string   | Y       | <code>LIMIT</code>/<code>MARKET</code>|<code>CLOSE_POSITION</code>                                                    |
-| triggerPrice     | string | N       | trigger price, if algoType=TRAILING_STOP, you need to provide &#39;activatedPrice&#39;          |
-| price            | string | N        | order price                                                                            |
-| reduceOnly       | boolean | N       | true or false, default false                                                           |
-| childOrders       | child  | N        | Child orders for algoType=<code>POSITIONAL_TP_SL</code>|<code>BRACKET</code>                                |</p>
+<p><strong>Parameters - Child</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>Y</td>
+<td></td>
+</tr>
+<tr>
+<td>algoType</td>
+<td>string</td>
+<td>Y</td>
+<td><code>STOP</code></td>
+</tr>
+<tr>
+<td>side</td>
+<td>enum</td>
+<td>Y</td>
+<td><code>SELL</code>/<code>BUY</code></td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>Y</td>
+<td><code>LIMIT</code>/<code>MARKET</code></td>
+</tr>
+<tr>
+<td>triggerPrice</td>
+<td>string</td>
+<td>N</td>
+<td>trigger price, if algoType=TRAILING_STOP, you need to provide &#39;activatedPrice&#39;</td>
+</tr>
+<tr>
+<td>price</td>
+<td>string</td>
+<td>N</td>
+<td>order price</td>
+</tr>
+<tr>
+<td>reduceOnly</td>
+<td>boolean</td>
+<td>N</td>
+<td>true or false, default false</td>
+</tr>
+<tr>
+<td>childOrders</td>
+<td>child</td>
+<td>N</td>
+<td>Child orders for algoType=<code>POSITIONAL_TP_SL</code></td>
+</tr>
+</tbody></table>
 <h2 id='cancel-algo-order'>Cancel Algo Order</h2>
 <p><strong>Limit: 10 requests per 1 second</strong> shared with <a href="#cancel-algo-order-by-client_order_id">cancel_algo_order_by_client_order_id</a></p>
 
@@ -3764,7 +3812,7 @@ GET /v3/buypower
 <tr>
 <td>symbol</td>
 <td>string</td>
-<td>N</td>
+<td>Y</td>
 <td>symbol that you wish to query</td>
 </tr>
 </tbody></table>
@@ -6392,12 +6440,13 @@ GET /v1/position/:symbol
 </code></pre><h1 id='release-note'>Release Note</h1>
 <p>All the API changes would be listed here.</p>
 <h2 id='2023-02-06'>2023-02-06</h2>
-<p>New REST API:
-- Add <a href="#get-current-holding-get-balance-new">Get Balance</a> API. The API is design to replace the legacy API <a href="#get-current-holding">Get Current Holding</a> and <a href="#get-current-holding-v2">Get Current Holding v2</a>.
-- Add <a href="#get-account-information-new">Get Account Information - New</a>. the API is design to replace the legacy API <a href="#get-account-information">Get Account Information</a>.
-- Add <a href="#get-all-position-info-new">Get All Position Info - New</a>. The API is design to replace the legacy API <a href="#get-positions">Get Positions</a>
-- Add <a href="#get-buy-power">Get Buy Power</a> for query buying power of selected symbol.
-- Add New Websocket topic <a href="#balance">balance</a>. The topic is design to replace existing topic <a href="#positionsinfo">positionsinfo</a>.</p>
+<ul>
+<li>Add <a href="#get-current-holding-get-balance-new">Get Balance</a> API. The API is design to replace the legacy API <a href="#get-current-holding">Get Current Holding</a> and <a href="#get-current-holding-v2">Get Current Holding v2</a>.</li>
+<li>Add <a href="#get-account-information-new">Get Account Information - New</a>. the API is design to replace the legacy API <a href="#get-account-information">Get Account Information</a>.</li>
+<li>Add <a href="#get-all-position-info-new">Get All Position Info - New</a>. The API is design to replace the legacy API <a href="#get-positions">Get Positions</a></li>
+<li>Add <a href="#get-buy-power">Get Buy Power</a> for query buying power of selected symbol.</li>
+<li>Add New Websocket topic <a href="#balance">balance</a>. The topic is design to replace existing topic <a href="#positionsinfo">positionsinfo</a>.</li>
+</ul>
 <h2 id='2022-12-05'>2022-12-05</h2>
 <ul>
 <li>Add <a href="#edit-order">Edit Order</a>, <a href="#edit-order-by-client_order_id">Edit order by client_order_id</a>, <a href="#edit-algo-order">Edit Algo Order</a> and <a href="#edit-algo-order-by-client_order_id">Edit Algo order by client_order_id</a>.</li>
