@@ -240,6 +240,9 @@
                     <a href="#exchange-information" class="toc-h2 toc-link" data-title="Exchange Information">Exchange Information</a>
                   </li>
                   <li>
+                    <a href="#system-status-public" class="toc-h2 toc-link" data-title="System Status (Public)">System Status (Public)</a>
+                  </li>
+                  <li>
                     <a href="#available-symbols-public" class="toc-h2 toc-link" data-title="Available Symbols (Public)">Available Symbols (Public)</a>
                   </li>
                   <li>
@@ -925,6 +928,31 @@ GET /v1/public/info/:symbol
 <td></td>
 </tr>
 </tbody></table>
+<h2 id='system-status-public'>System Status (Public)</h2>
+<p><strong>Limit: 10 requests per 1 second per IP address</strong></p>
+
+<p><code>
+GET /v1/public/system_info
+</code></p>
+
+<p>For fetch system status to check if system is down or under maintenance.</p>
+
+<blockquote>
+<p><strong>Response</strong></p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"success"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"data"</span><span class="p">:</span>
+        <span class="p">{</span>
+            <span class="s2">"status"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"msg"</span><span class="p">:</span><span class="s2">"System is functioning properly."</span>
+        <span class="p">},</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span><span class="mi">1676335013700</span>
+<span class="p">}</span>
+</code></pre>
+<p><strong>Parameters</strong></p>
+
+<p>None</p>
 <h2 id='available-symbols-public'>Available Symbols (Public)</h2>
 <p><strong>Limit: 10 requests per 1 second per IP address</strong></p>
 
@@ -2333,11 +2361,7 @@ will respond immediately with an order created message.</p>
 }
 ```</p>
 
-<p><strong>Parameters</strong></p>
-
-<ul>
-<li>Parent</li>
-</ul>
+<p><strong>Parameters - Parent</strong></p>
 
 <table><thead>
 <tr>
@@ -2457,8 +2481,7 @@ will respond immediately with an order created message.</p>
 </tr>
 </tbody></table>
 
-<ul>
-<li>Child
+<p><strong>Parameters - Child</strong>
 | Name             | Type   | Required | Description                                                                            |
 | ---------------- | ------ | -------- | -------------------------------------------------------------------------------------- |
 | symbol           | string | Y        |                                                                                        |
@@ -2468,8 +2491,7 @@ will respond immediately with an order created message.</p>
 | triggerPrice     | string | N       | trigger price, if algoType=TRAILING_STOP, you need to provide &#39;activatedPrice&#39;          |
 | price            | string | N        | order price                                                                            |
 | reduceOnly       | boolean | N       | true or false, default false                                                           |
-| childOrders       | child  | N        | Child orders for algoType=<code>POSITIONAL_TP_SL</code>|<code>BRACKET</code>                                |</li>
-</ul>
+| childOrders       | child  | N        | Child orders for algoType=<code>POSITIONAL_TP_SL</code>|<code>BRACKET</code>                                |</p>
 <h2 id='cancel-algo-order'>Cancel Algo Order</h2>
 <p><strong>Limit: 10 requests per 1 second</strong> shared with <a href="#cancel-algo-order-by-client_order_id">cancel_algo_order_by_client_order_id</a></p>
 
