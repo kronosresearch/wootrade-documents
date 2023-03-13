@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>WooTrade API Reference</title>
+    <title>WOO X API Reference</title>
     <link href="images/favicon.ico" rel="icon" type="image/ico" />
 
     <style>
@@ -6604,22 +6604,28 @@ GET /v1/position/:symbol
 </code></pre>
 <p>Subscribed Message</p>
 <pre class="highlight javascript"><code><span class="p">{</span>
-    <span class="s2">"topic"</span><span class="p">:</span><span class="s2">"position"</span><span class="p">,</span>
-    <span class="s2">"ts"</span><span class="p">:</span><span class="mi">1641439456774</span><span class="p">,</span>
-    <span class="s2">"data"</span><span class="p">:[</span>
-
+    <span class="s2">"topic"</span><span class="p">:</span> <span class="s2">"position"</span><span class="p">,</span>
+    <span class="s2">"ts"</span><span class="p">:</span> <span class="mi">1677814655101</span><span class="p">,</span>
+    <span class="s2">"data"</span><span class="p">:</span>
+    <span class="p">{</span>
+        <span class="s2">"positions"</span><span class="p">:</span>
+        <span class="p">{</span>
+            <span class="s2">"PERP_BTC_USDT"</span><span class="p">:</span>
             <span class="p">{</span>
-                <span class="s2">"symbol"</span><span class="p">:</span><span class="s2">"PERP_BTC_USDT"</span><span class="p">,</span>
-                <span class="s2">"holding"</span><span class="p">:</span><span class="mf">1.23</span><span class="p">,</span>
-                <span class="s2">"pendingLongQty"</span><span class="p">:</span><span class="mf">1.2</span><span class="p">,</span>
-                <span class="s2">"pendingShortQty"</span><span class="p">:</span><span class="mf">0.3</span><span class="p">,</span>
-                <span class="s2">"pnl24H"</span><span class="p">:</span><span class="mi">20</span><span class="p">,</span>
-                <span class="s2">"fee24H"</span><span class="p">:</span><span class="mi">12</span><span class="p">,</span>
-                <span class="s2">"avgOpenPrice"</span><span class="p">:</span><span class="mi">49000</span><span class="p">,</span>
-                <span class="s2">"settlePrice"</span><span class="p">:</span><span class="mi">50000</span><span class="p">,</span>
-                <span class="s2">"markPrice"</span><span class="p">:</span> <span class="mi">49500</span><span class="p">,</span>
+                <span class="s2">"holding"</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+                <span class="s2">"pendingLongQty"</span><span class="p">:</span> <span class="mf">0.00020</span><span class="p">,</span>
+                <span class="s2">"pendingShortQty"</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+                <span class="s2">"averageOpenPrice"</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+                <span class="s2">"pnl24H"</span><span class="p">:</span> <span class="o">-</span><span class="mf">1.55902</span><span class="p">,</span>
+                <span class="s2">"fee24H"</span><span class="p">:</span> <span class="mf">0.21800043</span><span class="p">,</span>
+                <span class="s2">"settlePrice"</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+                <span class="s2">"markPrice"</span><span class="p">:</span> <span class="mf">22325.47533333</span><span class="p">,</span>
+                <span class="s2">"version"</span><span class="p">:</span> <span class="mi">93454</span><span class="p">,</span>
+                <span class="s2">"openingTime"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"pnl24HPercentage"</span><span class="p">:</span> <span class="o">-</span><span class="mf">0.00542227</span>
             <span class="p">}</span>
-        <span class="p">]</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
 <span class="p">}</span>
 </code></pre><h1 id='release-note'>Release Note</h1>
 <p>All the API changes would be listed here.</p>
