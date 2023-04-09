@@ -505,6 +505,9 @@
             <a href="#release-note" class="toc-h1 toc-link" data-title="Release Note">Release Note</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#2023-04-10" class="toc-h2 toc-link" data-title="2023-04-10">2023-04-10</a>
+                  </li>
+                  <li>
                     <a href="#2023-02-06" class="toc-h2 toc-link" data-title="2023-02-06">2023-02-06</a>
                   </li>
                   <li>
@@ -6643,6 +6646,12 @@ GET /v1/position/:symbol
 <span class="p">}</span>
 </code></pre><h1 id='release-note'>Release Note</h1>
 <p>All the API changes would be listed here.</p>
+<h2 id='2023-04-10'>2023-04-10</h2>
+<ul>
+<li>Add <code>can_collateral</code> and <code>can_short</code> in the response message of API <a href="#available-token-public">Available Token (Public)</a>.</li>
+<li>Change response message of Funding Rate related API for new funding rate calculation rules released in 2023-04-10, including <a href="#get-predicted-funding-rate-for-all-markets-public">Get Predicted Funding Rate for All Markets</a>, <a href="#get-predicted-funding-rate-for-one-market-public">Get Predicted Funding Rate for One Market</a> and <a href="#get-funding-rate-history-for-one-market-public">Get Funding Rate History for One Market</a>.</li>
+<li>Change <a href="#orderbook-snapshot-public">Orderbook Snapshot</a> and <a href="#kline-public">Kline</a> RESTful API from privateto public endpoint. (Those two endpoint will not require authentication anymore).</li>
+</ul>
 <h2 id='2023-02-06'>2023-02-06</h2>
 <ul>
 <li>Add <a href="#get-current-holding-get-balance-new">Get Balance</a> API. The API is design to replace the legacy API <a href="#get-current-holding">Get Current Holding</a> and <a href="#get-current-holding-v2">Get Current Holding v2</a>.</li>
