@@ -246,6 +246,15 @@
                     <a href="#available-symbols-public" class="toc-h2 toc-link" data-title="Available Symbols (Public)">Available Symbols (Public)</a>
                   </li>
                   <li>
+                    <a href="#orderbook-snapshot-public" class="toc-h2 toc-link" data-title="Orderbook snapshot (Public)">Orderbook snapshot (Public)</a>
+                  </li>
+                  <li>
+                    <a href="#kline-public" class="toc-h2 toc-link" data-title="Kline (Public)">Kline (Public)</a>
+                  </li>
+                  <li>
+                    <a href="#kline-historical-data-public" class="toc-h2 toc-link" data-title="Kline - Historical Data (Public)">Kline - Historical Data (Public)</a>
+                  </li>
+                  <li>
                     <a href="#market-trades-public" class="toc-h2 toc-link" data-title="Market Trades (Public)">Market Trades (Public)</a>
                   </li>
                   <li>
@@ -328,15 +337,6 @@
                   </li>
                   <li>
                     <a href="#edit-algo-order-by-client_order_id" class="toc-h2 toc-link" data-title="Edit Algo Order by client_order_id">Edit Algo Order by client_order_id</a>
-                  </li>
-                  <li>
-                    <a href="#orderbook-snapshot" class="toc-h2 toc-link" data-title="Orderbook snapshot">Orderbook snapshot</a>
-                  </li>
-                  <li>
-                    <a href="#kline" class="toc-h2 toc-link" data-title="Kline">Kline</a>
-                  </li>
-                  <li>
-                    <a href="#kline-historical-data" class="toc-h2 toc-link" data-title="Kline - Historical Data">Kline - Historical Data</a>
                   </li>
                   <li>
                     <a href="#get-trade" class="toc-h2 toc-link" data-title="Get Trade">Get Trade</a>
@@ -989,6 +989,219 @@ GET /v1/public/info
 <p><strong>Parameters</strong></p>
 
 <p>None</p>
+<h2 id='orderbook-snapshot-public'>Orderbook snapshot (Public)</h2>
+<p><strong>Limit: 10 requests per 1 second</strong></p>
+
+<p><code>
+GET /v1/orderbook/:symbol
+</code></p>
+
+<p>SNAPSHOT of current orderbook. Price of asks/bids are in descending order.</p>
+
+<blockquote>
+<p><strong>Response</strong></p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"asks"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">"price"</span><span class="p">:</span> <span class="mf">10669.4</span><span class="p">,</span>
+            <span class="s2">"quantity"</span><span class="p">:</span> <span class="mf">1.56263218</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">"price"</span><span class="p">:</span> <span class="mf">10670.3</span><span class="p">,</span>
+            <span class="s2">"quantity"</span><span class="p">:</span> <span class="mf">0.36466977</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">"price"</span><span class="p">:</span> <span class="mf">10670.4</span><span class="p">,</span>
+            <span class="s2">"quantity"</span><span class="p">:</span> <span class="mf">0.06738009</span>
+        <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="s2">"bids"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">"price"</span><span class="p">:</span> <span class="mf">10669.3</span><span class="p">,</span>
+            <span class="s2">"quantity"</span><span class="p">:</span> <span class="mf">0.88159988</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">"price"</span><span class="p">:</span> <span class="mf">10669.2</span><span class="p">,</span>
+            <span class="s2">"quantity"</span><span class="p">:</span> <span class="mf">0.5</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">"price"</span><span class="p">:</span> <span class="mf">10668.9</span><span class="p">,</span>
+            <span class="s2">"quantity"</span><span class="p">:</span> <span class="mf">0.00488286</span>
+        <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="mi">1564710591905</span>   <span class="c1">// Unix epoch time in milliseconds</span>
+<span class="p">}</span>
+</code></pre>
+<p><strong>Parameters</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>max_level</td>
+<td>number</td>
+<td>N (default: 100)</td>
+<td>the levels you wish to show on both sides.</td>
+</tr>
+</tbody></table>
+<h2 id='kline-public'>Kline (Public)</h2>
+<p><strong>Limit: 10 requests per 1 second</strong></p>
+
+<p><code>
+GET /v1/kline
+</code></p>
+
+<p>The latest klines of the trading pairs.</p>
+
+<blockquote>
+<p><strong>Response</strong></p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"rows"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">"open"</span><span class="p">:</span> <span class="mf">66166.23</span><span class="p">,</span>
+            <span class="s2">"close"</span><span class="p">:</span> <span class="mf">66124.56</span><span class="p">,</span>
+            <span class="s2">"low"</span><span class="p">:</span> <span class="mf">66038.06</span><span class="p">,</span>
+            <span class="s2">"high"</span><span class="p">:</span> <span class="mf">66176.97</span><span class="p">,</span>
+            <span class="s2">"volume"</span><span class="p">:</span> <span class="mf">23.45528526</span><span class="p">,</span>
+            <span class="s2">"amount"</span><span class="p">:</span> <span class="mf">1550436.21725288</span><span class="p">,</span>
+            <span class="s2">"symbol"</span><span class="p">:</span> <span class="s2">"SPOT_BTC_USDT"</span><span class="p">,</span>
+            <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"1m"</span><span class="p">,</span>
+            <span class="s2">"start_timestamp"</span><span class="p">:</span> <span class="mi">1636388220000</span><span class="p">,</span> <span class="c1">// Unix epoch time in milliseconds</span>
+            <span class="s2">"end_timestamp"</span><span class="p">:</span> <span class="mi">1636388280000</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">"open"</span><span class="p">:</span> <span class="mf">66145.13</span><span class="p">,</span>
+            <span class="s2">"close"</span><span class="p">:</span> <span class="mf">66166.24</span><span class="p">,</span>
+            <span class="s2">"low"</span><span class="p">:</span> <span class="mf">66124.62</span><span class="p">,</span>
+            <span class="s2">"high"</span><span class="p">:</span> <span class="mf">66178.60</span><span class="p">,</span>
+            <span class="s2">"volume"</span><span class="p">:</span> <span class="mf">15.50705000</span><span class="p">,</span>
+            <span class="s2">"amount"</span><span class="p">:</span> <span class="mf">1025863.18892610</span><span class="p">,</span>
+            <span class="s2">"symbol"</span><span class="p">:</span> <span class="s2">"SPOT_BTC_USDT"</span><span class="p">,</span>
+            <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"1m"</span><span class="p">,</span>
+            <span class="s2">"start_timestamp"</span><span class="p">:</span> <span class="mi">1636388160000</span><span class="p">,</span>
+            <span class="s2">"end_timestamp"</span><span class="p">:</span> <span class="mi">1636388220000</span>
+        <span class="p">},</span>
+        <span class="c1">// ...skip</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</code></pre>
+<p><strong>Parameters</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>Y</td>
+<td></td>
+</tr>
+<tr>
+<td>type</td>
+<td>enum</td>
+<td>Y</td>
+<td><code>1m</code>/<code>5m</code>/<code>15m</code>/<code>30m</code>/<code>1h</code>/<code>4h</code>/<code>12h</code>/<code>1d</code>/<code>1w</code>/<code>1mon</code>/<code>1y</code></td>
+</tr>
+<tr>
+<td>limit</td>
+<td>number</td>
+<td>N (default: 100)</td>
+<td>Numbers of klines. Maximum of 1000 klines.</td>
+</tr>
+</tbody></table>
+<h2 id='kline-historical-data-public'>Kline - Historical Data (Public)</h2>
+<p><strong>Limit: 1 request per 1 second per IP</strong></p>
+
+<p><code>
+GET https://api-pub.woo.org/v1/hist/kline 
+</code></p>
+
+<p>The historical klines of the trading pairs. Note that the endpoint is different with other APIs.</p>
+
+<blockquote>
+<p><strong>Response</strong></p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"data"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"rows"</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+                <span class="s2">"open"</span><span class="p">:</span> <span class="mf">66166.23</span><span class="p">,</span>
+                <span class="s2">"close"</span><span class="p">:</span> <span class="mf">66124.56</span><span class="p">,</span>
+                <span class="s2">"low"</span><span class="p">:</span> <span class="mf">66038.06</span><span class="p">,</span>
+                <span class="s2">"high"</span><span class="p">:</span> <span class="mf">66176.97</span><span class="p">,</span>
+                <span class="s2">"volume"</span><span class="p">:</span> <span class="mf">23.45528526</span><span class="p">,</span>
+                <span class="s2">"amount"</span><span class="p">:</span> <span class="mf">1550436.21725288</span><span class="p">,</span>
+                <span class="s2">"symbol"</span><span class="p">:</span> <span class="s2">"SPOT_BTC_USDT"</span><span class="p">,</span>
+                <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"1m"</span><span class="p">,</span>
+                <span class="s2">"start_timestamp"</span><span class="p">:</span> <span class="mi">1636388220000</span><span class="p">,</span> <span class="c1">// Unix epoch time in milliseconds</span>
+                <span class="s2">"end_timestamp"</span><span class="p">:</span> <span class="mi">1636388280000</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s2">"open"</span><span class="p">:</span> <span class="mf">66145.13</span><span class="p">,</span>
+                <span class="s2">"close"</span><span class="p">:</span> <span class="mf">66166.24</span><span class="p">,</span>
+                <span class="s2">"low"</span><span class="p">:</span> <span class="mf">66124.62</span><span class="p">,</span>
+                <span class="s2">"high"</span><span class="p">:</span> <span class="mf">66178.60</span><span class="p">,</span>
+                <span class="s2">"volume"</span><span class="p">:</span> <span class="mf">15.50705000</span><span class="p">,</span>
+                <span class="s2">"amount"</span><span class="p">:</span> <span class="mf">1025863.18892610</span><span class="p">,</span>
+                <span class="s2">"symbol"</span><span class="p">:</span> <span class="s2">"SPOT_BTC_USDT"</span><span class="p">,</span>
+                <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"1m"</span><span class="p">,</span>
+                <span class="s2">"start_timestamp"</span><span class="p">:</span> <span class="mi">1636388160000</span><span class="p">,</span>
+                <span class="s2">"end_timestamp"</span><span class="p">:</span> <span class="mi">1636388220000</span>
+            <span class="p">},</span>
+            <span class="c1">// ...skip</span>
+        <span class="p">]</span>
+        <span class="s2">"meta"</span><span class="p">:{</span>
+            <span class="s2">"total"</span><span class="p">:</span><span class="mi">67377</span><span class="p">,</span>
+            <span class="s2">"records_per_page"</span><span class="p">:</span><span class="mi">100</span><span class="p">,</span>
+            <span class="s2">"current_page"</span><span class="p">:</span><span class="mi">1</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+<p><strong>Parameters</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>Y</td>
+<td></td>
+</tr>
+<tr>
+<td>type</td>
+<td>enum</td>
+<td>Y</td>
+<td><code>1m</code>/<code>5m</code>/<code>15m</code>/<code>30m</code>/<code>1h</code>/<code>4h</code>/<code>12h</code>/<code>1d</code>/<code>1w</code>/<code>1mon</code></td>
+</tr>
+<tr>
+<td>start_time</td>
+<td>number</td>
+<td>Y</td>
+<td>start range that you wish to query, noted that the time stamp is a 13-digits timestamp.</td>
+</tr>
+</tbody></table>
 <h2 id='market-trades-public'>Market Trades (Public)</h2>
 <p><strong>Limit: 10 requests per 1 second per IP address</strong></p>
 
@@ -1144,7 +1357,9 @@ GET /v1/public/token
             <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"BTC"</span><span class="p">,</span>
             <span class="s2">"balance_token"</span><span class="p">:</span> <span class="s2">"BTC"</span><span class="p">,</span>
             <span class="s2">"fullname"</span><span class="p">:</span> <span class="s2">"Bitcoin"</span><span class="p">,</span>
-            <span class="s2">"decimals"</span><span class="p">:</span> <span class="mi">8</span>
+            <span class="s2">"decimals"</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+            <span class="s2">"can_collateral"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span>
+            <span class="s2">"can_short"</span><span class="p">:</span><span class="kc">true</span>
         <span class="p">},</span>
         <span class="p">{</span>
             <span class="s2">"created_time"</span><span class="p">:</span> <span class="s2">"1579399877.02"</span><span class="p">,</span>
@@ -1152,7 +1367,9 @@ GET /v1/public/token
             <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"BTC_USDT"</span><span class="p">,</span>
             <span class="s2">"balance_token"</span><span class="p">:</span> <span class="s2">"USDT"</span><span class="p">,</span>
             <span class="s2">"fullname"</span><span class="p">:</span> <span class="s2">"Tether"</span><span class="p">,</span>
-            <span class="s2">"decimals"</span><span class="p">:</span> <span class="mi">8</span>
+            <span class="s2">"decimals"</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+            <span class="s2">"can_collateral"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span>
+            <span class="s2">"can_short"</span><span class="p">:</span><span class="kc">true</span>
         <span class="p">},</span>
         <span class="p">{</span>
             <span class="s2">"created_time"</span><span class="p">:</span> <span class="s2">"1579399877.02"</span><span class="p">,</span>
@@ -1160,7 +1377,9 @@ GET /v1/public/token
             <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"ETH"</span><span class="p">,</span>
             <span class="s2">"balance_token"</span><span class="p">:</span> <span class="s2">"ETH"</span><span class="p">,</span>
             <span class="s2">"fullname"</span><span class="p">:</span> <span class="s2">"Ethereum"</span><span class="p">,</span>
-            <span class="s2">"decimals"</span><span class="p">:</span> <span class="mi">18</span>
+            <span class="s2">"decimals"</span><span class="p">:</span> <span class="mi">18</span><span class="p">,</span>
+            <span class="s2">"can_collateral"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span>
+            <span class="s2">"can_short"</span><span class="p">:</span><span class="kc">true</span>
         <span class="p">},</span>
         <span class="p">{</span>
             <span class="s2">"created_time"</span><span class="p">:</span> <span class="s2">"1579399877.02"</span><span class="p">,</span>
@@ -1168,7 +1387,9 @@ GET /v1/public/token
             <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"ETH_OKB"</span><span class="p">,</span>
             <span class="s2">"balance_token"</span><span class="p">:</span> <span class="s2">"OKB"</span><span class="p">,</span>
             <span class="s2">"fullname"</span><span class="p">:</span> <span class="s2">"OKB"</span><span class="p">,</span>
-            <span class="s2">"decimals"</span><span class="p">:</span> <span class="mi">18</span>
+            <span class="s2">"decimals"</span><span class="p">:</span> <span class="mi">18</span><span class="p">,</span>
+            <span class="s2">"can_collateral"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span>
+            <span class="s2">"can_short"</span><span class="p">:</span><span class="kc">true</span>
         <span class="p">}</span>
     <span class="p">]</span>
 <span class="p">}</span>
@@ -1247,26 +1468,30 @@ GET /v1/public/funding_rates
 <p><strong>Response</strong></p>
 </blockquote>
 <pre class="highlight javascript"><code><span class="p">{</span>
-    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"success"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span>
     <span class="s2">"rows"</span><span class="p">:</span> <span class="p">[</span>
         <span class="p">{</span>
-            <span class="s2">"symbol"</span><span class="p">:</span> <span class="s2">"PERP_BTC_USDT"</span><span class="p">,</span>
-            <span class="s2">"est_funding_rate"</span><span class="p">:</span> <span class="mf">0.12345689</span><span class="p">,</span>
-            <span class="s2">"est_funding_rate_timestamp"</span><span class="p">:</span> <span class="mi">1636388220001</span><span class="p">,</span>
-            <span class="s2">"last_funding_rate"</span><span class="p">:</span> <span class="mf">0.12345689</span><span class="p">,</span>
-            <span class="s2">"last_funding_rate_timestamp"</span><span class="p">:</span> <span class="mi">1567411795000</span><span class="p">,</span> <span class="c1">// use rate to end calculating funding fee time</span>
-            <span class="s2">"next_funding_time"</span><span class="p">:</span> <span class="mi">1567411995000</span>
+            <span class="s2">"symbol"</span><span class="p">:</span><span class="s2">"PERP_BTC_USDT"</span><span class="p">,</span>
+            <span class="s2">"est_funding_rate"</span><span class="p">:</span><span class="o">-</span><span class="mf">0.00001392</span><span class="p">,</span>
+            <span class="s2">"est_funding_rate_timestamp"</span><span class="p">:</span><span class="mi">1681069199002</span><span class="p">,</span>
+            <span class="s2">"last_funding_rate"</span><span class="p">:</span><span class="o">-</span><span class="mf">0.00001666</span><span class="p">,</span>
+            <span class="s2">"last_funding_rate_timestamp"</span><span class="p">:</span><span class="mi">1681066800000</span><span class="p">,</span>
+            <span class="s2">"next_funding_time"</span><span class="p">:</span><span class="mi">1681070400000</span><span class="p">,</span>
+            <span class="s2">"last_funding_rate_interval"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+            <span class="s2">"est_funding_rate_interval"</span><span class="p">:</span><span class="mi">1</span>
         <span class="p">},</span>
         <span class="p">{</span>
-            <span class="s2">"symbol"</span><span class="p">:</span> <span class="s2">"PERP_ETH_USDT"</span><span class="p">,</span>
-            <span class="s2">"est_funding_rate"</span><span class="p">:</span> <span class="mf">0.12345689</span><span class="p">,</span>
-            <span class="s2">"est_funding_rate_timestamp"</span><span class="p">:</span> <span class="mi">1636388220001</span><span class="p">,</span>
-            <span class="s2">"last_funding_rate"</span><span class="p">:</span> <span class="mf">0.12345689</span><span class="p">,</span>
-            <span class="s2">"last_funding_rate_timestamp"</span><span class="p">:</span> <span class="mi">1567411795000</span><span class="p">,</span> <span class="c1">// use rate to end calculating funding fee time</span>
-             <span class="s2">"next_funding_time"</span><span class="p">:</span> <span class="mi">1567411995000</span>
+            <span class="s2">"symbol"</span><span class="p">:</span><span class="s2">"PERP_ETH_USDT"</span><span class="p">,</span>
+            <span class="s2">"est_funding_rate"</span><span class="p">:</span><span class="o">-</span><span class="mf">0.00001394</span><span class="p">,</span>
+            <span class="s2">"est_funding_rate_timestamp"</span><span class="p">:</span><span class="mi">1681069319011</span><span class="p">,</span>
+            <span class="s2">"last_funding_rate"</span><span class="p">:</span><span class="o">-</span><span class="mf">0.00001661</span><span class="p">,</span>
+            <span class="s2">"last_funding_rate_timestamp"</span><span class="p">:</span><span class="mi">1681066800000</span><span class="p">,</span>
+            <span class="s2">"next_funding_time"</span><span class="p">:</span><span class="mi">1681070400000</span><span class="p">,</span>
+            <span class="s2">"last_funding_rate_interval"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+            <span class="s2">"est_funding_rate_interval"</span><span class="p">:</span><span class="mi">1</span>
         <span class="p">}</span>
     <span class="p">],</span>
-    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="mi">1564710591905</span> <span class="c1">// Unix epoch time in milliseconds</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span><span class="mi">1681069222726</span><span class="p">,</span> <span class="c1">// Unix epoch time in milliseconds</span>
 <span class="p">}</span>
 </code></pre><h2 id='get-predicted-funding-rate-for-one-market-public'>Get Predicted Funding Rate for One Market (Public)</h2>
 <p><strong>Limit: 10 requests per 1 second per IP address</strong></p>
@@ -1299,14 +1524,16 @@ GET /v1/public/funding_rate/:symbol
 <p><strong>Response</strong></p>
 </blockquote>
 <pre class="highlight javascript"><code><span class="p">{</span>
-    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="s2">"symbol"</span><span class="p">:</span> <span class="s2">"PERP_BTC_USDT"</span><span class="p">,</span>
-    <span class="s2">"est_funding_rate"</span><span class="p">:</span> <span class="mf">0.12345689</span><span class="p">,</span>
-    <span class="s2">"est_funding_rate_timestamp"</span><span class="p">:</span> <span class="mi">1636388220001</span><span class="p">,</span>
-    <span class="s2">"last_funding_rate"</span><span class="p">:</span> <span class="mf">0.12345689</span><span class="p">,</span>
-    <span class="s2">"last_funding_rate_timestamp"</span><span class="p">:</span> <span class="mi">1567411795000</span><span class="p">,</span> <span class="c1">// use rate to end calculating funding fee time</span>
-    <span class="s2">"next_funding_time"</span><span class="p">:</span> <span class="mi">1567411995000</span>
-    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="mi">1564710591905</span> <span class="c1">// Unix epoch time in milliseconds</span>
+    <span class="s2">"success"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span><span class="mi">1681069222726</span><span class="p">,</span>
+    <span class="s2">"symbol"</span><span class="p">:</span><span class="s2">"PERP_BTC_USDT"</span><span class="p">,</span>
+    <span class="s2">"est_funding_rate"</span><span class="p">:</span><span class="o">-</span><span class="mf">0.00001392</span><span class="p">,</span>
+    <span class="s2">"est_funding_rate_timestamp"</span><span class="p">:</span><span class="mi">1681069199002</span><span class="p">,</span>
+    <span class="s2">"last_funding_rate"</span><span class="p">:</span><span class="o">-</span><span class="mf">0.00001666</span><span class="p">,</span>
+    <span class="s2">"last_funding_rate_timestamp"</span><span class="p">:</span><span class="mi">1681066800000</span><span class="p">,</span>
+    <span class="s2">"next_funding_time"</span><span class="p">:</span><span class="mi">1681070400000</span><span class="p">,</span>
+    <span class="s2">"last_funding_rate_interval"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"est_funding_rate_interval"</span><span class="p">:</span><span class="mi">1</span>
 <span class="p">}</span>
 </code></pre><h2 id='get-funding-rate-history-for-one-market-public'>Get Funding Rate History for One Market (Public)</h2>
 <p><strong>Limit: 10 requests per 1 second per IP address</strong></p>
@@ -3263,219 +3490,6 @@ PUT /v3/algo/order/client/:client_order_id
 <td>number</td>
 <td>N</td>
 <td>New trigger price of the algo order.</td>
-</tr>
-</tbody></table>
-<h2 id='orderbook-snapshot'>Orderbook snapshot</h2>
-<p><strong>Limit: 10 requests per 1 second</strong></p>
-
-<p><code>
-GET /v1/orderbook/:symbol
-</code></p>
-
-<p>SNAPSHOT of current orderbook. Price of asks/bids are in descending order.</p>
-
-<blockquote>
-<p><strong>Response</strong></p>
-</blockquote>
-<pre class="highlight javascript"><code><span class="p">{</span>
-    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="s2">"asks"</span><span class="p">:</span> <span class="p">[</span>
-        <span class="p">{</span>
-            <span class="s2">"price"</span><span class="p">:</span> <span class="mf">10669.4</span><span class="p">,</span>
-            <span class="s2">"quantity"</span><span class="p">:</span> <span class="mf">1.56263218</span>
-        <span class="p">},</span>
-        <span class="p">{</span>
-            <span class="s2">"price"</span><span class="p">:</span> <span class="mf">10670.3</span><span class="p">,</span>
-            <span class="s2">"quantity"</span><span class="p">:</span> <span class="mf">0.36466977</span>
-        <span class="p">},</span>
-        <span class="p">{</span>
-            <span class="s2">"price"</span><span class="p">:</span> <span class="mf">10670.4</span><span class="p">,</span>
-            <span class="s2">"quantity"</span><span class="p">:</span> <span class="mf">0.06738009</span>
-        <span class="p">}</span>
-    <span class="p">],</span>
-    <span class="s2">"bids"</span><span class="p">:</span> <span class="p">[</span>
-        <span class="p">{</span>
-            <span class="s2">"price"</span><span class="p">:</span> <span class="mf">10669.3</span><span class="p">,</span>
-            <span class="s2">"quantity"</span><span class="p">:</span> <span class="mf">0.88159988</span>
-        <span class="p">},</span>
-        <span class="p">{</span>
-            <span class="s2">"price"</span><span class="p">:</span> <span class="mf">10669.2</span><span class="p">,</span>
-            <span class="s2">"quantity"</span><span class="p">:</span> <span class="mf">0.5</span>
-        <span class="p">},</span>
-        <span class="p">{</span>
-            <span class="s2">"price"</span><span class="p">:</span> <span class="mf">10668.9</span><span class="p">,</span>
-            <span class="s2">"quantity"</span><span class="p">:</span> <span class="mf">0.00488286</span>
-        <span class="p">}</span>
-    <span class="p">],</span>
-    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="mi">1564710591905</span>   <span class="c1">// Unix epoch time in milliseconds</span>
-<span class="p">}</span>
-</code></pre>
-<p><strong>Parameters</strong></p>
-
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>max_level</td>
-<td>number</td>
-<td>N (default: 100)</td>
-<td>the levels you wish to show on both sides.</td>
-</tr>
-</tbody></table>
-<h2 id='kline'>Kline</h2>
-<p><strong>Limit: 10 requests per 1 second</strong></p>
-
-<p><code>
-GET /v1/kline
-</code></p>
-
-<p>The latest klines of the trading pairs.</p>
-
-<blockquote>
-<p><strong>Response</strong></p>
-</blockquote>
-<pre class="highlight javascript"><code><span class="p">{</span>
-    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="s2">"rows"</span><span class="p">:</span> <span class="p">[</span>
-        <span class="p">{</span>
-            <span class="s2">"open"</span><span class="p">:</span> <span class="mf">66166.23</span><span class="p">,</span>
-            <span class="s2">"close"</span><span class="p">:</span> <span class="mf">66124.56</span><span class="p">,</span>
-            <span class="s2">"low"</span><span class="p">:</span> <span class="mf">66038.06</span><span class="p">,</span>
-            <span class="s2">"high"</span><span class="p">:</span> <span class="mf">66176.97</span><span class="p">,</span>
-            <span class="s2">"volume"</span><span class="p">:</span> <span class="mf">23.45528526</span><span class="p">,</span>
-            <span class="s2">"amount"</span><span class="p">:</span> <span class="mf">1550436.21725288</span><span class="p">,</span>
-            <span class="s2">"symbol"</span><span class="p">:</span> <span class="s2">"SPOT_BTC_USDT"</span><span class="p">,</span>
-            <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"1m"</span><span class="p">,</span>
-            <span class="s2">"start_timestamp"</span><span class="p">:</span> <span class="mi">1636388220000</span><span class="p">,</span> <span class="c1">// Unix epoch time in milliseconds</span>
-            <span class="s2">"end_timestamp"</span><span class="p">:</span> <span class="mi">1636388280000</span>
-        <span class="p">},</span>
-        <span class="p">{</span>
-            <span class="s2">"open"</span><span class="p">:</span> <span class="mf">66145.13</span><span class="p">,</span>
-            <span class="s2">"close"</span><span class="p">:</span> <span class="mf">66166.24</span><span class="p">,</span>
-            <span class="s2">"low"</span><span class="p">:</span> <span class="mf">66124.62</span><span class="p">,</span>
-            <span class="s2">"high"</span><span class="p">:</span> <span class="mf">66178.60</span><span class="p">,</span>
-            <span class="s2">"volume"</span><span class="p">:</span> <span class="mf">15.50705000</span><span class="p">,</span>
-            <span class="s2">"amount"</span><span class="p">:</span> <span class="mf">1025863.18892610</span><span class="p">,</span>
-            <span class="s2">"symbol"</span><span class="p">:</span> <span class="s2">"SPOT_BTC_USDT"</span><span class="p">,</span>
-            <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"1m"</span><span class="p">,</span>
-            <span class="s2">"start_timestamp"</span><span class="p">:</span> <span class="mi">1636388160000</span><span class="p">,</span>
-            <span class="s2">"end_timestamp"</span><span class="p">:</span> <span class="mi">1636388220000</span>
-        <span class="p">},</span>
-        <span class="c1">// ...skip</span>
-    <span class="p">]</span>
-<span class="p">}</span>
-</code></pre>
-<p><strong>Parameters</strong></p>
-
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>symbol</td>
-<td>string</td>
-<td>Y</td>
-<td></td>
-</tr>
-<tr>
-<td>type</td>
-<td>enum</td>
-<td>Y</td>
-<td><code>1m</code>/<code>5m</code>/<code>15m</code>/<code>30m</code>/<code>1h</code>/<code>4h</code>/<code>12h</code>/<code>1d</code>/<code>1w</code>/<code>1mon</code>/<code>1y</code></td>
-</tr>
-<tr>
-<td>limit</td>
-<td>number</td>
-<td>N (default: 100)</td>
-<td>Numbers of klines. Maximum of 1000 klines.</td>
-</tr>
-</tbody></table>
-<h2 id='kline-historical-data'>Kline - Historical Data</h2>
-<p><strong>Limit: 1 request per 1 second per IP</strong></p>
-
-<p><code>
-GET https://api-pub.woo.org/v1/hist/kline 
-</code></p>
-
-<p>The historical klines of the trading pairs. Note that the endpoint is different with other APIs.</p>
-
-<blockquote>
-<p><strong>Response</strong></p>
-</blockquote>
-<pre class="highlight javascript"><code><span class="p">{</span>
-    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="s2">"data"</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">"rows"</span><span class="p">:</span> <span class="p">[</span>
-            <span class="p">{</span>
-                <span class="s2">"open"</span><span class="p">:</span> <span class="mf">66166.23</span><span class="p">,</span>
-                <span class="s2">"close"</span><span class="p">:</span> <span class="mf">66124.56</span><span class="p">,</span>
-                <span class="s2">"low"</span><span class="p">:</span> <span class="mf">66038.06</span><span class="p">,</span>
-                <span class="s2">"high"</span><span class="p">:</span> <span class="mf">66176.97</span><span class="p">,</span>
-                <span class="s2">"volume"</span><span class="p">:</span> <span class="mf">23.45528526</span><span class="p">,</span>
-                <span class="s2">"amount"</span><span class="p">:</span> <span class="mf">1550436.21725288</span><span class="p">,</span>
-                <span class="s2">"symbol"</span><span class="p">:</span> <span class="s2">"SPOT_BTC_USDT"</span><span class="p">,</span>
-                <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"1m"</span><span class="p">,</span>
-                <span class="s2">"start_timestamp"</span><span class="p">:</span> <span class="mi">1636388220000</span><span class="p">,</span> <span class="c1">// Unix epoch time in milliseconds</span>
-                <span class="s2">"end_timestamp"</span><span class="p">:</span> <span class="mi">1636388280000</span>
-            <span class="p">},</span>
-            <span class="p">{</span>
-                <span class="s2">"open"</span><span class="p">:</span> <span class="mf">66145.13</span><span class="p">,</span>
-                <span class="s2">"close"</span><span class="p">:</span> <span class="mf">66166.24</span><span class="p">,</span>
-                <span class="s2">"low"</span><span class="p">:</span> <span class="mf">66124.62</span><span class="p">,</span>
-                <span class="s2">"high"</span><span class="p">:</span> <span class="mf">66178.60</span><span class="p">,</span>
-                <span class="s2">"volume"</span><span class="p">:</span> <span class="mf">15.50705000</span><span class="p">,</span>
-                <span class="s2">"amount"</span><span class="p">:</span> <span class="mf">1025863.18892610</span><span class="p">,</span>
-                <span class="s2">"symbol"</span><span class="p">:</span> <span class="s2">"SPOT_BTC_USDT"</span><span class="p">,</span>
-                <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"1m"</span><span class="p">,</span>
-                <span class="s2">"start_timestamp"</span><span class="p">:</span> <span class="mi">1636388160000</span><span class="p">,</span>
-                <span class="s2">"end_timestamp"</span><span class="p">:</span> <span class="mi">1636388220000</span>
-            <span class="p">},</span>
-            <span class="c1">// ...skip</span>
-        <span class="p">]</span>
-        <span class="s2">"meta"</span><span class="p">:{</span>
-            <span class="s2">"total"</span><span class="p">:</span><span class="mi">67377</span><span class="p">,</span>
-            <span class="s2">"records_per_page"</span><span class="p">:</span><span class="mi">100</span><span class="p">,</span>
-            <span class="s2">"current_page"</span><span class="p">:</span><span class="mi">1</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre>
-<p><strong>Parameters</strong></p>
-
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>symbol</td>
-<td>string</td>
-<td>Y</td>
-<td></td>
-</tr>
-<tr>
-<td>type</td>
-<td>enum</td>
-<td>Y</td>
-<td><code>1m</code>/<code>5m</code>/<code>15m</code>/<code>30m</code>/<code>1h</code>/<code>4h</code>/<code>12h</code>/<code>1d</code>/<code>1w</code>/<code>1mon</code></td>
-</tr>
-<tr>
-<td>start_time</td>
-<td>number</td>
-<td>Y</td>
-<td>start range that you wish to query, noted that the time stamp is a 13-digits timestamp.</td>
 </tr>
 </tbody></table>
 <h2 id='get-trade'>Get Trade</h2>
