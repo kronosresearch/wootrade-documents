@@ -996,10 +996,11 @@ GET /v1/public/info
 <p><strong>Limit: 10 requests per 1 second</strong></p>
 
 <p><code>
-GET /v1/orderbook/:symbol
+GET /v1/public/orderbook/:symbol
 </code></p>
 
-<p>SNAPSHOT of current orderbook. Price of asks/bids are in descending order.</p>
+<p>SNAPSHOT of current orderbook. Price of asks/bids are in descending order.
+Note: The original endpoint <code>GET /v1/orderbook/:symbol</code> can still be used.</p>
 
 <blockquote>
 <p><strong>Response</strong></p>
@@ -1058,10 +1059,11 @@ GET /v1/orderbook/:symbol
 <p><strong>Limit: 10 requests per 1 second</strong></p>
 
 <p><code>
-GET /v1/kline
+GET /v1/public/kline
 </code></p>
 
-<p>The latest klines of the trading pairs.</p>
+<p>The latest klines of the trading pairs.
+Note: The original endpoint <code>GET /v1/kline</code> can still be used.</p>
 
 <blockquote>
 <p><strong>Response</strong></p>
